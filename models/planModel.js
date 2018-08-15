@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-import Day from './dayModel';
+const Day = require('./dayModel');
+
 
 let planSchema = new Schema({
   name: String,

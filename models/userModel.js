@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-import Plan from './planModel';
-import Attraction from './atrractionModel';
+const Plan = require('./planModel');
+const Attraction = require('./atrractionModel');
+
+
 
 let userSchema = new Schema({
   name: String,
