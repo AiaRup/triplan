@@ -17,10 +17,8 @@ mongoose.connect(connection, { useNewUrlParser: true })
 const app = express();
 
 const User = require('./models/userModel');
-const Plan = require('./models/planModel');
-const Day = require('./models/dayModel');
-const Attraction = require('./models/atrractionModel');
-const TheEvent = require('./models/eventModel');
+const Plan = require('./models/planModel').plan;
+
 
 // Middlewares
 app.use(express.static('public'));
