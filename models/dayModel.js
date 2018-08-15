@@ -11,6 +11,4 @@ let daySchema = new Schema({
   events: [TheEvent]
 });
 
-let Day = mongoose.model('day', daySchema);
-
-module.exports = Day;
+module.exports = daySchema;

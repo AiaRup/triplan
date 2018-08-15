@@ -10,6 +10,4 @@ let attractionSchema = new Schema({
   duration: String,
 });
 
-let Attraction = mongoose.model('attraction', attractionSchema);
-
-module.exports = Attraction;
+module.exports = attractionSchema;

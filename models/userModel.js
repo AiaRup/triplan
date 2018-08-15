@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Plan = require('./planModel');
+const Plan = require('./planModel').planSchema;
 const Attraction = require('./atrractionModel');
-
-
 
 let userSchema = new Schema({
   name: String,
