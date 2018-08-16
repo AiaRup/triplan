@@ -25,8 +25,10 @@ export default withAuth(
     checklogin = () => {
       if (this.state.authenticated === null) return null;
       const idToken = JSON.parse(localStorage.getItem('okta-token-storage'));
-      if (Object.keys(idToken).length) {
-        this.currentUserName = idToken.idToken.claims.name;
+      if (idToken !== null && typeof idToken === 'object') {
+        if (Object.keys(idToken).length) {
+          this.currentUserName = idToken.idToken.claims.name;
+        }
       }
       const authNav = this.state.authenticated ? (
         <ul className="auth-nav nav navbar-nav navbar-right">
@@ -43,6 +45,7 @@ export default withAuth(
     }
 
     render() {
+      const navbarRight = this.checklogin();
       return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
           <span className="navbar-brand"><Link className="navbar-brand" to="/">Triplan</Link></span>
@@ -62,7 +65,7 @@ export default withAuth(
                 <Link className="nav-link" to="/MyTrips">My Trips</Link>
               </li>
             </ul>
-            {this.checklogin()}
+            {navbarRight ? navbarRight : ''}
           </div>
         </nav >
       );
