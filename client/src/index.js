@@ -4,6 +4,10 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import App from './components/app/App';
 import registerServiceWorker from './registerServiceWorker';
+import store from './store/tripStore';
+import { Provider } from 'mobx-react';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>
+                  <App/>
+                </Provider>, document.getElementById('root'));
 registerServiceWorker();
