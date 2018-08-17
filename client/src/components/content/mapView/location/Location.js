@@ -31,7 +31,7 @@ export default class Location extends Component {
     return (
       <div>
         <Autocomplete
-          style={{ width: '40%' }}
+          style={{ width: '100%' }}
           onPlaceSelected={this.handleSelect}
           types={['address']}
 
