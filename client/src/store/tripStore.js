@@ -6,9 +6,9 @@ import { observer } from 'mobx-react';
 @observer
 class TripStore extends Component {
 
-  @observable daysArray = ['day1', 'day2', 'day3'];
+  @observable daysArray = [{name:'day1', id:'dayId1'}, {name:'day2', id:'dayId2'}, {name:'day3', id:'dayId3'}];
   @observable eventsArray = ['event1', 'event2', 'event3'];
-  @observable placesArray = ['place1', 'place2', 'place3'];
+  @observable placesArray = [{name:'place1', id:'placeId1'}, {name:'place2', id:'placeId2'}, {name:'place3', id:'placeId3'}];
 
   @action deleteDay = (index) => {
     this.daysArray.splice(index, 1);

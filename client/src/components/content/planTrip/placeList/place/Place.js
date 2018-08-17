@@ -16,7 +16,7 @@ class Place extends Component {
       <React.Fragment>
         <Container>
         <button onClick={()=>this.props.deletePlace(this.props.index)}>X</button>
-          {this.props.thePlace}
+          {this.props.thePlace.name}
         </Container>
       </React.Fragment>
     );

@@ -20,7 +20,7 @@ class Day extends Component {
       <React.Fragment>
         <Container>
         <button onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
-          <h4>{this.props.day}</h4>
+          <h4>{this.props.day.name}</h4>
         </Container>
       </React.Fragment>
     );
