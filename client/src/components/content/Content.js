@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const PlanTripContainer = styled.div`
   display: flex;
-  
+
   height: 80vh;
   width: 50%;
   border: 1px solid lightgrey;
@@ -35,11 +35,11 @@ class Content extends Component {
         <Container>
 
           <MapViewContainer>
-            <MapView/>
+            <MapView />
           </MapViewContainer>
 
           <PlanTripContainer>
-            <PlanTrip/>
+            <PlanTrip />
           </PlanTripContainer>
 
         </Container>
