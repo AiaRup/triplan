@@ -49,31 +49,34 @@ class PlanTrip extends Component {
      
      this.props.placesArray.splice(source.index, 1);
      this.props.placesArray.splice(destination.index, 0, dragger);
-     console.log(source)
-     console.log(destination)
+     console.log('working source '+source)
+     console.log('working destiantion '+ destination)
      }else {
 
      //dragging inside the day contianer
-     
-
-     //!!WHY RETURNS UNDIFNED AND NULL??
- 
+    
      const dayIdtoindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId)
-     console.log('source.droppableId '+dayIdtoindex)
 
      const idToIndexPlace = this.props.daysArray[dayIdtoindex].places.findIndex(p=> p.id===draggableId)
-        console.log('draggableIdIndex '+ idToIndexPlace)
-        console.log('draggableId '+draggableId)
 
-        source.index=idToIndexPlace
-        console.log(source)
-        console.log(destination)
      const draggedPlace = this.props.daysArray[dayIdtoindex].places[idToIndexPlace]
+    
+     //!!WHY SOURCE & DESTINATION INDEX RETURNS UNDIFNED AND NULL??
+        console.log('daysArray '+ JSON.stringify(this.props.daysArray))
+        console.log('dayIdtoindex-location '+ dayIdtoindex)
+        console.log('daysArray with location '+ JSON.stringify(this.props.daysArray[dayIdtoindex]))
+        console.log('daysArray with definit place '+ JSON.stringify(this.props.daysArray[dayIdtoindex]).place)
 
-    this.props.daysArray.splice(source.index, 1);
-    this.props.daysArray.splice(destination.index, 0, draggedPlace);
-     }
+        console.log('non working source '+ source)
+        console.log('non working destination '+destination)
+       
+    
+    this.props.daysArray[dayIdtoindex].places.splice(source.index, 1);
+    this.props.daysArray[dayIdtoindex].places.splice(destination.index, 0, draggedPlace);
+    
 
+     
+    }
 
 
   };

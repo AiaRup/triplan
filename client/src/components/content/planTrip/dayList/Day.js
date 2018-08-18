@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import PlaceInDay from './PlaceInDay';
 import Place from '../placeList/place/Place';
 
 
@@ -47,7 +46,6 @@ const PlaceListUL = styled.ul`
 class Day extends Component {
   render() {
 
-    
     return (
       <React.Fragment>
         <Container>

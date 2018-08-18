@@ -56,20 +56,6 @@ class Place extends Component {
 
     return (
       this.checkForDiv()
-
-      // <Draggable draggableId={this.props.thePlace.id} index={this.props.index}>
-      // {provided => (
-      //     <Container
-      //     innerRef={provided.innerRef}
-      //     {...provided.draggableProps}
-      //     {...provided.dragHandleProps}
-      //     >
-      //       <button onClick={()=>this.props.deletePlace(this.props.index)}>X</button>
-      //         {this.props.thePlace.name}
-      //     </Container>
-      // )}
-
-      // </Draggable>
     );
   }
 }
