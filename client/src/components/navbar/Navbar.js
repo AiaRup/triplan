@@ -18,6 +18,20 @@ export default withAuth(
       }
     }
 
+    async logout() {
+      let loginRedirect = this.login;
+      // Redirect to '/' after logout
+      //if session is active
+      this.props.auth.logout('/')
+        .then(function (out){
+          console.log('session is deleted');
+        })
+        .catch(function (error) {
+        //if session is inactive
+          loginRedirect();
+        });
+    }
+
     componentDidUpdate() {
       this.checkAuthentication();
     }

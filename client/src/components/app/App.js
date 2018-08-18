@@ -27,14 +27,14 @@ class App extends Component {
             <Navbar />
             <div className="container">
               <Switch>
-                <SecureRoute exact path="/MakeTriplan" render={() => <Content />} />
+                <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
                 <Route path="/Register" component={RegistrationForm} />
                 <Route
                   path="/Login"
                   render={() => (<Login baseUrl="https://dev-497398.oktapreview.com" />)} />
                 <Route path="/implicit/callback" component={ImplicitCallback} />
-                <Redirect from="/" to="/MakeTriplan" />
+                <Redirect from="/" to="/Home" />
               </Switch>
             </div>
           </div>
@@ -46,3 +46,4 @@ class App extends Component {
 }
 
 export default App;
+
