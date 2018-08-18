@@ -11,7 +11,10 @@ export default class Map extends Component {
 
     const address = this.props.address;
     return (
-      <div>
+      <div style={{
+        background: 'antiquewhite',
+        height: '250px'
+      }}>
         map will be here
         {this.props.children}
         {/* {this.address} */}

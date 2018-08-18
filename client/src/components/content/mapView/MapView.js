@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Map from './map/Map';
 import Location from './location/Location';
+import Preferences from './preferences/Preferences';
 
 export default class MapView extends Component {
   state = {
@@ -18,10 +19,11 @@ export default class MapView extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ width: '100%' }}>
         <Location updateAddress={this.updateAddress} />
         {/* <Map address={this.address} /> */}
         <Map address={this.state.address} />
+        <Preferences />
       </div>
     )
   }
