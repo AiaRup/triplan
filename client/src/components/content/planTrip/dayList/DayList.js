@@ -27,7 +27,7 @@ class DayList extends Component {
         <Container>
         <button onClick={this.props.addDay}>Add Day</button>
         <ul className="day-list">
-            {this.props.daysArray.map((day, index) => <li key={index}><Day index={index} day={day}/></li>)}
+            {this.props.daysArray.map((day, index) => <li key={day.id}><Day index={index} day={day}/></li>)}
           </ul> 
         </Container>
       </React.Fragment>

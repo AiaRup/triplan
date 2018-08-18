@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import DayList from './dayList/DayList';
 import styled from 'styled-components';
 import PlaceList from './placeList/PlaceList';
@@ -21,13 +22,13 @@ flex-direction: row;
 
 class PlanTrip extends Component {
 
-  // onDragEnd = result => {
-  //   console.log('onDragEnd')
-  // };
+  onDragEnd = result => {
+    console.log('onDragEnd')
+  };
     render() {
         return (
             <React.Fragment>
-                {/* <DragDropContext onDragEnd={this.onDragEnd}> */}
+                <DragDropContext onDragEnd={this.onDragEnd}>
                     <Container>
 
                         <Wrapper>
@@ -38,7 +39,7 @@ class PlanTrip extends Component {
                         <DayList/>
 
                     </Container>
-                {/* </DragDropContext> */}
+                </DragDropContext>
             </React.Fragment>
         );
     }

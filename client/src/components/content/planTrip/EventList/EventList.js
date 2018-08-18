@@ -22,9 +22,9 @@ class EventList extends Component {
  
       <Container>
         <h5>Events</h5>
-        <ul>
-            {this.props.eventsArray.map((theEvent, index) => <li key={index}><TheEvent index={index} theEvent={theEvent}/></li>)}
-          </ul>
+       
+            {this.props.eventsArray.map((theEvent, index) => <TheEvent key={theEvent.id} index={index} theEvent={theEvent}/>)}
+          
       </Container>
     );
   }

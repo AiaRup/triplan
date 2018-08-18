@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
+import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Place from './place/Place';
 
@@ -13,19 +14,47 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const PlaceListUL = styled.ul`
+`;
+
+
+
+
 @inject(allStores => ({
   placesArray: allStores.store.placesArray}))
+
+
+//!!need to be seperated for the DND to work!
+  @observer class DragNdrop extends Component {
+
+    render() {
+      return (
+          <PlaceListUL 
+          innerRef={this.props.provided.innerRef}
+          {...this.props.provided.droppableProps} 
+        >
+          {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place}/>)}
+          {this.props.provided.placeholder}
+        </PlaceListUL>
+        
+      )}
+    }
+
+
 @observer
 class PlaceList extends Component {
+ 
   render() {
-    
+
     return (
       <React.Fragment>
         <Container>
           <h5>Places</h5>
-          <ul>
-            {this.props.placesArray.map((place, index) => <li key={index}><Place index={index} thePlace={place}/></li>)}
-          </ul>
+          <Droppable droppableId="placesContainer">
+           {provided => (
+             <DragNdrop provided={provided}/>
+          )}
+          </Droppable>
         </Container>
       </React.Fragment>
     );

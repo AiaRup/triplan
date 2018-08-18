@@ -11,19 +11,19 @@ const Container = styled.div`
 `;
 
 @inject(allStores => ({
-  deletePlace: allStores.store.deletePlace}))
-class Place extends Component {
+  deletePlaceInDay: allStores.store.deletePlaceInDay}))
+class PlaceInDay extends Component {
   render() {
     return (
-      <Draggable draggableId={this.props.thePlace.id} index={this.props.index}>
+      <Draggable draggableId={this.props.place.id}>
       {provided => (
           <Container
           innerRef={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           >
-            <button onClick={()=>this.props.deletePlace(this.props.index)}>X</button>
-              {this.props.thePlace.name}
+            <button onClick={()=>this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex)}>X</button>
+              {this.props.place.name}
           </Container>
       )}
 
@@ -32,4 +32,4 @@ class Place extends Component {
   }
 }
 
-export default Place;
+export default PlaceInDay;
