@@ -3,6 +3,8 @@ import { observer, inject } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import PlaceInDay from './PlaceInDay';
+import Place from '../placeList/place/Place';
+
 
 const Container = styled.div`
   margin: 8px;
@@ -30,11 +32,15 @@ const PlaceListUL = styled.ul`
         innerRef={this.props.provided.innerRef}
         {...this.props.provided.droppableProps} 
       >
-         {this.props.daysArray[this.props.index].places.map((place, index)=><PlaceInDay key={place.id} placeIndex={index} dayIndex={this.props.index} place={place}/>)}
+         {this.props.daysArray[this.props.index].places.map((place, index)=><Place key={place.id} placeIndex={index} dayIndex={this.props.index} place={place} verifier="placeOfDay"/>)}
         {this.props.provided.placeholder}
       </PlaceListUL>
       
+      
     )}
+
+
+    
   }
 
 @observer 

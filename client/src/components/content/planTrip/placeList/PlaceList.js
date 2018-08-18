@@ -14,11 +14,8 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const PlaceListUL = styled.ul`
+const PlaceListUL = styled.div`
 `;
-
-
-
 
 @inject(allStores => ({
   placesArray: allStores.store.placesArray}))
@@ -28,12 +25,15 @@ const PlaceListUL = styled.ul`
   @observer class DragNdrop extends Component {
 
     render() {
+
       return (
           <PlaceListUL 
           innerRef={this.props.provided.innerRef}
           {...this.props.provided.droppableProps} 
         >
-          {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place}/>)}
+          {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place} verifier="placeOfPlace"/>)}
+
+
           {this.props.provided.placeholder}
         </PlaceListUL>
         
