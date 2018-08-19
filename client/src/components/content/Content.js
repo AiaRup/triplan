@@ -13,7 +13,6 @@ const Container = styled.div`
 
 const PlanTripContainer = styled.div`
   display: flex;
-
   height: 80vh;
   width: 50%;
   border: 1px solid lightgrey;

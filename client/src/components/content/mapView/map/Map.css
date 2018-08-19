@@ -1,0 +1,14 @@
+
+#map {
+  height: 100%
+}
+
+#appMap {
+  height: 80vh;
+}
+
+#map-container {
+  height: 100%;
+  width: 100%;
+
+}

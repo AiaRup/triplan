@@ -1,0 +1,23 @@
+.navbar .navbar-toggler-icon {
+  background-image: url('https://mdbootstrap.com/img/svg/hamburger1.svg?color=6a1b9a');
+}
+
+@media (max-width: 767px) {
+  .navbar-nav li a {
+    display: inline;
+  }
+  .navbar-nav li {
+    text-align: center;
+    padding: .5rem 1rem;
+  }
+  .navbar-right li {
+    text-align: right;
+    padding: 2px;
+  }
+  .navbar-right li.mr-3 {
+    margin-right: 0 !important;
+  }
+  .navbar-nav li.ml-3 {
+    margin-left: 0 !important;
+  }
+}

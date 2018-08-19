@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Autocomplete from 'react-google-autocomplete'
+import React, { Component } from 'react';
+import Autocomplete from 'react-google-autocomplete';
 import './location.css';
 
 export default class Location extends Component {
@@ -34,13 +34,12 @@ export default class Location extends Component {
           style={{ width: '100%' }}
           onPlaceSelected={this.handleSelect}
           types={['address']}
-
         />
         {/* <button
           // disabled={!this.state.isSelect}
           onClick={this.handleClick}>Search</button> */}
       </div>
-    )
+    );
   }
 }
 

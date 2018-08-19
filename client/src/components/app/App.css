@@ -8,3 +8,12 @@ ul {
   display: flex;
   flex-direction: row;
 }
+
+#root {
+  height: 100%;
+}
+
+.container-fluid {
+  min-height: 100vh;
+}
+
