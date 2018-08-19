@@ -14,6 +14,7 @@ export default class MapView extends Component {
     console.log(address);
     this.setState({ address: address });
   }
+
   render() {
     return (
       <div id="map-container">

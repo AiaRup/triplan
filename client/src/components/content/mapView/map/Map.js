@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './Map.css';
+import { observer, inject } from 'mobx-react';
 
 
+@inject('store')
+@observer
 export default class Map extends Component {
   constructor(props) {
     super(props);
@@ -15,12 +18,12 @@ export default class Map extends Component {
     this.address = props.address;
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     let map = new window.google.maps.Map(document.getElementById('map'), {
       center: { lat: -33.8688, lng: 151.2195 },
       zoom: 13,
       mapTypeId: 'roadmap',
-      mapTypeControl: false,
+      mapTypeControl: false
     });
 
     let marker = new window.google.maps.Marker({
@@ -54,7 +57,7 @@ export default class Map extends Component {
     console.log(this.props.address);
     return (
       <div id='appMap'>
-        <div id='map' />
+        <div id='map'></div>
       </div>
     );
   }
