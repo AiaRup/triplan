@@ -8,14 +8,12 @@ export default class MapView extends Component {
       lat: '', lng: ''
     }
   }
-  // address = {
-  //   lat: '', lng: ''
-  // }
+
   updateAddress = (address) => {
     console.log(address);
     this.setState({ address: address });
-    // this.address = address;
   }
+
   render() {
     return (
       <div id="map-container">
@@ -26,27 +24,3 @@ export default class MapView extends Component {
   }
 }
 
-// Dror:
-// import React, { Component } from 'react';
-// import styled from 'styled-components';
-
-// const Container = styled.div`
-//   margin: 8px;
-//   border-radius: 2px;
-//   display: flex;
-
-// `;
-
-// class MapView extends Component {
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <Container>
-
-//         </Container>
-//       </React.Fragment>
-//     );
-//   }
-// }
-
-// export default MapView;
