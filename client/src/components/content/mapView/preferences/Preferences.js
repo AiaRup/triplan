@@ -77,7 +77,7 @@ export default class Preferences extends Component {
                   key={label}
                 />
               )}
-              <button className="btn btn-outline-secondary" type="submit">Search</button>
+              <button className="btn btn-outline-secondary" type="submit">Find</button>
             </form>
           </div>
         </div>
