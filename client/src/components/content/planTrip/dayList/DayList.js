@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Day from './Day'
+import Day from './Day';
 
 const Container = styled.div`
   margin: 8px;
@@ -9,8 +9,6 @@ const Container = styled.div`
   border-radius: 2px;
   display: flex;
   flex-direction: row;
-  width: 500px;
-  height: 210px;
   flex-wrap: nowrap;
   overflow-x: auto;
 `;
@@ -25,10 +23,10 @@ class DayList extends Component {
     return (
       <React.Fragment>
         <Container>
-        <button onClick={this.props.addDay}>Add Day</button>
-        <ul className="day-list">
+          <button onClick={this.props.addDay}>Add Day</button>
+          <ul className="day-list">
             {this.props.daysArray.map((day, index) => <li key={index}><Day index={index} day={day}/></li>)}
-          </ul> 
+          </ul>
         </Container>
       </React.Fragment>
     );

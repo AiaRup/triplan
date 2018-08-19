@@ -7,7 +7,7 @@ import EventList from './EventList/EventList';
 const Container = styled.div`
   margin: 8px;
   border-radius: 2px;
-  
+
 `;
 
 const Wrapper = styled.div`
@@ -28,9 +28,9 @@ class PlanTrip extends Component {
             <PlaceList/>
             <EventList/>
           </Wrapper>
-          
+
           <DayList/>
-          
+
         </Container>
       </React.Fragment>
     );

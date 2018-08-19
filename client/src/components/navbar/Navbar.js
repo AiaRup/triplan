@@ -86,7 +86,6 @@ export default withAuth(
               </li>
             </ul>
             {navbarRight ? navbarRight : ''}
-
           </div>
         </nav >
       );

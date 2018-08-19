@@ -25,7 +25,7 @@ class App extends Component {
           onAuthRequired={onAuthRequired}>
           <div className="App">
             <Navbar />
-            <div className="container">
+            <div className="container-fluid">
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Map from './map/Map';
 import Location from './location/Location';
 
@@ -18,12 +18,11 @@ export default class MapView extends Component {
   }
   render() {
     return (
-      <div>
+      <div id="map-container">
         <Location updateAddress={this.updateAddress} />
-        {/* <Map address={this.address} /> */}
         <Map address={this.state.address} />
       </div>
-    )
+    );
   }
 }
 
