@@ -41,7 +41,10 @@ const PlaceListUL = styled.ul`
 
     
   }
-
+  @inject(allStores => ({
+    deleteDay: allStores.store.deleteDay,
+    daysArray: allStores.store.daysArray
+  }))
 @observer 
 class Day extends Component {
   render() {

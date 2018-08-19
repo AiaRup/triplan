@@ -24,8 +24,10 @@ flex-direction: row;
     placesArray: allStores.store.placesArray,
     daysArray: allStores.store.daysArray
 }))
-  
+@observer
 class PlanTrip extends Component {
+
+
 
   onDragEnd = result => {
     const { destination, source, draggableId } = result;
@@ -49,37 +51,22 @@ class PlanTrip extends Component {
      
      this.props.placesArray.splice(source.index, 1);
      this.props.placesArray.splice(destination.index, 0, dragger);
-     console.log('working source '+source)
+     console.log('working source '+JSON.stringify(source))
      console.log('working destiantion '+ destination)
      }else {
-
-     //dragging inside the day contianer
-    
-     const dayIdtoindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId)
-
-     const idToIndexPlace = this.props.daysArray[dayIdtoindex].places.findIndex(p=> p.id===draggableId)
-
-     const draggedPlace = this.props.daysArray[dayIdtoindex].places[idToIndexPlace]
-    
-     //!!WHY SOURCE & DESTINATION INDEX RETURNS UNDIFNED AND NULL??
-        console.log('daysArray '+ JSON.stringify(this.props.daysArray))
-        console.log('dayIdtoindex-location '+ dayIdtoindex)
-        console.log('daysArray with location '+ JSON.stringify(this.props.daysArray[dayIdtoindex]))
-        console.log('daysArray with definit place '+ JSON.stringify(this.props.daysArray[dayIdtoindex]).place)
-
-        console.log('non working source '+ source)
-        console.log('non working destination '+destination)
-       
-    
-    this.props.daysArray[dayIdtoindex].places.splice(source.index, 1);
-    this.props.daysArray[dayIdtoindex].places.splice(destination.index, 0, draggedPlace);
-    
-
-     
+    console.log(source.index)
+    //  const dayIdtoindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId)
+    //  const idToIndexPlace = this.props.daysArray[dayIdtoindex].places.findIndex(p=> p.id===draggableId)
+    //  const draggedPlace = this.props.daysArray[dayIdtoindex].places[idToIndexPlace]
+    // this.props.daysArray[dayIdtoindex].places.splice(source.index, 1);
+    // this.props.daysArray[dayIdtoindex].places.splice(destination.index, 0, draggedPlace);
+     }
     }
+     
+    
 
 
-  };
+  
     render() {
         return (
             <React.Fragment>

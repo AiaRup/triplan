@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { observable, action, computed, observe} from 'mobx';
+import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 
 
 @observer
 class TripStore extends Component {
+
+  // @observable daysArray = [{name:'day1', id:'dayId1', places:[{name:'place4', id:'placeId4'}, {name:'place5', id:'placeId5'}]}, {name:'day2', id:'dayId2', places:[{name:'place6', id:'placeId6'}, {name:'place7', id:'placeId7'}]}, {name:'day3', id:'dayId3', places:[]}];
 
   @observable daysArray = [{name:'day1', id:'dayId1', places:[{name:'place4', id:'placeId4'}, {name:'place5', id:'placeId5'}]}, {name:'day2', id:'dayId2', places:[{name:'place6', id:'placeId6'}, {name:'place7', id:'placeId7'}]}, {name:'day3', id:'dayId3', places:[]}];
 

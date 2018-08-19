@@ -11,7 +11,8 @@ const Container = styled.div`
 `;
 
 @inject(allStores => ({
-  deletePlace: allStores.store.deletePlace}))
+  deletePlace: allStores.store.deletePlace,
+  deletePlaceInDay: allStores.store.deletePlaceInDay}))
 class Place extends Component {
 
   checkForDiv = () => {
