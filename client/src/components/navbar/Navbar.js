@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
+import './Navbar.css';
+
 
 export default withAuth(
   class Navbar extends Component {
@@ -36,24 +38,6 @@ export default withAuth(
       this.checkAuthentication();
     }
 
-    // navOnCollapseLogin = () => {
-    //   if (this.state.authenticated === null) return null;
-    //   const idToken = JSON.parse(localStorage.getItem('okta-token-storage'));
-    //   if (idToken !== null && typeof idToken === 'object') {
-    //     if (Object.keys(idToken).length) {
-    //       this.currentUserName = idToken.idToken.claims.name;
-    //     }
-    //   }
-    //   const authNav = this.state.authenticated ? (
-    //     <li className="disabled mr-3">{this.currentUserName}</li>
-    //     <li className="nav-item"><Link to="/Login"><button className="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.logout()}>Log Out</button></Link></li>
-    //   ) : (
-    //     <li className="nav-item mr-3"><Link to="/Login"><button className="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.login()}>Log In</button></Link></li>
-    //     <li className="nav-item"><Link to="/Register"><button className="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="button">Register</button></Link></li>
-    //   )
-    //   return authNav;
-    // }
-
     navOnLogin = () => {
       if (this.state.authenticated === null) return null;
       const idToken = JSON.parse(localStorage.getItem('okta-token-storage'));
@@ -80,7 +64,7 @@ export default withAuth(
       const navbarRight = this.navOnLogin();
       // const navCollapseLogin = this.navOnCollapseLogin();
       return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <nav className="navbar navbar-expand-md navbar-light bg-light mb-3">
           <span className="navbar-brand"><Link className="navbar-brand" to="/">Triplan</Link></span>
           <button
             className="navbar-toggler"
@@ -92,21 +76,6 @@ export default withAuth(
             aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
-
-          {/* <div className="collapse navbar-collapse" id="navForCollapseMenu">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/MyTrips">My Trips</Link>
-              </li> */}
-          {/* {navbarRight} */}
-          {/* {navCollapseLogin} */}
-          {/* </ul>
-          </div> */}
-
-
           <div className="collapse navbar-collapse" id="navForCollapseMenu">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item ml-3">
