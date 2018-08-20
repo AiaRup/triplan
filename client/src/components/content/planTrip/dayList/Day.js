@@ -9,11 +9,20 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  height: 190px;
-  width:120px
+  min-height: 190px;
+  height: auto;
+  width:130px;
+  background-color: pink;
+  
 `;
 
-const PlaceListUL = styled.ul`
+const PlaceListUL = styled.div`
+  padding: 8px;
+  min-height: 120px;
+  height: auto;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
 `;
 
 
@@ -26,18 +35,17 @@ const PlaceListUL = styled.ul`
 @observer class DragNdropPlaceInDay extends Component {
 
   render() {
+    console.log(this.props.provided.placeholder)
+
     return (
         <PlaceListUL 
         innerRef={this.props.provided.innerRef}
         {...this.props.provided.droppableProps} 
-      >
-         {this.props.daysArray[this.props.index].places.map((place, index)=><Place key={place.id} placeIndex={index} dayIndex={this.props.index} place={place} verifier="placeOfDay"/>)}
-        {this.props.provided.placeholder}
+        >
+          {this.props.provided.placeholder}
+          {this.props.daysArray[this.props.index].places.map((place, index)=><Place key={place.id} placeIndex={index} dayIndex={this.props.index} place={place} verifier="placeOfDay"/>)}
       </PlaceListUL>
-      
-      
     )}
-
 
     
   }
@@ -48,18 +56,19 @@ const PlaceListUL = styled.ul`
 @observer 
 class Day extends Component {
   render() {
-
     return (
       <React.Fragment>
         <Container>
         <button onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
 
           <h4>{this.props.day.name}</h4>
+
           <Droppable droppableId={this.props.day.id}>
           {provided => (
             <DragNdropPlaceInDay index={this.props.index} provided={provided}/>
           )}
           </Droppable>
+
         </Container>
       </React.Fragment>
     );

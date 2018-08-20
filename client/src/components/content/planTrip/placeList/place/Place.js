@@ -36,7 +36,7 @@ class Place extends Component {
 } else if(this.props.verifier==="placeOfDay"){
   
     return (
-      <Draggable draggableId={this.props.place.id}>
+      <Draggable draggableId={this.props.place.id} index={this.props.placeIndex}>
       {provided => (
           <Container
           innerRef={provided.innerRef}

@@ -43,30 +43,48 @@ class PlanTrip extends Component {
         return;
     }
      
-  
+    if (destination.droppableId === source.droppableId) {
      //dragging inside the Place Container
-     if(source.droppableId === "placesContainer"){
-     const idToIndexPlaces = this.props.placesArray.findIndex(p=>p.id===draggableId)
-     const dragger = this.props.placesArray[idToIndexPlaces]
-     
-     this.props.placesArray.splice(source.index, 1);
-     this.props.placesArray.splice(destination.index, 0, dragger);
-     console.log('working source '+JSON.stringify(source))
-     console.log('working destiantion '+ destination)
+     if(source.droppableId && destination.droppableId === "placesContainer"){
+        const idToIndexPlaces = this.props.placesArray.findIndex(p=>p.id===draggableId)
+        const dragger = this.props.placesArray[idToIndexPlaces]
+        
+        this.props.placesArray.splice(source.index, 1);
+        this.props.placesArray.splice(destination.index, 0, dragger);
+
+     //dragging inside the day container   
      }else {
-    console.log(source.index)
-    //  const dayIdtoindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId)
-    //  const idToIndexPlace = this.props.daysArray[dayIdtoindex].places.findIndex(p=> p.id===draggableId)
-    //  const draggedPlace = this.props.daysArray[dayIdtoindex].places[idToIndexPlace]
-    // this.props.daysArray[dayIdtoindex].places.splice(source.index, 1);
-    // this.props.daysArray[dayIdtoindex].places.splice(destination.index, 0, draggedPlace);
-     }
-    }
+        const dayIdtoindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId);
+        const idToIndexPlace = this.props.daysArray[dayIdtoindex].places.findIndex(p=> p.id===draggableId)
+        const draggedPlace = this.props.daysArray[dayIdtoindex].places[idToIndexPlace];
+
+        this.props.daysArray[dayIdtoindex].places.splice(source.index, 1);
+        this.props.daysArray[dayIdtoindex].places.splice(destination.index, 0, draggedPlace);
+        }
+
+    }else{
+        const dayIdToSourceindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId);
+        const dayIdToDestinationindex = this.props.daysArray.findIndex(p=> p.id === destination.droppableId);
+
+        const dayToplaceDraggable = this.props.daysArray[dayIdToSourceindex].places.findIndex(p=> p.id===draggableId)
+
+        const dayDraggedPlace = this.props.daysArray[dayIdToSourceindex].places[dayToplaceDraggable];
+
+        const start = this.props.daysArray[dayIdToSourceindex];
+        const finish = this.props.daysArray[dayIdToDestinationindex];
+        const placeArrayContainer = this.props.placesArray;
+
+        if(destination.droppableId !== "placesContainer"){
+        this.props.daysArray[dayIdToSourceindex].places.splice(source.index, 1)
+        this.props.daysArray[dayIdToDestinationindex].places.splice(destination.index, 0, dayDraggedPlace)
+        } else {
+            this.props.placesArray.splice(source.index, 1);
+            this.props.daysArray[dayIdToDestinationindex].places.splice(destination.index, 0, dayDraggedPlace)
+        }
+
+    }  
+}
      
-    
-
-
-  
     render() {
         return (
             <React.Fragment>

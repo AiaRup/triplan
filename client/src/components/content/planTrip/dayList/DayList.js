@@ -10,7 +10,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   width: 500px;
-  height: 210px;
+  min-height: 210px;
+  height: auto;
   flex-wrap: nowrap;
   overflow-x: auto;
 `;

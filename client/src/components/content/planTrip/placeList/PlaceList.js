@@ -15,13 +15,14 @@ const Container = styled.div`
 `;
 
 const PlaceListUL = styled.div`
+padding: 8px;
+
 `;
 
 @inject(allStores => ({
   placesArray: allStores.store.placesArray}))
 
 
-//!!need to be seperated for the DND to work!
   @observer class DragNdrop extends Component {
 
     render() {
