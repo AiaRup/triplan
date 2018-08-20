@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 const request = require('request');
+// const cors = require('cors');
 
 
 const indexRouter = require('./routes/index');
@@ -24,6 +25,11 @@ mongoose.connect(connection, { useNewUrlParser: true })
 
 const app = express();
 
+// const corsOptions = {
+//   origin: 'http://http://localhost:3000/Home',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// };
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -38,6 +44,13 @@ app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 // app.use(express.static('public'));
 app.use(express.static('node_modules'));
+// app.use(cors());
+// app.options('*', cors());
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 
