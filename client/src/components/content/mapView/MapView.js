@@ -7,7 +7,8 @@ export default class MapView extends Component {
   state = {
     address: {
       lat: '', lng: ''
-    }
+    },
+    places: {}
   }
 
   updateAddress = (address) => {
@@ -15,12 +16,19 @@ export default class MapView extends Component {
     this.setState({ address: address });
   }
 
+  updatePlacesNear = (places) => {
+    console.log('places', places);
+    this.setState({ places: places });
+  }
+
   render() {
+    console.log('in render map view', this.state.places);
+
     return (
       <div id="map-container">
         <Location updateAddress={this.updateAddress} />
-        <Map address={this.state.address} />
-        <Preferences />
+        <Map address={this.state.address} places={this.state.places} />
+        <Preferences updatePlacesNear={this.updatePlacesNear}/>
       </div>
     );
   }
