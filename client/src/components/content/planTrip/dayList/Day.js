@@ -35,7 +35,6 @@ const PlaceListUL = styled.div`
 @observer class DragNdropPlaceInDay extends Component {
 
   render() {
-    console.log(this.props.provided.placeholder)
 
     return (
         <PlaceListUL 

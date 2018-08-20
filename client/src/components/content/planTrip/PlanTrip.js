@@ -30,59 +30,88 @@ class PlanTrip extends Component {
 
 
   onDragEnd = result => {
+    const daysArray = this.props.daysArray;
+    const placesArray = this.props.placesArray;
     const { destination, source, draggableId } = result;
-
+    
+    //if drag stop in the middle - do nothing
     if (!destination) {
         return;
     }
 
+    //if drag dropped in the same place - do nothing
     if (
-        destination.droppableId === source.droppableId && 
-        destination.index === source.index
+        source.droppableId === destination.droppableId && 
+        source.index === destination.index
     ) {
         return;
     }
-     
-    if (destination.droppableId === source.droppableId) {
-     //dragging inside the Place Container
-     if(source.droppableId && destination.droppableId === "placesContainer"){
-        const idToIndexPlaces = this.props.placesArray.findIndex(p=>p.id===draggableId)
-        const dragger = this.props.placesArray[idToIndexPlaces]
+
+    const daySourceIndex = daysArray.findIndex(p=> p.id === source.droppableId);
+    const dayDestinationIndex = daysArray.findIndex(p=> p.id === destination.droppableId);
+    
+    //if drag is in the same container - only reorder the item inside the div
+    if (source.droppableId === destination.droppableId) {
+
+        //if the drag is in the PLACE CONTAINER ONLY
+        if(source.droppableId === "placesContainer" && destination.droppableId === "placesContainer"){
+
+            //get index of place in places
+            const idToIndexPlaces = placesArray.findIndex(p=>p.id===draggableId)
+            const placeInPlaces = placesArray[idToIndexPlaces]
+            
+            //cut & paste item(place)
+            placesArray.splice(source.index, 1);
+            placesArray.splice(destination.index, 0, placeInPlaces);
+
+        //If the drag is in the day container 
+        }else if(source.droppableId !== "placesContainer" && source.droppableId === destination.droppableId ){
+            
+            
+
+            //get index of place in day
+            const placeIndexInDay = daysArray[daySourceIndex].places.findIndex(p=> p.id===draggableId)
+            const placeInDay = daysArray[daySourceIndex].places[placeIndexInDay];
+
+            //cut & paste item(place)
+            daysArray[daySourceIndex].places.splice(source.index, 1);
+            daysArray[daySourceIndex].places.splice(destination.index, 0, placeInDay);
+            }
+
+    //if the drag is between the day containers
+    }else if((source.droppableId !== "placesContainer")&& (destination.droppableId !== "placesContainer" ) && (source.droppableId !== destination.droppableId) ) {
+
+        //get index of day in days
+        const dayToplaceDraggable = daysArray[daySourceIndex].places.findIndex(p=> p.id===draggableId)
+
+        //get index of place in day
+        const dayDraggedPlace = daysArray[daySourceIndex].places[dayToplaceDraggable];
+
+        //cut & paste item(place) between the days
+        daysArray[daySourceIndex].places.splice(source.index, 1)
+        daysArray[dayDestinationIndex].places.splice(destination.index, 0, dayDraggedPlace)
+
+    //if the drag is from places to days
+    }else if(source.droppableId === "placesContainer" && destination.droppableId !== "placesContainer")  {
         
-        this.props.placesArray.splice(source.index, 1);
-        this.props.placesArray.splice(destination.index, 0, dragger);
+        //get place item
+        const placePlacesToDay = placesArray[source.index];
 
-     //dragging inside the day container   
-     }else {
-        const dayIdtoindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId);
-        const idToIndexPlace = this.props.daysArray[dayIdtoindex].places.findIndex(p=> p.id===draggableId)
-        const draggedPlace = this.props.daysArray[dayIdtoindex].places[idToIndexPlace];
+        //cut & paste
+        placesArray.splice(source.index, 1);
+        daysArray[dayDestinationIndex].places.splice(destination.index, 0, placePlacesToDay)
 
-        this.props.daysArray[dayIdtoindex].places.splice(source.index, 1);
-        this.props.daysArray[dayIdtoindex].places.splice(destination.index, 0, draggedPlace);
-        }
+    //if the drag is from days to places
+    }else if(source.droppableId !== "placesContainer" && destination.droppableId === "placesContainer"){
 
-    }else{
-        const dayIdToSourceindex = this.props.daysArray.findIndex(p=> p.id === source.droppableId);
-        const dayIdToDestinationindex = this.props.daysArray.findIndex(p=> p.id === destination.droppableId);
+        //get place item
+        const placeItem = daysArray[daySourceIndex].places[source.index];
+        
+        //cut & paste
+        daysArray[daySourceIndex].places.splice(source.index, 1);
+        placesArray.splice(destination.index, 0, placeItem);
+    }
 
-        const dayToplaceDraggable = this.props.daysArray[dayIdToSourceindex].places.findIndex(p=> p.id===draggableId)
-
-        const dayDraggedPlace = this.props.daysArray[dayIdToSourceindex].places[dayToplaceDraggable];
-
-        const start = this.props.daysArray[dayIdToSourceindex];
-        const finish = this.props.daysArray[dayIdToDestinationindex];
-        const placeArrayContainer = this.props.placesArray;
-
-        if(destination.droppableId !== "placesContainer"){
-        this.props.daysArray[dayIdToSourceindex].places.splice(source.index, 1)
-        this.props.daysArray[dayIdToDestinationindex].places.splice(destination.index, 0, dayDraggedPlace)
-        } else {
-            this.props.placesArray.splice(source.index, 1);
-            this.props.daysArray[dayIdToDestinationindex].places.splice(destination.index, 0, dayDraggedPlace)
-        }
-
-    }  
 }
      
     render() {
