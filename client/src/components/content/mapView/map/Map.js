@@ -29,14 +29,10 @@ const MyMapComponent = compose(
         },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
-          console.log('place');
-          console.log(place);
           let lat = place[0].geometry.location.lat();
           let lng = place[0].geometry.location.lng();
-          this.myLocation = { lat: lat, lng: lng };
           this.nameLocation = place[0].formatted_address;
-          console.log(this.myLocation);
-          this.props.updateAddress(this.myLocation);
+          this.props.updateAddress({ lat: lat, lng: lng });
           this.setState({ zoom: 13 });
         },
         onMarkerClick: () => {
@@ -51,7 +47,6 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) => {
-  console.log('in map props- markers:', props.markers);
 
   return <div>
     <StandaloneSearchBox
@@ -61,7 +56,7 @@ const MyMapComponent = compose(
       <input
         type="text"
         placeholder="Search Address"
-        className="autocomplete"/>
+        className="autocomplete" />
     </StandaloneSearchBox>
     <GoogleMap
       defaultZoom={10}
@@ -89,7 +84,7 @@ class MyFancyComponent extends React.PureComponent {
     };
   }
 
-  addMarkers= () => {
+  addMarkers = () => {
     const markerArray = [];
     const promises = [];
     this.state.places.forEach((element) => {
@@ -117,10 +112,12 @@ class MyFancyComponent extends React.PureComponent {
 
       promises.push(promise);
     });
-    Promise.all(promises).then(this.setState({ markers: markerArray }));
+    Promise.all(promises).then(() => { this.setState({ markers: markerArray }) });
+
+
   }
 
-  isArrayEqual= (array1, array2) => {
+  isArrayEqual = (array1, array2) => {
     let result = _(array1).differenceWith(array2, _.isEqual).isEmpty();
     console.log('equal', result);
     return result;
@@ -132,24 +129,7 @@ class MyFancyComponent extends React.PureComponent {
     }
   }
 
-  // componentDidMount() {
-  //   this.delayedShowMarker();
-  // }
-
-  // delayedShowMarker = () => {
-  //   setTimeout(() => {
-  //     this.setState({ isMarkerShown: true })
-  //   }, 3000);
-  // }
-
-  // handleMarkerClick = () => {
-  //   this.setState({ isMarkerShown: false });
-  //   this.delayedShowMarker();
-  // }
-
   render() {
-    console.log('state markers', this.state.markers);
-
     return (
       <MyMapComponent
         onMarkerClick={this.handleMarkerClick}
