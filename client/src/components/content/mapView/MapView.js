@@ -39,7 +39,7 @@ export default class MapView extends Component {
         />
         <Preferences updatePlacesNear={this.updatePlacesNear} />
       </div>
-    )
+    );
   }
 }
 
