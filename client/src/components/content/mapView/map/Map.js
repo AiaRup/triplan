@@ -1,141 +1,17 @@
 import React, { Component } from 'react';
 import './Map.css';
-// import { observer, inject } from 'mobx-react';
-// import axios from 'axios';
+import axios from 'axios';
 import _ from 'lodash';
-
-
-// @inject('store')
-// @observer
-// export default class Map extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       zoom: 13,
-//       maptype: 'roadmap',
-//       place_formatted: '',
-//       place_id: '',
-//       place_location: '',
-//       places: props.places
-//     };
-//     this.address = props.address;
-//   }
-
-//   componentDidMount = () => {
-//     let map = new window.google.maps.Map(document.getElementById('map'), {
-//       center: { lat: -33.8688, lng: 151.2195 },
-//       zoom: 13,
-//       mapTypeId: 'roadmap',
-//       mapTypeControl: false
-//     });
-
-//     let marker = new window.google.maps.Marker({
-//       map: map,
-//       position: { lat: -33.8688, lng: 151.2195 },
-//     });
-//   }
-
-//   // shouldComponentUpdate(nextProps) {
-//   //   if (this.address !== nextProps.address) {
-//   //     this.address = nextProps.address;
-//   //     console.log('in should');
-//   //     let map = new window.google.maps.Map(document.getElementById('map'), {
-//   //       center: { lat: this.address.lat, lng: this.address.lng },
-//   //       zoom: 17,
-//   //       mapTypeId: 'roadmap',
-//   //       mapTypeControl: false
-//   //     });
-
-//   //     let marker = new window.google.maps.Marker({
-//   //       map: map,
-//   //       position: { lat: this.address.lat, lng: this.address.lng },
-//   //     });
-//   //     return true;
-//   //   }
-//   //   return false;
-//   // }
-
-//   componentDidUpdate(prevProps) {
-//     console.log('in update');
-//     if (!this.isArrayEqual(this.props.places, prevProps.places)) {
-//       console.log('in compare');
-
-//       this.setState({ places: this.props.places }, () => this.addMarkers());
-
-//       // let map = new window.google.maps.Map(document.getElementById('map'), {
-//       //   center: { lat: -33.8688, lng: 151.2195 },
-//       //   zoom: 17,
-//       //   mapTypeId: 'roadmap',
-//       //   mapTypeControl: false
-//       // });
-
-
-//     }
-
-//     // this.places.forEach((place) => {
-
-
-
-//   }
-
-//   isArrayEqual = (array1, array2) => {
-//     return _(array1).differenceWith(array2, _.isEqual).isEmpty();
-//   };
-
-
-//   addMarkers = () => {
-//     console.log('in add markers', this.state.places);
-
-//     this.state.places.forEach((element) => {
-//       console.log(console.log(element.type));
-//           //   axios.get('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=YOUR_API_KEY')
-//     //     .then(function (response) {
-//     //       console.log(response);
-//     //     })
-//     //     .catch(function (error) {
-//     //       console.log(error);
-//     //     });
-
-//     //   let marker = new window.google.maps.Marker({
-//     //     map: map,
-//     //     position: { lat: this.address.lat, lng: this.address.lng },
-//     //   });
-//     // });
-//     });
-//   }
-
-//   render() {
-//     console.log('in render map');
-//     console.log(this.props.places);
-//     return (
-//       <div id='appMap'>
-//         <div id='map'></div>
-//       </div>
-//     );
-//   }
-// }
-
 import { StandaloneSearchBox } from "react-google-maps/lib/components/places/StandaloneSearchBox";
 import { compose, withProps, withState, lifecycle, withHandlers } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+// import 'map-icons/dist/fonts';
+// import 'map-icons/dist/css/map-icons.css';
+// import 'map-icons/dist/js/map-icons.js';
+const google = window.google;
 
 const MyMapComponent = compose(
   withState({ zoom: 12 }),
-  // withState('zoom', 'onZoomChange', 15),
-  // withHandlers(() => {
-  //   const refs = {
-  //     map: undefined,
-  //   }
-
-  //   return {
-  //     onMapMounted: () => ref => {
-  //       refs.map = ref
-  //     },
-  //     onZoomChanged: ({ onZoomChange }) => () => {
-  //       onZoomChange(refs.map.getZoom())
-  //     }
-  //   }
-  // }),
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY",
     loadingElement: <div style={{ height: `100%` }} />,
@@ -143,6 +19,7 @@ const MyMapComponent = compose(
     mapElement: <div style={{ height: `100%` }} />,
     isMarkerShown: true,
     zoom: 14,
+    places: this.props.places, // ????
   }),
   lifecycle({
     componentWillMount() {
@@ -172,9 +49,51 @@ const MyMapComponent = compose(
           console.log(this.state.zoom);
 
         },
+        isArrayEqual: (array1, array2) => {
+          let result = _(array1).differenceWith(array2, _.isEqual).isEmpty();
+          console.log('equal', result);
+          return result;
+        },
+
+        addMarkers: () => {
+          console.log('in add markers', this.state.places);
+
+          this.state.places.forEach((element) => {
+            let type = element.type;
+            const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=${type}&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`;
+
+            axios(url)
+              .then((response) => {
+                console.log('res', response.data.results);
+                const markerArray = [];
+                // add markers on the map
+                response.data.results.forEach((location) => {
+                  const objLatLng = location.geometry.location;
+                  let marker = {
+                    position:
+                      { lat: objLatLng.lat, lng: objLatLng.lng }
+                  }
+                  markerArray.push(marker);
+                });
+
+                console.log(markerArray);
+                this.setState({ markers: markerArray });
+
+              });
+          })
+            .catch(function (error) {
+              console.log(error);
+            });
+        },
       })
     }, // end componentWillMount
-
+    componentDidUpdate(prevProps) {
+      if (!this.isArrayEqual(this.props.places, prevProps.places)) {
+        console.log('in compare');
+        this.setState({ places: this.props.places }, () => this.addMarkers());
+        // this.setState({ places: this.props.places });
+      }
+    }
   }),
   withScriptjs,
   withGoogleMap
@@ -189,7 +108,7 @@ const MyMapComponent = compose(
     >
       <input
         type="text"
-        placeholder="הזן מיקום"
+        placeholder="Search Address"
         className="autocomplete"
       />
     </StandaloneSearchBox>
@@ -211,23 +130,105 @@ const MyMapComponent = compose(
       {/* {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />} */}
       {props.isMarkerShown && <Marker position={{ lat: props.address.lat, lng: props.address.lng }} onClick={props.onMarkerClick} />}
       {/* {props.isMarkerShown && <Marker position={{ lat: this.myLocation.lat, lng: this.myLocation.lng }} onClick={props.onMarkerClick} />} */}
+      {this.state.markerArray.map(marker => <Marker position={{ lat: marker.position.lat, lng: marker.position.lng }} />)}
     </GoogleMap>
   </div>
 
-  // <GoogleMap
-  //   defaultZoom={12}
-  //   // Zoom={13}
-  //   // defaultCenter={{ lat: -34.397, lng: 150.644 }}
-  //   defaultCenter={{ lat: props.address.lat, lng: props.address.lng }}
-
-  // >
-  //   {/* {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />} */}
-  //   {props.isMarkerShown && <Marker position={{ lat: props.address.lat, lng: props.address.lng }} onClick={props.onMarkerClick} />}
-  // </GoogleMap>
-}
-
-)
+})
 
 
 export default MyMapComponent
+
+
+// export default class Map extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       zoom: 12,
+//       maptype: 'roadmap',
+//       place_formatted: '',
+//       place_id: '',
+//       place_location: '',
+//       // places: []
+//       places: props.places
+//     };
+//     this.address = props.address;
+//     this.map = {};
+//     // this.places = props.places;
+//   }
+
+// componentDidMount = () => {
+//   // this.setState({ places: this.props.places });
+//   this.map = new window.google.maps.Map(document.getElementById('map'), {
+//     center: { lat: -33.8688, lng: 151.2195 },
+//     zoom: 12,
+//     mapTypeId: 'roadmap',
+//     mapTypeControl: false,
+//     scrollwheel: false
+//   });
+
+//   let marker = new window.google.maps.Marker({
+//     map: this.map,
+//     position: { lat: -33.8688, lng: 151.2195 },
+//   });
+// }
+
+// componentDidUpdate(prevProps) {
+//   if (!this.isArrayEqual(this.props.places, prevProps.places)) {
+//     console.log('in compare');
+//     this.setState({ places: this.props.places }, () => this.addMarkers());
+//   }
+// }
+
+// isArrayEqual = (array1, array2) => {
+//   let result = _(array1).differenceWith(array2, _.isEqual).isEmpty();
+//   console.log('equal', result);
+//   return result;
+// };
+
+
+// addMarkers = () => {
+//   console.log('in add markers', this.state.places);
+
+//   this.state.places.forEach((element) => {
+//     let type = element.type;
+//     const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=${type}&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`;
+
+//     axios(url)
+//       .then((response) => {
+//         console.log('res', response.data.results);
+//         // add markers on the map
+//         response.data.results.forEach((location) => {
+//           const objLatLng = location.geometry.location;
+//           let marker = new window.google.maps.Marker({
+//             map: this.map,
+//             animation: google.maps.Animation.DROP,
+//             position: { lat: objLatLng.lat, lng: objLatLng.lng },
+//           });
+//         });
+//       })
+//       .catch(function (error) {
+//         console.log(error);
+//       });
+//   });
+// }
+
+// setMapOnAll(map) {
+//   for (var i = 0; i < markers.length; i++) {
+//     markers[i].setMap(map);
+//   }
+// }
+
+// clearMarkers = () => {
+//   setMapOnAll(null);
+// }
+
+// render() {
+//   return (
+//     <div id='appMap'>
+//       <div id='map'></div>
+//     </div>
+//   );
+// }
+// }
 

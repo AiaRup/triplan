@@ -59,7 +59,6 @@ const items = [
 
 export default class Preferences extends Component {
   componentWillMount = () => {
-    // this.selectedCheckboxes = new Set();
     this.selectedCheckboxes = [];
   }
 
@@ -70,16 +69,10 @@ export default class Preferences extends Component {
     else {
       _.pullAllWith(this.selectedCheckboxes, [{ label: label, type: type }], _.isEqual);
     }
-    console.log('in toggle', this.selectedCheckboxes);
   }
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
-    for (const checkbox of this.selectedCheckboxes) {
-      console.log(checkbox.label, 'is selected.');
-
-    }
-    console.log('------');
     this.props.updatePlacesNear(this.selectedCheckboxes);
   }
 
