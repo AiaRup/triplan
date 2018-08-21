@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './Map.css';
 import axios from 'axios';
 import _ from 'lodash';
+// import 'map-icons/dist/fonts';
+// import 'map-icons/dist/css/map-icons.css';
+// import 'map-icons/dist/js/map-icons.js';
+
+const google = window.google;
 
 export default class Map extends Component {
   constructor(props) {
@@ -26,7 +31,8 @@ export default class Map extends Component {
       center: { lat: -33.8688, lng: 151.2195 },
       zoom: 12,
       mapTypeId: 'roadmap',
-      mapTypeControl: false
+      mapTypeControl: false,
+      scrollwheel: false
     });
 
     let marker = new window.google.maps.Marker({
@@ -36,11 +42,7 @@ export default class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.places);
-    console.log(prevProps.places);
-
     if (!this.isArrayEqual(this.props.places, prevProps.places)) {
-    // if (!this.isArrayEqual(this.props.places, prevProps.places)) {
       console.log('in compare');
       this.setState({ places: this.props.places }, () => this.addMarkers());
     }
@@ -68,9 +70,22 @@ export default class Map extends Component {
             const objLatLng = location.geometry.location;
             let marker = new window.google.maps.Marker({
               map: this.map,
+              animation: google.maps.Animation.DROP,
               position: { lat: objLatLng.lat, lng: objLatLng.lng },
             });
           });
+          // var marker = new Marker({
+          //   map: map,
+          //   position: new google.maps.LatLng(-27.46577, 153.02303),
+          //   icon: {
+          //     path: MAP_PIN,
+          //     fillColor: '#00CCBB',
+          //     fillOpacity: 1,
+          //     strokeColor: '',
+          //     strokeWeight: 0
+          //   },
+          //   map_icon_label: '<span class="map-icon map-icon-point-of-interest"></span>'
+          // });
 
         })
         .catch(function (error) {
@@ -78,6 +93,16 @@ export default class Map extends Component {
         });
     });
   }
+
+  // setMapOnAll(map) {
+  //   for (var i = 0; i < markers.length; i++) {
+  //     markers[i].setMap(map);
+  //   }
+  // }
+
+  // clearMarkers = () => {
+  //   setMapOnAll(null);
+  // }
 
   render() {
     return (
