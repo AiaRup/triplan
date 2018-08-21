@@ -12,7 +12,6 @@ const Container = styled.div`
   min-height: 190px;
   height: auto;
   width:130px;
-  background-color: pink;
   
 `;
 
@@ -20,9 +19,8 @@ const PlaceListUL = styled.div`
   padding: 8px;
   min-height: 120px;
   height: auto;
-  background-color: red;
-  display: flex;
-  flex-direction: column;
+  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
+  transition: background-color 0.2s ease;
 `;
 
 
@@ -39,10 +37,12 @@ const PlaceListUL = styled.div`
     return (
         <PlaceListUL 
         innerRef={this.props.provided.innerRef}
+        isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps} 
         >
-          {this.props.provided.placeholder}
+          
           {this.props.daysArray[this.props.index].places.map((place, index)=><Place key={place.id} placeIndex={index} dayIndex={this.props.index} place={place} verifier="placeOfDay"/>)}
+          {this.props.provided.placeholder}
       </PlaceListUL>
     )}
 
@@ -63,8 +63,8 @@ class Day extends Component {
           <h4>{this.props.day.name}</h4>
 
           <Droppable droppableId={this.props.day.id}>
-          {provided => (
-            <DragNdropPlaceInDay index={this.props.index} provided={provided}/>
+          {(provided, snapshot)=> (
+            <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
           )}
           </Droppable>
 

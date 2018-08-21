@@ -10,12 +10,15 @@ const Container = styled.div`
   border-radius: 2px;
   height: auto;
   min-height: 200px;
-  display: flex;
-  flex-direction: column;
+  width: 50%;
 `;
 
 const PlaceListUL = styled.div`
 padding: 8px;
+min-height: 200px;
+height: auto;
+background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
+transition: background-color 0.2s ease;
 
 `;
 
@@ -30,6 +33,7 @@ padding: 8px;
       return (
           <PlaceListUL 
           innerRef={this.props.provided.innerRef}
+          isDraggingOver={this.props.snapshot.isDraggingOver}
           {...this.props.provided.droppableProps} 
         >
           {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place} verifier="placeOfPlace"/>)}
@@ -52,8 +56,8 @@ class PlaceList extends Component {
         <Container>
           <h5>Places</h5>
           <Droppable droppableId="placesContainer">
-           {provided => (
-             <DragNdrop provided={provided}/>
+           {(provided, snapshot) => (
+             <DragNdrop provided={provided} snapshot={snapshot}/>
           )}
           </Droppable>
         </Container>

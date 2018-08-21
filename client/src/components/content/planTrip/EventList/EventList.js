@@ -9,6 +9,7 @@ const Container = styled.div`
   border-radius: 2px;
   height: auto;
   min-height: 200px;
+  width: 50%;
   display: flex;
   flex-direction: column;
 `;

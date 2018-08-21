@@ -30,7 +30,7 @@ class TripStore extends Component {
   }
 
   @action addDay = () => {
-    this.daysArray.push('day')
+    this.daysArray.push({name:'day4', id:'dayId4', places:[{name:'place9', id:'placeId9'}]})
   }
   
 

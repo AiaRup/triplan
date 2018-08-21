@@ -7,7 +7,8 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: white;
+  background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
+ 
 `;
 
 @inject(allStores => ({
@@ -15,13 +16,15 @@ const Container = styled.div`
   deletePlaceInDay: allStores.store.deletePlaceInDay}))
 class Place extends Component {
 
+  
   checkForDiv = () => {
     if(this.props.verifier==="placeOfPlace"){
       return (
     <Draggable draggableId={this.props.thePlace.id} index={this.props.index}>
-    {provided => (
+    {(provided, snapshot) => (
         <Container
         innerRef={provided.innerRef}
+        isDragging={snapshot.isDragging}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         >
@@ -37,9 +40,10 @@ class Place extends Component {
   
     return (
       <Draggable draggableId={this.props.place.id} index={this.props.placeIndex}>
-      {provided => (
+      {(provided, snapshot) => (
           <Container
           innerRef={provided.innerRef}
+          isDragging={snapshot.isDragging}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           >
@@ -54,10 +58,11 @@ class Place extends Component {
 }
 
   render() {
-
+    
     return (
       this.checkForDiv()
     );
+    
   }
 }
 

@@ -16,6 +16,15 @@ const Container = styled.div`
   overflow-x: auto;
 `;
 
+const Wrapper = styled.div`
+margin: 8px;
+border: 1px solid lightgrey;
+border-radius: 2px;
+width: auto;
+height: auto;
+
+`;
+
 @inject(allStores => ({
   daysArray: allStores.store.daysArray,
   addDay: allStores.store.addDay
@@ -24,14 +33,15 @@ const Container = styled.div`
 class DayList extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Container>
+      <Wrapper>
         <button onClick={this.props.addDay}>Add Day</button>
+        <Container>
+        
         <ul className="day-list">
             {this.props.daysArray.map((day, index) => <li key={day.id}><Day index={index} day={day}/></li>)}
           </ul> 
         </Container>
-      </React.Fragment>
+      </Wrapper>
     );
   }
 }
