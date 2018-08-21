@@ -8,7 +8,8 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 2px;
   background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
- 
+  max-width: ${props=> (props.isDragging ? '100px' : 'auto')};
+  transition: max-width 0.2 ease;
 `;
 
 @inject(allStores => ({

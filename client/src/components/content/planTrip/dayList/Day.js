@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Place from '../placeList/place/Place';
+import PickDate from './PickDate';
 
 
 const Container = styled.div`
@@ -59,7 +60,8 @@ class Day extends Component {
       <React.Fragment>
         <Container>
         <button onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
-
+        <PickDate dayIndex={this.props.index}/>
+        {/* {this.props.daysArray[this.props.index].date} */}
           <h4>{this.props.day.name}</h4>
 
           <Droppable droppableId={this.props.day.id}>
