@@ -1,7 +1,9 @@
 import React from 'react';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
-import { compose, withProps, withState, lifecycle, withHandlers } from 'recompose';
+import { compose, withProps, withState, lifecycle } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+
+// const google = window.google;
 
 const MapComponent = compose(
   withState({ zoom: 12 }),
@@ -10,7 +12,6 @@ const MapComponent = compose(
     loadingElement: <div style={{ height: '100%' }} />,
     containerElement: <div style={{ height: '100%' }} />,
     mapElement: <div style={{ height: '100%' }} />,
-    isMarkerShown: true,
     zoom: 14,
   }),
   lifecycle({
@@ -59,8 +60,10 @@ const MapComponent = compose(
         fullscreenControl: false,
         scrollwheel: false
       }}>
-      {props.isMarkerShown && <Marker position={{ lat: props.address.lat, lng: props.address.lng }} onClick={props.onMarkerClick} />}
-      {props.isMarkerShown && props.markers.map((marker, index) => <Marker key={index} position={{ lat: marker.position.lat, lng: marker.position.lng }} onClick={props.onMarkerClick} />)}
+
+      <Marker position={{ lat: props.address.lat, lng: props.address.lng }} onClick={props.onMarkerClick}/>
+
+      {props.markers.map((marker, index) => <Marker key={index} position={{ lat: marker.position.lat, lng: marker.position.lng }} onClick={props.onMarkerClick}/>)}
     </GoogleMap>
   </div>;
 });

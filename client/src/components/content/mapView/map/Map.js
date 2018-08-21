@@ -30,11 +30,26 @@ class Map extends Component {
         .then((response) => {
           // add markers on the map
           response.data.results.forEach((location) => {
+            console.log(location);
             const objLatLng = location.geometry.location;
+
             let marker = {
+              name: location.name,
+              id: location.id,
+              icon: location.icon,
+              rating: location.rating,
+              website: location.reference,
               position:
                 { lat: objLatLng.lat, lng: objLatLng.lng }
             };
+
+            if (location.opening_hours !== undefined) {
+              marker.openNow = location.opening_hours.open_now;
+            }
+            if (location.photos !== undefined) {
+              marker.photo = location.photos[0];
+            }
+            console.log('marker', marker);
             markerArray.push(marker);
           });
         })
