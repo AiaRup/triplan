@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import Map from './map/Map';
 import Location from './location/Location';
 import Preferences from './preferences/Preferences';
+import _ from 'lodash';
+
 
 export default class MapView extends Component {
   state = {
     address: {
       lat: '', lng: ''
     },
-    places: {}
+    places: []
   }
 
   updateAddress = (address) => {
@@ -25,7 +27,8 @@ export default class MapView extends Component {
     return (
       <div id="map-container">
         <Location updateAddress={this.updateAddress} />
-        <Map address={this.state.address} places={this.state.places} />
+        {/* <Map address={this.state.address} places={this.state.places} /> */}
+        <Map address={this.state.address} places={_.clone(this.state.places)} />
         <Preferences updatePlacesNear={this.updatePlacesNear}/>
       </div>
     );
