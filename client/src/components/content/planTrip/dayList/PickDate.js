@@ -2,11 +2,7 @@ import React from 'react';
 import { observer, inject } from 'mobx-react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
- 
 import 'react-datepicker/dist/react-datepicker.css';
- 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
  
 @inject(allStores => ({
   chooseDate: allStores.store.chooseDate,
