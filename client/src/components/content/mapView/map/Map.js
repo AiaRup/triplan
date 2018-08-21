@@ -137,7 +137,7 @@ const MyMapComponent = compose(
   //   }
   // }),
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100%` }} />,
     mapElement: <div style={{ height: `100%` }} />,
@@ -163,11 +163,14 @@ const MyMapComponent = compose(
           this.nameLocation = place[0].formatted_address;
           console.log(this.myLocation);
           this.props.updateAddress(this.myLocation);
-          this.setState({ zoom: 14 });
+          this.setState({ zoom: 13 });
         },
 
         onMarkerClick: () => {
           console.log('marker clicked!');
+          console.log(this.props.zoom);
+          console.log(this.state.zoom);
+
         },
       })
     }, // end componentWillMount
@@ -187,25 +190,11 @@ const MyMapComponent = compose(
       <input
         type="text"
         placeholder="הזן מיקום"
-        style={{
-          boxSizing: `border-box`,
-          border: `1px solid transparent`,
-          width: `240px`,
-          height: `32px`,
-          padding: `0 12px`,
-          borderRadius: `3px`,
-          boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          fontSize: `14px`,
-          outline: `none`,
-          textOverflow: `ellipses`,
-          position: 'absolute',
-          top: '91px',
-          left: '169px'
-        }}
+        className="autocomplete"
       />
     </StandaloneSearchBox>
     <GoogleMap
-      defaultZoom={10}
+      // defaultZoom={10}
       // zoom={10}
       zoom={props.zoom}
       center={{ lat: props.address.lat, lng: props.address.lng }}
@@ -213,13 +202,10 @@ const MyMapComponent = compose(
       defaultCenter={{ lat: props.address.lat, lng: props.address.lng }}
       // defaultCenter={{ lat: this.myLocation.lat, lng: this.myLocation.lng }}
       defaultOptions={{
-        // streetViewControl: false,
-        // scaleControl: false,
         mapTypeControl: false,
-        // panControl: false,
-        // zoomControl: false,
         rotateControl: false,
-        fullscreenControl: false
+        fullscreenControl: false,
+        scrollwheel: false
       }}
     >
       {/* {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} onClick={props.onMarkerClick} />} */}
