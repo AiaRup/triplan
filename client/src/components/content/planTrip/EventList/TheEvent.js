@@ -17,7 +17,7 @@ class TheEvent extends Component {
       <React.Fragment>
         <Container>
         <button onClick={()=>this.props.deleteEvent(this.props.index)}>X</button>
-        {this.props.theEvent}
+        {this.props.theEvent.name}
         </Container>
       </React.Fragment>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import Day from './Day';
+import Day from './Day'
 
 const Container = styled.div`
   margin: 8px;
@@ -9,8 +9,20 @@ const Container = styled.div`
   border-radius: 2px;
   display: flex;
   flex-direction: row;
+  width: 500px;
+  min-height: 210px;
+  height: auto;
   flex-wrap: nowrap;
   overflow-x: auto;
+`;
+
+const Wrapper = styled.div`
+margin: 8px;
+border: 1px solid lightgrey;
+border-radius: 2px;
+width: auto;
+height: auto;
+
 `;
 
 @inject(allStores => ({
@@ -21,14 +33,15 @@ const Container = styled.div`
 class DayList extends Component {
   render() {
     return (
-      <React.Fragment>
+      <Wrapper>
+        <button onClick={this.props.addDay}>Add Day</button>
         <Container>
-          <button onClick={this.props.addDay}>Add Day</button>
-          <ul className="day-list">
-            {this.props.daysArray.map((day, index) => <li key={index}><Day index={index} day={day}/></li>)}
-          </ul>
+        
+        <ul className="day-list">
+            {this.props.daysArray.map((day, index) => <li key={day.id}><Day index={index} day={day}/></li>)}
+          </ul> 
         </Container>
-      </React.Fragment>
+      </Wrapper>
     );
   }
 }
