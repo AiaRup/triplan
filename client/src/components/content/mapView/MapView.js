@@ -12,17 +12,15 @@ export default class MapView extends Component {
   }
 
   updateAddress = (address) => {
-    console.log(address);
     this.setState({ address: address });
   }
 
   updatePlacesNear = (places) => {
-    console.log('places', places);
     this.setState({ places: places });
   }
 
   render() {
-    console.log('in render map view', this.state.places);
+    console.log('places in mapview', this.state.places);
 
     return (
       <div id="map-container">
