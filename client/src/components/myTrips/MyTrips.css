@@ -1,0 +1,41 @@
+/* .all {
+    width: 60%;
+    margin : auto ;
+    background-color: aqua;
+    text-align:center;
+} */
+
+.search-bar{
+    margin:  auto ;
+    margin-bottom: 40px;
+    width:60%;
+    text-align:center;
+}
+
+/* input{
+    width:100%;
+} */
+
+.card-list{
+    width:60%;
+    margin : auto ;
+    display : flex; 
+    flex-wrap: wrap;
+    /* border: 2px solid; */
+    box-sizing: border-box;
+
+}
+
+.card{
+  flex: 0 0 33.3333%;
+  padding: 20px;
+  /* margin:15px; */
+  /* border: 1px solid; */
+
+}
+
+
+/* button{
+    max-width: 40%;
+} */
+

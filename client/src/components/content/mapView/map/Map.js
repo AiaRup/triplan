@@ -18,7 +18,7 @@ class Map extends Component {
     };
   }
 
-  addMarkers= () => {
+  addMarkers = () => {
     const markerArray = [];
     const promises = [];
     this.state.places.forEach((element) => {
@@ -58,7 +58,7 @@ class Map extends Component {
         });
       promises.push(promise);
     });
-    Promise.all(promises).then(() => {this.setState({ markers: markerArray });} );
+    Promise.all(promises).then(() => {this.setState({ markers: markerArray });});
   }
 
   isArrayEqual= (array1, array2) => {
