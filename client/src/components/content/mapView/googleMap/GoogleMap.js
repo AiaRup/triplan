@@ -3,16 +3,14 @@ import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/Sta
 import { compose, withProps, withState, lifecycle } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
-// const google = window.google;
-
 const MapComponent = compose(
-  withState({ zoom: 12 }),
+  withState({ zoom: 15 }),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY',
     loadingElement: <div style={{ height: '100%' }} />,
     containerElement: <div style={{ height: '100%' }} />,
     mapElement: <div style={{ height: '100%' }} />,
-    zoom: 14,
+    zoom: 15,
   }),
   lifecycle({
     componentWillMount() {
@@ -27,14 +25,13 @@ const MapComponent = compose(
           let lng = place[0].geometry.location.lng();
           this.nameLocation = place[0].formatted_address;
           this.props.updateAddress({ lat: lat, lng: lng });
-          this.setState({ zoom: 13 });
+          this.setState({ zoom: 15 });
         },
         onMarkerClick: () => {
           console.log('marker clicked!');
         }
       });
     }, // end componentWillMount
-
   }),
   withScriptjs,
   withGoogleMap
@@ -61,9 +58,23 @@ const MapComponent = compose(
         scrollwheel: false
       }}>
 
-      <Marker position={{ lat: props.address.lat, lng: props.address.lng }} onClick={props.onMarkerClick}/>
+      <Marker
+        position={{ lat: props.address.lat, lng: props.address.lng }}
+        onClick={props.onMarkerClick}
+        icon={{
+          url: require('./../../../../markersIcons/home.png')
+        }}
+      />
 
-      {props.markers.map((marker, index) => <Marker key={index} position={{ lat: marker.position.lat, lng: marker.position.lng }} onClick={props.onMarkerClick}/>)}
+      {props.markers.map((marker, index) => {
+        return <Marker key={index}
+          position={{ lat: marker.position.lat, lng: marker.position.lng }}
+          onClick={props.onMarkerClick}
+          icon={{
+            url: require(`../../../../markersIcons/${marker.icon}`)
+          }}/>;
+      }
+      )}
     </GoogleMap>
   </div>;
 });

@@ -4,10 +4,6 @@ import axios from 'axios';
 import _ from 'lodash';
 import GoogleMap from '../googleMap/GoogleMap';
 
-// import 'map-icons/dist/fonts';
-// import 'map-icons/dist/css/map-icons.css';
-// import 'map-icons/dist/js/map-icons.js';
-// const google = window.google;
 
 class Map extends Component {
   constructor(props) {
@@ -16,6 +12,7 @@ class Map extends Component {
       places: props.places,
       markers: []
     };
+    this.images = [];
   }
 
   addMarkers = () => {
@@ -23,8 +20,10 @@ class Map extends Component {
     const promises = [];
     this.state.places.forEach((element) => {
       let type = element.type;
+
       const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=1500&type=${type}&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`;
 
+// https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=CpQCAgEAAFxg8o-eU7_uKn7Yqjana-HQIx1hr5BrT4zBaEko29ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk-ReY7oulyuvKSQrw1lgJElggGlo0d6indiH1U-tDwquw4tU_UXoQ_sj8OBo8XBUuWjuuFShqmLMP-0W59Vr6CaXdLrF8M3wFR4dUUhSf5UC4QCLaOMVP92lyh0OdtF_m_9Dt7lz-Wniod9zDrHeDsz_by570K3jL1VuDKTl_U1cJ0mzz_zDHGfOUf7VU1kVIs1WnM9SGvnm8YZURLTtMLMWx8-doGUE56Af_VfKjGDYW361OOIj9GmkyCFtaoCmTMIr5kgyeUSnB-IEhDlzujVrV6O9Mt7N4DagR6RGhT3g1viYLS4kO5YindU6dm3GIof1Q&key=YOUR_API_KEY
 
       let promise = axios(url)
         .then((response) => {
@@ -35,11 +34,11 @@ class Map extends Component {
             let marker = {
               name: location.name,
               id: location.id,
-              icon: location.icon,
+              icon: element.icon,
               rating: location.rating,
               website: location.reference,
               position:
-                { lat: objLatLng.lat, lng: objLatLng.lng }
+                { lat: objLatLng.lat, lng: objLatLng.lng },
             };
 
             if (location.opening_hours !== undefined) {
@@ -74,7 +73,8 @@ class Map extends Component {
       <GoogleMap
         markers={this.state.markers}
         address={this.props.address}
-        updateAddress={this.props.updateAddress}/>
+        updateAddress={this.props.updateAddress}
+        images={this.images}/>
     );
   }
 }
