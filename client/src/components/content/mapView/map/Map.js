@@ -30,7 +30,6 @@ class Map extends Component {
         .then((response) => {
           // add markers on the map
           response.data.results.forEach((location) => {
-            console.log(location);
             const objLatLng = location.geometry.location;
 
             let marker = {
@@ -49,7 +48,6 @@ class Map extends Component {
             if (location.photos !== undefined) {
               marker.photo = location.photos[0];
             }
-            console.log('marker', marker);
             markerArray.push(marker);
           });
         })
