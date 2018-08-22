@@ -5,12 +5,18 @@ import _ from 'lodash';
 
 
 export default class MapView extends Component {
-  state = {
-    address: {
-      // lat: '', lng: ''
-      lat: 32.05445699999999, lng: 34.770838000000026
-    },
-    places: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      address: props.address,
+      places: []
+    };
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.address !== this.props.address) {
+      this.setState({ address: this.props.address });
+    }
   }
 
   updateAddress = (address) => {
