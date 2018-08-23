@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import SignInWidget from './SignInWidget';
 import { withAuth } from '@okta/okta-react';
+import axios from 'axios';
+import { observer, inject } from 'mobx-react';
+
 
 export default withAuth(
+  @inject(allStores => ({
+    configUser: allStores.store.configUser,
+  }))
+  @observer
   class Login extends Component {
     constructor(props) {
       super(props);
@@ -25,7 +32,19 @@ export default withAuth(
     }
 
     onSuccess = res => {
+      const oktaID = res.user.id;
       if (res.status === 'SUCCESS') {
+        // get user data from DB
+        axios.get(`/api/users/users/${oktaID}`)
+          .then((response) => {
+            // set user id on store
+            console.log('res from DB', response);
+
+            this.props.configUser(response._id);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         return this.props.auth.redirect({
           sessionToken: res.session.token
         });

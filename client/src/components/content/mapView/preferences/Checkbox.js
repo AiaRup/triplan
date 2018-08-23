@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class Checkbox extends Component {
   state = {
     isChecked: false,
@@ -7,7 +8,7 @@ class Checkbox extends Component {
 
   toggleCheckboxChange = () => {
     this.setState(({ isChecked }) => ({ isChecked: !isChecked }));
-    this.props.handleCheckboxChange(this.props.label, this.props.type);
+    this.props.handleCheckboxChange(this.props.label, this.props.type, this.props.icon);
   }
 
   render() {
@@ -21,7 +22,7 @@ class Checkbox extends Component {
             type="checkbox"
             value={label}
             checked={isChecked}
-            onChange={this.toggleCheckboxChange} />
+            onChange={this.toggleCheckboxChange}/>
           <span className="label">
             {label}
           </span>
@@ -31,4 +32,4 @@ class Checkbox extends Component {
   }
 }
 
-export default Checkbox
+export default Checkbox;
