@@ -19,6 +19,7 @@ class Map extends Component {
   }
 
   addMarkers = () => {
+    console.log('place '+ JSON.stringify(this.state.places))
     const markerArray = [];
     const promises = [];
     this.state.places.forEach((element) => {

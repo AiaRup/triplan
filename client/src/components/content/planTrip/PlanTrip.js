@@ -9,6 +9,7 @@ import EventList from './EventList/EventList';
 const Container = styled.div `
   margin: 8px;
   border-radius: 2px;
+  width: 100%
 `;
 
 const Wrapper = styled.div `
@@ -16,6 +17,7 @@ margin: 8px;
 border-radius: 2px;
 display: flex;
 flex-direction: row;
+width: 100%
 `;
 
 

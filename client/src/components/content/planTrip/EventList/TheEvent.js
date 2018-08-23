@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { inject } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -10,14 +10,17 @@ const Container = styled.div`
 
 
 @inject(allStores => ({
-  deleteEvent: allStores.store.deleteEvent}))
+  deleteEvent: allStores.store.deleteEvent
+}))
+
+@observer
 class TheEvent extends Component {
   render() {
     return (
       <React.Fragment>
         <Container>
-        <button onClick={()=>this.props.deleteEvent(this.props.index)}>X</button>
-        {this.props.theEvent.name}
+        <button onClick={()=>this.props.deleteEvent(this.props.theEventIndex)}>X</button>
+        {this.props.theEventName}
         </Container>
       </React.Fragment>
     );

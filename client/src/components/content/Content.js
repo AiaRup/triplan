@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PlanTrip from './planTrip/PlanTrip';
+import EventTemo from './tempEvents/TempEventList';
 import MapView from './mapView/MapView';
 import styled from 'styled-components';
 import _ from 'lodash';
+import TempEventList from './tempEvents/TempEventList';
 
 
 const Container = styled.div`
@@ -15,15 +17,17 @@ const Container = styled.div`
 const PlanTripContainer = styled.div`
   display: flex;
   height: 80vh;
-  width: 40%;
+  width: 100%;
   border: 1px solid lightgrey;
+  background-color: green;
 `;
 
 const MapViewContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   height: 80vh;
-  width: 60%;
+  width: 95%;
+  background-color: red;
   border: 1px solid lightgrey;
 `;
 
@@ -78,17 +82,15 @@ positionDenied = () => {
          <MapViewContainer>
            <MapView address={_.clone(this.state.address)}/>
          </MapViewContainer>
-         <PlanTripContainer>
+         <TempEventList/>
+        
+       </Container>
+       <PlanTripContainer>
            <PlanTrip />
          </PlanTripContainer>
-       </Container>
      </React.Fragment>
    );
  }
 }
 
 export default Content;
-<<<<<<< HEAD
-=======
-
->>>>>>> a322bd063b77d703f9979a9a2db2cee49a01d5ea
