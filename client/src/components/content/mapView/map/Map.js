@@ -3,12 +3,15 @@ import './Map.css';
 import axios from 'axios';
 import _ from 'lodash';
 import GoogleMap from '../googleMap/GoogleMap';
+import { observer, inject } from 'mobx-react';
 
 // import 'map-icons/dist/fonts';
 // import 'map-icons/dist/css/map-icons.css';
 // import 'map-icons/dist/js/map-icons.js';
 // const google = window.google;
 
+@inject("store")
+@observer
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +35,10 @@ class Map extends Component {
           response.data.results.forEach((location) => {
             const objLatLng = location.geometry.location;
 
+            // console.log('details', location);
+
             let marker = {
+              showInfoWindow: false,
               name: location.name,
               id: location.id,
               icon: location.icon,
@@ -56,10 +62,10 @@ class Map extends Component {
         });
       promises.push(promise);
     });
-    Promise.all(promises).then(() => {this.setState({ markers: markerArray });});
+    Promise.all(promises).then(() => { this.setState({ markers: markerArray }); });
   }
 
-  isArrayEqual= (array1, array2) => {
+  isArrayEqual = (array1, array2) => {
     return _(array1).differenceWith(array2, _.isEqual).isEmpty();
   }
 
@@ -69,12 +75,20 @@ class Map extends Component {
     }
   }
 
+  addPlace = (place) => {
+    console.log('in add place -Map ', place);
+    this.props.store.addPlace(place);
+
+  }
+
   render() {
     return (
       <GoogleMap
         markers={this.state.markers}
         address={this.props.address}
-        updateAddress={this.props.updateAddress}/>
+        updateAddress={this.props.updateAddress}
+        addPlace={this.addPlace}
+      />
     );
   }
 }
