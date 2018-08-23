@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import styled from 'styled-components';
-import TempEvent from './TempEvent';
+import TheEvent from '../planTrip/EventList/TheEvent';
 
 
 const Container = styled.div`
@@ -14,8 +14,7 @@ const Container = styled.div`
 `;
 
 @inject(allStores => ({
-  tempEventArray: allStores.store.tempEventArray,
-  addTempEvent: allStores.store.addTempEvent
+  tempEventArray: allStores.store.tempEventArray
 }))
 @observer
 class TempEventList extends Component {
@@ -27,7 +26,9 @@ class TempEventList extends Component {
         <Container>
           <h3>Event at 17/7/2018</h3>
           {this.props.tempEventArray.map((theTempEvent, tempEventIndex) => 
-          <TempEvent key={theTempEvent.id} tempEventAddress={theTempEvent.address} tempEventIndex={tempEventIndex} tempEventName={theTempEvent.name} tempEventTime={theTempEvent.time} addTempEvent={this.props.addTempEvent}/>)}
+          <TheEvent key={theTempEvent.id} 
+          verifier="eventOfTempEvent"
+          tempEventAddress={theTempEvent.address} tempEventIndex={tempEventIndex} tempEventName={theTempEvent.name} tempEventTime={theTempEvent.time} />)}
         </Container>
       </React.Fragment>
     );

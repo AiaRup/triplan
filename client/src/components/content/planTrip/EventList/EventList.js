@@ -24,7 +24,7 @@ class EventList extends Component {
       <Container>
         <h5>Events</h5>
        
-            {this.props.eventsArray.map((theEvent, theEventIndex) => <TheEvent key={theEvent.id} theEventIndex={theEventIndex} theEventName={theEvent.name}/>)}
+            {this.props.eventsArray.map((theEvent, theEventIndex) => <TheEvent key={theEvent.id} theEventIndex={theEventIndex} theEventName={theEvent.name} verifier="eventOfEvents"/>)}
           
       </Container>
     );
