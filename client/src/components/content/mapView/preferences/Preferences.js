@@ -1,42 +1,7 @@
 import React, { Component } from 'react';
 import './preferences.css';
 import _ from 'lodash';
-
-
-class Checkbox extends Component {
-  state = {
-    isChecked: false,
-  }
-
-  toggleCheckboxChange = () => {
-    this.setState(({ isChecked }) => ({ isChecked: !isChecked }));
-    this.props.handleCheckboxChange(this.props.label, this.props.type, this.props.icon);
-  }
-
-  render() {
-    const { label } = this.props;
-    const { isChecked } = this.state;
-
-    return (
-      <div className="checkbox">
-        <label>
-          <input
-            type="checkbox"
-            value={label}
-            checked={isChecked}
-            onChange={this.toggleCheckboxChange}/>
-          <span className="label">
-            {label}
-          </span>
-        </label>
-      </div>
-    );
-  }
-}
-
-/*=====================================================
-preferences component
-=======================================================*/
+import Checkbox from './Checkbox';
 
 const items = [
   { label: 'Restaurants', type: 'restaurant', icon: 'restaurant.png' },
@@ -75,6 +40,10 @@ export default class Preferences extends Component {
     this.props.updatePlacesNear(this.selectedCheckboxes);
   }
 
+  handleClear = (e) => {
+
+  }
+
   render() {
     return (
       <div className="container">
@@ -87,9 +56,11 @@ export default class Preferences extends Component {
                   icon={box.icon}
                   type={box.type}
                   handleCheckboxChange={this.toggleCheckbox}
-                  key={box.label}/>
+                  key={box.label} />
               )}
               <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
+              <button className="btn btn-sm btn-outline-secondary" type="button"
+                onClick={this.handleClear}>Clear</button>
             </form>
           </div>
         </div>

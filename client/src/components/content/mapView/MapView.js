@@ -34,7 +34,7 @@ export default class MapView extends Component {
       <div id="map-container">
         <Map address={this.state.address}
           places={_.clone(this.state.places)}
-          updateAddress={this.updateAddress}/>
+          updateAddress={this.updateAddress} />
         <Preferences updatePlacesNear={this.updatePlacesNear} />
       </div>
     );

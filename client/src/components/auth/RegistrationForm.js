@@ -90,9 +90,9 @@ export default withAuth(
               //   });
 
             });
-          console.log('user on reg', user._id);
+          console.log('user on reg', user);
 
-          this.props.configUser(user._id);
+          // this.props.configUser(user._id);
         })
         .catch(err => console.log);
     }
