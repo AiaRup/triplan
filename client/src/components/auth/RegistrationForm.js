@@ -3,9 +3,15 @@ import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import './RegisterForm.css';
+import axios from 'axios';
+import { observer, inject } from 'mobx-react';
 
 
 export default withAuth(
+  @inject(allStores => ({
+    configUser: allStores.store.configUser,
+  }))
+  @observer
   class RegistrationForm extends React.Component {
     constructor(props) {
       super(props);
@@ -55,6 +61,7 @@ export default withAuth(
 
     handleSubmit = (e) => {
       e.preventDefault();
+      // const mongoID = '';
       fetch('/api/users', {
         method: 'POST',
         headers: {
@@ -69,15 +76,26 @@ export default withAuth(
               username: this.state.email,
               password: this.state.password
             })
-            .then(res =>
+            .then(res => {
               this.setState({
                 sessionToken: res.sessionToken
-              })
-            );
+              });
+              // axios.get(`/api/users/users/${res.user.id}`)
+              //   .then((response) => {
+              //     // save user ID on store
+              //     this.props.configUser(response._id);
+              //   })
+              //   .catch((error) => {
+              //     console.log(error);
+              //   });
+
+            });
+          console.log('user on reg', user._id);
+
+          this.props.configUser(user._id);
         })
         .catch(err => console.log);
     }
-
     render() {
       if (this.state.sessionToken) {
         this.props.auth.redirect({ sessionToken: this.state.sessionToken });

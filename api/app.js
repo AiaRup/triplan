@@ -5,15 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const ObjectID = require('mongodb').ObjectID;
-const request = require('request');
+// const request = require('request');
 // const cors = require('cors');
-
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const User = require('./models/userModel');
-const Plan = require('./models/planModel').plan;
+const plansRouter = require('./routes/plans');
 
 mongoose.Promise = global.Promise;
 // Connect to DB and check the connection
@@ -42,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
-// app.use(express.static('public'));
+app.use('/api/plans', plansRouter);
 app.use(express.static('node_modules'));
 // app.use(cors());
 // app.options('*', cors());
@@ -51,8 +48,8 @@ app.use(express.static('node_modules'));
 //   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 //   next();
 // });
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // catch 404 and forward to error handler
