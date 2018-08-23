@@ -38,18 +38,12 @@ const MapComponent = compose(
           let lng = place[0].geometry.location.lng();
           this.props.updateAddress({ lat: lat, lng: lng });
         },
-        addPlace: (e) => {
-          // console.log('add place: ', e.target,
-          //   e.currentTarget.dataset.val.id, e.target.dataset.val.id,
-          //   e.currentTarget.dataset.val.name, e.currentTarget.id, e.target.dataset.val.name,
-          //   e.currentTarget.val
-          // );
-          let id = e.target.id;
-          let value = e.target.value;
-          // let val = e.currentTarget.getAttribute('data-val');
-          // console.log('val: ', val.name);
+        addPlace: (marker) => {
+          // console.log(marker);
+          let id = marker.id;
+          let name = marker.name;
           //! todo: check if the item not exist in the placesarray already
-          this.props.addPlace({ name: value, id: id });
+          this.props.addPlace({ name: name, id: id });
         },
       });
     }, // end componentWillMount
@@ -85,13 +79,10 @@ const MapComponent = compose(
                 <div>
                   <p><b>{marker.name}</b></p>
                   <p>Rating: {marker.rating ? marker.rating : "---"}</p>
-                  <p>Open Now: {marker.openNow ? "yes" : "no"}</p>
+                  <p>{marker.openNow ? "Open Now" : "Close Now"}</p>
                   {/* todo: fix the website link , add the photo */}
                   <a href={marker.website} target="_blank">Website</a>
-                  <button data-val={{ name: marker.name, id: marker.id }}
-                    value={marker.name}
-                    id={marker.id}
-                    onClick={props.addPlace}>Add</button>
+                  <button onClick={() => props.addPlace(marker)}>Add</button>
                 </div>
               </InfoWindow>}
           </Marker>)
