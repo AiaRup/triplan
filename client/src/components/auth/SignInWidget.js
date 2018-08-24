@@ -18,6 +18,12 @@ class SignInWidget extends Component {
         click: function () {
           window.location.href = 'http://localhost:3000/Register';
         }
+      },
+      i18n: {
+        en: {
+          'errors.E0000004': 'Invalid Credentials- Password Entered is incorrect or You are not registered to this app',
+
+        }
       }
     });
     this.widget.renderEl({ el }, this.props.onSuccess, this.props.onError);

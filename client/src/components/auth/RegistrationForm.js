@@ -2,15 +2,15 @@ import React from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
+import axios from 'axios';
 import './RegisterForm.css';
 import { observer, inject } from 'mobx-react';
 
-
+@inject(allStores => ({
+  configUser: allStores.store.configUser,
+}))
+@observer
 export default withAuth(
-  @inject(allStores => ({
-    configUser: allStores.store.configUser,
-  }))
-  @observer
   class RegistrationForm extends React.Component {
     constructor(props) {
       super(props);
@@ -23,7 +23,8 @@ export default withAuth(
         emailValid: false,
         firstNameValid: false,
         lastNameValid: false,
-        passwordValid: false
+        passwordValid: false,
+        showErrorDiv: false
       };
 
       this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
@@ -50,16 +51,19 @@ export default withAuth(
      }
 
     handleSubmit = (e) => {
-      e.preventDefault();
-      fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state)
-      })
+      // e.preventDefault();
+      this.setState({ showErrorDiv: false });
+      axios.post('/api/users', this.state)
+      // fetch('/api/users', {
+      //   method: 'POST',
+      //   headers: {
+      //     Accept: 'application/json',
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify(this.state)
+      // })
         .then(user => {
+          console.log('user', user);
           this.oktaAuth
             .signIn({
               username: this.state.email,
@@ -72,7 +76,10 @@ export default withAuth(
               this.props.configUser(res.user.id);
             });
         })
-        .catch(err => console.log);
+        .catch(err => {
+          console.log(err);
+          this.setState({ showErrorDiv: true });
+        });
     }
     render() {
       if (this.state.sessionToken) {
@@ -88,7 +95,13 @@ export default withAuth(
             <div className="auth-content">
               <div className="auth-content-inner">
                 <AvForm onValidSubmit={this.handleSubmit} onInvalidSubmit={this.handleInvalidSubmit} className="primary-auth-form o-form o-form-edit-mode">
-                  <h2 className="okta-form-title o-form-head">Register</h2>
+                  { this.state.showErrorDiv && <div className="o-form-error-container o-form-has-errors" data-se="o-form-error-container">
+                    <div className="okta-form-infobox-error infobox infobox-error" role="alert">
+                      <span className="icon error-16"></span>
+                      <p>Error, A user with this Email already exists.</p>
+                    </div>
+                  </div> }
+                  <h2 className="okta-form-title o-form-head">Create Account</h2>
                   <div className="form-element">
                     <AvField
                       name="email"
@@ -97,6 +110,7 @@ export default withAuth(
                       id="email"
                       value={this.state.email}
                       onChange={this.handleChangeInput}
+                      autoComplete="username email"
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter an email' }
@@ -146,6 +160,7 @@ export default withAuth(
                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
                       value={this.state.password}
                       onChange={this.handleChangeInput}
+                      autoComplete="current-password"
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter a password' },
