@@ -5,12 +5,11 @@ import { withAuth } from '@okta/okta-react';
 import axios from 'axios';
 import { observer, inject } from 'mobx-react';
 
-
+@inject(allStores => ({
+  configUser: allStores.store.configUser,
+}))
+@observer
 export default withAuth(
-  @inject(allStores => ({
-    configUser: allStores.store.configUser,
-  }))
-  @observer
   class Login extends Component {
     constructor(props) {
       super(props);
@@ -40,7 +39,7 @@ export default withAuth(
             // set user id on store
             console.log('res from DB', response);
 
-            this.props.configUser(response._id);
+            this.props.configUser(oktaID);
           })
           .catch((error) => {
             console.log(error);

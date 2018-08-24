@@ -9,6 +9,7 @@ class SignInWidget extends Component {
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
+      redirectUri: 'http://localhost:3000/Home',
       logo: '//logo.clearbit.com/okta.com',
       features: {
         registration: true

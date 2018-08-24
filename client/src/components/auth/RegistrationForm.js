@@ -3,7 +3,6 @@ import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import './RegisterForm.css';
-import axios from 'axios';
 import { observer, inject } from 'mobx-react';
 
 
@@ -46,22 +45,12 @@ export default withAuth(
        this.setState({ error: true });
      }
 
-    handleFirstNameChange = (e) => {
-      this.setState({ firstName: e.target.value });
-    }
-    handleLastNameChange = (e) => {
-      this.setState({ lastName: e.target.value });
-    }
-    handleEmailChange = (e) => {
-      this.setState({ email: e.target.value });
-    }
-    handlePasswordChange = (e) => {
-      this.setState({ password: e.target.value });
-    }
+     handleChangeInput = (e) =>{
+       this.setState({ [e.target.id]: e.target.value });
+     }
 
     handleSubmit = (e) => {
       e.preventDefault();
-      // const mongoID = '';
       fetch('/api/users', {
         method: 'POST',
         headers: {
@@ -80,19 +69,8 @@ export default withAuth(
               this.setState({
                 sessionToken: res.sessionToken
               });
-              // axios.get(`/api/users/users/${res.user.id}`)
-              //   .then((response) => {
-              //     // save user ID on store
-              //     this.props.configUser(response._id);
-              //   })
-              //   .catch((error) => {
-              //     console.log(error);
-              //   });
-
+              this.props.configUser(res.user.id);
             });
-          console.log('user on reg', user);
-
-          // this.props.configUser(user._id);
         })
         .catch(err => console.log);
     }
@@ -101,7 +79,6 @@ export default withAuth(
         this.props.auth.redirect({ sessionToken: this.state.sessionToken });
         return null;
       }
-
       return (
         <div id="widget-container1">
           <div id="okta-register" className="auth-container1 main-container">
@@ -119,7 +96,7 @@ export default withAuth(
                       type="email"
                       id="email"
                       value={this.state.email}
-                      onChange={this.handleEmailChange}
+                      onChange={this.handleChangeInput}
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter an email' }
@@ -132,12 +109,14 @@ export default withAuth(
                       type="text"
                       id="firstName"
                       value={this.state.firstName}
-                      onChange={this.handleFirstNameChange}
+                      onChange={this.handleChangeInput}
                       minLength="2"
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter your first name' },
-                        minLength: { value: 2, errorMessage: 'Your first name must be at least 2 characters' }
+                        minLength: { value: 2, errorMessage: 'Your first name must be at least 2 characters' },
+                        pattern: { value: '^[A-Za-z]+$', errorMessage: 'Only letters are allowed in first name' }
+
                       }}/>
                   </div>
                   <div className="form-element">
@@ -148,11 +127,13 @@ export default withAuth(
                       id="lastName"
                       minLength="2"
                       value={this.state.lastName}
-                      onChange={this.handleLastNameChange}
+                      onChange={this.handleChangeInput}
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter your last name' },
-                        minLength: { value: 2, errorMessage: 'Your last name must be at least 2 characters' }
+                        minLength: { value: 2, errorMessage: 'Your last name must be at least 2 characters' },
+                        pattern: { value: '^[A-Za-z]+$', errorMessage: 'only letters are allowed in last name' }
+
                       }}/>
                   </div>
                   <div className="form-element">
@@ -164,7 +145,7 @@ export default withAuth(
                       minLength="8"
                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
                       value={this.state.password}
-                      onChange={this.handlePasswordChange}
+                      onChange={this.handleChangeInput}
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter a password' },
