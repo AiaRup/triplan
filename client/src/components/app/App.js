@@ -8,7 +8,7 @@ import Content from '../content/Content';
 import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
 import RegistrationForm from '../auth/RegistrationForm';
-
+import OneTrip from '../myTrips/OneTrip';
 
 function onAuthRequired({ history }) {
   history.push('/Login');
@@ -27,8 +27,14 @@ class App extends Component {
             <Navbar />
             <div className="container-fluid">
               <Switch>
+
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
+                <SecureRoute path="/MyTrips" render={() => <OneTrip />} />
+
+                {/* <Route path="/MyTrips" component={OneTrip} />
+                <Route path="/MyTrips" component={OneTrip} /> */}
+
                 <Route path="/Register" component={RegistrationForm} />
                 <Route
                   path="/Login"

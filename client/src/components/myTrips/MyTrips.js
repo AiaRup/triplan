@@ -10,7 +10,7 @@ class MyTrips extends Component{
 
   constructor (props){
     super(props);
-    this.state = { user_plans : ['Barcelona 2018', 'Paris 2017', 'Vienna 2016', 'Singapour 2015',
+    this.state = { user_plans : ['Barcelona 2018', 'Paris2017', 'Vienna 2016', 'Singapour 2015',
      'Seoul 2014', 'Pekin 2012', 'Tokyo 2015'] };
   }
 
@@ -29,8 +29,9 @@ render(){
           {/* onSubmit={this.handleSubmit} */}
           
    <div className='search-bar'>
-        <input  type='text' placeholder='search...'  />
-</div>
+        <input className="input-search-bar" type='text' placeholder='search...'  />
+   </div>
+
         <CardList plans={this.state.user_plans} />
 
 

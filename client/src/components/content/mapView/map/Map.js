@@ -59,7 +59,7 @@ const MyMapComponent = compose(
         className="autocomplete" />
     </StandaloneSearchBox>
     <GoogleMap
-      defaultZoom={10}
+    
       zoom={props.zoom}
       center={{ lat: props.address.lat, lng: props.address.lng }}
       defaultCenter={{ lat: props.address.lat, lng: props.address.lng }}

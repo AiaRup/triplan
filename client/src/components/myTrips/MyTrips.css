@@ -6,13 +6,13 @@
 } */
 
 .search-bar{
+    width:60%;
     margin:  auto ;
     margin-bottom: 40px;
-    width:60%;
     text-align:center;
 }
 
-input{
+.input-search-bar{
     width:100%;
 }
 
@@ -35,7 +35,7 @@ input{
 }
 
 
-button{
+.button-watch{
     max-width: 40%;
 }
 
