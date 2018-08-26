@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PlanTrip from './planTrip/PlanTrip';
-import EventTemo from './tempEvents/TempEventList';
 import MapView from './mapView/MapView';
 import styled from 'styled-components';
 import _ from 'lodash';
@@ -16,10 +15,10 @@ const Container = styled.div`
 
 const PlanTripContainer = styled.div`
   display: flex;
-  height: 80vh;
+  min-height: 80vh;
+  height: auto;
   width: 100%;
   border: 1px solid lightgrey;
-  background-color: green;
 `;
 
 const MapViewContainer = styled.div`

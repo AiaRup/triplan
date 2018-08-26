@@ -9,9 +9,10 @@ const Container = styled.div`
   border-radius: 2px;
   display: flex;
   flex-direction: row;
-  width: 500px;
+  min-width: 500px;
   min-height: 210px;
   height: auto;
+  width: auto;
   flex-wrap: nowrap;
   overflow-x: auto;
 `;
