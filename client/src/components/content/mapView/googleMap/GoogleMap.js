@@ -1,5 +1,9 @@
+/* eslint-disable no-undef */
+
 import React from 'react';
-import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
+// import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
+import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
+import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
@@ -50,26 +54,58 @@ const MapComponent = compose(
   withGoogleMap
 )((props) => {
   return <div>
-    <StandaloneSearchBox
+    {/* <StandaloneSearchBox
       ref={props.onSearchBoxMounted}
       bounds={props.bounds}
       onPlacesChanged={props.onPlacesChanged}>
       <input placeholder="Search Address" className="autocomplete" />
-    </StandaloneSearchBox>
+    </StandaloneSearchBox> */}
 
     <GoogleMap
-      defaultZoom={15}
-      zoom={15}
+      defaultZoom={14}
+      zoom={14}
       center={{ lat: props.address.lat, lng: props.address.lng }}
       defaultCenter={{ lat: props.address.lat, lng: props.address.lng }}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}>
 
-      <Marker position={{ lat: props.address.lat, lng: props.address.lng }}
+      <SearchBox
+        ref={props.onSearchBoxMounted}
+        bounds={props.bounds}
+        controlPosition={google.maps.ControlPosition.TOP_LEFT}
+        onPlacesChanged={props.onPlacesChanged} >
+        <input
+          type="text"
+          placeholder="Search Address"
+          className="autocomplete" />
+      </SearchBox>
+
+      {/* <StandaloneSearchBox
+        ref={props.onSearchBoxMounted}
+        bounds={props.bounds}
+        onPlacesChanged={props.onPlacesChanged}>
+        <input placeholder="Search Address" className="autocomplete" />
+      </StandaloneSearchBox> */}
+
+      {/* <Marker position={{ lat: props.address.lat, lng: props.address.lng }}
+        defaultAnimation= {google.maps.Animation.DROP}
+        label= 'You are here'
         icon={{
-          url: require('./../../../../markersIcons/home.png')
+          // url: require('./../../../../markersIcons/home.png'),
+          // Animation: google.maps.Animation.DROP,
+
+          // path: google.maps.SymbolPath.CIRCLE,
+          // scale: 8
         }}
       // onClick={props.onMarkerClick}
-      />
+      /> */}
+
+      <MarkerWithLabel
+        position={{ lat: props.address.lat, lng: props.address.lng }}
+        labelAnchor={new google.maps.Point(0, 0)}
+        labelStyle={{ backgroundColor: 'yellow', fontSize: '10px', padding: '5px' }}
+      >
+        <div>You are here!</div>
+      </MarkerWithLabel>
 
       {props.markers.map((marker) =>
         <Marker onClick={() => props.showInfo(marker.id)} key={marker.id} position={{ lat: marker.position.lat, lng: marker.position.lng }}

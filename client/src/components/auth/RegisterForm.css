@@ -79,31 +79,24 @@
 }
 
 #okta-register.auth-container1 .okta-register-header {
-  /* -- Main Background and Border Colors -- */
   border-bottom-color: #ddd;
 }
 #okta-register.auth-container1 .okta-sign-in-beacon-border {
-  /* -- Main Background and Border Colors -- */
   border-color: #a7a7a7;
 }
 #okta-register.auth-container1 .okta-form-divider {
-  /* -- Main Background and Border Colors -- */
   border-bottom-color: #e8e8e8;
 }
 #okta-register.auth-container1 .factor-icon,
 #okta-register.auth-container1 .qrcode-image {
-  /* -- Main Background and Border Colors -- */
   border-color: #ccc;
 }
 
 #okta-register.auth-container1 .button {
-  /* -- Buttons' Colors -- */
   color: #5e5e5e;
   background-color: #fbfbfb;
   background: -o-linear-gradient(top, #fbfbfb 0%, #f8f8f8 100%);
-  /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #fbfbfb 0%, #f8f8f8 100%);
-  /* IE10+ */
   background: linear-gradient(#fbfbfb, #f8f8f8);
   border-color: #c3c3c3;
   border-bottom-color: #bbbbbb;
@@ -121,12 +114,9 @@
   -webkit-appearance: none;
 }
 #okta-register.auth-container1 .button:hover, #okta-register.auth-container1 .button:focus, #okta-register.auth-container1 .button:active, #okta-register.auth-container1 .button:focus {
-  /* -- Buttons' Colors -- */
   background-color: white;
   background: -o-linear-gradient(top, white 0%, #fcfcfc 100%);
-  /* Opera 11.10+ */
   background: -ms-linear-gradient(top, white 0%, #fcfcfc 100%);
-  /* IE10+ */
   background-image: linear-gradient(white, #fcfcfc);
   border-color: #b2b2b2;
   border-bottom-color: #afafaf;
@@ -134,7 +124,6 @@
   cursor: pointer;
 }
 #okta-register.auth-container1 .button:hover, #okta-register.auth-container1 .button:focus, #okta-register.auth-container1 .button:active, #okta-register.auth-container1 .button:focus {
-  /* -- Buttons' Colors -- */
   box-shadow: none;
 }
 #okta-register.auth-container1 .button:focus {
@@ -142,25 +131,19 @@
 }
 
 #okta-register.auth-container1 .button-primary {
-  /* -- Buttons' Colors -- */
   color: #fff;
   background-color: #007dc1;
   background: -o-linear-gradient(top, #007dc1 0%, #0073b2 100%);
-  /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #007dc1 0%, #0073b2 100%);
-  /* IE10+ */
   background: linear-gradient(#007dc1, #0073b2);
   border-color: #004b75;
   border-bottom-color: #00456a;
   box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
 }
 #okta-register.auth-container1 .button-primary:hover, #okta-register.auth-container1 .button-primary:focus, #okta-register.auth-container1 .button-primary:active, #okta-register.auth-container1 .button-primary:focus {
-  /* -- Buttons' Colors -- */
   background-color: #0087d0;
   background: -o-linear-gradient(top, #0087d0 0%, #007dc1 100%);
-  /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #0087d0 0%, #007dc1 100%);
-  /* IE10+ */
   background-image: linear-gradient(#0087d0, #007dc1);
   border-color: #003d5e;
   border-bottom-color: #003a59;
@@ -168,7 +151,6 @@
   cursor: pointer;
 }
 #okta-register.auth-container1 .button-primary:hover, #okta-register.auth-container1 .button-primary:focus, #okta-register.auth-container1 .button-primary:active, #okta-register.auth-container1 .button-primary:focus {
-  /* -- Buttons' Colors -- */
   box-shadow: none;
 }
 
@@ -187,24 +169,18 @@
 }
 
 #okta-register.auth-container1 .icon-button {
-  /* -- Buttons' Colors -- */
   color: #5e5e5e;
   background-color: #fff;
   background: -o-linear-gradient(top, #fff 0%, white 100%);
-  /* Opera 11.10+ */
   background: -ms-linear-gradient(top, #fff 0%, white 100%);
-  /* IE10+ */
   background: linear-gradient(#fff, white);
   border-color: #c4c4c4;
   border-bottom-color: #bdbdbd;
 }
 #okta-register.auth-container1 .icon-button:hover, #okta-register.auth-container1 .icon-button:focus, #okta-register.auth-container1 .icon-button:active, #okta-register.auth-container1 .icon-button:focus {
-  /* -- Buttons' Colors -- */
   background-color: white;
   background: -o-linear-gradient(top, white 0%, white 100%);
-  /* Opera 11.10+ */
   background: -ms-linear-gradient(top, white 0%, white 100%);
-  /* IE10+ */
   background-image: linear-gradient(white, white);
   border-color: #b3b3b3;
   border-bottom-color: #afafaf;
@@ -213,19 +189,16 @@
 }
 
 #okta-register.auth-container1 .okta-form-input-field {
-  /* -- Input Fields -- */
   background-color: #fff;
   border-color: #bbb;
 }
 #okta-register.auth-container1 .okta-form-input-field:hover {
-  /* -- Input Fields -- */
   border-color: #888;
 }
 #okta-register.auth-container1 .okta-form-input-field.focused-input {
   border-color: #0074b3;
 }
 #okta-register.auth-container1 .okta-form-input-field input {
-  /* -- Input Fields -- */
   font-family: "montserrat", Arial, Helvetica, sans-serif;
   color: #5e5e5e;
 }
@@ -235,33 +208,26 @@
   color: #aaa;
 }
 #okta-register.auth-container1 .okta-form-input-field input::-moz-placeholder {
-  /* -- Input Fields: placeholder -- */
   font-family: "montserrat", Arial, Helvetica, sans-serif;
   color: #aaa;
 }
 #okta-register.auth-container1 .okta-form-input-field input:-ms-input-placeholder {
-  /* -- Input Fields: placeholder -- */
   font-family: "montserrat", Arial, Helvetica, sans-serif;
   color: #aaa;
 }
 #okta-register.auth-container1 .okta-form-input-field input[disabled] {
-  /* -- Input Fields: disabled input field -- */
   color: #777;
   -webkit-text-fill-color: #777;
-  /* background: #f4f4f4; */
 }
 #okta-register.auth-container1 .okta-form-input-field input[type=password] {
-  /* -- Input Fields: password input field -- */
   font-family: Verdana, sans-serif;
 }
 #okta-register.auth-container1 .okta-form-input-field placeholder {
-  /* -- Input Fields: placeholder -- */
   font-family: "montserrat", Arial, Helvetica, sans-serif;
   color: #aaa;
 }
 #okta-register.auth-container1 .input-icon:before,
 #okta-register.auth-container1 .input-tooltip:before {
-  /* -- Input Fields: icons -- */
   color: #a7a7a7;
 }
 

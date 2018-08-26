@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     .then(user => {
       // create the user on the mongo DB
       const newUserDB = {
-        name: `${user.profile.firstName} ${user.profile.firstName}`,
+        name: `${user.profile.firstName} ${user.profile.lastName}`,
         oktaID: user.id,
         email: user.profile.email,
         plans: [],
@@ -35,8 +35,8 @@ router.post('/', (req, res) => {
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
         console.log('res server', userResult);
+        res.status(201).send(userResult);
       });
-      res.status(201).send(user);
     })
     .catch(err => {
       res.status(400).send(err);

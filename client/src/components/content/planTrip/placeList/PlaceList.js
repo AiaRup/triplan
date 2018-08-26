@@ -23,32 +23,32 @@ transition: background-color 0.2s ease;
 `;
 
 @inject(allStores => ({
-  placesArray: allStores.store.placesArray}))
+  placesArray: allStores.store.placesArray }))
 
 
   @observer class DragNdrop extends Component {
 
-    render() {
+  render() {
 
-      return (
-          <PlaceListUL 
-          innerRef={this.props.provided.innerRef}
-          isDraggingOver={this.props.snapshot.isDraggingOver}
-          {...this.props.provided.droppableProps} 
-        >
-          {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place} verifier="placeOfPlace"/>)}
+    return (
+      <PlaceListUL
+        innerRef={this.props.provided.innerRef}
+        isDraggingOver={this.props.snapshot.isDraggingOver}
+        {...this.props.provided.droppableProps}
+      >
+        {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place} verifier="placeOfPlace"/>)}
 
 
-          {this.props.provided.placeholder}
-        </PlaceListUL>
-        
-      )}
-    }
+        {this.props.provided.placeholder}
+      </PlaceListUL>
+
+    );}
+}
 
 
 @observer
 class PlaceList extends Component {
- 
+
   render() {
 
     return (
@@ -56,9 +56,9 @@ class PlaceList extends Component {
         <Container>
           <h5>Places</h5>
           <Droppable droppableId="placesContainer">
-           {(provided, snapshot) => (
-             <DragNdrop provided={provided} snapshot={snapshot}/>
-          )}
+            {(provided, snapshot) => (
+              <DragNdrop provided={provided} snapshot={snapshot}/>
+            )}
           </Droppable>
         </Container>
       </React.Fragment>

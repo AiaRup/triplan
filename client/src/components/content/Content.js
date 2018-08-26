@@ -3,6 +3,10 @@ import PlanTrip from './planTrip/PlanTrip';
 import MapView from './mapView/MapView';
 import styled from 'styled-components';
 import _ from 'lodash';
+import axios from 'axios';
+import { observer, inject } from 'mobx-react';
+
+
 
 
 const Container = styled.div`
@@ -27,6 +31,10 @@ const MapViewContainer = styled.div`
   border: 1px solid lightgrey;
 `;
 
+@inject(allStores => ({
+  configUser: allStores.store.configUser,
+}))
+@observer
 class Content extends Component {
   state = {
     address: { lat: 51.507351, lng: -0.127758 },
@@ -50,25 +58,40 @@ positionDenied = () => {
  handlePermission = () => {
    navigator.permissions.query({ name:'geolocation' }).then((result) => {
      if (result.state === 'granted') {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location: ' + result.state);
        navigator.geolocation.getCurrentPosition(this.revealPosition, this.positionDenied, this.geoSettings);
      } else if (result.state === 'prompt') {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location:: ' + result.state);
        navigator.geolocation.getCurrentPosition(this.revealPosition, this.positionDenied, this.geoSettings);
      } else if (result.state === 'denied') {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location:: ' + result.state);
      }
      result.onchange = () => {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location:: ' + result.state);
      };
    });
  }
+
 
  componentDidMount = () => {
    if (!('geolocation' in navigator)) {
      alert('No geolocation available!');
    }
    this.handlePermission();
+
+   const userId = localStorage.getItem('oktaID');
+   if (userId !== null) {
+     // get user data from
+     console.log('id from local', userId);
+
+     axios.get(`/api/users/users/${userId}`)
+       .then((response) => {
+         // set user id on store
+         console.log('res from DB', response.data[0]._id);
+        //  console.log('res from DB', response.id);
+         this.props.configUser(response.data[0]._id);
+       });
+   }
  }
 
  render() {

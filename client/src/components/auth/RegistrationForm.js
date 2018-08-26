@@ -54,26 +54,18 @@ export default withAuth(
       // e.preventDefault();
       this.setState({ showErrorDiv: false });
       axios.post('/api/users', this.state)
-      // fetch('/api/users', {
-      //   method: 'POST',
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(this.state)
-      // })
         .then(user => {
-          console.log('user', user);
           this.oktaAuth
             .signIn({
               username: this.state.email,
               password: this.state.password
             })
             .then(res => {
+              console.log('res', res);
+              localStorage.setItem('oktaID', res.user.id);
               this.setState({
                 sessionToken: res.sessionToken
               });
-              this.props.configUser(res.user.id);
             });
         })
         .catch(err => {
