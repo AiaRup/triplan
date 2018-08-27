@@ -1,35 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+const Checkbox = (props) => {
 
-class Checkbox extends Component {
-  state = {
-    isChecked: false,
+  const onChange = (e) => {
+    props.toggleCheckbox(props.index, e.target.checked);
   }
 
-  toggleCheckboxChange = () => {
-    this.setState(({ isChecked }) => ({ isChecked: !isChecked }));
-    this.props.handleCheckboxChange(this.props.label, this.props.type, this.props.icon);
-  }
+  return (
+    <div className="checkbox">
+      <label>
+        <input
+          type="checkbox"
+          checked={props.checked}
+          value={props.label}
+          onChange={onChange} />
+        <span className="label">
+          {props.label}
+        </span>
+      </label>
+    </div>
+  );
 
-  render() {
-    const { label } = this.props;
-    const { isChecked } = this.state;
-
-    return (
-      <div className="checkbox">
-        <label>
-          <input
-            type="checkbox"
-            value={label}
-            checked={isChecked}
-            onChange={this.toggleCheckboxChange}/>
-          <span className="label">
-            {label}
-          </span>
-        </label>
-      </div>
-    );
-  }
 }
 
 export default Checkbox;
