@@ -2,19 +2,38 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
+import axios from 'axios';
+import { observer, inject } from 'mobx-react';
 
 import Navbar from '../navbar/Navbar';
 import Content from '../content/Content';
 import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
-import RegistrationForm from '../auth/RegistrationForm';
 
 
 function onAuthRequired({ history }) {
   history.push('/Login');
 }
 
+@inject(allStores => ({
+  configUser: allStores.store.configUser,
+}))
+@observer
 class App extends Component {
+
+  componentDidMount = () => {
+    const userId = localStorage.getItem('oktaID');
+    if (userId !== null) {
+      // get user id from mongo
+      axios.get(`/api/users/users/${userId}`)
+        .then((response) => {
+          // set user id on store
+          if (response.data.length !== 0) {
+            this.props.configUser(response.data[0]._id);
+          }
+        });
+    }
+  }
   render() {
     return (
       <Router>
@@ -29,7 +48,6 @@ class App extends Component {
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
-                <Route path="/Register" component={RegistrationForm} />
                 <Route
                   path="/Login"
                   render={() => (<Login baseUrl="https://dev-497398.oktapreview.com" />)} />

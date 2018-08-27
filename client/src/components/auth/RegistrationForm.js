@@ -6,8 +6,10 @@ import axios from 'axios';
 import './RegisterForm.css';
 import { observer, inject } from 'mobx-react';
 
+
 @inject(allStores => ({
-  configUser: allStores.store.configUser,
+  toggleLoginRegister: allStores.store.toggleLoginRegister,
+  showLogin: allStores.store.showLogin
 }))
 @observer
 export default withAuth(
@@ -15,15 +17,8 @@ export default withAuth(
     constructor(props) {
       super(props);
       this.state = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        sessionToken: null,
-        emailValid: false,
-        firstNameValid: false,
-        lastNameValid: false,
-        passwordValid: false,
+        firstName: '', lastName: '', email: '', password: '', sessionToken: null,
+        emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
         showErrorDiv: false
       };
 
@@ -61,7 +56,7 @@ export default withAuth(
               password: this.state.password
             })
             .then(res => {
-              console.log('res', res);
+              // save the user oktaID before redirect
               localStorage.setItem('oktaID', res.user.id);
               this.setState({
                 sessionToken: res.sessionToken
@@ -162,7 +157,12 @@ export default withAuth(
                   <div className="o-form-button-bar">
                     <input className="button button-primary" type="submit" value="Register" id="submit" data-type="save"/>
                   </div>
-
+                  <div className="signin-container">
+                    <div className="content">
+                      <span className="signin-label">Back to </span>
+                      <span className="signin-link" onClick={this.props.toggleLoginRegister}>Sign in</span>
+                    </div>
+                  </div>
                 </AvForm>
               </div>
             </div>
@@ -173,12 +173,3 @@ export default withAuth(
   }
 );
 
-
-
-
-
-// handleValidSubmit(event, values) {
-//   this.setState({email: values.email});
-// }
-
-// password must contain at least eight characters, at least one number and both lower and uppercase letters and special characters

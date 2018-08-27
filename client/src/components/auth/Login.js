@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import SignInWidget from './SignInWidget';
 import { withAuth } from '@okta/okta-react';
-import axios from 'axios';
+import RegistrationForm from '../auth/RegistrationForm';
 import { observer, inject } from 'mobx-react';
 
+
 @inject(allStores => ({
-  configUser: allStores.store.configUser,
+  toggleLoginRegister: allStores.store.toggleLoginRegister,
+  showLogin: allStores.store.showLogin
 }))
 @observer
 export default withAuth(
@@ -35,26 +37,10 @@ export default withAuth(
         if (res.status === 'SUCCESS') {
           // save to localstorage befor redirect
           localStorage.setItem('oktaID', oktaID);
-
-          // get user data from DB
-          // axios.get(`/api/users/users/${oktaID}`)
-          //   .then((response) => {
-          //     // set user id on store
-          //     console.log('res from DB', response._id);
-
-          //     this.props.configUser(oktaID);
-
+          // redirect to homepage
           return this.props.auth.redirect({
             sessionToken: res.session.token
           });
-
-          // })
-          // .catch((error) => {
-          //   console.log(error);
-          // });
-
-          // res.session.setCookieAndRedirect('http://localhost:3000/Home');
-
         }
       };
 
@@ -67,11 +53,13 @@ export default withAuth(
         return this.state.authenticated ? (
           <Redirect to={{ pathname: '/' }} />
         ) : (
-          <SignInWidget
-            baseUrl={this.props.baseUrl}
-            onSuccess={this.onSuccess}
-            onError={this.onError}
-          />
+          this.props.showLogin ?
+            <SignInWidget
+              baseUrl={this.props.baseUrl}
+              onSuccess={this.onSuccess}
+              onError={this.onError}
+            /> :
+            <RegistrationForm/>
         );
       }
   }

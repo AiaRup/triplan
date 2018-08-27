@@ -3,8 +3,7 @@ import PlanTrip from './planTrip/PlanTrip';
 import MapView from './mapView/MapView';
 import styled from 'styled-components';
 import _ from 'lodash';
-import axios from 'axios';
-import { observer, inject } from 'mobx-react';
+
 
 
 
@@ -31,10 +30,6 @@ const MapViewContainer = styled.div`
   border: 1px solid lightgrey;
 `;
 
-@inject(allStores => ({
-  configUser: allStores.store.configUser,
-}))
-@observer
 class Content extends Component {
   state = {
     address: { lat: 51.507351, lng: -0.127758 },
@@ -79,19 +74,15 @@ positionDenied = () => {
    }
    this.handlePermission();
 
-   const userId = localStorage.getItem('oktaID');
-   if (userId !== null) {
-     // get user data from
-     console.log('id from local', userId);
-
-     axios.get(`/api/users/users/${userId}`)
-       .then((response) => {
-         // set user id on store
-         console.log('res from DB', response.data[0]._id);
-        //  console.log('res from DB', response.id);
-         this.props.configUser(response.data[0]._id);
-       });
-   }
+  //  const userId = localStorage.getItem('oktaID');
+  //  if (userId !== null) {
+  //    // get user id from mongo
+  //    axios.get(`/api/users/users/${userId}`)
+  //      .then((response) => {
+  //        // set user id on store
+  //        this.props.configUser(response.data[0]._id);
+  //      });
+  //  }
  }
 
  render() {
