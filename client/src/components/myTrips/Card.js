@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
 
- const handleClick= ()=>{
-    //  to = "/MyTrips/"+ props.plan
- }
-
-
-
-
-
-  return (
+   return (
             <div className = "card">
+
                 <h4>  {props.plan} </h4>
-                <button onClick={this.handleClick}>Watch </button>
+
+               <Link to = {`/MyTrips/${props.plan}`}> watch </Link>
+
             </div>
-       );
+    
+    );
     
 }
 
 export default Card;
+

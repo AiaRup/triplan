@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import  './MyTrips.css';
 import CardList from './CardList';
 
@@ -6,13 +6,9 @@ import CardList from './CardList';
 // {name:'singapour 2015'},{name: 'seoul 2014'}];
 
 
-class MyTrips extends Component{
+const MyTrips = (props) => {
 
-  constructor (props){
-    super(props);
-    this.state = { user_plans : ['Barcelona 2018', 'Paris 2017', 'Vienna 2016', 'Singapour 2015',
-     'Seoul 2014', 'Pekin 2012', 'Tokyo 2015'] };
-  }
+   
 
 // handleSubmit=(event)=>{
 //   is_filtered = true;
@@ -21,7 +17,6 @@ class MyTrips extends Component{
 
 // }
 
-render(){
     return (
 
       <div className="all">
@@ -30,15 +25,16 @@ render(){
           
    <div className='search-bar'>
         <input  type='text' placeholder='search...'  />
-</div>
-        <CardList plans={this.state.user_plans} />
+   </div>
+
+        <CardList plans={props.user_plans} />
 
 
       </div>
     );
 }
 
-}
+
 
 
 export default MyTrips;
