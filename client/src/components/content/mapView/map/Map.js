@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Map.css';
 import axios from 'axios';
-import _ from 'lodash';
+// import _ from 'lodash';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 
@@ -77,12 +77,12 @@ class Map extends Component {
 
   }
 
-  isArrayEqual = (array1, array2) => {
-    return _(array1).differenceWith(array2, _.isEqual).isEmpty();
-  }
-
   componentDidUpdate(prevProps) {
-    if (!this.isArrayEqual(this.props.places, prevProps.places)) {
+    console.log('in did update- this.props.places ', this.props.places);
+    console.log((JSON.stringify(this.props.places) === JSON.stringify(prevProps.places)));
+
+    if (!(JSON.stringify(this.props.places) === JSON.stringify(prevProps.places))) {
+      console.log('in if');
       this.setState({ places: this.props.places }, () => this.addMarkers());
     }
   }
@@ -90,7 +90,6 @@ class Map extends Component {
   addPlace = (place) => {
     console.log('in add place -Map ', place);
     this.props.store.addPlace(place);
-
   }
 
   render() {

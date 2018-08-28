@@ -22,10 +22,12 @@ export default class MapView extends Component {
   updateAddress = (address) => {
     this.setState({
       address: address,
-      places: [] });
+      places: []
+    });
   }
 
   updatePlacesNear = (places) => {
+    console.log(places);
     this.setState({ places: places });
   }
 
