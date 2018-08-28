@@ -4,17 +4,9 @@ import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Place from '../placeList/place/Place';
 import PickDate from './PickDate';
+import TheEvent from '../EventList/TheEvent';
+import './day.css'
 
-
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  min-height: 190px;
-  height: auto;
-  width:130px;
-  
-`;
 
 const PlaceListUL = styled.div`
   padding: 8px;
@@ -42,7 +34,16 @@ const PlaceListUL = styled.div`
         {...this.props.provided.droppableProps} 
         >
           
-          {this.props.daysArray[this.props.index].places.map((place, index)=><Place key={place.id} placeIndex={index} dayIndex={this.props.index} place={place} verifier="placeOfDay"/>)}
+          {this.props.daysArray[this.props.index].places.map((item, index)=>{
+            if(item.type==='event') {
+   
+            return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
+
+            }else if (item.type==='place'){
+              return(<Place key={item.id} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>)}
+          }
+        )}
+
           {this.props.provided.placeholder}
       </PlaceListUL>
     )}
@@ -57,21 +58,22 @@ const PlaceListUL = styled.div`
 class Day extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Container>
-        <button onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
-        <PickDate dayIndex={this.props.index}/>
-        {/* {this.props.daysArray[this.props.index].date} */}
+    
+        <div className="day-container">
+          <button className="btn btn-danger btn-sm" onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
+
+          <div className="pick-date">
+          <PickDate dayIndex={this.props.index}/>
+          </div>
           <h4>{this.props.day.name}</h4>
 
           <Droppable droppableId={this.props.day.id}>
-          {(provided, snapshot)=> (
-            <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
-          )}
+            {(provided, snapshot)=> (
+              <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
+            )}
           </Droppable>
 
-        </Container>
-      </React.Fragment>
+        </div>
     );
   }
 }

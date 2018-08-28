@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './preferences.css';
+import _ from 'lodash';
+import { Collapse } from 'react-collapse';
 // import _ from 'lodash';
 import Checkbox from './Checkbox';
 
@@ -22,14 +24,12 @@ const items = [
 ];
 
 export default class Preferences extends Component {
-  state = {
-    selectedCheckboxes: items,
+  constructor() {
+    super();
+    this.state =  {toggledCollapse: false,
+                  selectedCheckboxes: items,};
   }
-
-  componentWillMount = () => {
-    // this.selectedCheckboxes = [];
-  }
-
+  
   toggleCheckbox = (index, check) => {
     console.log('in toggle father');
     console.log(" checked? ", check);
@@ -43,7 +43,13 @@ export default class Preferences extends Component {
     })
 
     this.setState({ selectedCheckboxes: newarray });
+
   }
+
+  // componentWillMount = () => {
+  //   this.selectedCheckboxes = [];
+  //   this.setState({ selectedCheckboxes: newarray });
+  // }
 
 
   handleFormSubmit = formSubmitEvent => {
@@ -64,14 +70,37 @@ export default class Preferences extends Component {
     this.props.updatePlacesNear([]);
   }
 
+  collapseToggle = () => {
+    this.setState(prevState => ({
+      toggledCollapse: !prevState.toggledCollapse
+    }));
+  };
+
   render() {
-
-    // console.log('selected list', this.state.selectedCheckboxes);
-
+    const toggleCollapse = false;
     return (
       <div className="container">
         <div className="row">
           <div className="formSelector">
+
+
+            {/* <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
+            <Collapse isOpened={this.state.toggledCollapse}>
+              <form onSubmit={this.handleFormSubmit}>
+                {items.map(box =>
+                  <Checkbox
+                    label={box.label}
+                    type={box.type}
+                    handleCheckboxChange={this.toggleCheckbox}
+                    key={box.label}/>
+                )}
+                <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
+              </form>
+            </Collapse> */}
+
+
+            <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
+            <Collapse isOpened={this.state.toggledCollapse}>
             <form onSubmit={this.handleFormSubmit}>
               {this.state.selectedCheckboxes.map((box, index) =>
                 <Checkbox
@@ -85,6 +114,7 @@ export default class Preferences extends Component {
               <button className="btn btn-sm btn-outline-secondary" type="button"
                 onClick={this.handleClear}>Clear</button>
             </form>
+            </Collapse>
           </div>
         </div>
       </div>

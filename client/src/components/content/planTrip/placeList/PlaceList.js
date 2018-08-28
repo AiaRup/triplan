@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Place from './place/Place';
+import './places.css'
 
 const Container = styled.div`
   margin: 8px;
@@ -23,47 +24,42 @@ transition: background-color 0.2s ease;
 `;
 
 @inject(allStores => ({
-  placesArray: allStores.store.placesArray }))
+  placesArray: allStores.store.placesArray}))
 
 
-  @observer class DragNdrop extends Component {
+  @observer class DroppablePlaces extends Component {
 
-  render() {
-
-    return (
-      <PlaceListUL
+    render() {
+      return (
+        <PlaceListUL 
         innerRef={this.props.provided.innerRef}
         isDraggingOver={this.props.snapshot.isDraggingOver}
-        {...this.props.provided.droppableProps}
-      >
-        {this.props.placesArray.map((place, index) => <Place key={place.id} index={index} thePlace={place} verifier="placeOfPlace"/>)}
+        {...this.props.provided.droppableProps} 
+        >
+          {this.props.placesArray.map((place, index) => <Place key={place.id} placeIndex={index} thePlace={place} verifier="placeOfPlace"/>)}
 
-
-        {this.props.provided.placeholder}
-      </PlaceListUL>
-
-    );}
-}
+          {this.props.provided.placeholder}
+        </PlaceListUL>  
+      )};
+    };
 
 
 @observer
 class PlaceList extends Component {
-
+ 
   render() {
-
     return (
       <React.Fragment>
-        <Container>
-          <h5>Places</h5>
+        <div className='places-list-container'>
+          <h3 className='place-container-headline'>Places</h3>
           <Droppable droppableId="placesContainer">
-            {(provided, snapshot) => (
-              <DragNdrop provided={provided} snapshot={snapshot}/>
-            )}
+           {(provided, snapshot) => (
+             <DroppablePlaces provided={provided} snapshot={snapshot}/>
+          )}
           </Droppable>
-        </Container>
+        </div>
       </React.Fragment>
-    );
-  }
-}
+    )};
+};
 
 export default PlaceList;

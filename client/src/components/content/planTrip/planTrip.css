@@ -1,0 +1,17 @@
+.plan-trip-container {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  border-radius: 2px;
+  width: 100%; 
+  height: auto;
+}
+
+.place-event-containers {
+display: flex;
+flex-direction: row;
+margin: 8px;
+border-radius: 2px;
+width: 100%;
+height: auto;
+}

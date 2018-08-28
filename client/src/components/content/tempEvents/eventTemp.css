@@ -1,0 +1,12 @@
+.list-container {
+  margin-left: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  height: auto;
+  min-height: 200px;
+  width: 25%;
+};
+
+.date-picker {
+  display: flex;
+};

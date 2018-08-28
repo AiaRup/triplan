@@ -1,0 +1,29 @@
+.eventDatePicker {
+  width: 95px;
+  margin: 2px;
+  height: 30px;
+}
+
+.btn-temp-event-date {
+  height: 30px;
+  margin: 2px;
+}
+
+.datesHead {
+  background-color: rgba(69, 226, 253, 0.301);
+  text-align: center;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+}
+
+.to-event-date, 
+.from-event-date {
+  text-align: left;
+};
+
+.date-pick-container {
+  display: flex;
+  width: 75%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+};

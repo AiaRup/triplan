@@ -1,0 +1,24 @@
+.map-event-container {
+  display: flex;
+  flex: wrap;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+.plan-trip-container {
+  display: flex;
+  min-height: 80vh;
+  height: auto;
+  width: 100%;
+  border: 1px solid lightgrey;
+}
+
+.map-view-container {
+  display: flex;
+  justify-content: flex-start;
+  height: 80vh;
+  width: 95%;
+  border: 1px solid lightgrey;
+};
+
+
