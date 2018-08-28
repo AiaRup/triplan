@@ -51,7 +51,7 @@ class PlaceList extends Component {
     return (
       <React.Fragment>
         <div className='places-list-container'>
-          <h5>Places</h5>
+          <h3 className='place-container-headline'>Places</h3>
           <Droppable droppableId="placesContainer">
            {(provided, snapshot) => (
              <DroppablePlaces provided={provided} snapshot={snapshot}/>

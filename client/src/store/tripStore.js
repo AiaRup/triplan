@@ -8,7 +8,11 @@ class TripStore extends Component {
 
   @observable daysArray = [ { name:'day1', id:'dayId1', date: new Date(), places:[ { name:'place4', id:'placeId4', type:'place' }, { name:'place5', id:'placeId5', type:'place' } ]}, { name:'day2', id:'dayId2', places:[ { name:'place6', id:'placeId6', type:'place' },{ name:'play soccer', address: 'beersheva', time: '12:40',  id:'eventId9', type:'event' }, { name:'place7', id:'placeId7', type:'place' } ] }, { name:'day3', id:'dayId3', places:[{ name:'place8', id:'placeId8', type:'place'  }]} ];
 
-  @observable placesArray = [ { name:'Egypt Museum', Category: "Museum", address: "Kingsman 21 street", duration: "2 hours" , price:" Free", openingHours: '10:00-20:00', contact: '183-430-9901', id:'placeId1', type: 'place'}, { name:'place2', id:'placeId2' , type: 'place'}, { name:'place3', id:'placeId3', type: 'place' } ];
+  @observable placesArray = [ { name:'Egypt Museum', Category: 'Museum', address: 'Kingsman 21 street', duration: '2 hours' , price: 'Free', openingHours: '10:00-20:00', contact: '183-430-9901', id:'placeId1', type: 'place'}, 
+  
+  { name:'Dutch Park', Category: 'Gardens', address: 'Tulip 3 street', duration: '1 hour', price: '10 Euro', openingHours: '08:00-17:00', contact: '13-210-0092', id:'placeId2', type: 'place'},
+  
+  { name:'Picasso Gallery', Category: 'Art/Gallery', address: 'Mona Lisa 90 street', duration: '01:30 hour', price: '10 Euro', openingHours: '08:00-17:00', contact: '122-90-1272', id:'placeId3', type: 'place'} ];
 
   @observable eventsArray = [ { name:'Basball', address: 'Levin 4 Street', time: '14:15', id:'eventId4' , type:'event'}, { name:'Game Arena', address: 'Corner Street', time: '12:40',  id:'eventId5', type:'event' } ];
 

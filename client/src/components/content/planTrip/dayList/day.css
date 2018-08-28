@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.day-list-container {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: auto;
+  height: auto;
+}
+
+.day-list-wrapper {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: row;
+  min-width: 500px;
+  min-height: 210px;
+  height: auto;
+  width: auto;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.day-container {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  min-height: 190px;
+  height: auto;
+  min-width:150px;
+  width: auto;
+}
+
+.pick-date {
+  border: 1px solid  lightgrey;
+  text-align: center;
+}

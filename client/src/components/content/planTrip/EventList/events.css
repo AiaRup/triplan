@@ -4,13 +4,13 @@
   border: 0;
 }
 
-.places-list-container {
+.events-list-container {
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
   height: auto;
-  min-height: 200px;
-  width: 50%;
+  min-height: 40px;
+  width: auto;
 }
 
 .place-arrow {
@@ -21,25 +21,24 @@
   height: 20px;
   }
 
-.place-container-headline {
+.event-container-headline {
   text-align: center;
   margin-top: 5px;
 }
 
-.place-headline {
+
+.event-headline {
   margin: 5px;
   font-weight: 700;
 }
 
-.single-place-header-section {
+.single-event-header-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-ul {
-  margin: 5px;
-}
+
 
 
 

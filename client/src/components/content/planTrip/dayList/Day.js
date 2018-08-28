@@ -5,18 +5,8 @@ import styled from 'styled-components';
 import Place from '../placeList/place/Place';
 import PickDate from './PickDate';
 import TheEvent from '../EventList/TheEvent';
+import './day.css'
 
-
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  min-height: 190px;
-  height: auto;
-  min-width:150px;
-  width: auto;
-  
-`;
 
 const PlaceListUL = styled.div`
   padding: 8px;
@@ -68,20 +58,22 @@ const PlaceListUL = styled.div`
 class Day extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Container>
-        <button onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
-        <PickDate dayIndex={this.props.index}/>
+    
+        <div className="day-container">
+          <button className="btn btn-danger btn-sm" onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
+
+          <div className="pick-date">
+          <PickDate dayIndex={this.props.index}/>
+          </div>
           <h4>{this.props.day.name}</h4>
 
           <Droppable droppableId={this.props.day.id}>
-          {(provided, snapshot)=> (
-            <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
-          )}
+            {(provided, snapshot)=> (
+              <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
+            )}
           </Droppable>
 
-        </Container>
-      </React.Fragment>
+        </div>
     );
   }
 }
