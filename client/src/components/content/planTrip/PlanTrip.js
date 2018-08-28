@@ -2,25 +2,9 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { observer, inject } from 'mobx-react'; 
 import DayList from './dayList/DayList';
-import styled from 'styled-components';
 import PlaceList from './placeList/PlaceList';
 import EventList from './EventList/EventList';
-
-const Container = styled.div `
-  margin: 8px;
-  border-radius: 2px;
-  width: 100%
-  height: auto;
-`;
-
-const Wrapper = styled.div `
-margin: 8px;
-border-radius: 2px;
-display: flex;
-flex-direction: row;
-width: 100%
-height: auto;
-`;
+import './planTrip.css';
 
 
 @inject(allStores => ({
@@ -161,16 +145,15 @@ class PlanTrip extends Component {
         return (
             <React.Fragment>
                 <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Container>
+                    <div className='plan-trip-container'>
 
-                        <Wrapper>
+                        <div className='place-event-containers'>
                             <PlaceList/>
                             <EventList/>
-                        </Wrapper>
+                        </div>
 
                         <DayList/>
-
-                    </Container>
+                    </div>
                 </DragDropContext>
             </React.Fragment>
         );

@@ -4,29 +4,13 @@ import MapView from './mapView/MapView';
 import styled from 'styled-components';
 import _ from 'lodash';
 import TempEventList from './tempEvents/TempEventList';
-
-
-const Container = styled.div`
-  display: flex;
-  flex: wrap;
-  flex flow: row;
-  justify-content: space-around;
-`;
-
-const PlanTripContainer = styled.div`
-  display: flex;
-  min-height: 80vh;
-  height: auto;
-  width: 100%;
-  border: 1px solid lightgrey;
-`;
+import './content.css';
 
 const MapViewContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   height: 80vh;
   width: 95%;
-  background-color: red;
   border: 1px solid lightgrey;
 `;
 
@@ -74,22 +58,22 @@ positionDenied = () => {
    this.handlePermission();
  }
 
- render() {
-   return (
-     <React.Fragment>
-       <Container>
-         <MapViewContainer>
-           <MapView address={_.clone(this.state.address)}/>
-         </MapViewContainer>
-         <TempEventList/>
-        
-       </Container>
-       <PlanTripContainer>
-           <PlanTrip />
-         </PlanTripContainer>
-     </React.Fragment>
-   );
+ render() { 
+  return (
+    <React.Fragment>
+      <div className='map-event-container'>
+        <div className='map-view-container'>
+            <MapView address={_.clone(this.state.address)}/>
+        </div>
+        <TempEventList/>
+      </div>
+
+      <div className='plan-trip-container'>
+        <PlanTrip />
+      </div>
+    </React.Fragment>
+  );
  }
-}
+};
 
 export default Content;

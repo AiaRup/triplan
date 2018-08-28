@@ -47,7 +47,7 @@ const PlaceListUL = styled.div`
           {this.props.daysArray[this.props.index].places.map((item, index)=>{
             if(item.type==='event') {
    
-              return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item}verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
+              return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
 
             }else if (item.type==='place'){
               return(<Place key={item.id} placeIndex={index} dayIndex={this.props.index} place={item} verifier="placeOfDay"/>)}
@@ -72,7 +72,6 @@ class Day extends Component {
         <Container>
         <button onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
         <PickDate dayIndex={this.props.index}/>
-        {/* {this.props.daysArray[this.props.index].date} */}
           <h4>{this.props.day.name}</h4>
 
           <Droppable droppableId={this.props.day.id}>

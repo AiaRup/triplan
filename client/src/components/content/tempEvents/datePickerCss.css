@@ -19,4 +19,11 @@
 .to-event-date, 
 .from-event-date {
   text-align: left;
-}
+};
+
+.date-pick-container {
+  display: flex;
+  width: 75%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+};

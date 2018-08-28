@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Place from './place/Place';
+import './places.css'
 
 const Container = styled.div`
   margin: 8px;
@@ -49,14 +50,14 @@ class PlaceList extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container>
+        <div className='places-list-container'>
           <h5>Places</h5>
           <Droppable droppableId="placesContainer">
            {(provided, snapshot) => (
              <DroppablePlaces provided={provided} snapshot={snapshot}/>
           )}
           </Droppable>
-        </Container>
+        </div>
       </React.Fragment>
     )};
 };

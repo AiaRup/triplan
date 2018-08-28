@@ -3,17 +3,8 @@ import { observer, inject } from 'mobx-react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import styled from 'styled-components';
 import './datePickerCss.css';
  
-
-const Container = styled.div`
-  display: flex;
-  width: 75%
-  margin-top: 5px;
-  margin=bottom: 5px;
-`;
-
 
 @inject(allStores => ({
   EventStartDate: allStores.store.EventStartDate,
@@ -23,14 +14,11 @@ const Container = styled.div`
 @observer
 class EventPickDate extends React.Component {
 
-  
   render() {
     const lastDateIndex = this.props.tempEventCalander.length-1;
 
     return (
-
-    
-    <Container>
+    <div className='date-pick-container'>
       <div className='from-event-date'>
       From:
         <DatePicker
@@ -52,8 +40,8 @@ class EventPickDate extends React.Component {
             className='eventDatePicker'
         />
       </div>
-    </Container>)
+    </div>)
   }
-}
+};
 
 export default EventPickDate;
