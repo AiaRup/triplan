@@ -24,8 +24,46 @@
   font-size: 14px;
   outline: none;
   text-overflow: ellipses;
-  /* position: absolute;
-  top: 91px;
-  left: 169px; */
-
 }
+
+.info-window {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 300px;
+  justify-content: space-between;
+}
+
+.info-window .info-header {
+  color: rgb(255, 115, 0)
+}
+
+.info-window .info-content {
+  flex-basis: 170px;
+}
+.info-box {
+  background-color: rgb(0, 0, 0);
+  color: azure;
+  padding: 12px;
+  max-width: 230px;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+
+
+.info-box .info-header {
+  color: rgb(255, 115, 0)
+}
+#slider-hours {
+  transform: translateX(-150px);
+  transition: transform 400ms ease-in;
+  padding: 20px;
+}
+
+#slider-hours.slideIn {
+  transform: translateX(0);
+}
+
+#slider-hours.slideOut {
+  transform: translateX(-100%);
+}
+
