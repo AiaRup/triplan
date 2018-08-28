@@ -18,6 +18,7 @@ const Container = styled.div`
 @inject(allStores => ({
   deletePlace: allStores.store.deletePlace,
   deletePlaceInDay: allStores.store.deletePlaceInDay}))
+
 class Place extends Component {
   constructor() {
     super();
@@ -30,79 +31,56 @@ class Place extends Component {
     }));
   };
   
-  checkForDiv = (toggleCollapse) => {
-    if(this.props.verifier==="placeOfPlace"){
-      return (
-    <Draggable draggableId={this.props.thePlace.id} index={this.props.index}>
-    {(provided, snapshot) => (
 
-        <Container
-        innerRef={provided.innerRef}
-        isDragging={snapshot.isDragging}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        >
-          <div className='single-place-header-section'>
-       
-            <button type="button" className="btn btn-danger btn-sm" onClick={()=>this.props.deletePlace(this.props.index)}>X</button>
+  placeOrDayDelete = () => {
+    if(this.props.verifier==='placeOfDay'){
+      this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex)
+    }else {
+      this.props.deletePlace(this.props.index)
+    }
+  }
 
-            <h6 className='place-headline'>{this.props.thePlace.name}</h6>
 
-            <h5 className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</h5>
-            
-          </div>
+  render() {
+    const toggleCollapse = false;
 
-          <Collapse isOpened={this.state.toggledCollapse}>
-          <ul>
-            <li>Category: {this.props.thePlace.Category}</li>
-            <li>Address: {this.props.thePlace.address}</li>
-            <li>Duration: {this.props.thePlace.duration}</li>
-            <li>Opening Hours: {this.props.thePlace.openingHours}</li>
-            <li>Price: {this.props.thePlace.price}</li>
-            <li>Contact: {this.props.thePlace.contact}</li>
-
-          </ul>
-          </Collapse>
-
-        </Container>
-    )}
-
-    </Draggable>
-    
-  );
-} else if(this.props.verifier==="placeOfDay"){
-  
     return (
-      <Draggable draggableId={this.props.place.id} index={this.props.placeIndex}>
+      <Draggable draggableId={this.props.thePlace.id} index={this.props.placeIndex}>
       {(provided, snapshot) => (
+  
           <Container
           innerRef={provided.innerRef}
           isDragging={snapshot.isDragging}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           >
-            <h5 className='place-arrow' onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</h5>
-            <button type="button" className="btn btn-danger btn-sm" onClick={()=>this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex)}>X</button>
-              {this.props.place.name}
-              <Collapse isOpened={this.state.toggledCollapse}>
-              checking
-            </Collapse>
+            <div className='single-place-header-section'>
+                
+              <button type="button" className="btn btn-danger btn-sm" onClick={this.placeOrDayDelete}>X</button>
+  
+              <h6 className='place-headline'>{this.props.thePlace.name}</h6>
+  
+              <h5 className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</h5>
+              
+            </div>
+
+ 
+            <Collapse isOpened={this.state.toggledCollapse}>
+            <ul>
+              <li>Category: {this.props.thePlace.Category}</li>
+              <li>Address: {this.props.thePlace.address}</li>
+              <li>Duration: {this.props.thePlace.duration}</li>
+              <li>Opening Hours: {this.props.thePlace.openingHours}</li>
+              <li>Price: {this.props.thePlace.price}</li>
+              <li>Contact: {this.props.thePlace.contact}</li>
+            </ul>
+            </Collapse> 
+  
           </Container>
       )}
       </Draggable>
     );
-    }
-  
-}
-
-  render() {
-    const toggleCollapse = false;
-
-    return (
-      this.checkForDiv(toggleCollapse)
-    );
-    
-  }
+  }  
 }
 
 export default Place;

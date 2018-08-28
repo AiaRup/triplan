@@ -72,7 +72,6 @@ class TripStore extends Component {
     this.eventsArray.forEach(event => {
       if (this.tempEventArray[tempEventIndex].id === event.id) {
         checker = 1;
-      // this.tempEventArray.splice(tempEventIndex, 1);
       alert('You already have this event')
       }
     })
@@ -82,9 +81,6 @@ class TripStore extends Component {
         checker = 0;
       } 
   }
-
-
-
 }
 
 

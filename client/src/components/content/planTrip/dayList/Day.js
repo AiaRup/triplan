@@ -47,10 +47,10 @@ const PlaceListUL = styled.div`
           {this.props.daysArray[this.props.index].places.map((item, index)=>{
             if(item.type==='event') {
    
-              return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
+            return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
 
             }else if (item.type==='place'){
-              return(<Place key={item.id} placeIndex={index} dayIndex={this.props.index} place={item} verifier="placeOfDay"/>)}
+              return(<Place key={item.id} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>)}
           }
         )}
 
