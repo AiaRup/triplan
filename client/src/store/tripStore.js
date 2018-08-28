@@ -14,6 +14,13 @@ class TripStore extends Component {
 
   @observable placesArray = [ { name: 'place1', id: 'placeId1' }, { name: 'place2', id: 'placeId2' }, { name: 'place3', id: 'placeId3' } ];
 
+  @observable showLogin = true;
+
+  @action toggleLoginRegister = () => {
+    this.showLogin = !this.showLogin;
+    console.log('showLogin', this.showLogin);
+  }
+
   @action addPlace = (place) => {
     this.placesArray.push(place);
   }
@@ -43,11 +50,8 @@ class TripStore extends Component {
   }
 
   @action configUser = (userID) => {
-    console.log('user ID', userID);
-
     this.user_id = userID;
     console.log('id in store', this.user_id);
-
   }
 
 }

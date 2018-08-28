@@ -5,7 +5,6 @@ import _ from 'lodash';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 
-
 @inject('store')
 @observer
 class Map extends Component {
@@ -26,34 +25,44 @@ class Map extends Component {
 
       const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=1500&type=${type}&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`;
 
-      // https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=CpQCAgEAAFxg8o-eU7_uKn7Yqjana-HQIx1hr5BrT4zBaEko29ANsXtp9mrqN0yrKWhf-y2PUpHRLQb1GT-mtxNcXou8TwkXhi1Jbk-ReY7oulyuvKSQrw1lgJElggGlo0d6indiH1U-tDwquw4tU_UXoQ_sj8OBo8XBUuWjuuFShqmLMP-0W59Vr6CaXdLrF8M3wFR4dUUhSf5UC4QCLaOMVP92lyh0OdtF_m_9Dt7lz-Wniod9zDrHeDsz_by570K3jL1VuDKTl_U1cJ0mzz_zDHGfOUf7VU1kVIs1WnM9SGvnm8YZURLTtMLMWx8-doGUE56Af_VfKjGDYW361OOIj9GmkyCFtaoCmTMIr5kgyeUSnB-IEhDlzujVrV6O9Mt7N4DagR6RGhT3g1viYLS4kO5YindU6dm3GIof1Q&key=YOUR_API_KEY
 
       let promise = axios(url)
         .then((response) => {
           // add markers on the map
           response.data.results.forEach((location) => {
             const objLatLng = location.geometry.location;
+            const placeID = location.place_id;
+            console.log('response location', response);
 
-            // console.log('details', location);
+            return axios(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,opening_hours&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`).then((res) => {
+              console.log('place res', res.data.result);
+              const attraction = res.data.result;
+              let marker = {
+                showInfoWindow: false,
+                name: attraction.name,
+                id: location.id,
+                icon: element.icon,
+                rating: attraction.rating,
+                website: attraction.website,
+                address: attraction.formatted_address,
+                price: attraction.price_level,
+                position:
+                  { lat: objLatLng.lat, lng: objLatLng.lng },
+              };
 
-            let marker = {
-              showInfoWindow: false,
-              name: location.name,
-              id: location.id,
-              icon: element.icon,
-              rating: location.rating,
-              website: location.reference,
-              position:
-                { lat: objLatLng.lat, lng: objLatLng.lng },
-            };
+              if (attraction.opening_hours !== undefined) {
+                marker.openNow = attraction.opening_hours.open_now;
+                marker.openHours = attraction.opening_hours.weekday_text;
+              }
 
-            if (location.opening_hours !== undefined) {
-              marker.openNow = location.opening_hours.open_now;
-            }
-            if (location.photos !== undefined) {
-              marker.photo = location.photos[0];
-            }
-            markerArray.push(marker);
+              if (attraction.international_phone_number !== undefined) {
+                marker.phone = attraction.international_phone_number;
+              }
+              if (location.photos !== undefined) {
+                marker.photo = location.photos[0].photo_reference;
+              }
+              markerArray.push(marker);
+            });
           });
         })
         .catch(function (error) {
@@ -61,7 +70,11 @@ class Map extends Component {
         });
       promises.push(promise);
     });
-    Promise.all(promises).then(() => { this.setState({ markers: markerArray }); });
+    Promise.all(promises).then(() => {
+      console.log('merkersarray', markerArray);
+      this.setState({ markers: markerArray });
+    });
+
   }
 
   isArrayEqual = (array1, array2) => {

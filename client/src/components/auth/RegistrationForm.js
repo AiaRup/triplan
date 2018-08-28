@@ -2,29 +2,24 @@ import React from 'react';
 import OktaAuth from '@okta/okta-auth-js';
 import { withAuth } from '@okta/okta-react';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import './RegisterForm.css';
 import axios from 'axios';
+import './RegisterForm.css';
 import { observer, inject } from 'mobx-react';
 
 
+@inject(allStores => ({
+  toggleLoginRegister: allStores.store.toggleLoginRegister,
+  showLogin: allStores.store.showLogin
+}))
+@observer
 export default withAuth(
-  @inject(allStores => ({
-    configUser: allStores.store.configUser,
-  }))
-  @observer
   class RegistrationForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        sessionToken: null,
-        emailValid: false,
-        firstNameValid: false,
-        lastNameValid: false,
-        passwordValid: false
+        firstName: '', lastName: '', email: '', password: '', sessionToken: null,
+        emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
+        showErrorDiv: false
       };
 
       this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
@@ -46,30 +41,14 @@ export default withAuth(
        this.setState({ error: true });
      }
 
-    handleFirstNameChange = (e) => {
-      this.setState({ firstName: e.target.value });
-    }
-    handleLastNameChange = (e) => {
-      this.setState({ lastName: e.target.value });
-    }
-    handleEmailChange = (e) => {
-      this.setState({ email: e.target.value });
-    }
-    handlePasswordChange = (e) => {
-      this.setState({ password: e.target.value });
-    }
+     handleChangeInput = (e) =>{
+       this.setState({ [e.target.id]: e.target.value });
+     }
 
     handleSubmit = (e) => {
-      e.preventDefault();
-      // const mongoID = '';
-      fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state)
-      })
+      // e.preventDefault();
+      this.setState({ showErrorDiv: false });
+      axios.post('/api/users', this.state)
         .then(user => {
           this.oktaAuth
             .signIn({
@@ -77,31 +56,23 @@ export default withAuth(
               password: this.state.password
             })
             .then(res => {
+              // save the user oktaID before redirect
+              localStorage.setItem('oktaID', res.user.id);
               this.setState({
                 sessionToken: res.sessionToken
               });
-              // axios.get(`/api/users/users/${res.user.id}`)
-              //   .then((response) => {
-              //     // save user ID on store
-              //     this.props.configUser(response._id);
-              //   })
-              //   .catch((error) => {
-              //     console.log(error);
-              //   });
-
             });
-          console.log('user on reg', user);
-
-          // this.props.configUser(user._id);
         })
-        .catch(err => console.log);
+        .catch(err => {
+          console.log(err);
+          this.setState({ showErrorDiv: true });
+        });
     }
     render() {
       if (this.state.sessionToken) {
         this.props.auth.redirect({ sessionToken: this.state.sessionToken });
         return null;
       }
-
       return (
         <div id="widget-container1">
           <div id="okta-register" className="auth-container1 main-container">
@@ -111,7 +82,13 @@ export default withAuth(
             <div className="auth-content">
               <div className="auth-content-inner">
                 <AvForm onValidSubmit={this.handleSubmit} onInvalidSubmit={this.handleInvalidSubmit} className="primary-auth-form o-form o-form-edit-mode">
-                  <h2 className="okta-form-title o-form-head">Register</h2>
+                  { this.state.showErrorDiv && <div className="o-form-error-container o-form-has-errors" data-se="o-form-error-container">
+                    <div className="okta-form-infobox-error infobox infobox-error" role="alert">
+                      <span className="icon error-16"></span>
+                      <p>Error, A user with this Email already exists.</p>
+                    </div>
+                  </div> }
+                  <h2 className="okta-form-title o-form-head">Create Account</h2>
                   <div className="form-element">
                     <AvField
                       name="email"
@@ -119,7 +96,8 @@ export default withAuth(
                       type="email"
                       id="email"
                       value={this.state.email}
-                      onChange={this.handleEmailChange}
+                      onChange={this.handleChangeInput}
+                      autoComplete="username email"
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter an email' }
@@ -132,12 +110,14 @@ export default withAuth(
                       type="text"
                       id="firstName"
                       value={this.state.firstName}
-                      onChange={this.handleFirstNameChange}
+                      onChange={this.handleChangeInput}
                       minLength="2"
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter your first name' },
-                        minLength: { value: 2, errorMessage: 'Your first name must be at least 2 characters' }
+                        minLength: { value: 2, errorMessage: 'Your first name must be at least 2 characters' },
+                        pattern: { value: '^[A-Za-z]+$', errorMessage: 'Only letters are allowed in first name' }
+
                       }}/>
                   </div>
                   <div className="form-element">
@@ -148,11 +128,13 @@ export default withAuth(
                       id="lastName"
                       minLength="2"
                       value={this.state.lastName}
-                      onChange={this.handleLastNameChange}
+                      onChange={this.handleChangeInput}
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter your last name' },
-                        minLength: { value: 2, errorMessage: 'Your last name must be at least 2 characters' }
+                        minLength: { value: 2, errorMessage: 'Your last name must be at least 2 characters' },
+                        pattern: { value: '^[A-Za-z]+$', errorMessage: 'only letters are allowed in last name' }
+
                       }}/>
                   </div>
                   <div className="form-element">
@@ -164,7 +146,8 @@ export default withAuth(
                       minLength="8"
                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
                       value={this.state.password}
-                      onChange={this.handlePasswordChange}
+                      onChange={this.handleChangeInput}
+                      autoComplete="current-password"
                       required
                       validate={{
                         required: { value: true, errorMessage: 'Please enter a password' },
@@ -174,7 +157,12 @@ export default withAuth(
                   <div className="o-form-button-bar">
                     <input className="button button-primary" type="submit" value="Register" id="submit" data-type="save"/>
                   </div>
-
+                  <div className="signin-container">
+                    <div className="content">
+                      <span className="signin-label">Back to </span>
+                      <span className="signin-link" onClick={this.props.toggleLoginRegister}>Sign in</span>
+                    </div>
+                  </div>
                 </AvForm>
               </div>
             </div>
@@ -185,12 +173,3 @@ export default withAuth(
   }
 );
 
-
-
-
-
-// handleValidSubmit(event, values) {
-//   this.setState({email: values.email});
-// }
-
-// password must contain at least eight characters, at least one number and both lower and uppercase letters and special characters

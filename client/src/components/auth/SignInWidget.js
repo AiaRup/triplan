@@ -3,9 +3,15 @@ import ReactDOM from 'react-dom';
 import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import '@okta/okta-signin-widget/dist/css/okta-theme.css';
+import { observer, inject } from 'mobx-react';
 
+@inject(allStores => ({
+  toggleLoginRegister: allStores.store.toggleLoginRegister,
+  showLogin: allStores.store.showLogin
+}))
+@observer
 class SignInWidget extends Component {
-  componentDidMount() {
+  componentDidMount = () => {
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
@@ -14,8 +20,8 @@ class SignInWidget extends Component {
         registration: true
       },
       registration: {
-        click: function () {
-          window.location.href = 'http://localhost:3000/Register';
+        click: () => {
+          this.props.toggleLoginRegister();
         }
       }
     });
@@ -32,3 +38,4 @@ class SignInWidget extends Component {
 }
 
 export default SignInWidget;
+

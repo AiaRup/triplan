@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import SignInWidget from './SignInWidget';
 import { withAuth } from '@okta/okta-react';
-import axios from 'axios';
+import RegistrationForm from '../auth/RegistrationForm';
 import { observer, inject } from 'mobx-react';
 
 
+@inject(allStores => ({
+  toggleLoginRegister: allStores.store.toggleLoginRegister,
+  showLogin: allStores.store.showLogin
+}))
+@observer
 export default withAuth(
-  @inject(allStores => ({
-    configUser: allStores.store.configUser,
-  }))
-  @observer
   class Login extends Component {
     constructor(props) {
       super(props);
@@ -20,52 +21,46 @@ export default withAuth(
       this.checkAuthentication();
     }
 
-    checkAuthentication = async () => {
-      const authenticated = await this.props.auth.isAuthenticated();
-      if (authenticated !== this.state.authenticated) {
-        this.setState({ authenticated });
+      checkAuthentication = async () => {
+        const authenticated = await this.props.auth.isAuthenticated();
+        if (authenticated !== this.state.authenticated) {
+          this.setState({ authenticated });
+        }
       }
-    }
 
-    componentDidUpdate() {
-      this.checkAuthentication();
-    }
+      componentDidUpdate() {
+        this.checkAuthentication();
+      }
 
-    onSuccess = res => {
-      const oktaID = res.user.id;
-      if (res.status === 'SUCCESS') {
-        // get user data from DB
-        axios.get(`/api/users/users/${oktaID}`)
-          .then((response) => {
-            // set user id on store
-            console.log('res from DB', response);
-
-            this.props.configUser(response._id);
-          })
-          .catch((error) => {
-            console.log(error);
+      onSuccess = res => {
+        const oktaID = res.user.id;
+        if (res.status === 'SUCCESS') {
+          // save to localstorage befor redirect
+          localStorage.setItem('oktaID', oktaID);
+          // redirect to homepage
+          return this.props.auth.redirect({
+            sessionToken: res.session.token
           });
-        return this.props.auth.redirect({
-          sessionToken: res.session.token
-        });
+        }
+      };
+
+      onError = err => {
+        console.log('error logging in', err);
+      };
+
+      render() {
+        if (this.state.authenticated === null) return null;
+        return this.state.authenticated ? (
+          <Redirect to={{ pathname: '/' }} />
+        ) : (
+          this.props.showLogin ?
+            <SignInWidget
+              baseUrl={this.props.baseUrl}
+              onSuccess={this.onSuccess}
+              onError={this.onError}
+            /> :
+            <RegistrationForm/>
+        );
       }
-    };
-
-    onError = err => {
-      console.log('error logging in', err);
-    };
-
-    render() {
-      if (this.state.authenticated === null) return null;
-      return this.state.authenticated ? (
-        <Redirect to={{ pathname: '/' }} />
-      ) : (
-        <SignInWidget
-          baseUrl={this.props.baseUrl}
-          onSuccess={this.onSuccess}
-          onError={this.onError}
-        />
-      );
-    }
   }
 );
