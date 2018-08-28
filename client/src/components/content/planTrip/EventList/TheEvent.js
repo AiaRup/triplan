@@ -69,7 +69,7 @@ class TheEvent extends Component {
     }else if(this.props.verifier==="eventOfTempEvent") {
       return(
      
-      <div class="events-list-container">
+      <div className="events-list-container">
       
       <div className="single-event-header-section">
       

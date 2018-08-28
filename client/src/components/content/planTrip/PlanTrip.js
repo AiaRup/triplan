@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { observer, inject } from 'mobx-react'; 
+import { observer, inject } from 'mobx-react';
 import DayList from './dayList/DayList';
 import PlaceList from './placeList/PlaceList';
 import EventList from './EventList/EventList';
@@ -22,7 +22,7 @@ class PlanTrip extends Component {
     const placesArray = this.props.placesArray;
     const eventsArray = this.props.eventsArray;
     const { destination, source } = result;
-    
+
     //if drag stop in the middle - do nothing
     if (!destination) {
         return;
@@ -30,7 +30,7 @@ class PlanTrip extends Component {
 
     //if drag dropped in the same place - do nothing
     if (
-        source.droppableId === destination.droppableId && 
+        source.droppableId === destination.droppableId &&
         source.index === destination.index
     ) {
         return;
@@ -54,7 +54,7 @@ class PlanTrip extends Component {
     //convert day ID to index
     const daySourceIndex = daysArray.findIndex(p=> p.id === source.droppableId);
     const dayDestinationIndex = daysArray.findIndex(p=> p.id === destination.droppableId);
-    
+
     //if drag is in the same container - only reorder the item inside the div
     if (source.droppableId === destination.droppableId) {
 
@@ -63,7 +63,7 @@ class PlanTrip extends Component {
 
             //get the place item
             const placeInPlaces = placesArray[source.index]
-            
+
             //cut & paste item(place)
             placesArray.splice(source.index, 1);
             placesArray.splice(destination.index, 0, placeInPlaces);
@@ -73,7 +73,7 @@ class PlanTrip extends Component {
             
             //get the place item
             const placeInDay = daysArray[daySourceIndex].places[source.index];
-            
+
             //cut & paste item(place)
             daysArray[daySourceIndex].places.splice(source.index, 1);
             daysArray[daySourceIndex].places.splice(destination.index, 0, placeInDay);
@@ -113,7 +113,7 @@ class PlanTrip extends Component {
 
         //get place item
         const placeItem = daysArray[daySourceIndex].places[source.index];
-        
+
         //cut & paste
         daysArray[daySourceIndex].places.splice(source.index, 1);
         placesArray.splice(destination.index, 0, placeItem);

@@ -37,25 +37,36 @@ positionDenied = () => {
  handlePermission = () => {
    navigator.permissions.query({ name:'geolocation' }).then((result) => {
      if (result.state === 'granted') {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location: ' + result.state);
        navigator.geolocation.getCurrentPosition(this.revealPosition, this.positionDenied, this.geoSettings);
      } else if (result.state === 'prompt') {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location:: ' + result.state);
        navigator.geolocation.getCurrentPosition(this.revealPosition, this.positionDenied, this.geoSettings);
      } else if (result.state === 'denied') {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location:: ' + result.state);
      }
      result.onchange = () => {
-       console.log('Permission: ' + result.state);
+       console.log('Permission to get user location:: ' + result.state);
      };
    });
  }
+
 
  componentDidMount = () => {
    if (!('geolocation' in navigator)) {
      alert('No geolocation available!');
    }
    this.handlePermission();
+
+  //  const userId = localStorage.getItem('oktaID');
+  //  if (userId !== null) {
+  //    // get user id from mongo
+  //    axios.get(`/api/users/users/${userId}`)
+  //      .then((response) => {
+  //        // set user id on store
+  //        this.props.configUser(response.data[0]._id);
+  //      });
+  //  }
  }
 
  render() { 
