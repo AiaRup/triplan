@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
-
 import React from 'react';
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
-import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
+// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
@@ -88,7 +87,8 @@ const MapComponent = compose(
       <Marker position={{ lat: props.address.lat, lng: props.address.lng }} />
 
       {props.markers.map((marker) =>
-        <Marker onClick={() => props.showInfo(marker.id)} key={marker.id} position={{ lat: marker.position.lat, lng: marker.position.lng }}
+        <Marker onClick={() => props.showInfo(marker.id)} key={marker.id}
+          position={{ lat: marker.position.lat, lng: marker.position.lng }}
           icon={{
             url: require(`../../../../markersIcons/${marker.icon}`)
           }}
@@ -101,8 +101,6 @@ const MapComponent = compose(
                   <p className='info-header'>{marker.name}</p>
                   <p>{marker.address}</p>
                   <p>{marker.phone}</p>
-                  {/* <p>Price level: {marker.price ? marker.price : '---'}</p> */}
-                  {/* <p>Rating: {marker.rating ? marker.rating : '---'}</p> */}
                   {marker.price && <p>Price level: {marker.price}</p>}
                   {marker.rating && <p>Rating: {marker.rating}</p>}
                   <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
@@ -113,10 +111,10 @@ const MapComponent = compose(
                       {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
                     </Collapse>}
                   {marker.website && <a href={marker.website} target="_blank">Website</a>}
-                  <button className='btn btn-sm btn-outline-secondary ml-3' onClick={() => props.addPlace(marker)}>Add</button>
+                  <button className='btn btn-danger btn-sm' onClick={() => props.addPlace(marker)}>Add</button>
                 </div>
                 <div>
-                  {marker.photo ? <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`} alt='' /> : null}
+                  {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`} alt='' />}
                 </div>
               </div>
             </InfoWindow>}

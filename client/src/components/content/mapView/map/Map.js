@@ -77,6 +77,7 @@ class Map extends Component {
                   case 4:
                     marker.price = 'Very Expensive';
                     break;
+                  default: break;
                 }
               }
               markerArray.push(marker);
