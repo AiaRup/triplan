@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './preferences.css';
-import _ from 'lodash';
 import { Collapse } from 'react-collapse';
-// import _ from 'lodash';
 import Checkbox from './Checkbox';
 
 const items = [
@@ -26,36 +24,24 @@ const items = [
 export default class Preferences extends Component {
   constructor() {
     super();
-    this.state =  {toggledCollapse: false,
-                  selectedCheckboxes: items,};
+    this.state = { toggledCollapse: false,
+      selectedCheckboxes: items };
   }
-  
-  toggleCheckbox = (index, check) => {
-    console.log('in toggle father');
-    console.log(" checked? ", check);
 
+  toggleCheckbox = (index, check) => {
     let newarray = this.state.selectedCheckboxes.map((e, i) => {
       if (i === index) {
         e.checked = check;
         return e;
       }
       return e;
-    })
-
+    });
     this.setState({ selectedCheckboxes: newarray });
-
   }
-
-  // componentWillMount = () => {
-  //   this.selectedCheckboxes = [];
-  //   this.setState({ selectedCheckboxes: newarray });
-  // }
-
 
   handleFormSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
     let select = this.state.selectedCheckboxes.filter((e) => e.checked);
-    // console.log('submit: ', select);
     this.props.updatePlacesNear(select);
   }
 
@@ -63,7 +49,7 @@ export default class Preferences extends Component {
     let newarray = this.state.selectedCheckboxes.map((e) => {
       e.checked = false;
       return e;
-    })
+    });
 
     this.setState({ selectedCheckboxes: newarray });
     // clear places array in order to remove markers on map
@@ -82,38 +68,21 @@ export default class Preferences extends Component {
       <div className="container">
         <div className="row">
           <div className="formSelector">
-
-
-            {/* <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
-            <Collapse isOpened={this.state.toggledCollapse}>
-              <form onSubmit={this.handleFormSubmit}>
-                {items.map(box =>
-                  <Checkbox
-                    label={box.label}
-                    type={box.type}
-                    handleCheckboxChange={this.toggleCheckbox}
-                    key={box.label}/>
-                )}
-                <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
-              </form>
-            </Collapse> */}
-
-
             <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
             <Collapse isOpened={this.state.toggledCollapse}>
-            <form onSubmit={this.handleFormSubmit}>
-              {this.state.selectedCheckboxes.map((box, index) =>
-                <Checkbox
-                  index={index}
-                  checked={box.checked}
-                  label={box.label}
-                  toggleCheckbox={this.toggleCheckbox}
-                  key={box.label} />
-              )}
-              <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
-              <button className="btn btn-sm btn-outline-secondary" type="button"
-                onClick={this.handleClear}>Clear</button>
-            </form>
+              <form onSubmit={this.handleFormSubmit}>
+                {this.state.selectedCheckboxes.map((box, index) =>
+                  <Checkbox
+                    index={index}
+                    checked={box.checked}
+                    label={box.label}
+                    toggleCheckbox={this.toggleCheckbox}
+                    key={box.label} />
+                )}
+                <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
+                <button className="btn btn-sm btn-outline-secondary" type="button"
+                  onClick={this.handleClear}>Clear</button>
+              </form>
             </Collapse>
           </div>
         </div>
