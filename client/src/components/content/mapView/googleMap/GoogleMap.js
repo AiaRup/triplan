@@ -81,7 +81,7 @@ const MapComponent = compose(
         addPlace: (marker) => {
           let id = marker.id;
           let name = marker.name;
-          this.props.addPlace({ name: name, id: id });
+          this.props.addPlace({ name: name, id: id, type: 'place' });
         },
       });
     }, // end componentWillMount
