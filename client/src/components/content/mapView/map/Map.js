@@ -17,6 +17,12 @@ class Map extends Component {
   }
 
   addMarkers = () => {
+
+    if (this.state.places.length === 0) {
+      this.setState({ markers: [] });
+      return;
+    }
+
     const markerArray = [];
     this.finishMarker = 0;
 
