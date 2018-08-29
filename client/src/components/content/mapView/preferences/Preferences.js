@@ -24,8 +24,10 @@ const items = [
 export default class Preferences extends Component {
   constructor() {
     super();
-    this.state = { toggledCollapse: false,
-      selectedCheckboxes: items };
+    this.state = {
+      toggledCollapse: false,
+      selectedCheckboxes: items
+    };
   }
 
   toggleCheckbox = (index, check) => {
@@ -65,27 +67,27 @@ export default class Preferences extends Component {
   render() {
     const toggleCollapse = false;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="formSelector">
-            <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
-            <Collapse isOpened={this.state.toggledCollapse}>
-              <form onSubmit={this.handleFormSubmit}>
-                {this.state.selectedCheckboxes.map((box, index) =>
-                  <Checkbox
-                    index={index}
-                    checked={box.checked}
-                    label={box.label}
-                    toggleCheckbox={this.toggleCheckbox}
-                    key={box.label} />
-                )}
-                <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
-                <button className="btn btn-sm btn-outline-secondary" type="button"
-                  onClick={this.handleClear}>Clear</button>
-              </form>
-            </Collapse>
-          </div>
-        </div>
+      // <div className="container">
+      //   <div className="row">
+      <div className="formSelector">
+        <h5 onClick={() => this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
+        <Collapse isOpened={this.state.toggledCollapse}>
+          <form onSubmit={this.handleFormSubmit}>
+            {this.state.selectedCheckboxes.map((box, index) =>
+              <Checkbox
+                index={index}
+                checked={box.checked}
+                label={box.label}
+                toggleCheckbox={this.toggleCheckbox}
+                key={box.label} />
+            )}
+            <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
+            <button className="btn btn-sm btn-outline-secondary" type="button"
+              onClick={this.handleClear}>Clear</button>
+          </form>
+        </Collapse>
+        {/* </div>
+        </div> */}
       </div>
     );
   }
