@@ -2,6 +2,11 @@
   background-image: url('https://mdbootstrap.com/img/svg/hamburger1.svg?color=6a1b9a');
 }
 
+.loginNavLi {
+  pointer-events: none;
+
+}
+
 @media (max-width: 767px) {
   .navbar-nav li a {
     display: inline;
