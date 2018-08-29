@@ -50,19 +50,21 @@ const MapComponent = compose(
         },
         onMapMounted: ref => {
           refs.map = ref;
+          this.setState({ bounds: refs.map.getBounds() }); //maybe comment out
         },
-        onBoundsChanged: () => {
-          this.setState({
-            bounds: refs.map.getBounds(),
-            center: refs.map.getCenter(),
-          });
-        },
+        // onBoundsChanged: () => {
+        //   this.setState({
+        //     bounds: refs.map.getBounds(),
+        //     center: refs.map.getCenter(),
+        //   })
+        // },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
           const lat = place[0].geometry.location.lat();
           const lng = place[0].geometry.location.lng();
-          // console.log('latlng ', { lat: lat, lng: lng });
-          const bounds = new google.maps.LatLngBounds();
+          let bounds = new google.maps.LatLngBounds();
+          // const bounds = new google.maps.LatLngBounds();
+          // const bounds = refs.map.getBounds();
           if (place[0].geometry.viewport) {
             bounds.union(place[0].geometry.viewport);
           } else {
@@ -70,6 +72,7 @@ const MapComponent = compose(
           }
           const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
           this.setState({
+            bounds: bounds,
             center: nextCenter,
             marker: place[0].geometry.location,
           });
@@ -78,7 +81,7 @@ const MapComponent = compose(
         addPlace: (marker) => {
           let id = marker.id;
           let name = marker.name;
-          this.props.addPlace({ name: name, id: id });
+          this.props.addPlace({ name: name, id: id, type: 'place' });
         },
       });
     }, // end componentWillMount
@@ -90,14 +93,14 @@ const MapComponent = compose(
     <GoogleMap
       ref={props.onMapMounted}
       defaultZoom={14}
-      onBoundsChanged={props.onBoundsChanged}
+      // onBoundsChanged={props.onBoundsChanged}
       center={props.center}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}>
 
       <SearchBox
         ref={props.onSearchBoxMounted}
         bounds={props.bounds}
-        controlPosition={google.maps.ControlPosition.TOP_LEFT}
+        controlPosition={google.maps.ControlPosition.TOP_CENTER}
         onPlacesChanged={props.onPlacesChanged} >
         <input
           type="text"
