@@ -101,8 +101,10 @@ const MapComponent = compose(
                   <p className='info-header'>{marker.name}</p>
                   <p>{marker.address}</p>
                   <p>{marker.phone}</p>
-                  <p>Price level: {marker.price ? marker.price : '---'}</p>
-                  <p>Rating: {marker.rating ? marker.rating : '---'}</p>
+                  {/* <p>Price level: {marker.price ? marker.price : '---'}</p> */}
+                  {/* <p>Rating: {marker.rating ? marker.rating : '---'}</p> */}
+                  {marker.price && <p>Price level: {marker.price}</p>}
+                  {marker.rating && <p>Rating: {marker.rating}</p>}
                   <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
                   {marker.openHours &&
                     <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
