@@ -1,6 +1,6 @@
 .formSelector {
   position: absolute;
-  top: 132px;
+  top: 70px;
   border: 1px solid black;
   padding: 5px;
   background: white;
@@ -9,4 +9,5 @@
 
 .label {
   padding-left: 9px;
+  cursor: pointer;
 }

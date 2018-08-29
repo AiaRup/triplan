@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import './Map.css';
 import axios from 'axios';
 import GoogleMap from '../googleMap/GoogleMap';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +35,7 @@ class Map extends Component {
           // create all the markers after result arrives from second api request
           Promise.all(promises).then((values) => {
 
-            values.forEach((att)=> {
+            values.forEach((att) => {
               const attraction = att.data.result;
               const { lat, lng } = attraction.geometry.location;
 
@@ -45,7 +48,7 @@ class Map extends Component {
                 website: attraction.website,
                 address: attraction.formatted_address,
                 position:
-                          { lat: lat, lng: lng },
+                  { lat: lat, lng: lng },
               };
               if (attraction.opening_hours !== undefined) {
                 marker.openNow = attraction.opening_hours.open_now;
@@ -59,21 +62,22 @@ class Map extends Component {
               }
               if (attraction.price_level !== undefined) {
                 switch (attraction.price_level) {
-                case 0:
-                  marker.price= 'Free';
-                  break;
-                case 1:
-                  marker.price= 'Inexpensive';
-                  break;
-                case 2:
-                  marker.price= 'Moderate';
-                  break;
-                case 3:
-                  marker.price= 'Expensive';
-                  break;
-                case 4:
-                  marker.price= 'Very Expensive';
-                  break;
+                  case 0:
+                    marker.price = 'Free';
+                    break;
+                  case 1:
+                    marker.price = 'Inexpensive';
+                    break;
+                  case 2:
+                    marker.price = 'Moderate';
+                    break;
+                  case 3:
+                    marker.price = 'Expensive';
+                    break;
+                  case 4:
+                    marker.price = 'Very Expensive';
+                    break;
+                  default: break;
                 }
               }
               markerArray.push(marker);
@@ -102,6 +106,17 @@ class Map extends Component {
   }
 
   addPlace = (place) => {
+    console.log('place in Map: ', place);
+    let exist = false;
+    let places = this.props.store.placesArray;
+    for (var i = 0; i < places.length && !exist; i++) {
+      if (places[i].id === place.id) {
+        alert('You already have this activity place');
+        exist = true;
+        return;
+      }
+    }
+    // add the place to temp places div only if it doesnt already exist
     this.props.store.addPlace(place);
   }
 
@@ -111,9 +126,8 @@ class Map extends Component {
     return (
       <GoogleMap
         markers={this.state.markers}
-        address={this.props.address}
+        // address={this.props.address}
         updateAddress={this.props.updateAddress}
-        images={this.images}
         addPlace={this.addPlace}
       />
     );
