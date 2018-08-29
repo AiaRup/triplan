@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 import './Navbar.css';
 import { observer, inject } from 'mobx-react';
+import axios from 'axios';
 
 
 @inject(allStores => ({
   toggleLoginRegister: allStores.store.toggleLoginRegister,
-  showLogin: allStores.store.showLogin
+  showLogin: allStores.store.showLogin,
+  user_id: allStores.store.user_id
 }))
 @observer
 export default withAuth(
@@ -16,6 +18,8 @@ export default withAuth(
       super(props);
       this.state = { authenticated: null };
       this.checkAuthentication();
+      this.handleClick= this.handleClick.bind(this);
+
     }
 
     checkAuthentication = async () => {
@@ -46,7 +50,6 @@ export default withAuth(
       this.props.toggleLoginRegister();
       this.props.auth.login('/');
     }
-
     componentDidUpdate() {
       this.checkAuthentication();
     }
@@ -60,6 +63,26 @@ export default withAuth(
         }
         return '';
       }
+    }
+
+
+
+    handleClick = (event) => {
+      event.preventDefault();
+      console.log(this.props);
+      let trip_id = this.props.user_id.trim();
+        // debugger;
+      axios.get(`api/users/users_trips/${trip_id}`)
+       .then (response=>{     
+           let plans = response.data;
+           console.log("got response!");
+           console.log(response);
+          //  debugger;
+          this.setState({user_plans: plans});
+       })
+       .catch(error => {
+          console.log('Error fetching and parsing data', error);
+      });
     }
 
     render() {
@@ -83,7 +106,7 @@ export default withAuth(
                 <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/MyTrips">My Trips</Link>
+                <Link className="nav-link" to="/MyTrips" onClick={this.handleClick}> My Trips </Link>
               </li>
             </ul>
             { this.state.authenticated ? (

@@ -26,8 +26,10 @@ const MyTrips = (props) => {
    <div className='search-bar'>
         <input  type='text' placeholder='search...'  />
    </div>
+       {/* let user_plans= props.user_plans; */}
+      {/* {let plan_names = props.user_plans.map ( plan => plan.name)} */}
 
-        <CardList plans={props.user_plans} />
+        <CardList plan_names={props.user_plans.map ( plan => plan.name)} />
 
 
       </div>

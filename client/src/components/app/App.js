@@ -7,8 +7,8 @@ import { observer, inject } from 'mobx-react';
 
 import Navbar from '../navbar/Navbar';
 import Content from '../content/Content';
-import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
+import MyTrips from '../myTrips/MyTrips';
 import OneTrip from '../myTrips/OneTrip';
 
 function onAuthRequired({ history }) {
@@ -23,9 +23,7 @@ class App extends Component {
 
   constructor(){
     super();
-    this.state = { user_plans : ['Barcelona 2018', 'Paris 2017', 'Vienna 2016', 'Singapour 2015',
-    'Seoul 2014', 'Pekin 2012', 'Tokyo 2015'] };
-
+    this.state = { user_plans :''}
   }
 
   componentDidMount = () => {
@@ -55,11 +53,12 @@ class App extends Component {
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips  user_plans={this.state.user_plans}/>} />
+                {/* <SecureRoute exact path="/MyTrips" render={() => <MyTrips/>} /> */}
                 
-                {this.state.user_plans.map( 
+                {/* {this.state.user_plans.map( 
                   (plan,index) => 
                   <SecureRoute exact path ={`/MyTrips/${plan}`} render={() => <OneTrip plan={plan} key={index} />} />
-                )} 
+                )}  */}
 
                 <Route
                   path="/Login"

@@ -7,7 +7,7 @@ const CardList = (props)=> {
  
     <div className = "card-list">
 
- {props.plans.map( (plan,index) => <Card plan={plan} key={index}/> )}
+ {props.plan_names.map( (plan_name,index) => <Card plan_name={plan_name} key={index}/> )}
 {/*       
       {props.plans.map( (plan, index) =>
        return (
