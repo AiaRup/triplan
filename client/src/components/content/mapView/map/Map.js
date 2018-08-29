@@ -17,14 +17,13 @@ class Map extends Component {
   }
 
   addMarkers = () => {
-
     if (this.state.places.length === 0) {
       this.setState({ markers: [] });
       return;
     }
 
-    const markerArray = [];
     this.finishMarker = 0;
+    const markerArray = [];
 
     this.state.places.forEach((element) => {
       let type = element.type;
@@ -40,6 +39,7 @@ class Map extends Component {
 
           // create all the markers after result arrives from second api request
           Promise.all(promises).then((values) => {
+            console.log('values', values);
 
             values.forEach((att) => {
               const attraction = att.data.result;
@@ -68,27 +68,26 @@ class Map extends Component {
               }
               if (attraction.price_level !== undefined) {
                 switch (attraction.price_level) {
-                  case 0:
-                    marker.price = 'Free';
-                    break;
-                  case 1:
-                    marker.price = 'Inexpensive';
-                    break;
-                  case 2:
-                    marker.price = 'Moderate';
-                    break;
-                  case 3:
-                    marker.price = 'Expensive';
-                    break;
-                  case 4:
-                    marker.price = 'Very Expensive';
-                    break;
-                  default: break;
+                case 0:
+                  marker.price = 'Free';
+                  break;
+                case 1:
+                  marker.price = 'Inexpensive';
+                  break;
+                case 2:
+                  marker.price = 'Moderate';
+                  break;
+                case 3:
+                  marker.price = 'Expensive';
+                  break;
+                case 4:
+                  marker.price = 'Very Expensive';
+                  break;
+                default: break;
                 }
               }
               markerArray.push(marker);
             });
-            console.log('merkersarray', markerArray);
             this.finishMarker++;
             this.checkFinishMarkers(markerArray);
           });
