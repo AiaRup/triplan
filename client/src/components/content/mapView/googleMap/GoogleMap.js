@@ -135,7 +135,10 @@ const MapComponent = compose(
                       {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
                     </Collapse>}
                   {marker.website && <a href={marker.website} target="_blank">Website</a>}
-                  <button className='btn btn-primary btn-sm' onClick={() => props.addPlace(marker)}>Add</button>
+                  <br />
+                  <button className='btn btn-primary btn-sm' onClick={() => props.addPlace(marker)}>Add
+                  <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+                  </button>
                 </div>
                 <div>
                   {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`} alt='place photo' />}

@@ -1,10 +1,16 @@
 .formSelector {
   position: absolute;
-  top: 70px;
+  top: 15px;
   border: 1px solid black;
   padding: 5px;
   background: white;
   margin: 0 15px;
+}
+
+.pref-buttons {
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: space-around;
 }
 
 .label {
