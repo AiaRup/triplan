@@ -107,6 +107,16 @@ class Map extends Component {
 
   addPlace = (place) => {
     console.log('place in Map: ', place);
+    let exist = false;
+    let places = this.props.store.placesArray;
+    for (var i = 0; i < places.length && !exist; i++) {
+      if (places[i].id === place.id) {
+        alert('You already have this activity place');
+        exist = true;
+        return;
+      }
+    }
+    // add the place to temp places div only if it doesnt already exist
     this.props.store.addPlace(place);
   }
 
@@ -116,7 +126,7 @@ class Map extends Component {
     return (
       <GoogleMap
         markers={this.state.markers}
-        address={this.props.address}
+        // address={this.props.address}
         updateAddress={this.props.updateAddress}
         addPlace={this.addPlace}
       />
