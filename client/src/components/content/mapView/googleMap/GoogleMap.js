@@ -112,7 +112,7 @@ const MapComponent = compose(
                     <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
                       {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
                     </Collapse>}
-                  {marker.website ? <a href={marker.website} target="_blank">Website</a> : null}
+                  {marker.website && <a href={marker.website} target="_blank">Website</a>}
                   <button className='btn btn-sm btn-outline-secondary ml-3' onClick={() => props.addPlace(marker)}>Add</button>
                 </div>
                 <div>
