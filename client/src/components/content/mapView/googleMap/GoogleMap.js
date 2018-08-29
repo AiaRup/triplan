@@ -68,8 +68,8 @@ const MapComponent = compose(
 )((props) => {
   return <div>
     <GoogleMap
-      defaultZoom={13}
-      zoom={13}
+      defaultZoom={14}
+      zoom={14}
       center={{ lat: props.address.lat, lng: props.address.lng }}
       defaultCenter={{ lat: props.address.lat, lng: props.address.lng }}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}>
