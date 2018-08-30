@@ -1,16 +1,32 @@
 .formSelector {
   position: absolute;
-  top: 15px;
-  border: 1px solid black;
-  padding: 5px;
+  top: 0px;
+  margin: 10px;
+  padding: 0 12px;
   background: white;
-  margin: 0 15px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  outline: none;
+}
+
+.header-preference {
+  margin: 5px;
+  font-weight: bold
 }
 
 .pref-buttons {
   display: flex;
   /* justify-content: space-between; */
   justify-content: space-around;
+}
+
+.formSelector form {
+  /* margin-top: 10px; */
+  padding-bottom: 5px;
 }
 
 .label {

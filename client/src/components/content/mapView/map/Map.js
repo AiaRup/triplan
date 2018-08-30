@@ -53,6 +53,7 @@ class Map extends Component {
                 rating: attraction.rating,
                 website: attraction.website,
                 address: attraction.formatted_address,
+                category: type,
                 position:
                   { lat: lat, lng: lng },
               };

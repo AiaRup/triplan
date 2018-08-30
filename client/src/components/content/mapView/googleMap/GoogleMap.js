@@ -17,20 +17,20 @@ const MapComponent = compose(
       toggleCollapse: false,
       indexCollapse: null
     }),
-    {
-      showInfo: ({ isOpen, infoIndex }) => (index) => ({
-        isOpen: infoIndex !== index || !isOpen,
-        infoIndex: index
-      }),
-      onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
-        isOpenHover: infoIndexHover !== index || !isOpenHover,
-        infoIndexHover: index
-      }),
-      collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
-        toggleCollapse: indexCollapse !== index || !toggleCollapse,
-        indexCollapse: index
-      })
-    },
+  {
+    showInfo: ({ isOpen, infoIndex }) => (index) => ({
+      isOpen: infoIndex !== index || !isOpen,
+      infoIndex: index
+    }),
+    onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
+      isOpenHover: infoIndexHover !== index || !isOpenHover,
+      infoIndexHover: index
+    }),
+    collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
+      toggleCollapse: indexCollapse !== index || !toggleCollapse,
+      indexCollapse: index
+    })
+  },
   ),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE',
@@ -70,7 +70,7 @@ const MapComponent = compose(
           } else {
             bounds.extend(place[0].geometry.location);
           }
-          const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
+          const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
           this.setState({
             bounds: bounds,
             center: nextCenter,
@@ -79,9 +79,16 @@ const MapComponent = compose(
           this.props.updateAddress({ lat: lat, lng: lng });
         },
         addPlace: (marker) => {
-          let id = marker.id;
-          let name = marker.name;
-          this.props.addPlace({ name: name, id: id, type: 'place' });
+          const newActivity = { type: 'place' };
+          for (let prop in marker) {
+            if (marker.hasOwnProperty(prop)) {
+              console.log(prop + ': ' + marker[prop]);
+              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id') {
+                newActivity[prop] = marker[prop];
+              }
+            }
+          }
+          this.props.addPlace(newActivity);
         },
       });
     }, // end componentWillMount
@@ -137,7 +144,7 @@ const MapComponent = compose(
                   {marker.website && <a href={marker.website} target="_blank">Website</a>}
                   <br />
                   <button className='btn btn-primary btn-sm' onClick={() => props.addPlace(marker)}>Add
-                  <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                   </button>
                 </div>
                 <div>

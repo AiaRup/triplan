@@ -70,9 +70,9 @@ export default class Preferences extends Component {
       // <div className="container">
       //   <div className="row">
       <div className="formSelector">
-        <h5 onClick={() => this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</h5>
+        <p className="header-preference" onClick={() => this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</p>
         <Collapse isOpened={this.state.toggledCollapse}>
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={this.handleFormSubmit} >
             {this.state.selectedCheckboxes.map((box, index) =>
               <Checkbox
                 index={index}
