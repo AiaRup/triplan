@@ -3,9 +3,11 @@ import axios from 'axios';
 import  './MyTrips.css';
 import CardList from './CardList';
 import { observer, inject } from 'mobx-react';
+import OneTrip from './OneTrip';
 
 
-// var user_plans=[{name: 'barcelona 2018'}, {name:'paris 2017'}, {name:'vienna 2016'}, 
+
+// var user_plans=[{name: 'barcelona 2018'}, {name:'paris 2017'}, {name:'vienna 2016'},
 // {name:'singapour 2015'},{name: 'seoul 2014'}];
 
 
@@ -20,12 +22,12 @@ class MyTrips extends Component {
     this.state = { user_plans :''}
   }
 
-// handleSubmit=(event)=>{
-//   is_filtered = true;
-//   let filter_string = event.target.value;
-//   let filtered_array = user_plans.filter( plan => plan===filter_string );
+  // handleSubmit=(event)=>{
+  //   is_filtered = true;
+  //   let filter_string = event.target.value;
+  //   let filtered_array = user_plans.filter( plan => plan===filter_string );
 
-// }
+  // }
 
 componentDidMount = () => {
   console.log('in');
@@ -62,10 +64,16 @@ render(){
 
         {/* <CardList plan_names={this.state.user_plans.map( plan => plan.name)} /> */}
 
+        <div className='search-bar'>
+          <input type='text' placeholder='search...' />
+        </div>
+        <CardList plans={this.state.user_plans} />
+        {/* <OneTrip trip={this.props.store.oneTrip} /> */}
+        <OneTrip />
 
       </div>
     );
-}
+  }
 
 }
 

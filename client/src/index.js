@@ -8,8 +8,10 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store/tripStore';
 import { Provider } from 'mobx-react';
 
+window.store = store;
+
 ReactDOM.render(<Provider store={store}>
-  <App/>
+  <App />
 </Provider>, document.getElementById('root'));
 registerServiceWorker();
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Map.css';
 import axios from 'axios';
-// import _ from 'lodash';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 
@@ -14,91 +13,127 @@ class Map extends Component {
       places: props.places,
       markers: []
     };
-    this.images = [];
+    this.finishMarker = 0;
   }
 
   addMarkers = () => {
+    if (this.state.places.length === 0) {
+      this.setState({ markers: [] });
+      return;
+    }
+
+    this.finishMarker = 0;
     const markerArray = [];
-    const promises = [];
+
     this.state.places.forEach((element) => {
       let type = element.type;
 
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=1500&type=${type}&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`;
-
-
-      let promise = axios(url)
+      axios(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=1500&type=${type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
         .then((response) => {
-          // add markers on the map
-          response.data.results.forEach((location) => {
-            const objLatLng = location.geometry.location;
-            const placeID = location.place_id;
-            console.log('response location', response);
+          const promises = [];
 
-            return axios(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,opening_hours&language=en&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`).then((res) => {
-              console.log('place res', res.data.result);
-              const attraction = res.data.result;
+          // get more info on the placee found by the first request
+          response.data.results.forEach((location) => {
+            promises.push(axios(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${location.place_id}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`));
+          });
+
+          // create all the markers after result arrives from second api request
+          Promise.all(promises).then((values) => {
+            console.log('values', values);
+
+            values.forEach((att) => {
+              const attraction = att.data.result;
+              const { lat, lng } = attraction.geometry.location;
+
               let marker = {
                 showInfoWindow: false,
                 name: attraction.name,
-                id: location.id,
+                id: attraction.place_id,
                 icon: element.icon,
                 rating: attraction.rating,
                 website: attraction.website,
                 address: attraction.formatted_address,
-                price: attraction.price_level,
+                category: type,
                 position:
-                  { lat: objLatLng.lat, lng: objLatLng.lng },
+                  { lat: lat, lng: lng },
               };
-
               if (attraction.opening_hours !== undefined) {
                 marker.openNow = attraction.opening_hours.open_now;
                 marker.openHours = attraction.opening_hours.weekday_text;
               }
-
               if (attraction.international_phone_number !== undefined) {
                 marker.phone = attraction.international_phone_number;
               }
-              if (location.photos !== undefined) {
-                marker.photo = location.photos[0].photo_reference;
+              if (attraction.photos !== undefined) {
+                marker.photo = attraction.photos[0].photo_reference;
+              }
+              if (attraction.price_level !== undefined) {
+                switch (attraction.price_level) {
+                case 0:
+                  marker.price = 'Free';
+                  break;
+                case 1:
+                  marker.price = 'Inexpensive';
+                  break;
+                case 2:
+                  marker.price = 'Moderate';
+                  break;
+                case 3:
+                  marker.price = 'Expensive';
+                  break;
+                case 4:
+                  marker.price = 'Very Expensive';
+                  break;
+                default: break;
+                }
               }
               markerArray.push(marker);
             });
+            this.finishMarker++;
+            this.checkFinishMarkers(markerArray);
           });
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
-      promises.push(promise);
     });
-    Promise.all(promises).then(() => {
-      console.log('merkersarray', markerArray);
-      this.setState({ markers: markerArray });
-    });
-
   }
 
   componentDidUpdate(prevProps) {
-    console.log('in did update- this.props.places ', this.props.places);
-    console.log((JSON.stringify(this.props.places) === JSON.stringify(prevProps.places)));
-
     if (!(JSON.stringify(this.props.places) === JSON.stringify(prevProps.places))) {
-      console.log('in if');
       this.setState({ places: this.props.places }, () => this.addMarkers());
     }
   }
 
+  checkFinishMarkers(markerArray) {
+    if (this.finishMarker === this.state.places.length) {
+      this.setState({ markers: markerArray });
+    }
+  }
+
   addPlace = (place) => {
-    console.log('in add place -Map ', place);
+    console.log('place in Map: ', place);
+    let exist = false;
+    let places = this.props.store.placesArray;
+    for (var i = 0; i < places.length && !exist; i++) {
+      if (places[i].id === place.id) {
+        alert('You already have this activity place');
+        exist = true;
+        return;
+      }
+    }
+    // add the place to temp places div only if it doesnt already exist
     this.props.store.addPlace(place);
   }
 
   render() {
+    console.log('in render map marker to google', this.state.markers);
+
     return (
       <GoogleMap
         markers={this.state.markers}
-        address={this.props.address}
+        // address={this.props.address}
         updateAddress={this.props.updateAddress}
-        images={this.images}
         addPlace={this.addPlace}
       />
     );

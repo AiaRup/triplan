@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Merienda|Ubuntu');
+
 ul {
   list-style-type: none;
-  margin-left: -40px;
+  /* margin-left: -40px; */
 }
 
 .day-list {
@@ -11,9 +13,13 @@ ul {
 
 #root {
   height: 100%;
+  font-family: 'Merienda', cursive;
+/* font-family: 'Ubuntu', sans-serif; */
 }
 
 .container-fluid {
   min-height: 100vh;
 }
+
+
 

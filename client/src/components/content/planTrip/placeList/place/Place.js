@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { inject } from 'mobx-react';
 import styled from 'styled-components';
+import { Collapse } from 'react-collapse';
+import '../places.css';
+
 
 const Container = styled.div`
   margin: 8px;
@@ -14,56 +17,62 @@ const Container = styled.div`
 
 @inject(allStores => ({
   deletePlace: allStores.store.deletePlace,
-  deletePlaceInDay: allStores.store.deletePlaceInDay}))
+  deletePlaceInDay: allStores.store.deletePlaceInDay }))
+
 class Place extends Component {
+  constructor() {
+    super();
+    this.state = { toggledCollapse: false };
+  }
 
-  
-  checkForDiv = () => {
-    if(this.props.verifier==="placeOfPlace"){
-      return (
-    <Draggable draggableId={this.props.thePlace.id} index={this.props.index}>
-    {(provided, snapshot) => (
-        <Container
-        innerRef={provided.innerRef}
-        isDragging={snapshot.isDragging}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        >
-          <button onClick={()=>this.props.deletePlace(this.props.index)}>X</button>
-            {this.props.thePlace.name}
-        </Container>
-    )}
+  collapseToggle = () => {
+    this.setState(prevState => ({
+      toggledCollapse: !prevState.toggledCollapse
+    }));
+  };
 
-    </Draggable>
-    
-  );
-} else if(this.props.verifier==="placeOfDay"){
-  
-    return (
-      <Draggable draggableId={this.props.place.id} index={this.props.placeIndex}>
-      {(provided, snapshot) => (
-          <Container
-          innerRef={provided.innerRef}
-          isDragging={snapshot.isDragging}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          >
-            <button onClick={()=>this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex)}>X</button>
-              {this.props.place.name}
-          </Container>
-      )}
-      </Draggable>
-    );
+
+  placeOrDayDelete = () => {
+    if (this.props.verifier==='placeOfDay'){
+      this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex);
+    } else {
+      this.props.deletePlace(this.props.index);
     }
-  
-}
+  }
 
   render() {
-    
+    const toggleCollapse = false;
+
     return (
-      this.checkForDiv()
+      <Draggable draggableId={this.props.thePlace.id} index={this.props.placeIndex}>
+        {(provided, snapshot) => (
+
+          <Container
+            innerRef={provided.innerRef}
+            isDragging={snapshot.isDragging}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <div className='single-place-header-section'>
+              <button type="button" className="btn btn-danger btn-sm" onClick={this.placeOrDayDelete}>x</button>
+              <h6 className='place-headline'>{this.props.thePlace.name}</h6>
+              <div className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</div>
+            </div>
+            <Collapse isOpened={this.state.toggledCollapse}>
+              <ul>
+                {Object.keys(this.props.thePlace).map((prop, index)=> {
+                  if (prop !== 'id' && prop !== 'type') {
+                    return <li key={index}>{prop}: {this.props.thePlace[prop]}</li>;
+                  }
+                  return null;
+                })}
+              </ul>
+            </Collapse>
+
+          </Container>
+        )}
+      </Draggable>
     );
-    
   }
 }
 

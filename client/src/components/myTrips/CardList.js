@@ -20,6 +20,10 @@ const CardList = (props)=> {
            <Card>
 
        )  
+
+       <div className="card-list">
+            {props.plans.map((plan, i) => <Card plan={plan} key={i} />)}
+        </div>
  */}
 
     </div>

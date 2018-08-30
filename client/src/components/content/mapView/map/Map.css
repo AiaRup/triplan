@@ -34,7 +34,8 @@
 }
 
 .info-window .info-header {
-  color: rgb(255, 115, 0)
+  color: rgb(255, 115, 0);
+  font-weight: bold;
 }
 
 .info-window .info-content {

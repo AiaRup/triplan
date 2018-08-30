@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.events-list-container {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  height: auto;
+  min-height: 40px;
+  width: auto;
+}
+
+.place-arrow {
+  transform:rotate(90deg);
+  display:block;
+  float:right;
+  margin: 5px;
+  height: 20px;
+  }
+
+.event-container-headline {
+  text-align: center;
+  margin-top: 5px;
+}
+
+
+.event-headline {
+  margin: 5px;
+  font-weight: 700;
+}
+
+.single-event-header-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+
+
+
