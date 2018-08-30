@@ -18,7 +18,6 @@ export default withAuth(
       super(props);
       this.state = { authenticated: null };
       this.checkAuthentication();
-      this.handleClick= this.handleClick.bind(this);
 
     }
 
@@ -67,23 +66,21 @@ export default withAuth(
 
 
 
-    handleClick = (event) => {
-      event.preventDefault();
-      console.log(this.props);
-      let trip_id = this.props.user_id.trim();
-        // debugger;
-      axios.get(`api/users/users_trips/${trip_id}`)
-       .then (response=>{     
-           let plans = response.data;
-           console.log("got response!");
-           console.log(response);
-          //  debugger;
-          this.setState({user_plans: plans});
-       })
-       .catch(error => {
-          console.log('Error fetching and parsing data', error);
-      });
-    }
+    // handleClick = (event) => {
+    //   event.preventDefault();
+    //   console.log(this.props);
+    //   let trip_id = this.props.user_id.trim();
+    //   axios.get(`api/users/users_trips/${trip_id}`)
+    //    .then (response=>{     
+    //        let plans = response.data;
+    //        console.log("got response!");
+    //        console.log(response);
+    //       this.setState({user_plans: plans});
+    //    })
+    //    .catch(error => {
+    //       console.log('Error fetching and parsing data', error);
+    //   });
+    // }
 
     render() {
       const buttonText = this.props.showLogin ? 'Register' : 'Login';
@@ -106,7 +103,7 @@ export default withAuth(
                 <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/MyTrips" onClick={this.handleClick}> My Trips </Link>
+                <Link className="nav-link" to="/MyTrips" > My Trips </Link>
               </li>
             </ul>
             { this.state.authenticated ? (

@@ -48,10 +48,32 @@ router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
   User.find({ oktaID : oktaID }, (err, userResult) => {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+      res.send("an error has occured");
+    } 
     console.log('user from mongo', userResult);
     res.send(userResult);
   });
 });
+
+
+//2) getting all my trips (carl) 
+
+router.get('/users_trips/:user_id', (req,res)=>{
+  let user_id= req.params.user_id;
+  console.log("id is:");
+  console.log(user_id);
+ 
+  User.findById(user_id, (error,data)=> {
+    if (error) throw error;
+    else{
+    console.log(data.plans);
+     res.send (data.plans) }
+  })
+
+})
+
+
 
 module.exports = router;

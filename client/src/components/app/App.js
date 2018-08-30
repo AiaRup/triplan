@@ -21,24 +21,23 @@ function onAuthRequired({ history }) {
 @observer
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = { user_plans :''}
-  }
 
-  componentDidMount = () => {
-    const userId = localStorage.getItem('oktaID');
-    if (userId !== null) {
-      // get user id from mongo
-      axios.get(`/api/users/users/${userId}`)
-        .then((response) => {
-          // set user id on store
-          if (response.data.length !== 0) {
-            this.props.configUser(response.data[0]._id);
-          }
-        });
-    }
-  }
+
+  // componentDidMount = () => {
+  //   const userId = localStorage.getItem('oktaID');
+  //   if (userId !== null) {
+  //     // get user id from mongo
+  //     axios.get(`/api/users/users/${userId}`)
+  //       .then((response) => {
+  //         // set user id on store
+  //         if (response.data.length !== 0) {
+  //           this.props.configUser(response.data[0]._id);
+  //         }
+  //       });
+  //   }
+  // }
+
+
   render() {
     return (
       <Router>
@@ -52,8 +51,8 @@ class App extends Component {
             <div className="container-fluid">
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
-                <SecureRoute exact path="/MyTrips" render={() => <MyTrips  user_plans={this.state.user_plans}/>} />
-                {/* <SecureRoute exact path="/MyTrips" render={() => <MyTrips/>} /> */}
+                {/* <SecureRoute exact path="/MyTrips" render={() => <MyTrips  user_plans={this.state.user_plans}/>} /> */}
+                <SecureRoute exact path="/MyTrips" render={() => <MyTrips/>} />
                 
                 {/* {this.state.user_plans.map( 
                   (plan,index) => 

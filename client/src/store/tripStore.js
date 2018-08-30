@@ -58,4 +58,6 @@ class TripStore {
 
 
 const store = new TripStore();
+
+window.store= store;
 export default store;
