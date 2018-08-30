@@ -125,4 +125,6 @@ class TripStore extends Component {
 
 
 const store = new TripStore();
+
+window.store= store;
 export default store;
