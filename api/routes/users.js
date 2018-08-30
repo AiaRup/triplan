@@ -30,7 +30,8 @@ router.post('/', (req, res) => {
         email: user.profile.email,
         plans: [],
         tempPlaces: [],
-        tempEvents: [] };
+        tempEvents: []
+      };
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
@@ -47,11 +48,28 @@ router.post('/', (req, res) => {
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
-  User.find({ oktaID : oktaID }, (err, userResult) => {
+  User.find({ oktaID: oktaID }, (err, userResult) => {
     if (err) throw err;
     console.log('user from mongo', userResult);
     res.send(userResult);
   });
 });
+
+
+
+// to handle get a specific trip
+// router.get('/MyTrips/:id', (req, res) => {
+//   const tripId = req.params.id;
+
+//   User.find({ oktaID: oktaID }, (err, userResult) => {
+//     if (err) throw err;
+//     console.log('user from mongo', userResult);
+//     res.send(userResult);
+//   });
+// });
+
+
+
+
 
 module.exports = router;

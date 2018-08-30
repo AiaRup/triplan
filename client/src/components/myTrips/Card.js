@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 const Card = (props) => {
 
@@ -8,6 +9,19 @@ const Card = (props) => {
         //by action im store save the name of trip clicked, and use this in the route
         console.log('after click watch: ', props.plan);
 
+        // axios.get(`/MyTrips/${props.plan.id}`)
+        //     .then(({ data }) => {
+        //         console.log('data from server:', data);
+
+        //         let structure = {
+        //             // name: data.
+        //             comments: []
+        //         };
+
+        //     })
+        //     .catch(error => {
+        //         console.log('Error fetching and parsing data', error);
+        //     });
 
     }
 
