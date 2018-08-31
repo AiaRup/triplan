@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
         email: user.profile.email,
         plans: [],
         tempPlaces: [],
-        tempEvents: [] };
+        tempEvents: []
+      };
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
@@ -44,23 +45,23 @@ router.post('/', (req, res) => {
     });
 });
 
-  //saving the trip to the server 
-  router.post('/users/:id/plantrip', (req, res) => {
-    const newPlan = {
-      name: 'planName',
-      days: req.body,
-      city: 'cityName'
-    };
-  
-    const planInServer = Plan.create(newPlan, (err, planResult) => {
-      if (err) throw err;
-      return planResult
-    })
-  
-   User.findByIdAndUpdate(req.params.id, {plans: planInServer}, {new:true}, (err, updateResult) => {
-      if (err) throw err;
-      res.status(200).send(updateResult)
-    })
+//saving the trip to the server
+router.post('/users/:id/plantrip', (req, res) => {
+  const newPlan = {
+    name: 'planName',
+    days: req.body,
+    city: 'cityName'
+  };
+
+  const planInServer = Plan.create(newPlan, (err, planResult) => {
+    if (err) throw err;
+    return planResult
+  })
+
+  User.findByIdAndUpdate(req.params.id, { plans: planInServer }, { new: true }, (err, updateResult) => {
+    if (err) throw err;
+    res.status(200).send(updateResult)
+  })
 })
 
 
@@ -68,11 +69,13 @@ router.post('/', (req, res) => {
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
-  User.find({ oktaID : oktaID }, (err, userResult) => {
+  // User.find({ oktaID: oktaID }, (err, userResult) => {
+  //   if (err) throw err;
+  User.find({ oktaID: oktaID }, (err, userResult) => {
     if (err) {
       console.log(err);
       res.send("an error has occured");
-    } 
+    }
     console.log('user from mongo', userResult);
     res.send(userResult);
   });
@@ -80,18 +83,31 @@ router.get('/users/:id', (req, res) => {
 
 
 
-//2) getting all my trips (carl) 
+// to handle get a specific trip
+// router.get('/MyTrips/:id', (req, res) => {
+//   const tripId = req.params.id;
 
-router.get('/users_trips/:user_id', (req,res)=>{
-  let user_id= req.params.user_id;
+//   User.find({ oktaID: oktaID }, (err, userResult) => {
+//     if (err) throw err;
+//     console.log('user from mongo', userResult);
+//     res.send(userResult);
+//   });
+// });
+
+
+//2) getting all my trips (carl)
+
+router.get('/users_trips/:user_id', (req, res) => {
+  let user_id = req.params.user_id;
   console.log("id is:");
   console.log(user_id);
- 
-  User.findById(user_id, (error,data)=> {
+
+  User.findById(user_id, (error, data) => {
     if (error) throw error;
-    else{
-    console.log(data.plans);
-     res.send (data.plans) }
+    else {
+      console.log(data.plans);
+      res.send(data.plans)
+    }
   })
 
 })

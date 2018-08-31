@@ -5,37 +5,67 @@
     text-align:center;
 } */
 
-.search-bar{
-    margin:  auto ;
-    margin-bottom: 40px;
-    width:60%;
-    text-align:center;
+.search-bar {
+  margin: auto;
+  margin-bottom: 40px;
+  width: 60%;
+  text-align: center;
 }
 
 /* input{
     width:100%;
 } */
 
-.card-list{
-    width:60%;
-    margin : auto ;
-    display : flex; 
-    flex-wrap: wrap;
-    /* border: 2px solid; */
-    box-sizing: border-box;
-
+.card-list {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  /* border: 2px solid; */
+  box-sizing: border-box;
 }
 
-.card{
+.card {
   flex: 0 0 33.3333%;
   padding: 20px;
   /* margin:15px; */
   /* border: 1px solid; */
-
 }
-
 
 /* button{
     max-width: 40%;
 } */
 
+/*=====================================================
+Day
+=======================================================*/
+
+.day {
+  width: 50vw;
+  box-sizing: border-box;
+  padding: 25px;
+}
+
+.day-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.trip-header {
+  text-align: center;
+}
+
+.trip-header>h1 {
+  color: #dc3545;
+  text-shadow: 3px -1px 1px black;
+}
+
+.trip-header>h2 {
+  color: #0077b7;
+  text-shadow: 3px -1px 1px black;
+}
+
+.notes {
+  background-color: #fcea44a3;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}

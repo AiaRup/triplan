@@ -50,11 +50,15 @@ export default class OneTrip extends Component {
         {this.props.trip.days.map((day, i) =>
           <Day day={day} key={i} />
         )} */}
-        <h2> Name Trip: {name}</h2>
-        Your route-
-        {days.map((day, i) =>
-          <Day day={day} key={i} />
-        )}
+        <div className="trip-header">
+          <h1> Name Trip: {name}</h1>
+          <h2> Day Details:</h2>
+        </div>
+        <div className="day-list">
+          {days.map((day, i) =>
+            <Day day={day} index={i} key={i} />
+          )}
+        </div>
       </Fragment>
     )
   }
