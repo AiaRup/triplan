@@ -31,7 +31,7 @@ class App extends Component {
           if (response.data.length !== 0) {
             this.props.configUser(response.data[0]._id);
           }
-        });
+        }).catch(err=>console.log(err.response))
     }
   }
   render() {

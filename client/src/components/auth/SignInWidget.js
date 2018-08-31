@@ -19,6 +19,11 @@ class SignInWidget extends Component {
       features: {
         registration: true
       },
+      i18n: {
+        en: {
+          'errors.E0000004': 'Invalid Credentials- User not registered or Password is incorrect.'
+        }
+      },
       registration: {
         click: () => {
           this.props.toggleLoginRegister();

@@ -1,8 +1,35 @@
 import React, { Component } from 'react';
 import { observable, action } from 'mobx';
+import axios from 'axios';
 
 
 class TripStore extends Component {
+
+
+  @observable userIdStore = '';
+
+  @observable oneTrip = {
+    id: 'id1', // will get from the server
+    name: 'madrid 2018',
+    days:
+      [
+        {
+          date: '22/08/2018', places:
+            [{ position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
+            { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' }]
+        },
+        {
+          date: '23/08/2018', places:
+            [{ position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
+            { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
+            { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' }]
+        }
+      ]
+  }
+
+  @observable cityName = '';
+
+  @observable tripName = '';
 
   @observable daysArray = [{ name: 'day1', id: 'dayId1', date: new Date(), places: [{ name: 'place4', id: 'placeId4', type: 'place' }, { name: 'place5', id: 'placeId5', type: 'place' }] }, { name: 'day2', id: 'dayId2', places: [{ name: 'place6', id: 'placeId6', type: 'place' }, { name: 'play soccer', address: 'beersheva', time: '12:40', id: 'eventId9', type: 'event' }, { name: 'place7', id: 'placeId7', type: 'place' }] }, { name: 'day3', id: 'dayId3', places: [{ name: 'place8', id: 'placeId8', type: 'place' }] }];
 
@@ -98,7 +125,8 @@ class TripStore extends Component {
   @action configUser = (userID) => {
     this.user_id = userID;
     console.log('id in store', this.user_id);
-  }
+    this.userIdStore = userID;
+  };
 
 }
 

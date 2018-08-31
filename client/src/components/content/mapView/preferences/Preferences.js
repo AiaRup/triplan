@@ -81,9 +81,11 @@ export default class Preferences extends Component {
                 toggleCheckbox={this.toggleCheckbox}
                 key={box.label} />
             )}
-            <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
-            <button className="btn btn-sm btn-outline-secondary" type="button"
-              onClick={this.handleClear}>Clear</button>
+            <div className="pref-buttons">
+              <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
+              <button className="btn btn-sm btn-danger" type="button"
+                onClick={this.handleClear}>Clear</button>
+            </div>
           </form>
         </Collapse>
         {/* </div>

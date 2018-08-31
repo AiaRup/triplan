@@ -5,17 +5,35 @@ import DayList from './dayList/DayList';
 import PlaceList from './placeList/PlaceList';
 import EventList from './EventList/EventList';
 import './planTrip.css';
+import axios from 'axios';
+
 
 
 @inject(allStores => ({
     placesArray: allStores.store.placesArray,
     daysArray: allStores.store.daysArray,
-    eventsArray: allStores.store.eventsArray
+    eventsArray: allStores.store.eventsArray,
+    _userId: allStores.store.userIdStore
 }))
 @observer
 class PlanTrip extends Component {
 
+    saveTrip = (event) => {
+    
+        // const plans = {
+        //     name: 'myTrip',
+        //     plans: this.props.daysArray,
+        //     city: 'myCity'
+        // }
 
+        axios.post(`/api/users/users/${this.props._userId}/plantrip`, this.props.daysArray)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+    };
 
   onDragEnd = result => {
     const daysArray = this.props.daysArray;
@@ -154,6 +172,7 @@ class PlanTrip extends Component {
 
                         <DayList/>
                     </div>
+                    <button onClick={this.saveTrip} className="save-trip-btn">Save Trip</button>
                 </DragDropContext>
             </React.Fragment>
         );
