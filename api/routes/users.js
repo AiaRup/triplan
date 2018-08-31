@@ -3,6 +3,7 @@ const router = express.Router();
 const oktaClient = require('../lib/oktaClient');
 // const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
+const Plan = require('../models/planModel');
 
 /* Create a new User (register). */
 router.post('/', (req, res) => {
@@ -34,7 +35,7 @@ router.post('/', (req, res) => {
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
-        console.log('res server', userResult);
+        console.log(userResult);
         res.status(201).send(userResult);
       });
     })
@@ -42,6 +43,26 @@ router.post('/', (req, res) => {
       res.status(400).send(err);
     });
 });
+
+  //saving the trip to the server 
+  router.post('/users/:id/plantrip', (req, res) => {
+    const newPlan = {
+      name: 'planName',
+      days: req.body,
+      city: 'cityName'
+    };
+  
+    const planInServer = Plan.create(newPlan, (err, planResult) => {
+      if (err) throw err;
+      return planResult
+    })
+  
+   User.findByIdAndUpdate(req.params.id, {plans: planInServer}, {new:true}, (err, updateResult) => {
+      if (err) throw err;
+      res.status(200).send(updateResult)
+    })
+})
+
 
 // 1) to handle get user data on login
 router.get('/users/:id', (req, res) => {
@@ -56,6 +77,7 @@ router.get('/users/:id', (req, res) => {
     res.send(userResult);
   });
 });
+
 
 
 //2) getting all my trips (carl) 

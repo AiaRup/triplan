@@ -48,7 +48,7 @@ componentDidMount = () => {
 }
   
 
-render(){
+  render() {
     return (
 
       <div className="all">

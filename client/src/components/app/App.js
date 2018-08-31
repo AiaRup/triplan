@@ -23,19 +23,19 @@ class App extends Component {
 
 
 
-  // componentDidMount = () => {
-  //   const userId = localStorage.getItem('oktaID');
-  //   if (userId !== null) {
-  //     // get user id from mongo
-  //     axios.get(`/api/users/users/${userId}`)
-  //       .then((response) => {
-  //         // set user id on store
-  //         if (response.data.length !== 0) {
-  //           this.props.configUser(response.data[0]._id);
-  //         }
-  //       });
-  //   }
-  // }
+  componentDidMount = () => {
+    const userId = localStorage.getItem('oktaID');
+    if (userId !== null) {
+      // get user id from mongo
+      axios.get(`/api/users/users/${userId}`)
+        .then((response) => {
+          // set user id on store
+          if (response.data.length !== 0) {
+            this.props.configUser(response.data[0]._id);
+          }
+        });
+    }
+  }
 
 
   render() {
