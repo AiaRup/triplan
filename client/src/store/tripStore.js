@@ -4,6 +4,19 @@ import { observable, action } from 'mobx';
 
 class TripStore extends Component {
 
+  @action addNotes = (note, index) => {
+    console.log('note ', note, 'index ', index);
+
+    // this.oneTrip.days[index].notes.push(note);
+    this.oneTrip.days[index].notes = note;
+    console.log(`oneTrip.days[${index}].notes, ${note} `);
+  }
+
+  @action updateNotes = (data, index) => {
+    this.oneTrip.days[index].notes = data;
+  }
+
+
   @observable user_id = '';
 
   @observable oneTrip = {
@@ -14,13 +27,15 @@ class TripStore extends Component {
         {
           date: '22/08/2018', places:
             [{ position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
-            { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' }]
+            { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' }],
+          notes: ''
+          // notes: []
         },
         {
           date: '23/08/2018', places:
             [{ position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
             { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
-            { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' }]
+            { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' }], notes: ''
         }
       ]
   }

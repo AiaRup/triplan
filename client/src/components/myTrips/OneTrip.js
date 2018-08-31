@@ -28,7 +28,7 @@ export default class OneTrip extends Component {
         </div>
         <div className="day-list">
           {days.map((day, i) =>
-            <Day day={day} key={i} />
+            <Day day={day} index={i} key={i} />
           )}
         </div>
       </Fragment>

@@ -1,5 +1,6 @@
 import React from 'react';
 import MapWithADirectionsRenderer from './MapDay';
+import Notes from './Notes';
 
 const Day = (props) => {
   const { date, places } = props.day;
@@ -21,6 +22,7 @@ const Day = (props) => {
       {places.map((place, i) =>
         <h5 key={i}>{place.name} | {place.type}</h5>)}
       <MapWithADirectionsRenderer route={route} />
+      <Notes index={props.index} />
     </div>
   )
 }
