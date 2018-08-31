@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "react-inline-editing": "^1.0.10",
     "@okta/okta-react": "^1.0.3",
     "@okta/okta-signin-widget": "^2.10.0",
     "autoprefixer": "7.1.6",
@@ -48,7 +49,7 @@
     "react-beautiful-dnd": "^9.0.1",
     "react-collapse": "^4.0.3",
     "react-datepicker": "^1.6.0",
-    "react-dev-utils": "^5.0.1",
+    "react-dev-utils": "^5.0.2",
     "react-dom": "^16.4.2",
     "react-google-autocomplete": "^1.0.16",
     "react-google-autocomplete-address-fields": "^1.0.9",
@@ -121,5 +122,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "https://localhost:3001/"
 }

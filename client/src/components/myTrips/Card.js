@@ -1,36 +1,38 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import axios from 'axios';
 
-
-  
 const Card = (props) => {
 
+    const handleWatch = () => {
+        //  to = "/MyTrips/"+ props.plan
+        // maybe pass the name to app where is the routes and link,
+        //by action im store save the name of trip clicked, and use this in the route
+        console.log('after click watch: ', props.plan);
 
-   return (
-            <div className = "card">
+        // axios.get(`/MyTrips/${props.plan.id}`)
+        //     .then(({ data }) => {
+        //         console.log('data from server:', data);
 
-                <h4>  {props.plan_name} </h4>
+        //         let structure = {
+        //             // name: data.
+        //             comments: []
+        //         };
 
-               <Link to={`/MyTrips/${props.plan_name}`} > watch </Link>
+        //     })
+        //     .catch(error => {
+        //         console.log('Error fetching and parsing data', error);
+        //     });
 
-            </div>
-    
+    }
+
+
+    return (
+        <div className="card">
+            <h4>{props.plan.name}</h4>
+            <button onClick={handleWatch}>Watch </button>
+        </div>
     );
-    
-//     const handleWatch = () => {
-//         // maybe pass the name to app where is the routes and link,
-//         //by action im store save the name of trip clicked, and use this in the route
-//     }
-
-
-//     return (
-//         <div className="card">
-//             <h4>  {props.plan} </h4>
-//             <button onClick={this.handleWatch}>Watch </button>
-//         </div>
-//     );
 
 }
 
-
-export default Card
+export default Card;

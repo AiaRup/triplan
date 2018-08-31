@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
-
 import React from 'react';
 import { compose, withProps, lifecycle } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer, } from 'react-google-maps';
-
 
 const MapWithADirectionsRenderer = compose(
   withProps({
@@ -18,17 +16,7 @@ const MapWithADirectionsRenderer = compose(
     componentDidMount() {
       const DirectionsService = new google.maps.DirectionsService();
       console.log('in did mount-props :', this.props.routes);
-
-      // const latO = this.props.points[0].location.lat;
-      // const lngO = this.props.points[0].location.lng;
-      // const latD = this.props.points[this.props.points.length - 1].location.lat;
-      // const lngD = this.props.points[this.props.points.length - 1].location.lng;
-
       DirectionsService.route({
-        // origin: new google.maps.LatLng(latO, lngO),
-        // destination: new google.maps.LatLng(latD, lngD),
-        // origin: new google.maps.LatLng(32.067270, 34.779642),
-        // destination: new google.maps.LatLng(32.096587, 34.776057),
         origin: this.props.route.origin,
         destination: this.props.route.destination,
         travelMode: google.maps.TravelMode.DRIVING,
@@ -49,11 +37,14 @@ const MapWithADirectionsRenderer = compose(
   })
 )(props => {
   console.log('in render map');
-  console.log('props directions', props.directions);
+  // console.log('props directions', props.directions);
+  const { lat, lng } = props.route.origin.location;
+  // console.log('lat lng', lat, lng);
 
   return <GoogleMap
     defaultZoom={7}
-    defaultCenter={new google.maps.LatLng(41.8507300, -87.6512600)} >
+    defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
+    defaultCenter={new google.maps.LatLng(lat, lng)} >
     {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>;
 }
