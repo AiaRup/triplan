@@ -4,6 +4,8 @@ import { observable, action } from 'mobx';
 
 class TripStore extends Component {
 
+  @observable user_id= '';
+
   @observable oneTrip = {
     id: 'id1', // will get from the server
     name: 'madrid 2018',
