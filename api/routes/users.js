@@ -62,7 +62,7 @@ router.get('/users/:id', (req, res) => {
 
 router.get('/users_trips/:user_id', (req,res)=>{
   let user_id= req.params.user_id;
-  console.log("id is:");
+  console.log("param id is:");
   console.log(user_id);
  
   User.findById(user_id, (error,data)=> {

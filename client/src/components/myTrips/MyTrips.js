@@ -4,7 +4,7 @@ import  './MyTrips.css';
 import CardList from './CardList';
 import { observer, inject } from 'mobx-react';
 import OneTrip from './OneTrip';
-
+import store from '../../store/tripStore';
 
 
 // var user_plans=[{name: 'barcelona 2018'}, {name:'paris 2017'}, {name:'vienna 2016'},
@@ -17,9 +17,10 @@ import OneTrip from './OneTrip';
 @inject('store') 
 @observer
 class MyTrips extends Component {
-  constructor(){
-    super();
-    this.state = { user_plans :''}
+  constructor(props){
+    super(props);
+    this.state = { user_plans:[],
+                   plan_names: []}
   }
 
   // handleSubmit=(event)=>{
@@ -30,17 +31,30 @@ class MyTrips extends Component {
   // }
 
 componentDidMount = () => {
-  console.log('in');
-  // console.log(this.props);
-  console.log(this.props.store);
-  let trip_id = this.props.user_id;
-  console.log('id: '+trip_id);
-  axios.get(`api/users/users_trips/${trip_id}`)
+  let u_id = this.props.store.user_id;
+  console.log('user id: '+ u_id);
+  axios.get(`api/users/users_trips/${u_id}`)
    .then (response=>{     
        let plans = response.data;
-       console.log("got response!");
-       console.log(response);
-      this.setState({user_plans: plans});
+      // const plansArray = Object.keys(plans).map(i => plans[i]);
+       console.log("got response! - data");
+      //  console.log(plans);
+      //  console.log('type:' + typeof plans )
+        // console.log('plans:' + plans.constructor===Array)
+
+      //  this.setState( {user_plans: plans});
+        this.setState( (state, props) => {
+         return {user_plans: this.state.user_plans.concat([plans])}
+        });
+        // console.log( this.state.user_plans);
+
+       let names= plans.map(plan => plan.name);
+         //console.log(names )
+
+      this.setState( (state, props) => {
+        return {plan_names : this.state.plan_names.concat([names])}
+      });
+        console.log (this.state.plan_names);
    })
    .catch(error => {
       console.log('Error fetching and parsing data', error);
@@ -53,23 +67,17 @@ render(){
 
       <div className="all">
 
-          {/* onSubmit={this.handleSubmit} */}
+        {/* onSubmit={this.handleSubmit} */}
           
-   <div className='search-bar'>
-        <input  type='text' placeholder='search...'  />
-   </div>
-
-       {/* let user_plans= this.props.user_plans; */}
-      {/* {let plan_names = props.user_plans.map ( plan => plan.name)} */}
-
-        {/* <CardList plan_names={this.state.user_plans.map( plan => plan.name)} /> */}
-
         <div className='search-bar'>
-          <input type='text' placeholder='search...' />
+              <input  type='text' placeholder='search .....'  />
         </div>
-        <CardList plans={this.state.user_plans} />
+
+
+         <CardList plan_names={this.state.plan_names} /> 
+
         {/* <OneTrip trip={this.props.store.oneTrip} /> */}
-        <OneTrip />
+        {/* <OneTrip /> */}
 
       </div>
     );

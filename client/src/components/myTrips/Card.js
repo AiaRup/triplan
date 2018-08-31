@@ -9,9 +9,9 @@ const Card = (props) => {
    return (
             <div className = "card">
 
-                <h4>  {props.plan_name} </h4>
+                <h4>  {props.name} </h4>
 
-               <Link to={`/MyTrips/${props.plan_name}`} > watch </Link>
+               <Link to={`/MyTrips/${props.name}`} > watch </Link>
 
             </div>
     
