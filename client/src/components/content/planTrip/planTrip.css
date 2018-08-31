@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 .plan-trip-container {
   display: flex;
   flex-direction: column;
@@ -14,4 +20,13 @@ margin: 8px;
 border-radius: 2px;
 width: 100%;
 height: auto;
+}
+
+.save-trip-btn {
+  background-color: orange;
+  width: 22%;
+  margin: 0 auto;
+  color: white;
+  height: 30px;
+  border-radius: 3px;
 }

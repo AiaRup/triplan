@@ -7,9 +7,9 @@ import { observer, inject } from 'mobx-react';
 
 import Navbar from '../navbar/Navbar';
 import Content from '../content/Content';
-import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
-
+import MyTrips from '../myTrips/MyTrips';
+import OneTrip from '../myTrips/OneTrip';
 
 function onAuthRequired({ history }) {
   history.push('/Login');
@@ -20,6 +20,8 @@ function onAuthRequired({ history }) {
 }))
 @observer
 class App extends Component {
+
+
 
   componentDidMount = () => {
     const userId = localStorage.getItem('oktaID');
@@ -34,6 +36,8 @@ class App extends Component {
         });
     }
   }
+
+
   render() {
     return (
       <Router>
@@ -47,7 +51,14 @@ class App extends Component {
             <div className="container-fluid">
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
-                <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
+                {/* <SecureRoute exact path="/MyTrips" render={() => <MyTrips  user_plans={this.state.user_plans}/>} /> */}
+                <SecureRoute exact path="/MyTrips" render={() => <MyTrips/>} />
+                
+                {/* {this.state.user_plans.map( 
+                  (plan,index) => 
+                  <SecureRoute exact path ={`/MyTrips/${plan}`} render={() => <OneTrip plan={plan} key={index} />} />
+                )}  */}
+
                 <Route
                   path="/Login"
                   render={() => (<Login baseUrl="https://dev-497398.oktapreview.com" />)} />

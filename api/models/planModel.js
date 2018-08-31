@@ -10,5 +10,9 @@ let planSchema = new Schema({
 
 let Plan = mongoose.model('plan', planSchema);
 
-module.exports.planSchema = planSchema;
-module.exports.plan = Plan;
+module.exports = Plan;
+
+
+// module.exports.planSchema = planSchema;
+// module.exports.plan = Plan;
+

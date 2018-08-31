@@ -32,7 +32,7 @@ export default class Notes extends Component {
   }
 
   handleAddNote = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // doesnt work
     this.props.store.addNotes(this.state.input, this.props.index);
     this.setState({
       input: '',
@@ -45,7 +45,7 @@ export default class Notes extends Component {
   }
 
   render() {
-    console.log('txt input after adding: ', this.props.store.oneTrip.days[this.props.index].notes);
+    // console.log('txt input after adding: ', this.props.store.oneTrip.days[this.props.index].notes);
 
     return (
       <div className="notes">
