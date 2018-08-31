@@ -20,7 +20,9 @@ router.post('/', (req, res) => {
         value: req.body.password
       }
     }
+   
   };
+  // console.log('newUser',newUser)
   oktaClient
     .createUser(newUser)
     .then(user => {
@@ -45,23 +47,24 @@ router.post('/', (req, res) => {
 });
 
   //saving the trip to the server 
-  router.post('/users/:id/plantrip', (req, res) => {
-    const newPlan = {
-      name: 'planName',
-      days: req.body,
-      city: 'cityName'
-    };
+//   router.post('/users/:id/plantrip', (req, res) => {
+//     const newPlan = {
+//       name: 'planName',
+//       days: req.body,
+//       city: 'cityName'
+//     };
   
-    const planInServer = Plan.create(newPlan, (err, planResult) => {
-      if (err) throw err;
-      return planResult
-    })
+//     const planInServer = Plan.create(newPlan, (err, planResult) => {
+//       if (err) throw err;
+//       console.log('planResult', planResult);
+//       return planResult
+//     })
   
-   User.findByIdAndUpdate(req.params.id, {plans: planInServer}, {new:true}, (err, updateResult) => {
-      if (err) throw err;
-      res.status(200).send(updateResult)
-    })
-})
+//    User.findByIdAndUpdate(req.params.id, {plans: planInServer}, {new:true}, (err, updateResult) => {
+//       if (err) throw err;
+//       res.status(200).send(updateResult)
+//     })
+// })
 
 
 // 1) to handle get user data on login
@@ -82,19 +85,19 @@ router.get('/users/:id', (req, res) => {
 
 //2) getting all my trips (carl) 
 
-router.get('/users_trips/:user_id', (req,res)=>{
-  let user_id= req.params.user_id;
-  console.log("id is:");
-  console.log(user_id);
+// router.get('/users_trips/:user_id', (req,res)=>{
+//   let user_id= req.params.user_id;
+//   console.log("id is:");
+//   console.log(user_id);
  
-  User.findById(user_id, (error,data)=> {
-    if (error) throw error;
-    else{
-    console.log(data.plans);
-     res.send (data.plans) }
-  })
+//   User.findById(user_id, (error,data)=> {
+//     if (error) throw error;
+//     else{
+//     console.log(data.plans);
+//      res.send (data.plans) }
+//   })
 
-})
+// })
 
 
 
