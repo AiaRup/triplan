@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import './MyTrips.css';
+import React, {Component} from 'react';
+import axios from 'axios';
+import  './MyTrips.css';
 import CardList from './CardList';
-import OneTrip from './OneTrip';
 import { observer, inject } from 'mobx-react';
+import OneTrip from './OneTrip';
+
+
 
 // var user_plans=[{name: 'barcelona 2018'}, {name:'paris 2017'}, {name:'vienna 2016'},
 // {name:'singapour 2015'},{name: 'seoul 2014'}];
 
 
-@inject('store')
+// @inject(allStores => ({
+//    user_id: allStores.store.user_id
+// }))
+@inject('store') 
 @observer
 class MyTrips extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      user_plans: ['Barcelona 2018', 'Paris 2017', 'Vienna 2016', 'Singapour 2015',
-        'Seoul 2014', 'Pekin 2012', 'Tokyo 2015']
-    };
+  constructor(){
+    super();
+    this.state = { user_plans :''}
   }
 
   // handleSubmit=(event)=>{
@@ -27,12 +29,40 @@ class MyTrips extends Component {
 
   // }
 
+componentDidMount = () => {
+  console.log('in');
+  // console.log(this.props);
+  console.log(this.props.store);
+  let trip_id = this.props.user_id;
+  console.log('id: '+trip_id);
+  axios.get(`api/users/users_trips/${trip_id}`)
+   .then (response=>{     
+       let plans = response.data;
+       console.log("got response!");
+       console.log(response);
+      this.setState({user_plans: plans});
+   })
+   .catch(error => {
+      console.log('Error fetching and parsing data', error);
+  });
+}
+  
+
   render() {
     return (
 
       <div className="all">
 
-        {/* onSubmit={this.handleSubmit} */}
+          {/* onSubmit={this.handleSubmit} */}
+          
+   <div className='search-bar'>
+        <input  type='text' placeholder='search...'  />
+   </div>
+
+       {/* let user_plans= this.props.user_plans; */}
+      {/* {let plan_names = props.user_plans.map ( plan => plan.name)} */}
+
+        {/* <CardList plan_names={this.state.user_plans.map( plan => plan.name)} /> */}
 
         <div className='search-bar'>
           <input type='text' placeholder='search...' />
@@ -46,6 +76,7 @@ class MyTrips extends Component {
   }
 
 }
+
 
 
 export default MyTrips;

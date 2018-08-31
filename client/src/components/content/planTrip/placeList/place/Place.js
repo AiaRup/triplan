@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { inject } from 'mobx-react';
 import styled from 'styled-components';
 import { Collapse } from 'react-collapse';
-import '../places.css'
+import '../places.css';
 
 
 const Container = styled.div`
@@ -17,70 +17,63 @@ const Container = styled.div`
 
 @inject(allStores => ({
   deletePlace: allStores.store.deletePlace,
-  deletePlaceInDay: allStores.store.deletePlaceInDay}))
+  deletePlaceInDay: allStores.store.deletePlaceInDay }))
 
 class Place extends Component {
   constructor() {
     super();
-    this.state =  {toggledCollapse: false};
-  };
+    this.state = { toggledCollapse: false };
+  }
 
   collapseToggle = () => {
     this.setState(prevState => ({
       toggledCollapse: !prevState.toggledCollapse
     }));
   };
-  
+
 
   placeOrDayDelete = () => {
-    if(this.props.verifier==='placeOfDay'){
-      this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex)
-    }else {
-      this.props.deletePlace(this.props.index)
+    if (this.props.verifier==='placeOfDay'){
+      this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex);
+    } else {
+      this.props.deletePlace(this.props.index);
     }
   }
-
 
   render() {
     const toggleCollapse = false;
 
     return (
       <Draggable draggableId={this.props.thePlace.id} index={this.props.placeIndex}>
-      {(provided, snapshot) => (
-  
+        {(provided, snapshot) => (
+
           <Container
-          innerRef={provided.innerRef}
-          isDragging={snapshot.isDragging}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
+            innerRef={provided.innerRef}
+            isDragging={snapshot.isDragging}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
           >
             <div className='single-place-header-section'>
-                
               <button type="button" className="btn btn-danger btn-sm" onClick={this.placeOrDayDelete}>x</button>
-  
               <h6 className='place-headline'>{this.props.thePlace.name}</h6>
-  
               <div className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</div>
-              
             </div>
-
- 
             <Collapse isOpened={this.state.toggledCollapse}>
-            <ul>
-              <li>Category: {this.props.thePlace.Category}</li>
-              <li>Address: {this.props.thePlace.address}</li>
-              <li>Duration: {this.props.thePlace.duration}</li>
-              <li>Opening Hours: {this.props.thePlace.openingHours}</li>
-              <li>Price: {this.props.thePlace.price}</li>
-              <li>Contact: {this.props.thePlace.contact}</li>
-            </ul>
-            </Collapse> 
-  
+              <ul>
+                {Object.keys(this.props.thePlace).map((prop, index)=> {
+                  if (prop !== 'id' && prop !== 'type') {
+                    return <li key={index}>{prop}: {this.props.thePlace[prop]}</li>;
+                  }
+                  return null;
+                })}
+              </ul>
+            </Collapse>
+
           </Container>
-      )}
+        )}
       </Draggable>
     );
-  }  
+  }
 }
 
 export default Place;
