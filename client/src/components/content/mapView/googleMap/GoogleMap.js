@@ -7,6 +7,9 @@ import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
 
+// const google=window.google;
+
+
 const MapComponent = compose(
   withStateHandlers(() =>
     ({
@@ -60,6 +63,14 @@ const MapComponent = compose(
         // },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
+          // if (!place.geometry) {
+          //   // User entered the name of a Place that was not suggested and
+          //   // pressed the Enter key, or the Place Details request failed.
+          //   window.alert("No details available for input: '" + place.name + "'");
+          //   return;
+          // }
+          this.props.saveCity(place[0].vicinity);
+
           const lat = place[0].geometry.location.lat();
           const lng = place[0].geometry.location.lng();
           let bounds = new google.maps.LatLngBounds();
@@ -82,8 +93,7 @@ const MapComponent = compose(
           const newActivity = { type: 'place' };
           for (let prop in marker) {
             if (marker.hasOwnProperty(prop)) {
-              console.log(prop + ': ' + marker[prop]);
-              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id') {
+              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id' || prop === 'position') {
                 newActivity[prop] = marker[prop];
               }
             }
@@ -147,9 +157,9 @@ const MapComponent = compose(
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                   </button>
                 </div>
-                <div>
-                  {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyDuKj7l762Y5ulcwj_EyANIvHx6rfffceY`} alt='place photo' />}
-                </div>
+                {/* <div>
+                  {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
+                </div> */}
               </div>
             </InfoWindow>}
 

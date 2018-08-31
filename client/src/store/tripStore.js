@@ -4,6 +4,11 @@ import { observable, action } from 'mobx';
 
 class TripStore extends Component {
 
+  @observable user_id = ''
+  @observable cityName= ''
+  @observable tripName= 'Name Your Trip'
+
+
   @observable oneTrip = {
     id: 'id1', // will get from the server
     name: 'madrid 2018',
@@ -43,12 +48,21 @@ class TripStore extends Component {
 
   @action toggleLoginRegister = () => {
     this.showLogin = !this.showLogin;
-    console.log('showLogin', this.showLogin);
   }
 
   @action addPlace = (place) => {
     this.placesArray.push(place);
-    console.log('place', place);
+  }
+
+  @action saveCity = (city) => {
+    this.cityName = city;
+    console.log('city in store', this.cityName);
+
+  }
+
+  @action saveTripName = (name) => {
+    this.tripName = name;
+    console.log('name in store', this.tripName);
 
   }
 

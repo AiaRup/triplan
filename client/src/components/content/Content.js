@@ -58,33 +58,33 @@ positionDenied = () => {
    }
    this.handlePermission();
 
-  //  const userId = localStorage.getItem('oktaID');
-  //  if (userId !== null) {
-  //    // get user id from mongo
-  //    axios.get(`/api/users/users/${userId}`)
-  //      .then((response) => {
-  //        // set user id on store
-  //        this.props.configUser(response.data[0]._id);
-  //      });
-  //  }
+   //  const userId = localStorage.getItem('oktaID');
+   //  if (userId !== null) {
+   //    // get user id from mongo
+   //    axios.get(`/api/users/users/${userId}`)
+   //      .then((response) => {
+   //        // set user id on store
+   //        this.props.configUser(response.data[0]._id);
+   //      });
+   //  }
  }
 
- render() { 
-  return (
-    <React.Fragment>
-      <div className='map-event-container'>
-        <div className='map-view-container'>
-            <MapView address={_.clone(this.state.address)}/>
-        </div>
-        <TempEventList/>
-      </div>
+ render() {
+   return (
+     <React.Fragment>
+       <div className='map-event-container'>
+         <div className='map-view-container'>
+           <MapView address={_.clone(this.state.address)}/>
+         </div>
+         <TempEventList/>
+       </div>
 
-      <div className='plan-trip-container'>
-        <PlanTrip />
-      </div>
-    </React.Fragment>
-  );
+       <div className='plan-trip-container'>
+         <PlanTrip />
+       </div>
+     </React.Fragment>
+   );
  }
-};
+}
 
 export default Content;

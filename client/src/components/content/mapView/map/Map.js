@@ -4,6 +4,8 @@ import axios from 'axios';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 
+const google=window.google;
+
 @inject('store')
 @observer
 class Map extends Component {
@@ -112,7 +114,6 @@ class Map extends Component {
   }
 
   addPlace = (place) => {
-    console.log('place in Map: ', place);
     let exist = false;
     let places = this.props.store.placesArray;
     for (var i = 0; i < places.length && !exist; i++) {
@@ -127,14 +128,13 @@ class Map extends Component {
   }
 
   render() {
-    console.log('in render map marker to google', this.state.markers);
-
     return (
       <GoogleMap
         markers={this.state.markers}
         // address={this.props.address}
         updateAddress={this.props.updateAddress}
         addPlace={this.addPlace}
+        saveCity={this.props.store.saveCity}
       />
     );
   }

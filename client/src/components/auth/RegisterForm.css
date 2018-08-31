@@ -345,7 +345,7 @@
 }
 }
 
-@media only screen and (max-height: 750px) {
+@media only screen and (max-width: 750px) {
   #okta-register {
     margin-top: 0;
 }

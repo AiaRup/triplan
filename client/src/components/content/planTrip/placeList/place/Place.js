@@ -61,7 +61,7 @@ class Place extends Component {
             <Collapse isOpened={this.state.toggledCollapse}>
               <ul>
                 {Object.keys(this.props.thePlace).map((prop, index)=> {
-                  if (prop !== 'id' && prop !== 'type') {
+                  if (prop !== 'id' && prop !== 'type' && prop !== 'position') {
                     return <li key={index}>{prop}: {this.props.thePlace[prop]}</li>;
                   }
                   return null;

@@ -1,0 +1,23 @@
+.inlineEdit {
+  font-size: 20px;
+  padding: 10px;
+  margin-bottom: 0
+  }
+
+.header-days {
+display: flex;
+flex-wrap: wrap;
+}
+
+  .inlineEdit:hover {
+    cursor: text;
+  }
+
+  .inlineInput {
+    font-size: 20px;
+    padding: 10px;
+  }
+
+.add-day {
+  margin-left: auto;
+}
