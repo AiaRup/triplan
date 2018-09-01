@@ -9,7 +9,8 @@
   margin: auto;
   margin-bottom: 40px;
   width: 60%;
-  text-align: center;
+  /* text-align: center; */
+  border-bottom: 1px solid #ddd;
 }
 
 /* input{

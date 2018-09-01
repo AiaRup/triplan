@@ -5,7 +5,11 @@ const CardList = (props) => {
     return (
 
         <div className="card-list">
-            {props.plans.map((plan, i) => <Card plan={plan} key={i} />)}
+            {
+                props.plans.length > 0 ? props.plans.map((plan, i) => <Card plan={plan} key={i} />)
+                    :
+                    <h2> No result... </h2>
+            }
         </div>
     );
 }
