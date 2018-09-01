@@ -1,3 +1,10 @@
+h5 {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+}
+
 .eventDatePicker {
   width: 95px;
   margin: 2px;
@@ -10,10 +17,13 @@
 }
 
 .datesHead {
-  background-color: rgba(69, 226, 253, 0.301);
+  /* background-color: #E63946; */
+  background-color: #1483c6;
+  /* background-color: #E33B4A; */
   text-align: center;
   border: 1px solid lightgrey;
-  border-radius: 2px;
+  border-radius: 5px;
+  min-height: 40px;
 }
 
 .to-event-date, 

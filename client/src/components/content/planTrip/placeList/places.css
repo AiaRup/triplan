@@ -6,11 +6,13 @@
 
 .places-list-container {
   margin: 8px;
+  background: linear-gradient(180deg, #1483c6 50%, white 50%);
   border: 1px solid lightgrey;
   border-radius: 2px;
   height: auto;
   min-height: 200px;
   width: 50%;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 .place-arrow {
@@ -19,12 +21,13 @@
   float:right;
   margin: 5px;
   height: 20px;
-  color:red;
   }
 
 .place-container-headline {
   text-align: center;
   margin-top: 5px;
+  background-color: #1483c6;
+  color: white;
 }
 
 .place-headline {
@@ -42,5 +45,8 @@ ul {
   margin: 5px;
 }
 
+.btn-color {
+  color: #E63946;
+}
 
 

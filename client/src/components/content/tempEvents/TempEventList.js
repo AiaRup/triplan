@@ -48,14 +48,15 @@ class TempEventList extends Component {
       <React.Fragment>
         <div className = 'list-container'>
           <div className='datesHead'>
-            <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Events Nearby &raquo;</h5>
-              <Collapse isOpened={this.state.toggledCollapse}>
+            <h5 className="dates-headline" onClick={()=>this.collapseToggle(toggleCollapse)}>Find Events Nearby &raquo;</h5>
+            </div>
+              <Collapse className="collapse-color" isOpened={this.state.toggledCollapse}>
                 <div className = 'date-pick'>
                   <EventPickDate/>
                   <button className='btn-temp-event-date' onClick={this.getEvents}>Events</button>
                 </div>
               </Collapse>
-          </div>
+          
           {this.props.tempEventArray.map((theTempEvent, tempEventIndex) => 
             <TheEvent key={theTempEvent.id} 
             verifier="eventOfTempEvent"

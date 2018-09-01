@@ -5,7 +5,7 @@
 }
 
 .day-list-container {
-  margin: 8px;
+  margin-top: 10px;
   border: 1px solid lightgrey;
   border-radius: 2px;
   width: auto;
@@ -13,7 +13,6 @@
 }
 
 .day-list-wrapper {
-  margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
   display: flex;

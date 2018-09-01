@@ -4,19 +4,6 @@ import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import TheEvent from './TheEvent';
 
-
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  height: auto;
-  min-height: 200px;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-`;
-
-
 const EventListUL = styled.div`
 padding: 8px;
 min-height: 200px;
@@ -56,7 +43,7 @@ class EventList extends Component {
 
   render() {
     return (
-      <Container>
+      <div className="event-list-container">
         <h3 className='event-container-headline'>Events</h3>
           <Droppable droppableId="eventsContainer">
             {(provided, snapshot) => (
@@ -64,7 +51,7 @@ class EventList extends Component {
             )}
             
           </Droppable>
-      </Container>
+      </div>
     );
   }
 }

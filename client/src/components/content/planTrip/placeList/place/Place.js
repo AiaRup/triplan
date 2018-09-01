@@ -54,7 +54,7 @@ class Place extends Component {
             {...provided.dragHandleProps}
           >
             <div className='single-place-header-section'>
-              <button type="button" className="btn btn-danger btn-sm" onClick={this.placeOrDayDelete}>x</button>
+              <button type="button" className="btn btn-sm btn-color" onClick={this.placeOrDayDelete}>x</button>
               <h6 className='place-headline'>{this.props.thePlace.name}</h6>
               <div className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</div>
             </div>
