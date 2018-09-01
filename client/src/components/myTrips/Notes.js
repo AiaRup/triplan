@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import InlineEdit from 'react-inline-editing';
 import { observer, inject } from 'mobx-react';
 
-@inject('store')
+inject('store')
 const View = (props) => {
   console.log(props.text, props.index);
 
