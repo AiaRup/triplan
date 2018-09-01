@@ -27,8 +27,10 @@ class TempEventList extends Component {
 
   getEvents = () => {
     const USER_TOKEN = '9bgBCdDfmWp8NxrBqoNZ808YqGIf6m';
-    const URL = 'https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=concerts&location_around.origin=40.782409,-73.971885&&location_around.offset=5km&country=US&active.tz=America/Los_Angeles&sort=rank';
     const AuthStr = 'Bearer ' + USER_TOKEN;
+
+    // const URL = 'https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=concerts&location_around.origin=40.782409,-73.971885&&location_around.offset=5km&country=US&active.tz=America/Los_Angeles&sort=rank';
+    const URL = `https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=concerts&location_around.origin=40.782409,-73.971885&&location_around.offset=5km&start.gte=${this.tempEventCalander.startDate}&start.lte=${this.tempEventCalander.endDate}`;
 
 
     axios.get(URL, { 'headers': { 'Authorization': AuthStr }})

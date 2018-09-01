@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const oktaClient = require('../lib/oktaClient');
-// const ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
+const Plan = require('../models/planModel').plan;
 
-/* Create a new User (register). */
+/* Create a new User (register on okta). */
 router.post('/', (req, res) => {
   if (!req.body) return res.sendStatus(400);
   const newUser = {
@@ -34,7 +35,6 @@ router.post('/', (req, res) => {
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
-        console.log('res server', userResult);
         res.status(201).send(userResult);
       });
     })
@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// 1) to handle get user data on login
+// 1) to handle get user data on login and register
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
@@ -51,6 +51,31 @@ router.get('/users/:id', (req, res) => {
     if (err) throw err;
     console.log('user from mongo', userResult);
     res.send(userResult);
+  });
+});
+
+
+// 2) to update user's plans and tempEvents and tempPlaces
+router.post('/users/:id/plantrip', (req, res) => {
+  // check mongo id validation
+  if (!ObjectID.isValid(req.params.id)) {
+    return res.status(400).send('Id not in the correct format');
+  }
+
+  const newPlan = {
+    name: req.body.plan.name,
+    days: req.body.plan.days,
+    city: req.body.plan.city
+  };
+
+  Plan.create(newPlan, (err, planResult) => {
+    if (err) throw err;
+    // update the user with the new trip plan
+    User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new:true }, (err, updateUser) => {
+      if (err) throw err;
+      console.log('newUser updated', updateUser);
+      res.status(200).send(updateUser);
+    });
   });
 });
 
