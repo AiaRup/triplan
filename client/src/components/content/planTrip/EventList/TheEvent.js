@@ -68,20 +68,19 @@ class TheEvent extends Component {
 
     } else if (this.props.verifier==='eventOfTempEvent') {
       return (
-
         <div className="events-list-container">
-
           <div className="single-event-header-section">
-
             <h6 className="event-headline">{this.props.tempEventName}</h6>
             <div className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</div>
-
           </div>
 
           <Collapse isOpened={this.state.toggledCollapse}>
-            <p>Address: {this.props.tempEventAddress}</p>
-            <p>Time: {this.props.tempEventTime}</p>
-
+            {Object.keys(this.props.tempEvent).map((prop, index)=> {
+              if (prop !== 'type' && prop !== 'name' && prop !== 'id') {
+                return <li key={index}>{prop}: {this.props.tempEvent[prop]}</li>;
+              }
+              return null;
+            })}
           </Collapse>
           <button className="btn btn-primary btn-sm" onClick={()=>this.props.addTempEvent(this.props.tempEventIndex)}>Add</button>
 

@@ -4,8 +4,6 @@ import axios from 'axios';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 
-const google=window.google;
-
 @inject('store')
 @observer
 class Map extends Component {

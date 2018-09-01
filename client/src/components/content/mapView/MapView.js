@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Map from './map/Map';
 import Preferences from './preferences/Preferences';
 import _ from 'lodash';
+import { observer, inject } from 'mobx-react';
 
-
+@inject('store')
+@observer
 export default class MapView extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +26,7 @@ export default class MapView extends Component {
       address: address,
       places: []
     });
+    this.props.store.saveAddress(address);
   }
 
   updatePlacesNear = (places) => {

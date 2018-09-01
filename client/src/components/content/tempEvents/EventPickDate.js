@@ -10,7 +10,8 @@ import './datePickerCss.css';
 @inject(allStores => ({
   EventStartDate: allStores.store.EventStartDate,
   tempEventCalander: allStores.store.tempEventCalander,
-  EventEndDate: allStores.store.EventEndDate
+  EventEndDate: allStores.store.EventEndDate,
+  updateEventCategory: allStores.store.updateEventCategory
 }))
 @observer
 
@@ -27,6 +28,7 @@ export default class DateRange extends React.Component {
   handleSelectChange = (value) => {
     console.log('You have selected: ', value);
     this.setState({ value });
+    this.props.updateEventCategory(value);
   }
 
   options = [
@@ -50,8 +52,10 @@ export default class DateRange extends React.Component {
     }
 
     this.setState({ startDate, endDate });
-    let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('DD/MM/YYYY');
-    let formatedEnd = moment(`/Date(${Date.parse(endDate)})/`).format('DD/MM/YYYY');
+    let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('YYYY/MM/DD');
+    // let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('DD/MM/YYYY');
+    let formatedEnd = moment(`/Date(${Date.parse(endDate)})/`).format('YYYY/MM/DD');
+    // let formatedEnd = moment(`/Date(${Date.parse(endDate)})/`).format('DD/MM/YYYY');
     this.props.EventStartDate(formatedStart);
     this.props.EventEndDate(formatedEnd);
   }
@@ -87,14 +91,6 @@ export default class DateRange extends React.Component {
             dateFormat="DD/MM/YYYY" />
         </div>
         <div>
-          {/* <Select
-            value={this.state.selectedOption}
-            onChange={this.handleChange}
-            options={this.options}
-
-
-            isMulti
-          /> */}
           <Select
             isMulti
             joinValues

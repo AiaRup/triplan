@@ -39,11 +39,12 @@ transition: background-color 0.2s ease;
         {...this.props.provided.droppableProps}
       >
         {this.props.eventsArray.map((eventItem, eventItemIndex) => (
-          <TheEvent key={eventItem.id} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents"/>))}
+          <TheEvent key={eventItem.id} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents" />))}
 
         {this.props.provided.placeholder}
       </EventListUL>
-    );}
+    );
+  }
 }
 
 
@@ -60,7 +61,7 @@ class EventList extends Component {
         <h3 className='event-container-headline'>Events</h3>
         <Droppable droppableId="eventsContainer">
           {(provided, snapshot) => (
-            <DroppableEvent provided={provided} snapshot={snapshot}/>
+            <DroppableEvent provided={provided} snapshot={snapshot} />
           )}
 
         </Droppable>

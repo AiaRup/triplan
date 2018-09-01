@@ -7,8 +7,9 @@ class TripStore extends Component {
   @observable user_id = ''
   @observable cityName= 'London'
   @observable tripName= 'Name Your Trip'
-  @observable address = {};
+  @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
+  @observable eventCategory = [];
 
 
   // @observable oneTrip = {
@@ -31,13 +32,9 @@ class TripStore extends Component {
   // }
 
   @observable daysArray = [];
-
   @observable placesArray = [];
-
-  @observable eventsArray = [ { name: 'Basball', address: 'Levin 4 Street', time: '14:15', id: 'eventId4', type: 'event' }, { name: 'Game Arena', address: 'Corner Street', time: '12:40', id: 'eventId5', type: 'event' } ];
-
-  @observable tempEventArray = [ { name: 'Led Zepplin', address: 'City Center', time: '17:30', id: 'eventId1', type: 'event', date: '' }, { name: 'Madonna', address: 'New York Stadium', time: '20:30', id: 'eventId2', type: 'event' }, { name: 'Jay-Z', address: 'Beat-Pop Club', time: '22:00', id: 'eventId3', type: 'event' } ];
-
+  @observable eventsArray = [];
+  @observable tempEventArray = [];
   @observable testEventsArray = [];
 
   @observable tempEventCalander =
@@ -45,6 +42,8 @@ class TripStore extends Component {
         endDate: new Date() };
 
   @observable showLogin = true;
+
+  /*********** ACTIONS ***********/
 
   // save the user Id recieved from mongo
   @action configUser = (userID) => {
@@ -79,10 +78,16 @@ class TripStore extends Component {
     console.log('name in store', this.tripName);
   }
 
-  // update trip name when user changes the name
+  // update number of days in trip
   @action resetNumDays = (name) => {
     this.numOfDays = 0;
     console.log('num days reset', this.numOfDays);
+  }
+
+  // update category event when user changes the category
+  @action updateEventCategory = (category) => {
+    this.eventCategory = category;
+    console.log('category in store', this.eventCategory);
   }
 
   //Functionality in DAY
@@ -121,7 +126,7 @@ class TripStore extends Component {
   }
 
   @action EventStartDate = (startDate) => {
-    console.log('startday', startDate);
+    console.log('startDate', startDate);
     this.tempEventCalander.startDate = startDate;
     console.log(JSON.stringify(this.tempEventCalander.startDate));
   }
