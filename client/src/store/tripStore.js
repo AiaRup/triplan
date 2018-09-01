@@ -126,8 +126,10 @@ class TripStore extends Component {
 
   @action configUser = (userID) => {
     this.user_id = userID;
-    console.log('id in store', this.userIdStore);
+    // console.log('id in store', this.userIdStore);
     this.userIdStore = userID;
+    console.log('id in store', this.userIdStore);
+
   };
 
 }
