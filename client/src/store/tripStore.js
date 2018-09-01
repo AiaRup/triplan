@@ -7,6 +7,7 @@ class TripStore extends Component {
   @observable user_id = ''
   @observable cityName= ''
   @observable tripName= 'Name Your Trip'
+  @observable address = {};
 
 
   @observable oneTrip = {
@@ -52,6 +53,12 @@ class TripStore extends Component {
 
   @action addPlace = (place) => {
     this.placesArray.push(place);
+  }
+
+  @action saveAddress = (address) => {
+    this.address = address;
+    console.log('address in store', this.address);
+
   }
 
   @action saveCity = (city) => {

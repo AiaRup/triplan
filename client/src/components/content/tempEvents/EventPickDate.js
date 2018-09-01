@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import './datePickerCss.css';
- 
+
 
 @inject(allStores => ({
   EventStartDate: allStores.store.EventStartDate,
@@ -18,30 +18,30 @@ class EventPickDate extends React.Component {
     const lastDateIndex = this.props.tempEventCalander.length-1;
 
     return (
-    <div className='date-pick-container'>
-      <div className='from-event-date'>
+      <div className='date-pick-container'>
+        <div className='from-event-date'>
       From:
-        <DatePicker
+          <DatePicker
             selected={moment(this.props.tempEventCalander[0].startDate)}
             selectsStart
             startDate={this.props.tempEventCalander[0]}
             onChange={(event)=>this.props.EventStartDate(event)}
             className='eventDatePicker'
-        />
-      </div>
+          />
+        </div>
 
-      <div className='to-event-date'>
+        <div className='to-event-date'>
       To:
-        <DatePicker
+          <DatePicker
             selected={moment(this.props.tempEventCalander[lastDateIndex].endDate)}
             selectsEnd
             endDate={this.props.tempEventCalander[lastDateIndex]}
             onChange={(event)=>this.props.EventEndDate(event, lastDateIndex)}
             className='eventDatePicker'
-        />
-      </div>
-    </div>)
+          />
+        </div>
+      </div>);
   }
-};
+}
 
 export default EventPickDate;
