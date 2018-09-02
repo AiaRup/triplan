@@ -74,9 +74,9 @@ positionDenied = () => {
     <React.Fragment>
       <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
       <div className="home-page-instructions">
-      <p>Search Your Location<i class="right"></i></p>
-      <p>Choose Attractions<i class="right"></i></p>
-      <p>Add Events<i class="right"></i></p>
+      <p>Search Your Location<i className="right"></i></p>
+      <p>Choose Attractions<i className="right"></i></p>
+      <p>Add Events<i className="right"></i></p>
       <p>Drag & Drop To The Right Day</p>
       </div>
       <div className='map-event-container'>
