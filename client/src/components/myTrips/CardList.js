@@ -3,7 +3,6 @@ import Card from './Card';
 
 const CardList = (props) => {
     return (
-
         <div className="card-list">
             {
                 props.plans.length > 0 ? props.plans.map((plan, i) => <Card plan={plan} key={i} />)

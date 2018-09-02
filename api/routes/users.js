@@ -3,6 +3,7 @@ const router = express.Router();
 const oktaClient = require('../lib/oktaClient');
 // const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
+const Plan = require('../models/planModel').plan;
 
 /* Create a new User (register). */
 router.post('/', (req, res) => {
@@ -35,7 +36,7 @@ router.post('/', (req, res) => {
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
-        console.log('res server', userResult);
+        console.log(userResult);
         res.status(201).send(userResult);
       });
     })
@@ -44,12 +45,37 @@ router.post('/', (req, res) => {
     });
 });
 
+//saving the trip to the server
+router.post('/users/:id/plantrip', (req, res) => {
+  const newPlan = {
+    name: 'planName',
+    days: req.body,
+    city: 'cityName'
+  };
+
+  const planInServer = Plan.create(newPlan, (err, planResult) => {
+    if (err) throw err;
+    return planResult
+  })
+
+  User.findByIdAndUpdate(req.params.id, { plans: planInServer }, { new: true }, (err, updateResult) => {
+    if (err) throw err;
+    res.status(200).send(updateResult)
+  })
+})
+
+
 // 1) to handle get user data on login
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
+  // User.find({ oktaID: oktaID }, (err, userResult) => {
+  //   if (err) throw err;
   User.find({ oktaID: oktaID }, (err, userResult) => {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+      res.send("an error has occured");
+    }
     console.log('user from mongo', userResult);
     res.send(userResult);
   });
@@ -66,10 +92,6 @@ router.get('/users_trips/:user_id', (req, res) => {
 
   User.findById(user_id, (error, data) => {
     if (error) throw error;
-    // if (error) {
-    //   console.log(error);
-    //   res.send(error);
-    // }
     else {
       console.log(data.plans);
       res.send(data.plans)

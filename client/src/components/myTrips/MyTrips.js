@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './MyTrips.css';
 import CardList from './CardList';
 import SearchTrip from './SearchTrip';
 import { observer, inject } from 'mobx-react';
-import axios from 'axios';
 
 @inject('store')
 @observer
@@ -27,8 +27,8 @@ class MyTrips extends Component {
       .then(response => {
         console.log(response);
 
-        // let plans = response.data;
-        let plans = response;
+        let plans = response.data;
+        // let plans = response;
 
         this.props.store.savePlans(plans);
 
@@ -56,6 +56,25 @@ class MyTrips extends Component {
 
   }
 
+  componentDidMount = () => {
+    console.log('in');
+    // console.log(this.props);
+    console.log(this.props.store);
+    let trip_id = this.props.store.user_id;
+    console.log('id: ' + trip_id);
+    axios.get(`api/users/users_trips/${trip_id}`)
+      .then(response => {
+        let plans = response.data;
+        console.log("got response!");
+        console.log(response);
+        this.setState({ user_plans: plans });
+      })
+      .catch(error => {
+        console.log('Error fetching and parsing data', error);
+      });
+  }
+
+
   render() {
 
     return (
@@ -69,6 +88,7 @@ class MyTrips extends Component {
   }
 
 }
+
 
 
 export default MyTrips;

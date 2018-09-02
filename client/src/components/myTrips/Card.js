@@ -10,8 +10,14 @@ const Card = (props) => {
             {/* <button onClick={handleWatch}>Watch </button> */}
             <Link to={`MyTrips/${props.plan.name}`} > Watch </Link>
         </div>
-    );
 
+        //     return (
+        //         <div className="card">
+        //             <h4>  {props.plan.name} </h4>
+        //             <button onClick={handleWatch}>Watch </button>
+        //         </div>
+    );
 }
 
-export default Card;
+
+export default Card

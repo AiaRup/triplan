@@ -7,12 +7,9 @@ import { observer, inject } from 'mobx-react';
 
 import Navbar from '../navbar/Navbar';
 import Content from '../content/Content';
-import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
+import MyTrips from '../myTrips/MyTrips';
 import OneTrip from '../myTrips/OneTrip';
-import Day from '../myTrips/Day';
-
-
 
 function onAuthRequired({ history }) {
   history.push('/Login');
@@ -24,6 +21,8 @@ function onAuthRequired({ history }) {
 }))
 @observer
 class App extends Component {
+
+
 
   componentDidMount = () => {
     const userId = localStorage.getItem('oktaID');
@@ -38,6 +37,8 @@ class App extends Component {
         });
     }
   }
+
+
   render() {
     return (
       <Router>
