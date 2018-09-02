@@ -6,13 +6,13 @@ import _ from 'lodash';
 import TempEventList from './tempEvents/TempEventList';
 import './content.css';
 
-const MapViewContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  height: 80vh;
-  width: 95%;
-  border: 1px solid lightgrey;
-`;
+// const MapViewContainer = styled.div`
+//   display: flex;
+//   justify-content: flex-start;
+//   height: 80vh;
+//   width: 95%;
+//   border: 1px solid lightgrey;
+// `;
 
 class Content extends Component {
   state = {
@@ -62,6 +62,13 @@ positionDenied = () => {
  render() { 
   return (
     <React.Fragment>
+      <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
+      <div className="home-page-instructions">
+      <p>Search Your Location<i class="right"></i></p>
+      <p>Choose Attractions<i class="right"></i></p>
+      <p>Add Events<i class="right"></i></p>
+      <p>Drag & Drop To The Right Day</p>
+      </div>
       <div className='map-event-container'>
         <div className='map-view-container'>
             <MapView address={_.clone(this.state.address)}/>

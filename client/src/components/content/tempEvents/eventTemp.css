@@ -7,13 +7,10 @@
   width: 25%;
   /* background-color: rgba(168, 218, 220, 0.13); */
   background-color: #F8F9FA;
+  overflow-y: auto;
 };
 
 .date-picker {
   display: flex;
 };
-
-/* .datesHead {
-  background-color: red;
-} */
 
