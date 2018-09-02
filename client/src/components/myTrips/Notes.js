@@ -48,16 +48,16 @@ export default class Notes extends Component {
     console.log('txt input after adding: ', this.props.store.oneTrip.days[this.props.index].notes);
 
     return (
-      <div className="notes">
+      <div>
 
-        {!this.state.isAdd && <div>
-          <input onChange={this.handleOnChange} placeholder="...." value={this.state.input} />
-          <button type="submit" onClick={this.handleAddNote}>Add Notes</button>
+        {!this.state.isAdd && <div >
+          <input className="input-notes" onChange={this.handleOnChange} placeholder="...." value={this.state.input} />
+          <button className="btn btn-danger" type="submit" onClick={this.handleAddNote}>Add Notes</button>
         </div>
         }
 
         {this.state.isAdd &&
-          <div>
+          <div className="notes">
             <i className="fa fa-pencil" aria-hidden="true"> Edit Your Notes</i>
             <InlineEdit
               //  text="Add Notes"
