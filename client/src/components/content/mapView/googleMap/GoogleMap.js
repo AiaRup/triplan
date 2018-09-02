@@ -136,11 +136,11 @@ const MapComponent = compose(
                   {marker.rating && <p>Rating: {marker.rating}</p>}
                   <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
                   {marker.openHours &&
-                    <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
-                  {marker.openHours &&
                     <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
                       {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
                     </Collapse>}
+                  {marker.openHours &&
+                    <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
                   {marker.website && <a href={marker.website} target="_blank">Website</a>}
                   <br />
                   <button className='btn btn-primary btn-sm' onClick={() => props.addPlace(marker)}>Add
