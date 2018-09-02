@@ -78,7 +78,8 @@ export default withAuth(
     render() {
       const navbarRight = this.navOnLogin();
       return (
-        <nav className="navbar navbar-expand-md custom-nav-link bg-light mb-3">
+        // bg-light mb-3
+        <nav className="navbar navbar-expand-md custom-nav-link ">
           <span className="navbar-brand custom-navbar "><Link className="navbar-brand custom-nav-link logo-design" to="/">Triplan</Link></span>
           <button
             className="navbar-toggler"

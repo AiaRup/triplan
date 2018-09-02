@@ -3,15 +3,14 @@
 }
 
 .navbar { 
-  background-color: #E63946;
+  background-color: #1483c6;
   color: white;
   margin: 0 auto;
   padding: 15px;
-  width: 90%;
   border: 1px solid lightgray;
-  margin-top: 10px;
   border-radius: 2px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  height: 60px;
+  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 .loginNavLi {
@@ -19,16 +18,16 @@
 
 }
 .custom-nav-link {
-  color: #1D3557;
+  color: white;
   
 }
 
 .logo-design {
-  font-size: 35px;
+  font-size: 25px;
   font-weight: 500;
   margin-bottom: 8px;
   margin-left: 20px;
-  color: #E63946;
+  color: white;
 }
 
 .color-userName {

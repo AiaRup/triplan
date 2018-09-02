@@ -36,7 +36,7 @@ class Place extends Component {
     if (this.props.verifier==='placeOfDay'){
       this.props.deletePlaceInDay(this.props.dayIndex, this.props.placeIndex);
     } else {
-      this.props.deletePlace(this.props.index);
+      this.props.deletePlace(this.props.placeIndex);
     }
   }
 

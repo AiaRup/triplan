@@ -45,7 +45,7 @@ class EventList extends Component {
     return (
       <div className="event-list-container">
         <h3 className='event-container-headline'>Events</h3>
-          <Droppable droppableId="eventsContainer">
+          <Droppable droppableId="eventsContainer" className="places-background-color">
             {(provided, snapshot) => (
                 <DroppableEvent provided={provided} snapshot={snapshot}/>
             )}

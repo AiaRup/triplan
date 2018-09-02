@@ -76,7 +76,7 @@ class TheEvent extends Component {
 
           <h6 className="event-headline">{this.props.tempEventName}</h6>
 
-          <button className="btn btn-sm event-dlt-btn" onClick={()=>this.props.addTempEvent(this.props.tempEventIndex)}>Add</button>
+          <button className="btn btn-sm event-add-btn" onClick={()=>this.props.addTempEvent(this.props.tempEventIndex)}>Add</button>
 
 
         </div>
