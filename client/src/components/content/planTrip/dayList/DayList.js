@@ -24,6 +24,7 @@ class DayList extends Component {
           <InlineEdit inputClassName="inlineInput" labelClassName="inlineEdit" text={this.props.tripName} onFocusOut={(data) => {
             this.props.saveTripName(data);
           }} />
+          <i className="fa fa-pencil" aria-hidden="true"></i>
           <button className="btn btn-primary btn-sm add-day" onClick={this.props.addDay}>Add Day</button>
         </div>
 

@@ -28,8 +28,8 @@ transition: background-color 0.2s ease;
 @inject(allStores => ({
   eventsArray: allStores.store.eventsArray
 }))
-
-@observer class DroppableEvent extends Component {
+@observer
+class DroppableEvent extends Component {
 
   render() {
     return (
@@ -38,8 +38,11 @@ transition: background-color 0.2s ease;
         isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps}
       >
-        {this.props.eventsArray.map((eventItem, eventItemIndex) => (
-          <TheEvent key={eventItem.id} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents" />))}
+        {this.props.eventsArray.map((eventItem, eventItemIndex) => {
+          console.log('event in map', eventItem);
+          return <TheEvent key={eventItem.id} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents" />;
+        })}
+
 
         {this.props.provided.placeholder}
       </EventListUL>

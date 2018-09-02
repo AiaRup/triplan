@@ -12,24 +12,24 @@ class TripStore extends Component {
   @observable eventCategory = [];
 
 
-  // @observable oneTrip = {
-  //   id: 'id1', // will get from the server
-  //   name: 'madrid 2018',
-  //   days:
-  //     [
-  //       {
-  //         date: '22/08/2018', places:
-  //           [ { position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
-  //             { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' } ]
-  //       },
-  //       {
-  //         date: '23/08/2018', places:
-  //           [ { position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
-  //             { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
-  //             { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' } ]
-  //       }
-  //     ]
-  // }
+  @observable oneTrip = {
+    id: 'id1', // will get from the server
+    name: 'madrid 2018',
+    days:
+      [
+        {
+          date: '22/08/2018', places:
+            [ { position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
+              { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' } ]
+        },
+        {
+          date: '23/08/2018', places:
+            [ { position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
+              { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
+              { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' } ]
+        }
+      ]
+  }
 
   @observable daysArray = [];
   @observable placesArray = [];
@@ -142,21 +142,27 @@ class TripStore extends Component {
   // }
 
   //Move from EVENT from TempEvent To EVENTS DIV
-  @action addTempEvent = (tempEventIndex) => {
-    let checker = 0;
-    const chosenEvent = this.tempEventArray[tempEventIndex];
+  @action addTempEvent = (event) => {
+    // let checker = 0;
+    // const chosenEvent = this.tempEventArray[tempEventIndex];
 
-    this.eventsArray.forEach(event => {
-      if (this.tempEventArray[tempEventIndex].id === event.id) {
-        checker = 1;
-        alert('You already have this event');
-      }
-    });
-    if (checker === 0) {
-      this.eventsArray.push(chosenEvent);
-    } else {
-      checker = 0;
-    }
+    // this.eventsArray.forEach(event => {
+    //   if (this.tempEventArray[tempEventIndex].id === event.id) {
+    //     checker = 1;
+    //     alert('You already have this event');
+    //   }
+    // });
+    // if (checker === 0) {
+    //   this.eventsArray.push(chosenEvent);
+    // } else {
+    //   checker = 0;
+    // }
+
+    // const chosenEvent = this.tempEventArray[tempEventIndex];
+
+    this.eventsArray.push(event);
+    console.log('eventsArray', this.eventsArray);
+
   }
 
 

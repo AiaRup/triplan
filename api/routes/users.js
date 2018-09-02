@@ -79,4 +79,21 @@ router.post('/users/:id/plantrip', (req, res) => {
   });
 });
 
+// 3) get a plan trip from DB
+router.get('/:idUser/myTrips/:planID', (req, res) => {
+  const idUser = req.params.idUser;
+  const planID = req.params.planID;
+
+  if (!ObjectID.isValid(req.params.idUser)) {
+    return res.status(400).send('Id not in the correct format');
+  }
+
+  User.findByID(idUser, (err, userResult) => {
+
+    if (err) throw err;
+    const result = userResult.plans.filter((plan)=> plan._id === planID);
+    console.log('trip from mongo', result);
+    res.send(result);
+  });
+});
 module.exports = router;

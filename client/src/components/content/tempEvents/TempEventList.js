@@ -58,6 +58,7 @@ class TempEventList extends Component {
           event.start = moment(`/Date(${Date.parse(eventResult.start)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.end = moment(`/Date(${Date.parse(eventResult.end)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.type = 'event';
+          event.position = { lat: eventResult.location[0], lng: eventResult.location[1] };
 
           if (eventResult.description) {
             event.description = eventResult.description;
@@ -67,6 +68,8 @@ class TempEventList extends Component {
             event.duration = this.convertDuration(eventResult.duration);
           }
           this.props.tempEventArray.push(event);
+          console.log('tempEvent', this.props.tempEventArray);
+
         });
       })
       .catch((error) => {
@@ -108,7 +111,7 @@ class TempEventList extends Component {
             <Collapse isOpened={this.state.toggledCollapse}>
               <div className = 'date-pick'>
                 <EventPickDate/>
-                <button className='btn-temp-event-date' onClick={this.getEvents}>Events</button>
+                <button className='btn btn-sm btn-outline-secondary btn-temp-event-date' onClick={this.getEvents}>Events</button>
               </div>
             </Collapse>
           </div>

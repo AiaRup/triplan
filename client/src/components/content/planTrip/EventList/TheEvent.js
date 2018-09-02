@@ -56,14 +56,19 @@ class TheEvent extends Component {
               </div>
 
               <Collapse isOpened={this.state.toggledCollapse}>
-                <p>Time: {this.props.eventItem.time}</p>
-                <p>Address: {this.props.eventItem.address}</p>
+                <ul>
+                  {Object.keys(this.props.eventItem).map((prop, index)=> {
+                    if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
+                      return <li key={index}>{prop}: {this.props.eventItem[prop]}</li>;
+                    }
+                    return null;
+                  })}
+                </ul>
               </Collapse>
 
             </Container>
           )}
         </Draggable>
-
       );
 
     } else if (this.props.verifier==='eventOfTempEvent') {
@@ -75,14 +80,16 @@ class TheEvent extends Component {
           </div>
 
           <Collapse isOpened={this.state.toggledCollapse}>
-            {Object.keys(this.props.tempEvent).map((prop, index)=> {
-              if (prop !== 'type' && prop !== 'name' && prop !== 'id') {
-                return <li key={index}>{prop}: {this.props.tempEvent[prop]}</li>;
-              }
-              return null;
-            })}
+            <ul>
+              {Object.keys(this.props.tempEvent).map((prop, index)=> {
+                if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
+                  return <li key={index}>{prop}: {this.props.tempEvent[prop]}</li>;
+                }
+                return null;
+              })}
+            </ul>
           </Collapse>
-          <button className="btn btn-primary btn-sm" onClick={()=>this.props.addTempEvent(this.props.tempEventIndex)}>Add</button>
+          <button className="btn btn-primary btn-sm" onClick={()=>this.props.addTempEvent(this.props.tempEvent)}>Add</button>
 
         </div>
       );
