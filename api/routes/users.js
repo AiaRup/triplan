@@ -3,6 +3,7 @@ const router = express.Router();
 const oktaClient = require('../lib/oktaClient');
 // const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
+const Plan = require('../models/planModel').plan;
 
 /* Create a new User (register). */
 router.post('/', (req, res) => {
@@ -58,11 +59,11 @@ router.get('/users/:id', (req, res) => {
 });
 
 
-//2) getting all my trips (carl) 
+//2) getting all my trips (carl)
 
-router.get('/users_trips/:user_id', (req,res)=>{
-  let user_id= req.params.user_id;
-  console.log("id is:");
+router.get('/users_trips/:user_id', (req, res) => {
+  let user_id = req.params.user_id;
+  console.log("param id is:");
   console.log(user_id);
  
   User.findById(user_id, (error,data)=> {
@@ -73,7 +74,6 @@ router.get('/users_trips/:user_id', (req,res)=>{
   })
 
 })
-
 
 
 module.exports = router;

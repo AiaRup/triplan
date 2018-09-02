@@ -17,6 +17,7 @@ function onAuthRequired({ history }) {
 
 @inject(allStores => ({
   configUser: allStores.store.configUser,
+  plans: allStores.store.plansArray
 }))
 @observer
 class App extends Component {
@@ -51,13 +52,12 @@ class App extends Component {
             <div className="container-fluid">
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
-                {/* <SecureRoute exact path="/MyTrips" render={() => <MyTrips  user_plans={this.state.user_plans}/>} /> */}
-                <SecureRoute exact path="/MyTrips" render={() => <MyTrips/>} />
-                
-                {/* {this.state.user_plans.map( 
-                  (plan,index) => 
-                  <SecureRoute exact path ={`/MyTrips/${plan}`} render={() => <OneTrip plan={plan} key={index} />} />
-                )}  */}
+                <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
+
+                {this.props.plans.map(
+                  (plan, index) =>
+                    <SecureRoute exact path={`/MyTrips/${plan.name}`} render={() => <OneTrip plan={plan} key={index} />} />
+                )}
 
                 <Route
                   path="/Login"

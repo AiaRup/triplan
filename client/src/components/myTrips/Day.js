@@ -20,7 +20,7 @@ const Day = (props) => {
       <h3>Date :{date}</h3>
       <h4>Attractions:</h4>
       {places.map((place, i) =>
-        <h5 key={i}>{place.name} | {place.type}</h5>)}
+        <h5 key={i}>{place.name}  ({place.category ? place.category : ""})</h5>)}
       <MapWithADirectionsRenderer route={route} />
       <Notes index={props.index} />
     </div>
