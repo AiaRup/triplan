@@ -28,7 +28,7 @@ class Map extends Component {
     this.state.places.forEach((element) => {
       let type = element.type;
 
-      axios(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=1500&type=${type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+      axios(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=2000&type=${type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
         .then((response) => {
           const promises = [];
 
@@ -112,7 +112,6 @@ class Map extends Component {
   }
 
   addPlace = (place) => {
-    console.log('place in Map: ', place);
     let exist = false;
     let places = this.props.store.placesArray;
     for (var i = 0; i < places.length && !exist; i++) {
@@ -127,14 +126,13 @@ class Map extends Component {
   }
 
   render() {
-    console.log('in render map marker to google', this.state.markers);
-
     return (
       <GoogleMap
         markers={this.state.markers}
         // address={this.props.address}
         updateAddress={this.props.updateAddress}
         addPlace={this.addPlace}
+        saveCity={this.props.store.saveCity}
       />
     );
   }

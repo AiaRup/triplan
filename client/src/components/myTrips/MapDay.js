@@ -29,6 +29,7 @@ const MapWithADirectionsRenderer = compose(
             directions: result,
           });
         } else {
+          this.setState({ directions: false });
           console.error(`error fetching directions ${result}`);
         }
       });
@@ -39,14 +40,30 @@ const MapWithADirectionsRenderer = compose(
   console.log('in render map');
   // console.log('props directions', props.directions);
   const { lat, lng } = props.route.origin.location;
-  // console.log('lat lng', lat, lng);
+  const routelog = props.route;
+  console.log('lat lng', lat, lng);
+  console.log('route log', routelog);
 
-  return <GoogleMap
-    defaultZoom={7}
-    defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
-    defaultCenter={new google.maps.LatLng(lat, lng)} >
-    {props.directions && <DirectionsRenderer directions={props.directions} />}
-  </GoogleMap>;
+  if (!props.directions) {
+    return <p>No Route Can Be calculated for this day</p>;
+  } else {
+    return <GoogleMap
+      defaultZoom={7}
+      defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
+      defaultCenter={new google.maps.LatLng(lat, lng)} >
+      {props.directions && <DirectionsRenderer directions={props.directions}/> }
+    </GoogleMap>;
+  }
+
+
+
+
+  // return <GoogleMap
+  //   defaultZoom={7}
+  //   defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
+  //   defaultCenter={new google.maps.LatLng(lat, lng)} >
+  //   {props.directions && <DirectionsRenderer directions={props.directions}/> }
+  // </GoogleMap>;
 }
 );
 

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const oktaClient = require('../lib/oktaClient');
-// const ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
 const Plan = require('../models/planModel').plan;
 
-/* Create a new User (register). */
+/* Create a new User (register on okta). */
 router.post('/', (req, res) => {
   if (!req.body) return res.sendStatus(400);
   const newUser = {
@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
         value: req.body.password
       }
     }
-   
+
   };
   // console.log('newUser',newUser)
   oktaClient
@@ -37,7 +37,6 @@ router.post('/', (req, res) => {
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
-        console.log('res server', userResult);
         res.status(201).send(userResult);
       });
     })
@@ -46,36 +45,79 @@ router.post('/', (req, res) => {
     });
 });
 
-// 1) to handle get user data on login
+// 1) to handle get user data on login and register
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
   User.find({ oktaID : oktaID }, (err, userResult) => {
     if (err) {
       console.log(err);
-      res.send("an error has occured");
-    } 
+      res.send('an error has occured');
+    }
     console.log('user from mongo', userResult);
     res.send(userResult);
   });
 });
 
 
-//2) getting all my trips (carl)
+// 2) to update user's plans and tempEvents and tempPlaces
+router.post('/users/:id/plantrip', (req, res) => {
+  // check mongo id validation
+  if (!ObjectID.isValid(req.params.id)) {
+    return res.status(400).send('Id not in the correct format');
+  }
+
+  const newPlan = {
+    name: req.body.plan.name,
+    days: req.body.plan.days,
+    city: req.body.plan.city
+  };
+
+  Plan.create(newPlan, (err, planResult) => {
+    if (err) throw err;
+    // update the user with the new trip plan
+    User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new:true }, (err, updateUser) => {
+      if (err) throw err;
+      console.log('newUser updated', updateUser);
+      res.status(200).send(updateUser);
+    });
+  });
+});
+
+// // 3) get a plan trip from DB
+// router.get('/:idUser/myTrips/:planID', (req, res) => {
+//   const idUser = req.params.idUser;
+//   const planID = req.params.planID;
+
+//   if (!ObjectID.isValid(req.params.idUser)) {
+//     return res.status(400).send('Id not in the correct format');
+//   }
+
+//   User.findByID(idUser, (err, userResult) => {
+
+//     if (err) throw err;
+//     const result = userResult.plans.filter((plan)=> plan._id === planID);
+//     console.log('trip from mongo', result);
+//     res.send(result);
+//   });
+// });
+
+
+// 3) getting all my trips
 
 router.get('/users_trips/:user_id', (req, res) => {
   let user_id = req.params.user_id;
-  console.log("param id is:");
+  console.log('param id is:');
   console.log(user_id);
- 
-  User.findById(user_id, (error,data)=> {
-    if (error) throw error;
-    else{
-    console.log(data.plans);
-     res.send (data.plans) }
-  })
 
-})
+  User.findById(user_id, (error, data)=> {
+    if (error) throw error;
+    else {
+      console.log(data.plans);
+      res.send (data.plans); }
+  });
+
+});
 
 
 module.exports = router;

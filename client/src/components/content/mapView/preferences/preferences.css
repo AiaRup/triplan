@@ -39,3 +39,10 @@
   padding-left: 9px;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 940px) {
+  .formSelector {
+    top: 45px;
+    left: 10px
+  }
+}

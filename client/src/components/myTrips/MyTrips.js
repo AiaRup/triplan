@@ -14,11 +14,8 @@ class MyTrips extends Component {
     this.state = {
       user_plans: [],
       filter_plans: []
-    }
+    };
   }
-
-  // user_plans = [{ name: 'barcelona 2018' }, { name: 'paris 2017' }, { name: 'vienna 2016' },
-  // { name: 'singapour 2015' }, { name: 'seoul 2014' }];
 
   componentDidMount = () => {
     let u_id = this.props.store.user_id;
@@ -32,9 +29,9 @@ class MyTrips extends Component {
 
         this.props.store.savePlans(plans);
 
-        console.log("got response! ");
+        console.log('got response! ');
         this.setState((state, props) => {
-          return { user_plans: plans, filter_plans: plans }
+          return { user_plans: plans, filter_plans: plans };
         });
 
       })
@@ -48,7 +45,7 @@ class MyTrips extends Component {
     // console.log("Our App knows the query: " + query)
     let trips = this.state.user_plans.filter((trip) => {
       // return trip.includes(query)
-      return trip.name.includes(query)
+      return trip.name.includes(query);
       // || trip.body.includes(query)
     });
     console.log(trips);
@@ -56,23 +53,23 @@ class MyTrips extends Component {
 
   }
 
-  componentDidMount = () => {
-    console.log('in');
-    // console.log(this.props);
-    console.log(this.props.store);
-    let trip_id = this.props.store.user_id;
-    console.log('id: ' + trip_id);
-    axios.get(`api/users/users_trips/${trip_id}`)
-      .then(response => {
-        let plans = response.data;
-        console.log("got response!");
-        console.log(response);
-        this.setState({ user_plans: plans });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
-  }
+  // componentDidMount = () => {
+  //   console.log('in');
+  //   // console.log(this.props);
+  //   console.log(this.props.store);
+  //   let trip_id = this.props.store.user_id;
+  //   console.log('id: ' + trip_id);
+  //   axios.get(`api/users/users_trips/${trip_id}`)
+  //     .then(response => {
+  //       let plans = response.data;
+  //       console.log("got response!");
+  //       console.log(response);
+  //       this.setState({ user_plans: plans });
+  //     })
+  //     .catch(error => {
+  //       console.log('Error fetching and parsing data', error);
+  //     });
+  // }
 
 
   render() {

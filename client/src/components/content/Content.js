@@ -57,6 +57,16 @@ positionDenied = () => {
      alert('No geolocation available!');
    }
    this.handlePermission();
+
+   //  const userId = localStorage.getItem('oktaID');
+   //  if (userId !== null) {
+   //    // get user id from mongo
+   //    axios.get(`/api/users/users/${userId}`)
+   //      .then((response) => {
+   //        // set user id on store
+   //        this.props.configUser(response.data[0]._id);
+   //      });
+   //  }
  }
 
  render() { 
@@ -76,12 +86,12 @@ positionDenied = () => {
         <TempEventList/>
       </div>
 
-      <div className='plan-trip-container'>
-        <PlanTrip />
-      </div>
-    </React.Fragment>
-  );
+       <div className='plan-trip-container'>
+         <PlanTrip />
+       </div>
+     </React.Fragment>
+   );
  }
-};
+}
 
 export default Content;

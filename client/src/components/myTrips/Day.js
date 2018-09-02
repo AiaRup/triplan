@@ -11,20 +11,29 @@ const Day = (props) => {
     origin: positions[0],
     destination: positions[positions.length - 1]
   };
+
   positions.splice(0, 1);
   positions.splice(positions.length - 1, 1);
   route.waypoints = positions;
+
+  console.log('route', route);
+
 
   return (
     <div className="day">
       <h3>Date :{date}</h3>
       <h4>Attractions:</h4>
       {places.map((place, i) =>
-        <h5 key={i}>{place.name}  ({place.category ? place.category : ""})</h5>)}
+      {
+        console.log('place in map', place, i);
+        return <h5 key={i}>{place.name}  {place.category ? place.category : ''}</h5>;
+      })
+
+      }
       <MapWithADirectionsRenderer route={route} />
       <Notes index={props.index} />
     </div>
-  )
-}
+  );
+};
 
 export default Day;

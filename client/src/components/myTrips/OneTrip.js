@@ -2,16 +2,16 @@
 // // // import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 // const OneTrip = (props) => {
-    
+
 //     return (
 //         <div>
 
-//          <h2>  {props.plan} </h2> 
-        
+//          <h2>  {props.plan} </h2>
+
 
 //         {/* {props.plan.days.map(
-//             (index, day) => 
-         
+//             (index, day) =>
+
 
 //          {<div class="container">
 //             <div class="row">
@@ -26,7 +26,7 @@
 //     )
 //  }
 
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 import { observer, inject } from 'mobx-react';
 import Day from './Day';
 
@@ -55,6 +55,6 @@ export default class OneTrip extends Component {
           )}
         </div>
       </Fragment>
-    )
+    );
   }
 }

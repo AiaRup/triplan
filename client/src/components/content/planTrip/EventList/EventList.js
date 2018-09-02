@@ -15,23 +15,27 @@ transition: background-color 0.2s ease;
 @inject(allStores => ({
   eventsArray: allStores.store.eventsArray
 }))
-
-@observer class DroppableEvent extends Component {
+@observer
+class DroppableEvent extends Component {
 
   render() {
     return (
-      <EventListUL 
-      innerRef={this.props.provided.innerRef}
-      isDraggingOver={this.props.snapshot.isDraggingOver}
-      {...this.props.provided.droppableProps} 
+      <EventListUL
+        innerRef={this.props.provided.innerRef}
+        isDraggingOver={this.props.snapshot.isDraggingOver}
+        {...this.props.provided.droppableProps}
       >
-        {this.props.eventsArray.map((eventItem, eventItemIndex) => (
-        <TheEvent key={eventItem.id} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents"/>))}
-        
+        {this.props.eventsArray.map((eventItem, eventItemIndex) => {
+          console.log('event in map', eventItem);
+          return <TheEvent key={eventItem.id} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents" />;
+        })}
+
+
         {this.props.provided.placeholder}
       </EventListUL>
-    )};
-};
+    );
+  }
+}
 
 
 
@@ -45,12 +49,12 @@ class EventList extends Component {
     return (
       <div className="event-list-container">
         <h3 className='event-container-headline'>Events</h3>
-          <Droppable droppableId="eventsContainer" className="places-background-color">
-            {(provided, snapshot) => (
-                <DroppableEvent provided={provided} snapshot={snapshot}/>
-            )}
-            
-          </Droppable>
+        <Droppable droppableId="eventsContainer" className="places-background-color">
+          {(provided, snapshot) => (
+            <DroppableEvent provided={provided} snapshot={snapshot}/>
+          )}
+
+        </Droppable>
       </div>
     );
   }
