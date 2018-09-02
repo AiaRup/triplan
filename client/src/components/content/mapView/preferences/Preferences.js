@@ -45,6 +45,7 @@ export default class Preferences extends Component {
     formSubmitEvent.preventDefault();
     let select = this.state.selectedCheckboxes.filter((e) => e.checked);
     this.props.updatePlacesNear(select);
+    this.collapseToggle();
   }
 
   handleClear = (e) => {

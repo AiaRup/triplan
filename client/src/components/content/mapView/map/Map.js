@@ -46,7 +46,6 @@ class Map extends Component {
               const { lat, lng } = attraction.geometry.location;
 
               let marker = {
-                showInfoWindow: false,
                 name: attraction.name,
                 id: attraction.place_id,
                 icon: element.icon,
@@ -69,22 +68,22 @@ class Map extends Component {
               }
               if (attraction.price_level !== undefined) {
                 switch (attraction.price_level) {
-                case 0:
-                  marker.price = 'Free';
-                  break;
-                case 1:
-                  marker.price = 'Inexpensive';
-                  break;
-                case 2:
-                  marker.price = 'Moderate';
-                  break;
-                case 3:
-                  marker.price = 'Expensive';
-                  break;
-                case 4:
-                  marker.price = 'Very Expensive';
-                  break;
-                default: break;
+                  case 0:
+                    marker.price = 'Free';
+                    break;
+                  case 1:
+                    marker.price = 'Inexpensive';
+                    break;
+                  case 2:
+                    marker.price = 'Moderate';
+                    break;
+                  case 3:
+                    marker.price = 'Expensive';
+                    break;
+                  case 4:
+                    marker.price = 'Very Expensive';
+                    break;
+                  default: break;
                 }
               }
               markerArray.push(marker);
