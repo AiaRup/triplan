@@ -9,6 +9,9 @@ import Navbar from '../navbar/Navbar';
 import Content from '../content/Content';
 import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
+import OneTrip from '../myTrips/OneTrip';
+import Day from '../myTrips/Day';
+
 
 
 function onAuthRequired({ history }) {
@@ -17,6 +20,7 @@ function onAuthRequired({ history }) {
 
 @inject(allStores => ({
   configUser: allStores.store.configUser,
+  plans: allStores.store.plansArray
 }))
 @observer
 class App extends Component {
@@ -48,6 +52,12 @@ class App extends Component {
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
+
+                {this.props.plans.map(
+                  (plan, index) =>
+                    <SecureRoute exact path={`/MyTrips/${plan.name}`} render={() => <OneTrip plan={plan} key={index} />} />
+                )}
+
                 <Route
                   path="/Login"
                   render={() => (<Login baseUrl="https://dev-497398.oktapreview.com" />)} />

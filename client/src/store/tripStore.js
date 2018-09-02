@@ -4,6 +4,7 @@ import { observable, action } from 'mobx';
 
 class TripStore extends Component {
 
+
   @action addNotes = (note, index) => {
     console.log('note ', note, 'index ', index);
 
@@ -15,6 +16,13 @@ class TripStore extends Component {
   @action updateNotes = (data, index) => {
     this.oneTrip.days[index].notes = data;
   }
+
+
+  @action savePlans = (plans) => {
+    this.plansArray = plans;
+  }
+
+  @observable plansArray = [];
 
 
   @observable user_id = '';

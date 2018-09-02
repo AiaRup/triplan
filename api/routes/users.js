@@ -57,19 +57,26 @@ router.get('/users/:id', (req, res) => {
 
 
 
-// to handle get a specific trip
-// router.get('/MyTrips/:id', (req, res) => {
-//   const tripId = req.params.id;
+//2) getting all my trips (carl)
 
-//   User.find({ oktaID: oktaID }, (err, userResult) => {
-//     if (err) throw err;
-//     console.log('user from mongo', userResult);
-//     res.send(userResult);
-//   });
-// });
+router.get('/users_trips/:user_id', (req, res) => {
+  let user_id = req.params.user_id;
+  console.log("param id is:");
+  console.log(user_id);
 
+  User.findById(user_id, (error, data) => {
+    if (error) throw error;
+    // if (error) {
+    //   console.log(error);
+    //   res.send(error);
+    // }
+    else {
+      console.log(data.plans);
+      res.send(data.plans)
+    }
+  })
 
-
+})
 
 
 module.exports = router;

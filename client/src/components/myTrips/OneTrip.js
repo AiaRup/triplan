@@ -11,17 +11,12 @@ Display Trip
 export default class OneTrip extends Component {
 
   render() {
-    const { name, days } = this.props.store.oneTrip;
-    // const { name, days } = this.props.trip;
+    // const { name, days } = this.props.store.oneTrip;
+    // const plans= this.props.store.plansArray;
+    const { name, days } = this.props.plan;
 
     return (
       <Fragment>
-        {/* {days} */}
-        {/* <h2> Name Trip: {this.props.trip.name}</h2>
-        Your route-
-        {this.props.trip.days.map((day, i) =>
-          <Day day={day} key={i} />
-        )} */}
         <div className="trip-header">
           <h1> Name Trip: {name}</h1>
           <h2> Day Details:</h2>

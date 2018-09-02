@@ -51,7 +51,7 @@ export default class Notes extends Component {
       <div>
 
         {!this.state.isAdd && <div >
-          <input className="input-notes" onChange={this.handleOnChange} placeholder="...." value={this.state.input} />
+          <input className="input-notes form-control mb-2 mr-sm-2 mb-sm-0" onChange={this.handleOnChange} placeholder="...." value={this.state.input} />
           <button className="btn btn-danger" type="submit" onClick={this.handleAddNote}>Add Notes</button>
         </div>
         }
