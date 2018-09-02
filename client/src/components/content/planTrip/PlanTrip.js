@@ -20,11 +20,7 @@ class PlanTrip extends Component {
 
     saveTrip = (event) => {
     
-        // const plans = {
-        //     name: 'myTrip',
-        //     plans: this.props.daysArray,
-        //     city: 'myCity'
-        // }
+  
 
         axios.post(`/api/users/users/${this.props._userId}/plantrip`, this.props.daysArray)
         .then(response => {

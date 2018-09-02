@@ -85,7 +85,7 @@ class TripStore extends Component {
 
   //Functionality in DAY
   @action addDay = () => {
-    this.daysArray.push({ name: 'day4', id: 'dayId4', places: [{ name: 'place9', id: 'placeId9' }] });
+    this.daysArray.push({ name: 'day4', id: 'dayId4', date: new Date(), places: [] });
   }
 
   @action deleteDay = (index) => {
@@ -149,8 +149,10 @@ class TripStore extends Component {
 
   @action configUser = (userID) => {
     this.user_id = userID;
-    console.log('id in store', this.user_id);
+    // console.log('id in store', this.usegirIdStore);
     this.userIdStore = userID;
+    console.log('id in store', this.user_id);
+
   };
 
 }

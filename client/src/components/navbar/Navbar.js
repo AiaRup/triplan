@@ -46,7 +46,7 @@ export default withAuth(
       }
       const authNav = this.state.authenticated ? (
         <ul className="auth-nav nav navbar-nav navbar-right">
-          <li className="disabled mr-3">{this.currentUserName}</li>
+          <li className="custom-nav-link nav-link">{this.currentUserName}</li>
           <li className="nav-item"><button className="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.logout()}>Log Out</button></li>
         </ul>
       ) : (
@@ -78,8 +78,9 @@ export default withAuth(
     render() {
       const navbarRight = this.navOnLogin();
       return (
-        <nav className="navbar navbar-expand-md navbar-light bg-light mb-3">
-          <span className="navbar-brand"><Link className="navbar-brand" to="/">Triplan</Link></span>
+        // bg-light mb-3
+        <nav className="navbar navbar-expand-md custom-nav-link ">
+          <span className="navbar-brand custom-navbar "><Link className="navbar-brand custom-nav-link logo-design" to="/">Triplan</Link></span>
           <button
             className="navbar-toggler"
             type="button"
@@ -90,13 +91,18 @@ export default withAuth(
             aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse" id="navForCollapseMenu">
+          <div className="collapse navbar-collapse custom-navbar" id="navForCollapseMenu">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item ml-3">
-                <Link className="nav-link" to="/">Home</Link>
+                <Link className="nav-link custom-nav-link" to="/">Home</Link>
               </li>
+              <li className="nav-item nav-link custom-nav-link"><em><b>|</b></em></li>
               <li className="nav-item">
-                <Link className="nav-link" to="/MyTrips" > My Trips </Link>
+                <Link className="nav-link custom-nav-link" to="/MyTrips" > My Trips </Link>
+              </li>
+              <li className="nav-item nav-link custom-nav-link"><em><b>|</b></em></li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/MyTrips" > About & Contact </Link>
               </li>
             </ul>
             {navbarRight ? navbarRight : ''}

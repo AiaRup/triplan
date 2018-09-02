@@ -7,19 +7,20 @@
 .plan-trip-container {
   display: flex;
   flex-direction: column;
-  margin: 8px;
-  border-radius: 2px;
+  padding-bottom: 15px;
+  /* border-radius: 2px; */
   width: 100%; 
   height: auto;
+  /* background-color: green; */
 }
 
 .place-event-containers {
 display: flex;
 flex-direction: row;
-margin: 8px;
-border-radius: 2px;
+/* border-radius: 2px; */
 width: 100%;
 height: auto;
+/* background-color: purple; */
 }
 
 .save-trip-btn {
@@ -27,6 +28,6 @@ height: auto;
   width: 22%;
   margin: 0 auto;
   color: white;
-  height: 30px;
+  height: 35px;
   border-radius: 3px;
 }
