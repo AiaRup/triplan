@@ -29,6 +29,12 @@
   padding-bottom: 5px;
 }
 
+.pref-buttons {
+  display: flex;
+  /* justify-content: space-between; */
+  justify-content: space-around;
+}
+
 .label {
   padding-left: 9px;
   cursor: pointer;

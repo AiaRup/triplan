@@ -5,14 +5,6 @@ import styled from 'styled-components';
 import Place from './place/Place';
 import './places.css'
 
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  height: auto;
-  min-height: 200px;
-  width: 50%;
-`;
 
 const PlaceListUL = styled.div`
 padding: 8px;

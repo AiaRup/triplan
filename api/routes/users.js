@@ -20,7 +20,9 @@ router.post('/', (req, res) => {
         value: req.body.password
       }
     }
+
   };
+  // console.log('newUser',newUser)
   oktaClient
     .createUser(newUser)
     .then(user => {
@@ -48,7 +50,10 @@ router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
   User.find({ oktaID : oktaID }, (err, userResult) => {
-    if (err) throw err;
+    if (err) {
+      console.log(err);
+      res.send('an error has occured');
+    }
     console.log('user from mongo', userResult);
     res.send(userResult);
   });
@@ -79,21 +84,40 @@ router.post('/users/:id/plantrip', (req, res) => {
   });
 });
 
-// 3) get a plan trip from DB
-router.get('/:idUser/myTrips/:planID', (req, res) => {
-  const idUser = req.params.idUser;
-  const planID = req.params.planID;
+// // 3) get a plan trip from DB
+// router.get('/:idUser/myTrips/:planID', (req, res) => {
+//   const idUser = req.params.idUser;
+//   const planID = req.params.planID;
 
-  if (!ObjectID.isValid(req.params.idUser)) {
-    return res.status(400).send('Id not in the correct format');
-  }
+//   if (!ObjectID.isValid(req.params.idUser)) {
+//     return res.status(400).send('Id not in the correct format');
+//   }
 
-  User.findByID(idUser, (err, userResult) => {
+//   User.findByID(idUser, (err, userResult) => {
 
-    if (err) throw err;
-    const result = userResult.plans.filter((plan)=> plan._id === planID);
-    console.log('trip from mongo', result);
-    res.send(result);
+//     if (err) throw err;
+//     const result = userResult.plans.filter((plan)=> plan._id === planID);
+//     console.log('trip from mongo', result);
+//     res.send(result);
+//   });
+// });
+
+
+// 3) getting all my trips
+
+router.get('/users_trips/:user_id', (req, res) => {
+  let user_id = req.params.user_id;
+  console.log('param id is:');
+  console.log(user_id);
+
+  User.findById(user_id, (error, data)=> {
+    if (error) throw error;
+    else {
+      console.log(data.plans);
+      res.send (data.plans); }
   });
+
 });
+
+
 module.exports = router;

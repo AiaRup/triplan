@@ -46,6 +46,7 @@ class PlanTrip extends Component {
   };
 
 
+
   onDragEnd = result => {
     const daysArray = this.props.daysArray;
     const placesArray = this.props.placesArray;

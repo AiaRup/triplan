@@ -3,22 +3,25 @@
   flex: wrap;
   flex-flow: row;
   justify-content: space-around;
+  margin-top: 45px;
+  margin-bottom: 35px;
 }
 
 .plan-trip-container {
+  margin: 0;
   display: flex;
   min-height: 80vh;
   height: auto;
   width: 100%;
-  border: 1px solid lightgrey;
 }
 
 .map-view-container {
   display: flex;
   justify-content: flex-start;
   height: 80vh;
-  width: 95%;
-  border: 1px solid lightgrey;
-};
+  width: 100%;
+  border: 2px solid lightgray;
+  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1); */
+}
 
 

@@ -2,9 +2,36 @@
   background-image: url('https://mdbootstrap.com/img/svg/hamburger1.svg?color=6a1b9a');
 }
 
+.navbar { 
+  background-color: #1483c6;
+  color: white;
+  margin: 0 auto;
+  padding: 15px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  height: 60px;
+  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+}
+
 .loginNavLi {
   pointer-events: none;
 
+}
+.custom-nav-link {
+  color: white;
+  
+}
+
+.logo-design {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  margin-left: 20px;
+  color: white;
+}
+
+.color-userName {
+  color:#1D3557;
 }
 
 @media (max-width: 767px) {

@@ -48,7 +48,7 @@ class TheEvent extends Component {
             >
               <div className="single-event-header-section">
 
-                <button className="btn btn-danger btn-sm" onClick={()=>this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}>x</button>
+              <button className="btn btn-color btn-sm" onClick={()=>this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}>x</button>
 
                 <h6 className="event-headline">{this.props.eventName}</h6>
 

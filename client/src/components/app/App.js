@@ -7,9 +7,9 @@ import { observer, inject } from 'mobx-react';
 
 import Navbar from '../navbar/Navbar';
 import Content from '../content/Content';
-import MyTrips from '../myTrips/MyTrips';
 import Login from '../auth/Login';
-
+import MyTrips from '../myTrips/MyTrips';
+import OneTrip from '../myTrips/OneTrip';
 
 function onAuthRequired({ history }) {
   history.push('/Login');
@@ -17,9 +17,12 @@ function onAuthRequired({ history }) {
 
 @inject(allStores => ({
   configUser: allStores.store.configUser,
+  plans: allStores.store.plansArray
 }))
 @observer
 class App extends Component {
+
+
 
   componentDidMount = () => {
     const userId = localStorage.getItem('oktaID');
@@ -34,6 +37,8 @@ class App extends Component {
         });
     }
   }
+
+
   render() {
     return (
       <Router>
@@ -48,6 +53,12 @@ class App extends Component {
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
+
+                {this.props.plans.map(
+                  (plan, index) =>
+                    <SecureRoute exact path={`/MyTrips/${plan.name}`} key={index} render={() => <OneTrip plan={plan} />} />
+                )}
+
                 <Route
                   path="/Login"
                   render={() => (<Login baseUrl="https://dev-497398.oktapreview.com" />)} />
