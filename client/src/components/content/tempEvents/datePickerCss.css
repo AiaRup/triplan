@@ -2,7 +2,7 @@ h5 {
   margin-top: 8px;
   font-size: 18px;
   font-weight: 400;
-  color: white;
+  /* color: white; */
 }
 
 .eventDatePicker {
@@ -24,14 +24,17 @@ h5 {
   min-height: 40px;
 }
 
-.to-event-date, 
+.to-event-date,
 .from-event-date {
   text-align: left;
-};
+}
 
+;
 .date-pick-container {
   display: flex;
   width: 75%;
   margin-top: 5px;
   margin-bottom: 5px;
-};
+}
+
+;

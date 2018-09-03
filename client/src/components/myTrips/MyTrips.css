@@ -7,6 +7,7 @@
 
 .search-bar {
   margin: auto;
+  margin-top: 100px;
   margin-bottom: 40px;
   width: 60%;
   /* text-align: center; */
@@ -58,6 +59,7 @@ Day
 
 .trip-header>h1 {
   color: #dc3545;
+  font-weight: bolder;
   text-shadow: 3px -1px 1px black;
 }
 
