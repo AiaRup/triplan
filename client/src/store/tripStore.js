@@ -94,7 +94,7 @@ class TripStore extends Component {
   //Functionality in DAY
   @action addDay = () => {
     this.numOfDays++;
-    this.daysArray.push({ date: new Date(), places: [], id: this.numOfDays });
+    this.daysArray.push({ date: new Date(), places: [], id: 'day_' + this.numOfDays });
   }
 
   @action deleteDay = (index) => {
