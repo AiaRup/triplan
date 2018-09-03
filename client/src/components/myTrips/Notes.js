@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import InlineEdit from 'react-inline-editing';
 import { observer, inject } from 'mobx-react';
-
+import pin from './pin.png'
 
 const View = (props) => {
   console.log('note', props.note);
@@ -31,18 +31,21 @@ class FormNotes extends Component {
     this.setState({ input: e.target.value });
   }
   addNotes = (e) => {
-    e.preventDefault();
-    this.props.addNotes(this.state.input);
-    this.setState({ input: '' });
+    // e.preventDefault();
+    if (e.key === 'Enter') {
+      this.props.addNotes(this.state.input);
+      this.setState({ input: '' });
+    }
+
   }
   render() {
     return (
-      <form className="form" onSubmit={this.addNotes} >
-        <input className="input-form" type="text" placeholder="....."
-          // required
-          onChange={this.inputChange} value={this.state.input} />
-        <button type="submit" className="btn btn-primary btn-sm">Add Notes</button>
-      </form>);
+      <input className="form-control" type="text" placeholder="Add Notes..."
+        required
+        style={{ width: '95%' }}
+        onKeyPress={this.addNotes}
+        onChange={this.inputChange} value={this.state.input} />
+    );
   }
 }
 
@@ -69,6 +72,7 @@ export default class Notes extends Component {
     // console.log('txt input after adding: ', this.props.store.oneTrip.days[this.props.index].notes);
     return (
       <div>
+        {/* <img src={pin} alt="pin icon" className="pin-note" /> */}
         <FormNotes addNotes={this.addNotes} />
         <ul>
           {this.state.notes.map((note, i) =>
@@ -80,3 +84,11 @@ export default class Notes extends Component {
   }
 }
 
+
+
+    //   <form className="form" onSubmit={this.addNotes} >
+      //     <input className="input-form" type="text" placeholder="....."
+      //       // required
+      //       onChange={this.inputChange} value={this.state.input} />
+      //     <button type="submit" className="btn btn-primary btn-sm">Add Notes</button>
+      // </form>

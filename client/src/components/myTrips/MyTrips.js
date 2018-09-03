@@ -49,7 +49,7 @@ class MyTrips extends Component {
     return (
       <div className="all">
         {/* !delete Notes after check! */}
-        <Notes />
+        {/* <Notes /> */}
         <SearchTrip searchTrips={this.searchTrips} />
         <CardList plans={this.state.filter_plans} />
       </div>
