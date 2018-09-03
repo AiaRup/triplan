@@ -10,6 +10,7 @@ export default class OneTrip extends Component {
 
   render() {
     const { name, days } = this.props.plan;
+    console.log('id trip ', this.props.plan._id);
 
     return (
       <Fragment>

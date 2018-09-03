@@ -3,6 +3,8 @@ import MapDay from './MapDay';
 import Notes from './Notes';
 
 const Day = (props) => {
+  console.log('id day ', props.day._id);
+
   const { date, places } = props.day;
   // console.log('date: ', date, 'places:', places);
   const positions = places.map((place) => ({ location: place.position }));
@@ -23,14 +25,20 @@ const Day = (props) => {
   }
   return (
     <div className="day">
-      <h3>Date :{date}</h3>
-      <h4>Attractions:</h4>
-      {places.map((place, i) => {
-        console.log('place in map', place, i);
-        return <h5 key={i}>{place.name}  {place.category ? '(' + place.category + ')' : ''}</h5>;
-      })}
-      <MapDay route={route} directions={false} />
-      <Notes index={props.index} />
+      <div className="attractions">
+        <h3>Date :{date}</h3>
+        <h4>Attractions:</h4>
+        {places.map((place, i) => {
+          console.log('place in map', place, i);
+          return <h5 key={i}>{place.name}  {place.category ? '(' + place.category + ')' : ''}</h5>;
+        })}
+      </div>
+      <div className="mapDay">
+        <MapDay route={route} directions={false} />
+      </div>
+      <div className="notes">
+        <Notes index={props.index} />
+      </div>
     </div>
   );
 };

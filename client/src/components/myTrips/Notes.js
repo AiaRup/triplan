@@ -2,76 +2,79 @@ import React, { Component } from 'react'
 import InlineEdit from 'react-inline-editing';
 import { observer, inject } from 'mobx-react';
 
-inject('store')
-const View = (props) => {
-  console.log(props.text, props.index);
 
+const View = (props) => {
+  console.log('note', props.note);
+  const edit = () => {
+    console.log('click edit');
+  }
   return (
-    <InlineEdit text={props.text}
-      onFocusOut={(data) => {
-        this.props.store.updateNotes(data, props.index);
-      }}
-    />
-  )
+    <div className="note">
+      <i className="fa fa-pencil" aria-hidden="true" onClick={edit}></i>
+      <InlineEdit
+        text={props.note} onFocusOut={(data) => {
+          props.updateNotes(data, props.indexN);
+        }} onFocus={this._handleFocus} />
+      {/* <p >{props.note}</p> */}
+    </div>
+
+  );
+}
+
+
+class FormNotes extends Component {
+  // console.log(props.text, props.index);
+  state = {
+    input: ''
+  }
+  inputChange = (e) => {
+    this.setState({ input: e.target.value });
+  }
+  addNotes = (e) => {
+    e.preventDefault();
+    this.props.addNotes(this.state.input);
+    this.setState({ input: '' });
+  }
+  render() {
+    return (
+      <form className="form" onSubmit={this.addNotes} >
+        <input className="input-form" type="text" placeholder="....."
+          // required
+          onChange={this.inputChange} value={this.state.input} />
+        <button type="submit" className="btn btn-primary btn-sm">Add Notes</button>
+      </form>);
+  }
 }
 
 
 
 
 @inject('store')
+@observer
 export default class Notes extends Component {
-
   state = {
     input: '',
-    isAdd: false,
-    notes: ''
+    notes: []
   }
 
-  handleOnChange = (e) => {
-    this.setState({ input: e.target.value });
+  addNotes = (input) => {
+    let notes = this.state.notes;
+    this.setState({ notes: notes.concat(input) });
   }
+  updateNotes = (newNote, indexNote) => {
+    console.log(newNote, indexNote);
 
-  handleAddNote = (e) => {
-    e.preventDefault(); // doesnt work
-    this.props.store.addNotes(this.state.input, this.props.index);
-    this.setState({
-      input: '',
-      isAdd: true,
-      notes: this.props.store.oneTrip.days[this.props.index].notes
-    });
   }
-  _handleFocus = (text) => {
-    console.log('Focused with text: ' + text);
-  }
-
   render() {
     // console.log('txt input after adding: ', this.props.store.oneTrip.days[this.props.index].notes);
-
     return (
       <div>
-
-        {!this.state.isAdd && <div >
-          <input className="input-notes form-control mb-2 mr-sm-2 mb-sm-0" onChange={this.handleOnChange} placeholder="...." value={this.state.input} />
-          <button className="btn btn-danger" type="submit" onClick={this.handleAddNote}>Add Notes</button>
-        </div>
-        }
-
-        {this.state.isAdd &&
-          <div className="notes">
-            <i className="fa fa-pencil" aria-hidden="true"> Edit Your Notes</i>
-            <InlineEdit
-              //  text="Add Notes"
-              // text={this.state.input !== '' ? this.state.input : "Add Notes"}
-              text={this.state.notes !== '' ? this.state.notes : "Add Notes"}
-              onFocusOut={(data) => {
-                this.props.store.updateNotes(data, this.props.index);
-              }}
-              onFocus={this._handleFocus}
-            />
-          </div>
-
-        }
-
+        <FormNotes addNotes={this.addNotes} />
+        <ul>
+          {this.state.notes.map((note, i) =>
+            <View note={note} indexN={i} key={i} updateNotes={this.updateNotes} />
+          )}
+        </ul>
       </div>
     )
   }

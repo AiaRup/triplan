@@ -4,6 +4,7 @@ import './MyTrips.css';
 import CardList from './CardList';
 import SearchTrip from './SearchTrip';
 import { observer, inject } from 'mobx-react';
+import Notes from './Notes';
 
 @inject('store')
 @observer
@@ -47,6 +48,8 @@ class MyTrips extends Component {
   render() {
     return (
       <div className="all">
+        {/* !delete Notes after check! */}
+        <Notes />
         <SearchTrip searchTrips={this.searchTrips} />
         <CardList plans={this.state.filter_plans} />
       </div>
@@ -57,3 +60,4 @@ class MyTrips extends Component {
 
 
 export default MyTrips;
+

@@ -43,9 +43,10 @@ Day
 =======================================================*/
 
 .day {
-  width: 50vw;
+  /* width: 50vw; */
   box-sizing: border-box;
   padding: 25px;
+  display: flex;
 }
 
 .day-list {
@@ -69,13 +70,29 @@ Day
 }
 
 .notes {
-  margin: auto;
+  margin: 0;
+  width: 50%;
+  padding: 20px;
   text-align: center;
-  width: 40%;
   background-color: #fcea44a3;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
 }
 
 .input-notes {
   background: #0077b7;
+}
+
+.note {
+  display: flex;
+  text-align: center;
+  padding: 5px;
+  border-bottom: 1px #007dc1ad solid;
+}
+
+.attractions {
+  /* display: flex; */
+}
+
+.mapDay {
+  width: 50vw;
 }
