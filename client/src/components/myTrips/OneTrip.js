@@ -16,7 +16,7 @@ export default class OneTrip extends Component {
       <Fragment>
         <div className="trip-header">
           {/* <h1> Name Trip: {name}</h1> */}
-          <h1>{name}</h1>
+          <h1>{name[0].toUpperCase() + name.slice(1)}</h1>
           <h2> Day Details: </h2>
         </div>
         <div className="day-list-trip">

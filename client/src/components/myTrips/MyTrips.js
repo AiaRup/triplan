@@ -39,8 +39,7 @@ class MyTrips extends Component {
 
   searchTrips = (query) => {
     let trips = this.state.user_plans.filter((trip) => {
-      // return trip.includes(query)
-      return trip.name.includes(query);
+      return trip.name.toLowerCase().includes(query.toLowerCase());
     });
     this.setState({ filter_plans: trips });
   }
@@ -48,8 +47,6 @@ class MyTrips extends Component {
   render() {
     return (
       <div className="all">
-        {/* !delete Notes after check! */}
-        {/* <Notes /> */}
         <SearchTrip searchTrips={this.searchTrips} />
         <CardList plans={this.state.filter_plans} />
       </div>
