@@ -10,6 +10,8 @@ import Content from '../content/Content';
 import Login from '../auth/Login';
 import MyTrips from '../myTrips/MyTrips';
 import OneTrip from '../myTrips/OneTrip';
+import About from '../about/About';
+
 
 function onAuthRequired({ history }) {
   history.push('/Login');
@@ -58,6 +60,8 @@ class App extends Component {
                   (plan, index) =>
                     <SecureRoute exact path={`/MyTrips/${plan.name}`} key={index} render={() => <OneTrip plan={plan} />} />
                 )}
+
+                 <SecureRoute exact path="/About"  render={() => <About/>} />
 
                 <Route
                   path="/Login"
