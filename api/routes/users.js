@@ -4,6 +4,10 @@ const oktaClient = require('../lib/oktaClient');
 const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
 const Plan = require('../models/planModel').plan;
+const request = require('request');
+var rp = require('request-promise');
+
+
 
 /* Create a new User (register on okta). */
 router.post('/', (req, res) => {
@@ -118,6 +122,44 @@ router.get('/users_trips/:user_id', (req, res) => {
   });
 
 });
+
+// enable CORS request to google - first fetch
+router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
+  rp(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+    .then(function (placesRes) {
+      console.log('placesRes:', placesRes);
+      res.send(placesRes);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+
+// second fetch - get more info on the place found by the first request
+router.get('/placeSearch/:placeID', (req, res) => {
+  rp(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.params.placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+    .then(function (placeRes) {
+      console.log('one place result:', placeRes);
+      res.send(placeRes);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+
+
+
+
+// router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
+//   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`, function (error, response, body) {
+//     console.log('error:', error); // Print the error if one occurred
+//     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//     console.log('body:', body); // Print the HTML for the Google homepage.
+//   });
+// });
+
 
 
 module.exports = router;
