@@ -69,15 +69,22 @@ positionDenied = () => {
    //  }
  }
 
- render() {
-   return (
-     <React.Fragment>
-       <div className='map-event-container'>
-         <div className='map-view-container'>
-           <MapView address={_.clone(this.state.address)}/>
-         </div>
-         <TempEventList/>
-       </div>
+ render() { 
+  return (
+    <React.Fragment>
+      <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
+      <div className="home-page-instructions">
+      <p>Search Your Location<i className="right"></i></p>
+      <p>Choose Attractions<i className="right"></i></p>
+      <p>Add Events<i className="right"></i></p>
+      <p>Drag & Drop To The Right Day</p>
+      </div>
+      <div className='map-event-container'>
+        <div className='map-view-container'>
+            <MapView address={_.clone(this.state.address)}/>
+        </div>
+        <TempEventList/>
+      </div>
 
        <div className='plan-trip-container'>
          <PlanTrip />

@@ -26,11 +26,16 @@ import './eventTemp.css';
 class TempEventList extends Component {
   constructor() {
     super();
-    this.state = { toggledCollapse: false };
+    this.state = { toggledCollapse: false,
+                    showSnackBar: false };
 
   }
 
   getEvents = () => {
+    if (this.props.eventCategory.length === 0 ) {
+      alert('choose an event category')
+      return;
+    }
     const USER_TOKEN = '9bgBCdDfmWp8NxrBqoNZ808YqGIf6m';
     const AuthStr = 'Bearer ' + USER_TOKEN;
     let categories ='';
@@ -53,6 +58,11 @@ class TempEventList extends Component {
 
     axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
       .then((response) => {
+
+        if (response.data.results.length === 0 ) {
+          console.log('No Events Found!')
+        }
+
         // empty old events
         this.props.emptyTempEvents();
         // create new event object
@@ -121,7 +131,7 @@ class TempEventList extends Component {
 
     return (
       <React.Fragment>
-        <div className = 'list-container'>
+        <div className = 'temp-event-container'>
           <div className='datesHead'>
             <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Events Nearby &raquo;</h5>
             <Collapse isOpened={this.state.toggledCollapse}>
@@ -131,13 +141,16 @@ class TempEventList extends Component {
               </div>
             </Collapse>
           </div>
-          {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
-            <TheEvent key={theTempEvent.id}
-              verifier="eventOfTempEvent"
-              tempEventIndex={tempEventIndex}
-              tempEventName ={theTempEvent.name}
-              tempEvent={theTempEvent} />)}
+         
+            {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
+              <TheEvent key={theTempEvent.id}
+                verifier="eventOfTempEvent"
+                tempEventIndex={tempEventIndex}
+                tempEventName ={theTempEvent.name}
+                tempEvent={theTempEvent} />)}
+          
         </div>
+ 
       </React.Fragment>
     );
   }

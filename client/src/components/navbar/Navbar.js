@@ -101,8 +101,9 @@ export default withAuth(
                 <Link className="nav-link custom-nav-link" to="/MyTrips" > My Trips </Link>
               </li>
               <li className="nav-item nav-link custom-nav-link"><em><b>|</b></em></li>
+
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/MyTrips" > About & Contact </Link>
+                          <Link className="nav-link custom-nav-link" to="/About" > About </Link>
               </li>
             </ul>
             {navbarRight ? navbarRight : ''}

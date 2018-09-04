@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react';
 import DayList from './dayList/DayList';
 import PlaceList from './placeList/PlaceList';
 import EventList from './EventList/EventList';
+import _ from 'lodash'
 import './planTrip.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -24,6 +25,26 @@ import { Link } from 'react-router-dom';
 class PlanTrip extends Component {
 
   saveTrip = (event) => {
+
+    if (this.props.daysArray.length === 0) {
+      alert('Please add days to your plan')
+      return;
+    }
+    
+    if (this.props.tripName === 'Name Your Trip') {
+      alert('Please name your trip')
+      return;
+     }
+
+    //  this.props.daysArray.map((day, index) => {
+    //   const dayDate = day.date;
+    //   if (index<this.props.daysArray.length) {
+    //   if(this.props.daysArray[index+1].date) {
+    //     console.log('same')
+    //   }
+    // }
+    //  })
+
     const tripUser = {
       plan: {
         name: this.props.tripName,
@@ -188,7 +209,7 @@ class PlanTrip extends Component {
 
             <DayList/>
           </div>
-          <button onClick={this.saveTrip} className="save-trip-btn">Save Trip</button>
+          <button onClick={() => {if(window.confirm('Are you sure you want to save your trip?')) {this.saveTrip()}}}className="save-trip-btn">Save Trip</button>
 
         </DragDropContext>
       </React.Fragment>

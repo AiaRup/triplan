@@ -1,19 +1,16 @@
-.list-container {
+.temp-event-container {
   margin-left: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  height: auto;
-  min-height: 200px;
+  max-height: 80vh;
+  /* min-height: 200px; */
   width: 25%;
   /* background-color: rgba(168, 218, 220, 0.13); */
   background-color: #F8F9FA;
-};
+  overflow-y: auto;
+}
 
 .date-picker {
   display: flex;
-};
-
-/* .datesHead {
-  background-color: red;
-} */
+}
 

@@ -24,4 +24,35 @@
   /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1); */
 }
 
+.home-page-headline {
+  text-align: center;
+  margin-top: 75px;
+  margin-bottom: 35px;
+  font-size: 38px;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
 
+.home-page-instructions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 35px;
+  margin-bottom: 65px;
+  font-size: 18px;
+}
+
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-right: 12px;
+  margin-left: 12px;
+
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}

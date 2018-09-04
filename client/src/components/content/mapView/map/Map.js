@@ -31,6 +31,11 @@ class Map extends Component {
       axios(`/api/users/googlePlaces/${type}/${this.props.address.lat}/${this.props.address.lng}`).then((response) => {
         console.log('res in axios first fetch', response);
 
+
+        console.log('response', response)
+        if (response.data.results.length === 0) {
+          alert('No attraction found!')
+        }
         const promises = [];
 
         response.data.results.forEach((location) => {
