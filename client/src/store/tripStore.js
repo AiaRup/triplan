@@ -1,29 +1,50 @@
-import React, { Component } from 'react';
 import { observable, action } from 'mobx';
-import axios from 'axios';
+import moment from 'moment';
 
 
-class TripStore extends Component {
+
+class TripStore{
 
   @observable user_id = ''
-  @observable cityName= 'London'
-  @observable tripName= 'Name Your Trip'
+  @observable cityName = 'London'
+  @observable tripName = 'Name Your Trip'
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
   @observable eventCategory = [];
 
+  //////////////////////////
+  @observable oneTrip = {
+    id: 'id1', // will get from the server
+    name: 'madrid 2018',
+    days:
+      [
+        {
+          date: '22/08/2018', places:
+            [{ position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
+            { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' }],
+          notes: []
+        },
+        {
+          date: '23/08/2018', places:
+            [{ position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
+            { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
+            { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' }], notes: []
+        }
+      ]
+  }
 
   @action addNotes = (note, index) => {
-    console.log('note ', note, 'index ', index);
-    // this.oneTrip.days[index].notes.push(note);
-    this.oneTrip.days[index].notes = note;
+    // console.log('note ', note, 'index ', index);
+    this.oneTrip.days[index].notes.push(note);
+    // this.oneTrip.days[index].notes = note;
     console.log(`oneTrip.days[${index}].notes, ${note} `);
   }
 
-  @action updateNotes = (data, index) => {
-    this.oneTrip.days[index].notes = data;
+  @action updateNotes = (data, indexD, indexN) => {
+    this.oneTrip.days[indexD].notes[indexN].push(data);
   }
 
+  ////////////////////////
 
   @action savePlans = (plans) => {
     this.plansArray = plans;
@@ -38,8 +59,10 @@ class TripStore extends Component {
   @observable testEventsArray = [];
 
   @observable tempEventCalander =
-      { startDate: new Date(),
-        endDate: new Date() };
+    {
+      startDate: new Date(),
+      endDate: new Date()
+    };
 
 
   @observable showLogin = true;
@@ -94,7 +117,7 @@ class TripStore extends Component {
   //Functionality in DAY
   @action addDay = () => {
     this.numOfDays++;
-    this.daysArray.push({ date: new Date(), places: [], id: this.numOfDays });
+    this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: this.numOfDays });
   }
 
   @action deleteDay = (index) => {
@@ -164,6 +187,16 @@ class TripStore extends Component {
     this.eventsArray.push(event);
     console.log('eventsArray', this.eventsArray);
 
+  }
+
+  // empty temp events
+  @action emptyTempEvents = () => {
+    this.tempEventArray = [];
+  }
+
+  // add temp events to array
+  @action addTempEvents = (event) => {
+    this.tempEventArray.push(event);
   }
 }
 

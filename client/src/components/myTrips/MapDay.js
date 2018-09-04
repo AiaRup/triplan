@@ -29,7 +29,8 @@ const MapWithADirectionsRenderer = compose(
             directions: result,
           });
         } else {
-          this.setState({ directions: false });
+          // this.setState({ directions: false });
+          // this.props.updateDirections(false);
           console.error(`error fetching directions ${result}`);
         }
       });
@@ -51,7 +52,7 @@ const MapWithADirectionsRenderer = compose(
       defaultZoom={7}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
       defaultCenter={new google.maps.LatLng(lat, lng)} >
-      {props.directions && <DirectionsRenderer directions={props.directions}/> }
+      {props.directions && <DirectionsRenderer directions={props.directions} />}
     </GoogleMap>;
   }
 
