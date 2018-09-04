@@ -8,6 +8,8 @@ import _ from 'lodash'
 import './planTrip.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Notification, { notify } from 'react-notify-toast';
+
 
 
 
@@ -27,47 +29,53 @@ class PlanTrip extends Component {
   saveTrip = (event) => {
 
     if (this.props.daysArray.length === 0) {
-      alert('Please add days to your plan')
+      // alert('Please add days to your plan')
+      let myColor = { background: '#0E1717', text: "#FFFFFF" };
+      notify.show("Please add days to your plan", "error", 5000, myColor);
       return;
     }
-    
-    if (this.props.tripName === 'Name Your Trip') {
-      alert('Please name your trip')
+
+    if (this.props.tripName === 'Name Your Trip' || this.props.tripName === "") {
+      // alert('Please name your trip')
+      let myColor = { background: '#0E1717', text: "#FFFFFF" };
+      notify.show("Please name your trip", "error", 5000, myColor);
       return;
-     }
+    }
 
-    //  this.props.daysArray.map((day, index) => {
-    //   const dayDate = day.date;
-    //   if (index<this.props.daysArray.length) {
-    //   if(this.props.daysArray[index+1].date) {
-    //     console.log('same')
-    //   }
-    // }
-    //  })
+    // check if each day is not empty
+    for (let i = 0; i < this.props.daysArray.length; i++) {
+      if (this.props.daysArray[i].places.length === 0) {
+        let myColor = { background: '#0E1717', text: "#FFFFFF" };
+        notify.show("There is an empty day in yout trip", "error", 5000, myColor);
+        return;
+      }
+    }
 
-    const tripUser = {
-      plan: {
-        name: this.props.tripName,
-        days: this.props.daysArray,
-        city: this.props.cityName
-      },
-      tempPlaces: this.props.placesArray,
-      tempEvents: this.props.eventsArray
-    };
+    if (window.confirm('Are you sure you want to save your trip?')) {
+      const tripUser = {
+        plan: {
+          name: this.props.tripName,
+          days: this.props.daysArray,
+          city: this.props.cityName
+        },
+        tempPlaces: this.props.placesArray,
+        tempEvents: this.props.eventsArray
+      };
 
-    console.log('trip to server', tripUser);
+      console.log('trip to server', tripUser);
 
-    axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
-      .then(response => {
-        console.log('back to axios', response);
-        // reset days to 0
-        this.props.resetNumDays();
-        // Link to trirps page
-        // <Link to='MyTrips/'></Link>;
-      })
-      .catch(function (error) {
-        console.log(error.response);
-      });
+      axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
+        .then(response => {
+          console.log('back to axios', response);
+          // reset days to 0
+          this.props.resetNumDays();
+          // Link to trirps page
+          // <Link to='MyTrips/'></Link>;
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+    }
   };
 
 
@@ -86,7 +94,7 @@ class PlanTrip extends Component {
     //if drag dropped in the same place - do nothing
     if (
       source.droppableId === destination.droppableId &&
-        source.index === destination.index
+      source.index === destination.index
     ) {
       return;
     }
@@ -94,27 +102,27 @@ class PlanTrip extends Component {
     //if drag dragging places to events and vise versa - do nothing
     if (
       source.droppableId === 'placesContainer' &&
-        destination.droppableId === 'eventsContainer'
+      destination.droppableId === 'eventsContainer'
     ) {
       return;
     }
 
     if (
       source.droppableId === 'eventsContainer' &&
-        destination.droppableId === 'placesContainer'
+      destination.droppableId === 'placesContainer'
     ) {
       return;
     }
 
     //convert day ID to index
-    const daySourceIndex = daysArray.findIndex(p=> p.id === source.droppableId);
-    const dayDestinationIndex = daysArray.findIndex(p=> p.id === destination.droppableId);
+    const daySourceIndex = daysArray.findIndex(p => p.id === source.droppableId);
+    const dayDestinationIndex = daysArray.findIndex(p => p.id === destination.droppableId);
 
     //if drag is in the same container - only reorder the item inside the div
     if (source.droppableId === destination.droppableId) {
 
       //if the drag is in the PLACE CONTAINER ONLY
-      if (source.droppableId === 'placesContainer' && destination.droppableId === 'placesContainer'){
+      if (source.droppableId === 'placesContainer' && destination.droppableId === 'placesContainer') {
 
         //get the place item
         const placeInPlaces = placesArray[source.index];
@@ -124,7 +132,7 @@ class PlanTrip extends Component {
         placesArray.splice(destination.index, 0, placeInPlaces);
       }
       //If the drag is in the day container to itself
-      if ((source.droppableId !== 'placesContainer' && source.droppableId !== 'eventsContainer') &&source.droppableId === destination.droppableId){
+      if ((source.droppableId !== 'placesContainer' && source.droppableId !== 'eventsContainer') && source.droppableId === destination.droppableId) {
 
         //get the place item
         const placeInDay = daysArray[daySourceIndex].places[source.index];
@@ -143,7 +151,7 @@ class PlanTrip extends Component {
       }
     }
     //if the drag is between the day containers
-    if ((source.droppableId !== 'placesContainer')&& (destination.droppableId !== 'placesContainer') && (source.droppableId !== destination.droppableId) && (source.droppableId !== 'eventsContainer') && (destination.droppableId !== 'eventsContainer')) {
+    if ((source.droppableId !== 'placesContainer') && (destination.droppableId !== 'placesContainer') && (source.droppableId !== destination.droppableId) && (source.droppableId !== 'eventsContainer') && (destination.droppableId !== 'eventsContainer')) {
 
 
       //get the place item
@@ -164,7 +172,7 @@ class PlanTrip extends Component {
       daysArray[dayDestinationIndex].places.splice(destination.index, 0, placePlacesToDay);
     }
     //if the drag is from days to places
-    if (source.droppableId !== 'placesContainer' && destination.droppableId === 'placesContainer' && daysArray[daySourceIndex].places[source.index].type !== 'event'){
+    if (source.droppableId !== 'placesContainer' && destination.droppableId === 'placesContainer' && daysArray[daySourceIndex].places[source.index].type !== 'event') {
 
       //get place item
       const placeItem = daysArray[daySourceIndex].places[source.index];
@@ -175,7 +183,7 @@ class PlanTrip extends Component {
     }
 
     //if dragging from EVENTS to DAYS
-    if (source.droppableId==='eventsContainer' && destination.droppableId!== 'eventsContainer' && destination.droppableId===daysArray[dayDestinationIndex].id){
+    if (source.droppableId === 'eventsContainer' && destination.droppableId !== 'eventsContainer' && destination.droppableId === daysArray[dayDestinationIndex].id) {
 
       const eventItem = eventsArray[source.index];
       eventsArray.splice(source.index, 1);
@@ -183,10 +191,10 @@ class PlanTrip extends Component {
     }
 
     //if dragging from DAYS to EVENTS
-    if (destination.droppableId==='eventsContainer' && destination.droppableId !== 'placesContainer' && source.droppableId!=='eventsContainer' &&source.droppableId === daysArray[daySourceIndex].id){
+    if (destination.droppableId === 'eventsContainer' && destination.droppableId !== 'placesContainer' && source.droppableId !== 'eventsContainer' && source.droppableId === daysArray[daySourceIndex].id) {
 
       const eventItemFromDay = daysArray[daySourceIndex].places[source.index];
-      if (eventItemFromDay.type === 'event'){
+      if (eventItemFromDay.type === 'event') {
         daysArray[daySourceIndex].places.splice(source.index, 1);
         eventsArray.splice(destination.index, 0, eventItemFromDay);
       } else {
@@ -199,17 +207,20 @@ class PlanTrip extends Component {
   render() {
     return (
       <React.Fragment>
+        <Notification options={{ zIndex: 200, top: '250px' }} />
+
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>
 
             <div className='place-event-containers'>
-              <PlaceList/>
-              <EventList/>
+              <PlaceList />
+              <EventList />
             </div>
 
-            <DayList/>
+            <DayList />
           </div>
-          <button onClick={() => {if(window.confirm('Are you sure you want to save your trip?')) {this.saveTrip()}}}className="save-trip-btn">Save Trip</button>
+          {/* <button onClick={() => { if (window.confirm('Are you sure you want to save your trip?')) { this.saveTrip() } }} className="save-trip-btn">Save Trip</button> */}
+          <button onClick={this.saveTrip} className="save-trip-btn">Save Trip</button>
 
         </DragDropContext>
       </React.Fragment>

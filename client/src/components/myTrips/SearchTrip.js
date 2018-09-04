@@ -7,7 +7,13 @@ const SearchTrip = (props) => {
 
   return (
     <div className="row">
-      <input className="search-bar" type="text" onKeyUp={handleSearch} placeholder="Search Trips..." />
+      <span style={{
+        width: '100%',
+        textAlign: 'center'
+      }}>
+        <i className="fa fa-search" style={{ color: 'gray' }} aria-hidden="true"></i>
+        <input className="search-bar" type="text" onKeyUp={handleSearch} placeholder="Search Trips..." />
+      </span>
     </div>
   );
 

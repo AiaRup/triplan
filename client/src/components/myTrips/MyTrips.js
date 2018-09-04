@@ -27,9 +27,7 @@ class MyTrips extends Component {
         let plans = response.data;
         this.props.store.savePlans(plans);
         console.log('got response! ');
-        this.setState((state, props) => {
-          return { user_plans: plans, filter_plans: plans };
-        });
+        this.setState({ user_plans: plans, filter_plans: plans });
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
