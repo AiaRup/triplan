@@ -1,0 +1,82 @@
+.about-page{
+    background-color: rosybrown;
+}
+
+.about-head{
+    /* margin: 0 100px; */
+    height: 440px;
+    width: 100%;
+    background-image:url(/images/zoug.jpg);
+     background-size: contain;
+
+}
+.about-body{
+    margin: 100px 200px auto;
+}
+
+.team-body{
+margin-top: 0px;
+}
+
+.h1-team{
+    text-align: center;
+    margin: 100px auto;
+}
+
+
+.tm_pic_dror{
+    background-image: url(/images/dror.png);
+    width: 230px;
+    height : 230px;
+    border-radius: 50%;
+    /* border: 2px solid; */
+    margin :10px;
+}
+
+
+.tm_pic_hodaya{
+    background-image: url(/images/hodaya.png);
+    width: 230px;
+    height : 230px;
+    border-radius: 50%;
+     /* border: 2px solid; */
+     margin :10px;
+}
+
+
+.tm_pic_aia{
+    background-image: url(/images/aia.jpg);
+    width: 230px;
+    height : 230px;
+    border-radius: 50%;
+     /* border: 2px solid; */
+     margin :10px;
+}  
+
+
+.tm_pic_carl{
+     background-image: url(/images/carl.png); 
+     width: 230px;
+     height : 230px;
+     border-radius: 50%;
+     margin :10px;
+}
+    
+
+
+.tm_name{
+    text-align:center;
+}
+
+.icons {
+    text-align: center;
+    width: 100%;
+    font-size: 2em;
+}
+
+.gitIcon{
+    margin : 10px;
+}
+
+/* .linkedinIcon{
+} */

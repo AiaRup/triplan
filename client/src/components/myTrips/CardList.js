@@ -3,22 +3,19 @@ import Card from './Card';
 
 const CardList = (props)=> {
     
-  //  let test= props.plan_names;
-  //  console.log(test)
+//console.log('plan_names in CardList.js')
+//console.log(props.plan_names)
  
+
+
  return (
       
      
      <div className = "card-list">
 
-       {/* {test.map( */}
-    {/* (one_name,index) => <Card key={index} name={one_name} /> )} */}
- 
- 
-
-    {props.plan_names.map(
-    (one_name,index) => <Card key={index} name={one_name} />  
-    )}  
+     {props.plan_names.map( 
+     (one_name, index)=> <Card key={index} name={one_name}/>
+     )}   
 
     </div>
 
@@ -28,7 +25,7 @@ const CardList = (props)=> {
 
 
 
-    //   {props.plans.map( (plan, index) =>
+{/*  
     //    return (
     //        if( index%3==0)
     //           <div {class="row"}>
@@ -43,7 +40,7 @@ const CardList = (props)=> {
     //    <div className="card-list">
     //         {props.plans.map((plan, i) => <Card plan={plan} key={i} />)}
     //     </div>
- 
+  */}
 
    
 

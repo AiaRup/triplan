@@ -9,7 +9,8 @@
 //          <h2>  {props.plan} </h2> 
         
 
-//         {/* {props.plan.days.map(
+//         
+// {props.plan.days.map(
 //             (index, day) => 
          
 
@@ -27,7 +28,7 @@
 //  }
 
 
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 import { observer, inject } from 'mobx-react';
 import Day from './Day';
 

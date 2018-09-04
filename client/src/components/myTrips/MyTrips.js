@@ -36,25 +36,26 @@ componentDidMount = () => {
   axios.get(`api/users/users_trips/${u_id}`)
    .then (response=>{     
        let plans = response.data;
-      // const plansArray = Object.keys(plans).map(i => plans[i]);
-       console.log("got response! - data");
-      //  console.log(plans);
+       console.log("got response! ");
+        console.log(response);
       //  console.log('type:' + typeof plans )
         // console.log('plans:' + plans.constructor===Array)
 
       //  this.setState( {user_plans: plans});
         this.setState( (state, props) => {
-         return {user_plans: this.state.user_plans.concat([plans])}
+         return {user_plans:plans}
         });
-        // console.log( this.state.user_plans);
+       // console.log( this.state.user_plans);
 
        let names= plans.map(plan => plan.name);
-         //console.log(names )
+      // console.log ('names')
+      // console.log(names)
 
       this.setState( (state, props) => {
-        return {plan_names : this.state.plan_names.concat([names])}
+        return {plan_names : names}
       });
-        console.log (this.state.plan_names);
+       // console.log  ('plan_names in MyTrips.js')
+      //console.log (this.state.plan_names);
    })
    .catch(error => {
       console.log('Error fetching and parsing data', error);

@@ -10,7 +10,7 @@ import Content from '../content/Content';
 import Login from '../auth/Login';
 import MyTrips from '../myTrips/MyTrips';
 import OneTrip from '../myTrips/OneTrip';
-
+import About from '../about/About';
 function onAuthRequired({ history }) {
   history.push('/Login');
 }
@@ -31,7 +31,7 @@ class App extends Component {
         .then((response) => {
           // set user id on store
           if (response.data.length !== 0) {
-            console.log("entered confiUser!!")
+            console.log("entered configUser!!")
             this.props.configUser(response.data[0]._id);
           }
         });
@@ -55,10 +55,13 @@ class App extends Component {
                 {/* <SecureRoute exact path="/MyTrips" render={() => <MyTrips  user_plans={this.state.user_plans}/>} /> */}
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips/>} />
                 
-                {/* {this.state.user_plans.map( 
+                 {/* {this.state.user_plans.map( 
                   (plan,index) => 
                   <SecureRoute exact path ={`/MyTrips/${plan}`} render={() => <OneTrip plan={plan} key={index} />} />
-                )}  */}
+                )}   */}
+                 
+                 <SecureRoute exact path="/about"  render={() => <About/>} />
+
 
                 <Route
                   path="/Login"

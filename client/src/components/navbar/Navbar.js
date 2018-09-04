@@ -95,6 +95,9 @@ export default withAuth(
               <li className="nav-item ml-3">
                 <Link className="nav-link" to="/">Home</Link>
               </li>
+              <li>
+                <Link className="nav-link" to="/About">  About </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/MyTrips" > My Trips </Link>
               </li>
