@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
 import { observable, action } from 'mobx';
-import axios from 'axios';
 import moment from 'moment';
 
 
 
-class TripStore extends Component {
+class TripStore{
 
   @observable user_id = ''
   @observable cityName= 'London'
