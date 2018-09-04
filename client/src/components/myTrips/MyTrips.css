@@ -65,8 +65,9 @@ Day
 }
 
 .notes {
+  /* width: 40%; */
+  flex-basis: 25%;
   margin: 0;
-  width: 40%;
   padding: 20px;
   margin-left: 30px;
   text-align: center;
@@ -90,8 +91,13 @@ Day
   font-size: large;
 }
 
+.attractions {
+  flex-basis: 37%;
+}
+
 .mapDay {
-  width: 50vw;
+  /* width: 50vw; */
+  flex-basis: 40%;
 }
 
 .list-attractions {

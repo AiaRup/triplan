@@ -42,7 +42,7 @@ class FormNotes extends Component {
     return (
       <input className="form-control" type="text" placeholder="Add Notes..."
         required
-        style={{ width: '95%' }}
+        style={{ width: '95%', marginBottom: '20px' }}
         onKeyPress={this.addNotes}
         onChange={this.inputChange} value={this.state.input} />
     );
