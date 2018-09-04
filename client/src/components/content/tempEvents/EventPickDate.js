@@ -21,6 +21,7 @@ export default class DateRange extends React.Component {
     this.state = {
       startDate: moment(new Date()),
       endDate: moment(new Date()),
+      // endDatePlusOne: moment(new Date()).add(1, 'days'),
       value: []
     };
   }
@@ -52,6 +53,7 @@ export default class DateRange extends React.Component {
     }
 
     this.setState({ startDate, endDate });
+    // this.setState({ endDatePlusOne: endDate.add(1, 'days') });
     let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('YYYY/MM/DD');
     // let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('DD/MM/YYYY');
     let formatedEnd = moment(`/Date(${Date.parse(endDate)})/`).format('YYYY/MM/DD');
@@ -84,7 +86,9 @@ export default class DateRange extends React.Component {
             selected={this.state.endDate}
             selectsEnd
             startDate={this.state.startDate}
+            // startDate={this.state.endDatePlusOne}
             endDate={this.state.endDate}
+            // endDate={this.state.endDate}
             onChange={this.handleChangeEnd}
             minDate={moment()}
             maxDate={moment().add(6, 'months')}

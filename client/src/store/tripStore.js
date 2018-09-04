@@ -12,27 +12,6 @@ class TripStore{
   @observable numOfDays = 0;
   @observable eventCategory = [];
 
-  //////////////////////////
-  @observable oneTrip = {
-    id: 'id1', // will get from the server
-    name: 'madrid 2018',
-    days:
-      [
-        {
-          date: '22/08/2018', places:
-            [{ position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
-            { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' }],
-          notes: []
-        },
-        {
-          date: '23/08/2018', places:
-            [{ position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
-            { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
-            { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' }], notes: []
-        }
-      ]
-  }
-
   @action addNotes = (note, index) => {
     // console.log('note ', note, 'index ', index);
     this.oneTrip.days[index].notes.push(note);
@@ -43,8 +22,6 @@ class TripStore{
   @action updateNotes = (data, indexD, indexN) => {
     this.oneTrip.days[indexD].notes[indexN].push(data);
   }
-
-  ////////////////////////
 
   @action savePlans = (plans) => {
     this.plansArray = plans;
@@ -104,7 +81,7 @@ class TripStore{
 
   // update number of days in trip
   @action resetNumDays = (name) => {
-    this.numOfDays = 0;
+    // this.numOfDays = 0;
     console.log('num days reset', this.numOfDays);
   }
 
@@ -133,6 +110,10 @@ class TripStore{
 
   @action deletePlaceInDay = (dayIndex, placeIndex) => {
     this.daysArray[dayIndex].places.splice(placeIndex, 1);
+  }
+
+  @action restStoreTrip = () => {
+    window.location.reload();
   }
 
   //Functionality in PLACES
@@ -205,3 +186,6 @@ const store = new TripStore();
 
 window.store = store;
 export default store;
+
+
+// fb007c

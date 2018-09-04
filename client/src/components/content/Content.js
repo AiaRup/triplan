@@ -4,6 +4,8 @@ import MapView from './mapView/MapView';
 import styled from 'styled-components';
 import _ from 'lodash';
 import TempEventList from './tempEvents/TempEventList';
+import { observer, inject } from 'mobx-react';
+
 import './content.css';
 
 const MapViewContainer = styled.div`
@@ -14,6 +16,11 @@ const MapViewContainer = styled.div`
   border: 1px solid lightgrey;
 `;
 
+@inject(allStores => ({
+  restStoreTrip: allStores.store.restStoreTrip }))
+
+
+  @observer
 class Content extends Component {
   state = {
     address: { lat: 51.507351, lng: -0.127758 },
@@ -51,6 +58,12 @@ positionDenied = () => {
    });
  }
 
+ resetTrip = () => {
+   console.log('inRest');
+
+   this.props.restStoreTrip();
+ }
+
 
  componentDidMount = () => {
    if (!('geolocation' in navigator)) {
@@ -69,22 +82,25 @@ positionDenied = () => {
    //  }
  }
 
- render() { 
-  return (
-    <React.Fragment>
-      <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
-      <div className="home-page-instructions">
-      <p>Search Your Location<i className="right"></i></p>
-      <p>Choose Attractions<i className="right"></i></p>
-      <p>Add Events<i className="right"></i></p>
-      <p>Drag & Drop To The Right Day</p>
-      </div>
-      <div className='map-event-container'>
-        <div className='map-view-container'>
-            <MapView address={_.clone(this.state.address)}/>
-        </div>
-        <TempEventList/>
-      </div>
+ render() {
+   return (
+     <React.Fragment>
+       <div className="bg-image">
+         <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
+         <div className="home-page-instructions">
+           <p>Search Your Location<i className="right"></i></p>
+           <p>Choose Attractions<i className="right"></i></p>
+           <p>Add Events<i className="right"></i></p>
+           <p>Drag & Drop To The Right Day</p>
+         </div>
+         <button className="btn btn-sm btn-danger" onClick={this.resetTrip}>Reset Trip</button>
+       </div>
+       <div className='map-event-container'>
+         <div className='map-view-container'>
+           <MapView address={_.clone(this.state.address)}/>
+         </div>
+         <TempEventList/>
+       </div>
 
        <div className='plan-trip-container'>
          <PlanTrip />
