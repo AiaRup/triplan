@@ -8,9 +8,7 @@ let userSchema = new Schema({
   name: String,
   oktaID: String,
   email: String,
-  plans: { type:[Plan], default: [] },
-  tempPlaces: { type:[Schema.Types.Mixed], default: [] },
-  tempEvents: { type:[Schema.Types.Mixed], default: [] }
+  plans: { type:[Plan], default: [] }
 }, { minimize: false }, { usePushEach: true });
 
 

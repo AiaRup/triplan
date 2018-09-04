@@ -6,6 +6,8 @@ const logger = require('morgan');
 // const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const request = require('request');
+const cors = require('cors');
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -26,12 +28,24 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // Middlewares
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('node_modules'));
+
+// adding CORS
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Credentials', true);
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+//   next();
+// });
+
+
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/plans', plansRouter);

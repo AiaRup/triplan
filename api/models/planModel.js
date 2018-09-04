@@ -6,7 +6,9 @@ let planSchema = new Schema({
   name: String,
   days: [Day],
   city: String,
-});
+  tempPlaces: { type:[Schema.Types.Mixed], default: [] },
+  tempEvents: { type:[Schema.Types.Mixed], default: [] }
+}, { minimize: false }, { usePushEach: true });
 
 let Plan = mongoose.model('plan', planSchema);
 

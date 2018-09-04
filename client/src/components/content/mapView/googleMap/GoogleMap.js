@@ -20,20 +20,20 @@ const MapComponent = compose(
       toggleCollapse: false,
       indexCollapse: null
     }),
-    {
-      showInfo: ({ isOpen, infoIndex }) => (index) => ({
-        isOpen: infoIndex !== index || !isOpen,
-        infoIndex: index
-      }),
-      onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
-        isOpenHover: infoIndexHover !== index || !isOpenHover,
-        infoIndexHover: index
-      }),
-      collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
-        toggleCollapse: indexCollapse !== index || !toggleCollapse,
-        indexCollapse: index
-      })
-    },
+  {
+    showInfo: ({ isOpen, infoIndex }) => (index) => ({
+      isOpen: infoIndex !== index || !isOpen,
+      infoIndex: index
+    }),
+    onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
+      isOpenHover: infoIndexHover !== index || !isOpenHover,
+      infoIndexHover: index
+    }),
+    collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
+      toggleCollapse: indexCollapse !== index || !toggleCollapse,
+      indexCollapse: index
+    })
+  },
   ),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE',
@@ -63,6 +63,8 @@ const MapComponent = compose(
         // },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
+          // empty temp events array
+          this.props.emptyEvents();
           // if (!place.geometry) {
           //   // User entered the name of a Place that was not suggested and
           //   // pressed the Enter key, or the Place Details request failed.
@@ -81,7 +83,7 @@ const MapComponent = compose(
           } else {
             bounds.extend(place[0].geometry.location);
           }
-          const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
+          const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
           this.setState({
             bounds: bounds,
             center: nextCenter,
