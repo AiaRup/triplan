@@ -66,6 +66,7 @@ table {
 }
 
 body {
+  /* background-image: url("paper.gif"); */
   /* background-color: #f4f4f4; */
   /* background-color: #F8F9FA; */
   /* background-color: #10101010; */
@@ -115,3 +116,4 @@ border-radius {
 .container-fluid {
   min-height: 100vh;
 }
+

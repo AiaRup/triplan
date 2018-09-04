@@ -30,9 +30,9 @@
   border: 1px solid lightgrey;
   border-radius: 2px;
   min-height: 190px;
-  height: auto;
+  height: 350px;
   width: 310px;
-  /* width: auto; */
+  overflow: auto;
 }
 
 .pick-date {
@@ -40,21 +40,6 @@
   text-align: center;
 }
 
-#snackBar {
-  visibility: hidden;
-  width: auto;
-  z-index: 1;
-  text-align: center;
-  font-size: 25px;
-  /* position: absolute; */
-  padding: 16px;
-  background-color: red;
-}
-
-#snackBar.show {
-  visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
 
 @keyframes fadein {
   from {

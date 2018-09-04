@@ -60,6 +60,8 @@ class PlanTrip extends Component {
       .catch(function (error) {
         console.log(error.response);
       });
+
+      
   };
 
 
