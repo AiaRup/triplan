@@ -10,7 +10,6 @@
   border: 1px solid lightgray;
   border-radius: 2px;
   height: 60px;
-  /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 .loginNavLi {
@@ -19,8 +18,13 @@
 }
 .custom-nav-link {
   color: white;
-  
 }
+
+.collapse-nav-design {
+  background-color: #1483c6;
+  color: white;
+}
+
 
 .logo-design {
   font-size: 25px;

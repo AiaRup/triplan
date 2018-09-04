@@ -48,13 +48,17 @@ class EventList extends Component {
   render() {
     return (
       <div className="event-list-container">
-        <h3 className='event-container-headline'>Events</h3>
-        <Droppable droppableId="eventsContainer" className="places-background-color">
+      <div className="event-container-headline">
+        <h3>Events</h3>
+        </div>
+        <div className="eventList-background-div">
+        <Droppable droppableId="eventsContainer" >
           {(provided, snapshot) => (
             <DroppableEvent provided={provided} snapshot={snapshot}/>
           )}
 
         </Droppable>
+        </div>
       </div>
     );
   }

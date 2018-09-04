@@ -17,10 +17,9 @@
 .place-event-containers {
 display: flex;
 flex-direction: row;
-/* border-radius: 2px; */
+justify-content: space-around;
 width: 100%;
 height: auto;
-/* background-color: purple; */
 }
 
 .save-trip-btn {

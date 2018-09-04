@@ -36,14 +36,6 @@ class PlanTrip extends Component {
       return;
      }
 
-    //  this.props.daysArray.map((day, index) => {
-    //   const dayDate = day.date;
-    //   if (index<this.props.daysArray.length) {
-    //   if(this.props.daysArray[index+1].date) {
-    //     console.log('same')
-    //   }
-    // }
-    //  })
 
     const tripUser = {
       plan: {

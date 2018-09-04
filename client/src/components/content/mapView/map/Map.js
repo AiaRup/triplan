@@ -33,9 +33,7 @@ class Map extends Component {
 
 
         console.log('response', response)
-        if (response.data.results.length === 0) {
-          alert('No attraction found!')
-        }
+     
         const promises = [];
 
         response.data.results.forEach((location) => {
@@ -95,6 +93,12 @@ class Map extends Component {
           });
           this.finishMarker++;
           this.checkFinishMarkers(markerArray);
+
+          if (response.data.results.length === 0) {
+            alert('No attraction found!')
+            return;
+          }
+
         });
       })
         .catch((error) => {

@@ -80,7 +80,7 @@ export default withAuth(
       return (
         // bg-light mb-3
         <nav className="navbar navbar-expand-md custom-nav-link ">
-          <span className="navbar-brand custom-navbar "><Link className="navbar-brand custom-nav-link logo-design" to="/">Triplan</Link></span>
+          <span className="navbar-brand"><Link className="navbar-brand custom-nav-link logo-design" to="/">Triplan</Link></span>
           <button
             className="navbar-toggler"
             type="button"
@@ -91,7 +91,7 @@ export default withAuth(
             aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="collapse navbar-collapse custom-navbar" id="navForCollapseMenu">
+          <div className="collapse navbar-collapse collapse-nav-design" id="navForCollapseMenu">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item ml-3">
                 <Link className="nav-link custom-nav-link" to="/">Home</Link>
@@ -104,6 +104,7 @@ export default withAuth(
               <li className="nav-item">
                 <Link className="nav-link custom-nav-link" to="/MyTrips" > About & Contact </Link>
               </li>
+      
             </ul>
             {navbarRight ? navbarRight : ''}
           </div>

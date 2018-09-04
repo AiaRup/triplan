@@ -6,19 +6,12 @@
 
 .places-list-container {
   margin: 8px;
-  /* background-color: #F8F9FA; */
-
-  background: linear-gradient(180deg, #1483c6 50%, #F8F9FA 50%);
-  border: 1px solid lightgrey;
   border-radius: 2px;
   height: auto;
+  border: 1px solid lightgrey;
   min-height: 200px;
-  width: 50%;
+  width: 45%;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-}
-
-.places-background-color {
-  background-color: red;
 }
 
 .place-arrow {
@@ -31,9 +24,10 @@
 
 .place-container-headline {
   text-align: center;
-  margin-top: 5px;
   background-color: #1483c6;
   color: white;
+  padding-top: 2px;
+  padding-bottom: 2px
 }
 
 .place-headline {
@@ -47,12 +41,18 @@
   justify-content: space-between;
 }
 
-ul {
+/* ul {
   margin: 5px;
-}
+} */
 
 .btn-color {
   color: #E63946;
 }
+
+.placeList-background-div{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 
 

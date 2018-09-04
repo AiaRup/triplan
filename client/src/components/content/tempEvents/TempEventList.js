@@ -59,9 +59,7 @@ class TempEventList extends Component {
     axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
       .then((response) => {
 
-        if (response.data.results.length === 0 ) {
-          console.log('No Events Found!')
-        }
+    
 
         // empty old events
         this.props.emptyTempEvents();
@@ -84,6 +82,12 @@ class TempEventList extends Component {
           this.props.addTempEvents(event);
           // this.props.tempEventArray.push(event);
           console.log('tempEvent', this.props.tempEventArray);
+
+          // alert if no event found
+          if (response.data.results.length === 0 ) {
+            alert('No Events Found!')
+            return;
+          }
 
         });
       })

@@ -10,11 +10,12 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 2px;
   background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
-  max-width: ${props=> (props.isDragging ? '300px' : 'auto')};
-  width: 250px;
+  width: ${props=> (props.isDragging ? '40%' : 'auto')};
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;
+
+// transform: ${props=> (props.isDragging ? 'rotate(20deg)' : 'none')};
 
 @inject(allStores => ({
   deleteEvent: allStores.store.deleteEvent,
