@@ -37,7 +37,8 @@ router.post('/', (req, res) => {
         email: user.profile.email,
         plans: [],
         tempPlaces: [],
-        tempEvents: [] };
+        tempEvents: []
+      };
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
@@ -53,7 +54,7 @@ router.post('/', (req, res) => {
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
-  User.find({ oktaID : oktaID }, (err, userResult) => {
+  User.find({ oktaID: oktaID }, (err, userResult) => {
     if (err) {
       console.log(err);
       res.send('an error has occured');
@@ -80,7 +81,7 @@ router.post('/users/:id/plantrip', (req, res) => {
   Plan.create(newPlan, (err, planResult) => {
     if (err) throw err;
     // update the user with the new trip plan
-    User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new:true }, (err, updateUser) => {
+    User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
       if (err) throw err;
       console.log('newUser updated', updateUser);
       res.status(200).send(updateUser);
@@ -114,11 +115,12 @@ router.get('/users_trips/:user_id', (req, res) => {
   console.log('param id is:');
   console.log(user_id);
 
-  User.findById(user_id, (error, data)=> {
+  User.findById(user_id, (error, data) => {
     if (error) throw error;
     else {
       console.log(data.plans);
-      res.send (data.plans); }
+      res.send(data.plans);
+    }
   });
 
 });
@@ -159,6 +161,49 @@ router.get('/placeSearch/:placeID', (req, res) => {
 //     console.log('body:', body); // Print the HTML for the Google homepage.
 //   });
 // });
+
+
+
+
+// 4) to update notes of user's plan
+
+router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
+  const idUser = req.params.idUser;
+  const idPlan = req.params.idPlan;
+  const idDay = req.params.idDay;
+
+  // check mongo id validation
+  if (!ObjectID.isValid(idUser) || !ObjectID.isValid(idPlan) || !ObjectID.isValid(idDay)) {
+    return res.status(400).send('Id not in the correct format');
+  }
+
+  const newNote = req.body.plan.note; // !check in client how to pass in body the note
+
+  Plan.create(newNote, (err, noteResult) => {
+    if (err) throw err;
+    // update the user' plan with the new
+    User.findByIdAndUpdate(idUser, { $push: { /*????*/ } }, { new: true }, (err, updateUser) => {
+      if (err) throw err;
+      console.log('newUser updated', updateUser);
+      res.status(200).send(updateUser);
+    });
+
+    // User.findByIdAndUpdate(idUser, (error, data) => {
+    //   if (error) throw error;
+    //   else {
+    //     console.log('data plans ', data.plans);
+    // loop over plans and find the one idPlan, then find the right day by idDay
+
+
+    // User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
+    //   if (err) throw err;
+    //   console.log('newUser updated', updateUser);
+    //   res.status(200).send(updateUser);
+    // });
+    // }
+    // });
+  });
+});
 
 
 
