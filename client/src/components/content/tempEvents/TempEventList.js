@@ -35,6 +35,8 @@ class TempEventList extends Component {
     const AuthStr = 'Bearer ' + USER_TOKEN;
     let categories ='';
     const { lat, lng } = this.props.address;
+    console.log('adress in events', this.props.address);
+
     const { startDate, endDate } = this.props.tempEventCalander;
 
     // get selected categories
@@ -44,8 +46,8 @@ class TempEventList extends Component {
       console.log('arr category', categories);
     }
 
-    // const URL = 'https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=concerts&location_around.origin=40.782409,-73.971885&&location_around.offset=5km&country=US&active.tz=America/Los_Angeles&sort=rank';
-    const URL = `https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=${categories}&location_around.origin=${lat},${lng}&location_around.offset=10km&start.gte=${startDate}&start.lte=${endDate}`;
+    const URL = `https://api.predicthq.com/v1/events/??relevance=rank,start_around&category=${categories}&within=10km@${lat},${lng}&start.gte=${startDate}&start.lte=${endDate}`;
+    // const URL = `https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=${categories}&location_around.origin=${lat},${lng}&location_around.offset=10km&start.gte=${startDate}&start.lte=${endDate}`;
 
     console.log(URL);
 
@@ -63,7 +65,7 @@ class TempEventList extends Component {
           event.start = moment(`/Date(${Date.parse(eventResult.start)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.end = moment(`/Date(${Date.parse(eventResult.end)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.type = 'event';
-          event.position = { lat: eventResult.location[0], lng: eventResult.location[1] };
+          event.position = { lat: eventResult.location[1], lng: eventResult.location[0] };
 
           if (eventResult.duration !== 0) {
             event.duration = this.convertDuration(eventResult.duration);
