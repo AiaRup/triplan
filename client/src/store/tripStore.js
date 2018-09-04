@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
 import { observable, action } from 'mobx';
-import axios from 'axios';
+import moment from 'moment';
 
 
-class TripStore extends Component {
+
+class TripStore{
 
   @observable user_id = ''
   @observable cityName = 'London'
@@ -117,7 +117,7 @@ class TripStore extends Component {
   //Functionality in DAY
   @action addDay = () => {
     this.numOfDays++;
-    this.daysArray.push({ date: new Date(), places: [], id: this.numOfDays });
+    this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: this.numOfDays });
   }
 
   @action deleteDay = (index) => {
@@ -187,6 +187,16 @@ class TripStore extends Component {
     this.eventsArray.push(event);
     console.log('eventsArray', this.eventsArray);
 
+  }
+
+  // empty temp events
+  @action emptyTempEvents = () => {
+    this.tempEventArray = [];
+  }
+
+  // add temp events to array
+  @action addTempEvents = (event) => {
+    this.tempEventArray.push(event);
   }
 }
 
