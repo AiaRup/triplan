@@ -117,11 +117,7 @@ class TripStore{
   //Functionality in DAY
   @action addDay = () => {
     this.numOfDays++;
-<<<<<<< HEAD
-    this.daysArray.push({ date: new Date(), places: [], id: 'day_' + this.numOfDays });
-=======
-    this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: this.numOfDays });
->>>>>>> master
+    this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: 'day_' + this.numOfDays });
   }
 
   @action deleteDay = (index) => {

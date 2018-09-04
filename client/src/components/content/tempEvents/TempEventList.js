@@ -58,17 +58,14 @@ class TempEventList extends Component {
 
     axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
       .then((response) => {
-<<<<<<< HEAD
 
         if (response.data.results.length === 0 ) {
           console.log('No Events Found!')
         }
 
-=======
         // empty old events
         this.props.emptyTempEvents();
         // create new event object
->>>>>>> master
         let event = {};
         console.log(response);
         response.data.results.forEach((eventResult) => {
