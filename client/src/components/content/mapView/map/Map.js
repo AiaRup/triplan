@@ -3,6 +3,7 @@ import './Map.css';
 import axios from 'axios';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
+import Notification, { notify } from 'react-notify-toast';
 
 @inject('store')
 @observer
@@ -11,7 +12,7 @@ class Map extends Component {
     super(props);
     this.state = {
       places: props.places,
-      markers: []
+      markers: [],
     };
     this.finishMarker = 0;
   }
@@ -59,7 +60,7 @@ class Map extends Component {
               address: attraction.formatted_address,
               category: type,
               position:
-                  { lat: lat, lng: lng },
+                { lat: lat, lng: lng },
             };
             if (attraction.opening_hours !== undefined) {
               marker.openNow = attraction.opening_hours.open_now;
@@ -73,22 +74,22 @@ class Map extends Component {
             }
             if (attraction.price_level !== undefined) {
               switch (attraction.price_level) {
-              case 0:
-                marker.price = 'Free';
-                break;
-              case 1:
-                marker.price = 'Inexpensive';
-                break;
-              case 2:
-                marker.price = 'Moderate';
-                break;
-              case 3:
-                marker.price = 'Expensive';
-                break;
-              case 4:
-                marker.price = 'Very Expensive';
-                break;
-              default: break;
+                case 0:
+                  marker.price = 'Free';
+                  break;
+                case 1:
+                  marker.price = 'Inexpensive';
+                  break;
+                case 2:
+                  marker.price = 'Moderate';
+                  break;
+                case 3:
+                  marker.price = 'Expensive';
+                  break;
+                case 4:
+                  marker.price = 'Very Expensive';
+                  break;
+                default: break;
               }
             }
             markerArray.push(marker);
@@ -202,7 +203,9 @@ class Map extends Component {
     let places = this.props.store.placesArray;
     for (var i = 0; i < places.length && !exist; i++) {
       if (places[i].id === place.id) {
-        alert('You already have this activity place');
+        let myColor = { background: '#0E1717', text: "#FFFFFF" };
+        notify.show("You Already Choose This Place", "error", 5000, myColor);
+        // alert('You already have this activity place');
         exist = true;
         return;
       }
@@ -213,14 +216,17 @@ class Map extends Component {
 
   render() {
     return (
-      <GoogleMap
-        markers={this.state.markers}
-        // address={this.props.address}
-        updateAddress={this.props.updateAddress}
-        addPlace={this.addPlace}
-        saveCity={this.props.store.saveCity}
-        emptyEvents={this.props.store.emptyTempEvents}
-      />
+      <React.Fragment>
+        <Notification options={{ zIndex: 200, top: '50px' }} />
+        <GoogleMap
+          markers={this.state.markers}
+          // address={this.props.address}
+          updateAddress={this.props.updateAddress}
+          addPlace={this.addPlace}
+          saveCity={this.props.store.saveCity}
+          emptyEvents={this.props.store.emptyTempEvents}
+        />
+      </React.Fragment>
     );
   }
 }

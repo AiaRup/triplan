@@ -6,6 +6,7 @@ import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
+import SnackBar from 'react-material-snackbar';
 
 // const google=window.google;
 
@@ -20,20 +21,20 @@ const MapComponent = compose(
       toggleCollapse: false,
       indexCollapse: null
     }),
-  {
-    showInfo: ({ isOpen, infoIndex }) => (index) => ({
-      isOpen: infoIndex !== index || !isOpen,
-      infoIndex: index
-    }),
-    onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
-      isOpenHover: infoIndexHover !== index || !isOpenHover,
-      infoIndexHover: index
-    }),
-    collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
-      toggleCollapse: indexCollapse !== index || !toggleCollapse,
-      indexCollapse: index
-    })
-  },
+    {
+      showInfo: ({ isOpen, infoIndex }) => (index) => ({
+        isOpen: infoIndex !== index || !isOpen,
+        infoIndex: index
+      }),
+      onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
+        isOpenHover: infoIndexHover !== index || !isOpenHover,
+        infoIndexHover: index
+      }),
+      collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
+        toggleCollapse: indexCollapse !== index || !toggleCollapse,
+        indexCollapse: index
+      })
+    },
   ),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE',
@@ -83,7 +84,7 @@ const MapComponent = compose(
           } else {
             bounds.extend(place[0].geometry.location);
           }
-          const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
+          const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
           this.setState({
             bounds: bounds,
             center: nextCenter,
@@ -100,6 +101,8 @@ const MapComponent = compose(
               }
             }
           }
+          //close the infoWindow after click add place
+          this.props.showInfo(this.props.infoIndex);
           this.props.addPlace(newActivity);
         },
       });
