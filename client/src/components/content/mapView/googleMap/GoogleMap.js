@@ -6,7 +6,7 @@ import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
-import SnackBar from 'react-material-snackbar';
+import Notification, { notify } from 'react-notify-toast';
 
 // const google=window.google;
 
@@ -66,14 +66,15 @@ const MapComponent = compose(
           const place = refs.searchBox.getPlaces();
           console.log(place);
 
+          if (place.length === 0) {
+            let myColor = { background: '#0E1717', text: "#FFFFFF" };
+            notify.show("Address not found", "error", 5000, myColor);
+            return;
+          }
+
           // empty temp events array
           this.props.emptyEvents();
-          // if (!place.geometry) {
-          //   // User entered the name of a Place that was not suggested and
-          //   // pressed the Enter key, or the Place Details request failed.
-          //   window.alert("No details available for input: '" + place.name + "'");
-          //   return;
-          // }
+
           this.props.saveCity(place[0].vicinity);
 
           const lat = place[0].geometry.location.lat();
@@ -114,6 +115,8 @@ const MapComponent = compose(
   withGoogleMap
 )((props) => {
   return <div>
+    <Notification options={{ zIndex: 200, top: '250px' }} />
+
     <GoogleMap
       ref={props.onMapMounted}
       defaultZoom={14}

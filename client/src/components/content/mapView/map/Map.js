@@ -37,13 +37,7 @@ class Map extends Component {
       axios(`/api/users/googlePlaces/${type}/${this.props.address.lat}/${this.props.address.lng}`).then((response) => {
         console.log('res in axios first fetch', response);
 
-
         console.log('response', response)
-        if (response.data.results.length === 0) {
-          let myColor = { background: '#0E1717', text: "#FFFFFF" };
-          notify.show("No attraction found!", "warning", 5000, myColor);
-          // alert('No attraction found!')
-        }
 
         const promises = [];
 
@@ -202,6 +196,11 @@ class Map extends Component {
 
   checkFinishMarkers(markerArray) {
     if (this.finishMarker === this.state.places.length) {
+      if (markerArray.length === 0) {
+        let myColor = { background: '#0E1717', text: "#FFFFFF" };
+        notify.show("No attraction found!", "warning", 5000, myColor);
+        // alert('No attraction found!')
+      }
       this.setState({ markers: markerArray });
     }
   }
