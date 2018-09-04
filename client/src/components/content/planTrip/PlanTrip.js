@@ -7,6 +7,8 @@ import EventList from './EventList/EventList';
 import _ from 'lodash'
 import './planTrip.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -60,6 +62,8 @@ class PlanTrip extends Component {
         console.log('back to axios', response);
         // reset days to 0
         this.props.resetNumDays();
+        // Link to trirps page
+        // <Link to='MyTrips/'></Link>;
       })
       .catch(function (error) {
         console.log(error.response);

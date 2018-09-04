@@ -4,6 +4,10 @@ const oktaClient = require('../lib/oktaClient');
 const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
 const Plan = require('../models/planModel').plan;
+const request = require('request');
+var rp = require('request-promise');
+
+
 
 /* Create a new User (register on okta). */
 router.post('/', (req, res) => {
@@ -33,7 +37,8 @@ router.post('/', (req, res) => {
         email: user.profile.email,
         plans: [],
         tempPlaces: [],
-        tempEvents: [] };
+        tempEvents: []
+      };
 
       User.create(newUserDB, (err, userResult) => {
         if (err) throw err;
@@ -49,7 +54,7 @@ router.post('/', (req, res) => {
 router.get('/users/:id', (req, res) => {
   const oktaID = req.params.id;
 
-  User.find({ oktaID : oktaID }, (err, userResult) => {
+  User.find({ oktaID: oktaID }, (err, userResult) => {
     if (err) {
       console.log(err);
       res.send('an error has occured');
@@ -76,7 +81,7 @@ router.post('/users/:id/plantrip', (req, res) => {
   Plan.create(newPlan, (err, planResult) => {
     if (err) throw err;
     // update the user with the new trip plan
-    User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new:true }, (err, updateUser) => {
+    User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
       if (err) throw err;
       console.log('newUser updated', updateUser);
       res.status(200).send(updateUser);
@@ -110,14 +115,96 @@ router.get('/users_trips/:user_id', (req, res) => {
   console.log('param id is:');
   console.log(user_id);
 
-  User.findById(user_id, (error, data)=> {
+  User.findById(user_id, (error, data) => {
     if (error) throw error;
     else {
       console.log(data.plans);
-      res.send (data.plans); }
+      res.send(data.plans);
+    }
   });
 
 });
+
+// enable CORS request to google - first fetch
+router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
+  rp(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+    .then(function (placesRes) {
+      console.log('placesRes:', placesRes);
+      res.send(placesRes);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+
+// second fetch - get more info on the place found by the first request
+router.get('/placeSearch/:placeID', (req, res) => {
+  rp(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.params.placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+    .then(function (placeRes) {
+      console.log('one place result:', placeRes);
+      res.send(placeRes);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+
+
+
+
+// router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
+//   request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`, function (error, response, body) {
+//     console.log('error:', error); // Print the error if one occurred
+//     console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+//     console.log('body:', body); // Print the HTML for the Google homepage.
+//   });
+// });
+
+
+
+
+// 4) to update notes of user's plan
+
+router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
+  const idUser = req.params.idUser;
+  const idPlan = req.params.idPlan;
+  const idDay = req.params.idDay;
+
+  // check mongo id validation
+  if (!ObjectID.isValid(idUser) || !ObjectID.isValid(idPlan) || !ObjectID.isValid(idDay)) {
+    return res.status(400).send('Id not in the correct format');
+  }
+
+  const newNote = req.body.plan.note; // !check in client how to pass in body the note
+
+  Plan.create(newNote, (err, noteResult) => {
+    if (err) throw err;
+    // update the user' plan with the new
+    User.findByIdAndUpdate(idUser, { $push: { /*????*/ } }, { new: true }, (err, updateUser) => {
+      if (err) throw err;
+      console.log('newUser updated', updateUser);
+      res.status(200).send(updateUser);
+    });
+
+    // User.findByIdAndUpdate(idUser, (error, data) => {
+    //   if (error) throw error;
+    //   else {
+    //     console.log('data plans ', data.plans);
+    // loop over plans and find the one idPlan, then find the right day by idDay
+
+
+    // User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
+    //   if (err) throw err;
+    //   console.log('newUser updated', updateUser);
+    //   res.status(200).send(updateUser);
+    // });
+    // }
+    // });
+  });
+});
+
 
 
 module.exports = router;

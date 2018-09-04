@@ -24,7 +24,6 @@ class PickDate extends React.Component {
     let formatedDate = moment(`/Date(${Date.parse(date)})/`).format('DD/MM/YYYY');
     this.props.chooseDate(this.props.dayIndex, formatedDate);
     console.log('date in state date', date);
-
   }
 
   render() {

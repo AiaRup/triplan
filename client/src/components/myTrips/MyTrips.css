@@ -1,21 +1,12 @@
-/* .all {
-    width: 60%;
-    margin : auto ;
-    background-color: aqua;
-    text-align:center;
-} */
-
 .search-bar {
+  padding-left: 12px;
   margin: auto;
+  margin-top: 100px;
   margin-bottom: 40px;
   width: 60%;
   /* text-align: center; */
   border-bottom: 1px solid #ddd;
 }
-
-/* input{
-    width:100%;
-} */
 
 .card-list {
   width: 60%;
@@ -27,28 +18,29 @@
 }
 
 .card {
-  flex: 0 0 33.3333%;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  display: block;
+  flex-direction: row;
+  border-radius: 1.25rem;
+  flex: 0 0 31.3333%;
   padding: 20px;
-  /* margin:15px; */
-  /* border: 1px solid; */
+  margin: 5px;
 }
-
-/* button{
-    max-width: 40%;
-} */
 
 /*=====================================================
 Day
 =======================================================*/
 
-.day {
-  width: 50vw;
+.day-trip {
+  /* width: 50vw; */
   box-sizing: border-box;
   padding: 25px;
+  display: flex;
 }
 
-.day-list {
-  display: flex;
+.day-list-trip {
+  /* display: flex; */
+  flex-direction: row;
   justify-content: space-around;
 }
 
@@ -58,22 +50,78 @@ Day
 
 .trip-header>h1 {
   color: #dc3545;
+  font-weight: bolder;
   text-shadow: 3px -1px 1px black;
 }
 
 .trip-header>h2 {
-  color: #0077b7;
-  text-shadow: 3px -1px 1px black;
+  /* color: #0077b7; */
+  color: white;
+  /* width: fit-content; */
+  margin: auto;
+  /* text-align: center; */
+  background: #dc3545;
+  /* text-shadow: 3px -1px 1px black; */
 }
 
 .notes {
-  margin: auto;
+  /* width: 40%; */
+  flex-basis: 25%;
+  margin: 0;
+  padding: 20px;
+  margin-left: 30px;
   text-align: center;
-  width: 40%;
   background-color: #fcea44a3;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
 }
 
 .input-notes {
   background: #0077b7;
+}
+
+.note {
+  font-style: italic;
+  display: flex;
+  text-align: center;
+  padding: 5px;
+  border-bottom: 1px #007dc1ad solid;
+}
+
+.attraction {
+  font-size: large;
+}
+
+.attractions {
+  flex-basis: 37%;
+}
+
+.mapDay {
+  /* width: 50vw; */
+  flex-basis: 40%;
+}
+
+.list-attractions {
+  list-style: initial;
+}
+
+.pin-note {
+  /* top: 156px; */
+  margin-top: -43px;
+  position: absolute;
+  right: 36px;
+}
+
+.card:hover {
+  background: orange;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.watch:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.fa-eye {
+  font-size: 24px;
 }
