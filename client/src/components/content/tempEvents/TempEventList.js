@@ -7,6 +7,8 @@ import './datePickerCss.css';
 import { Collapse } from 'react-collapse';
 import moment from 'moment';
 import './eventTemp.css';
+import Notification, { notify } from 'react-notify-toast';
+
 
 
 // const apiKey = '2H98vvmL8G3zZvx7';
@@ -19,30 +21,50 @@ import './eventTemp.css';
   eventCategory: allStores.store.eventCategory,
   address: allStores.store.address,
   emptyTempEvents: allStores.store.emptyTempEvents,
-  addTempEvents : allStores.store.addTempEvents,
+  addTempEvents: allStores.store.addTempEvents,
 
 }))
 @observer
 class TempEventList extends Component {
   constructor() {
     super();
-    this.state = { toggledCollapse: false,
-                    showSnackBar: false };
+    this.state = {
+      toggledCollapse: false,
+      showSnackBar: false
+    };
 
   }
 
   getEvents = () => {
-    if (this.props.eventCategory.length === 0 ) {
-      alert('choose an event category')
+
+    const { startDate, endDate } = this.props.tempEventCalander;
+
+    let start = moment(`/Date(${Date.parse(startDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
+    let end = moment(`/Date(${Date.parse(endDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
+
+    console.log('star end date', startDate, endDate);
+
+    // if (startDate === endDate) {
+    if (start === end) {
+      let myColor = { background: '#0E1717', text: "#FFFFFF" };
+      notify.show("You need to choose a different start and end date", "warning", 5000, myColor);
       return;
     }
+
+    if (this.props.eventCategory.length === 0) {
+      // alert('choose an event category')
+      let myColor = { background: '#0E1717', text: "#FFFFFF" };
+      notify.show("Please choose an event category", "warning", 5000, myColor);
+      return;
+    }
+
+
     const USER_TOKEN = '9bgBCdDfmWp8NxrBqoNZ808YqGIf6m';
     const AuthStr = 'Bearer ' + USER_TOKEN;
-    let categories ='';
+    let categories = '';
     const { lat, lng } = this.props.address;
     console.log('adress in events', this.props.address);
 
-    const { startDate, endDate } = this.props.tempEventCalander;
 
     // get selected categories
     if (this.props.eventCategory.length) {
@@ -56,11 +78,14 @@ class TempEventList extends Component {
 
     console.log(URL);
 
-    axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
+    axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
       .then((response) => {
 
-        if (response.data.results.length === 0 ) {
-          console.log('No Events Found!')
+        if (response.data.results.length === 0) {
+          // console.log('No Events Found!')
+          let myColor = { background: '#0E1717', text: "#FFFFFF" };
+          notify.show("No Events Found!", "warning", 5000, myColor);
+          return;
         }
 
         // empty old events
@@ -99,12 +124,12 @@ class TempEventList extends Component {
   };
 
   convertDuration(seconds) {
-    let days = Math.floor(seconds / (3600*24));
-    seconds -= days*3600*24;
+    let days = Math.floor(seconds / (3600 * 24));
+    seconds -= days * 3600 * 24;
     let hrs = Math.floor(seconds / 3600);
-    seconds -= hrs*3600;
+    seconds -= hrs * 3600;
     let mnts = Math.floor(seconds / 60);
-    seconds -= mnts*60;
+    seconds -= mnts * 60;
     if (days === 0) {
       if (hrs === 0) {
         return `${mnts} Minutes.`;
@@ -131,26 +156,28 @@ class TempEventList extends Component {
 
     return (
       <React.Fragment>
-        <div className = 'temp-event-container'>
+        <Notification options={{ zIndex: 200, top: '50px' }} />
+
+        <div className='temp-event-container'>
           <div className='datesHead'>
-            <h5 onClick={()=>this.collapseToggle(toggleCollapse)}>Find Events Nearby &raquo;</h5>
+            <h5 onClick={() => this.collapseToggle(toggleCollapse)}>Find Events Nearby &raquo;</h5>
             <Collapse isOpened={this.state.toggledCollapse}>
-              <div className = 'date-pick'>
-                <EventPickDate/>
+              <div className='date-pick'>
+                <EventPickDate />
                 <button className='btn btn-sm btn-outline-secondary btn-temp-event-date' onClick={this.getEvents}>Events</button>
               </div>
             </Collapse>
           </div>
-         
-            {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
-              <TheEvent key={theTempEvent.id}
-                verifier="eventOfTempEvent"
-                tempEventIndex={tempEventIndex}
-                tempEventName ={theTempEvent.name}
-                tempEvent={theTempEvent} />)}
-          
+
+          {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
+            <TheEvent key={theTempEvent.id}
+              verifier="eventOfTempEvent"
+              tempEventIndex={tempEventIndex}
+              tempEventName={theTempEvent.name}
+              tempEvent={theTempEvent} />)}
+
         </div>
- 
+
       </React.Fragment>
     );
   }

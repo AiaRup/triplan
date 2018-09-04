@@ -64,6 +64,8 @@ const MapComponent = compose(
         // },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
+          console.log(place);
+
           // empty temp events array
           this.props.emptyEvents();
           // if (!place.geometry) {

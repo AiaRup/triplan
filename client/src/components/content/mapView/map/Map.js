@@ -18,10 +18,15 @@ class Map extends Component {
   }
 
   addMarkers = () => {
+
+    // for the clear button
     if (this.state.places.length === 0) {
       this.setState({ markers: [] });
       return;
     }
+
+    // let myColor = { background: '#0E1717', text: "#FFFFFF" };
+    // notify.show("Loading...", "custom", 5000, myColor);
 
     this.finishMarker = 0;
     const markerArray = [];
@@ -35,8 +40,11 @@ class Map extends Component {
 
         console.log('response', response)
         if (response.data.results.length === 0) {
-          alert('No attraction found!')
+          let myColor = { background: '#0E1717', text: "#FFFFFF" };
+          notify.show("No attraction found!", "warning", 5000, myColor);
+          // alert('No attraction found!')
         }
+
         const promises = [];
 
         response.data.results.forEach((location) => {
