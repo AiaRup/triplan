@@ -40,4 +40,36 @@
   text-align: center;
 }
 
+#snackBar {
+  visibility: hidden;
+  width: auto;
+  z-index: 1;
+  text-align: center;
+  font-size: 25px;
+  /* position: absolute; */
+  padding: 16px;
+  background-color: red;
+}
 
+#snackBar.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -10,6 +10,8 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   border-radius: 2px;
   background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
+  max-width: ${props=> (props.isDragging ? '300px' : 'auto')};
+  width: 250px;
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;

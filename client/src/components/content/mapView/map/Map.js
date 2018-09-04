@@ -31,6 +31,12 @@ class Map extends Component {
       axios(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${this.props.address.lat},${this.props.address.lng}&radius=2000&type=${type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
         .then((response) => {
           const promises = [];
+          
+          console.log('response', response)
+          if (response.data.results.length === 0) {
+            alert('No attraction found!')
+          }
+
 
           // get more info on the placee found by the first request
           response.data.results.forEach((location) => {
