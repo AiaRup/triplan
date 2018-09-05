@@ -17,8 +17,8 @@ import InlineEdit from 'react-inline-editing';
   user_id: allStores.store.user_id,
   cityName: allStores.store.cityName,
   resetNumDays: allStores.store.resetNumDays,
-  tripName : allStores.store.tripName,
-  saveTripName : allStores.store.saveTripName
+  tripName: allStores.store.tripName,
+  saveTripName: allStores.store.saveTripName
 }))
 @observer
 class PlanTrip extends Component {
@@ -59,6 +59,9 @@ class PlanTrip extends Component {
         tempEvents: this.props.eventsArray
       };
 
+      // let myColor = { background: '#20313b', text: '#FFFFFF' };
+      notify.show('Your trip has been successfully saved!', 'success', 5000);
+
       console.log('trip to server', tripUser);
 
       axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
@@ -68,6 +71,7 @@ class PlanTrip extends Component {
           this.props.resetNumDays();
           // Link to trirps page
           // <Link to='MyTrips/'></Link>;
+
         })
         .catch(function (error) {
           console.log(error.response);
