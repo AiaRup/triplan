@@ -69,7 +69,7 @@ class TheEvent extends Component {
             >
               <div className="single-event-header-section">
 
-                <button className="btn btn-color btn-sm" onClick={() => this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}>x</button>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}>x</button>
 
                 <h6 className="event-headline">{this.props.eventName}</h6>
 
@@ -77,7 +77,7 @@ class TheEvent extends Component {
               </div>
 
               <Collapse isOpened={this.state.toggledCollapse}>
-                <ul>
+                <ul className="content-of-event">
                   {Object.keys(this.props.eventItem).map((prop, index) => {
                     if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
                       return <li key={index}>{prop}: {this.props.eventItem[prop]}</li>;
@@ -103,7 +103,7 @@ class TheEvent extends Component {
           </div>
 
           <Collapse isOpened={this.state.toggledCollapse}>
-            <ul>
+            <ul className="content-of-event">
               {Object.keys(this.props.tempEvent).map((prop, index) => {
                 if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
                   return <li key={index}>{prop}: {this.props.tempEvent[prop]}</li>;
@@ -113,8 +113,7 @@ class TheEvent extends Component {
             </ul>
           </Collapse>
           {/* <button className="btn btn-primary btn-sm" onClick={()=>this.props.addTempEvent(this.props.tempEvent)}>Add</button> */}
-          <button className="btn btn-primary btn-sm" onClick={this.handleAddEvent}>Add</button>
-
+          <button className="btn btn-outline-secondary btn-sm" onClick={this.handleAddEvent}>Add</button>
         </div>
       );
 

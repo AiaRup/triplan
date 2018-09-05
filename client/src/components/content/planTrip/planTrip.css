@@ -9,7 +9,7 @@
   flex-direction: column;
   padding-bottom: 15px;
   /* border-radius: 2px; */
-  width: 100%; 
+  width: 100%;
   height: auto;
   /* background-color: green; */
 }
@@ -17,6 +17,7 @@
 .place-event-containers {
 display: flex;
 flex-direction: row;
+justify-content: space-around;
 /* border-radius: 2px; */
 width: 100%;
 height: auto;
@@ -24,10 +25,30 @@ height: auto;
 }
 
 .save-trip-btn {
-  background-color: orange;
-  width: 22%;
+  background-color: #ffec82;
+  width: 20%;
   margin: 0 auto;
-  color: white;
-  height: 35px;
+  color: black;
+  /* height: 35px; */
   border-radius: 3px;
+  border: 1px solid #ffec82;
+
 }
+
+.name-trip-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-trip-label {
+  margin-right: 5px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.inlineEdit {
+  font-size: 20px;
+  padding: 10px;
+  margin-bottom: 0
+  }

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Place from '../placeList/place/Place';
 import PickDate from './PickDate';
 import TheEvent from '../EventList/TheEvent';
-import './day.css'
+import './day.css';
 
 
 const PlaceListUL = styled.div`
@@ -28,28 +28,28 @@ const PlaceListUL = styled.div`
   render() {
 
     return (
-        <PlaceListUL
+      <PlaceListUL
         innerRef={this.props.provided.innerRef}
         isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps}
-        >
+      >
 
-          {this.props.daysArray[this.props.index].places.map((item, index)=>{
-            if(item.type==='event') {
+        {this.props.daysArray[this.props.index].places.map((item, index)=>{
+          if (item.type==='event') {
 
-            return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
+            return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>);
 
-            }else if (item.type==='place'){
-              return(<Place key={item.id} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>)}
-          }
+          } else if (item.type==='place'){
+            return (<Place key={item.id} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>);}
+        }
         )}
 
-          {this.props.provided.placeholder}
+        {this.props.provided.placeholder}
       </PlaceListUL>
-    )}
+    );}
 
 
-  }
+}
   @inject(allStores => ({
     deleteDay: allStores.store.deleteDay,
     daysArray: allStores.store.daysArray
@@ -59,21 +59,21 @@ class Day extends Component {
   render() {
     return (
 
-        <div className="day-container">
-          <button className="btn btn-danger btn-sm" onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
+      <div className="day-container">
+        <button className="btn btn-secondary btn-sm" onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
 
-          <div className="pick-date">
+        <div className="pick-date">
           <PickDate dayIndex={this.props.index}/>
-          </div>
-          {/* <h4>{this.props.day.name}</h4> */}
-
-          <Droppable droppableId={this.props.day.id}>
-            {(provided, snapshot)=> (
-              <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
-            )}
-          </Droppable>
-
         </div>
+        {/* <h4>{this.props.day.name}</h4> */}
+
+        <Droppable droppableId={this.props.day.id}>
+          {(provided, snapshot)=> (
+            <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
+          )}
+        </Droppable>
+
+      </div>
     );
   }
 }

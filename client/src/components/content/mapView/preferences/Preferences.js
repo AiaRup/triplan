@@ -84,7 +84,7 @@ export default class Preferences extends Component {
             )}
             <div className="pref-buttons">
               <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
-              <button className="btn btn-sm btn-danger" type="button"
+              <button className="btn btn-sm btn-secondary" type="button"
                 onClick={this.handleClear}>Clear</button>
             </div>
           </form>

@@ -3,16 +3,19 @@
   flex: wrap;
   flex-flow: row;
   justify-content: space-around;
-  margin-top: 45px;
-  margin-bottom: 35px;
+  margin: 35px 0;
 }
 
 .plan-trip-container {
+  background-color: #20313b;
+  color: #fff;
   margin: 0;
   display: flex;
   min-height: 80vh;
   height: auto;
   width: 100%;
+  padding: 20px;
+  justify-content: space-between;
 }
 
 .map-view-container {
@@ -26,20 +29,20 @@
 
 .home-page-headline {
   text-align: center;
-  margin-top: 75px;
+  /* margin-top: 75px; */
   margin-bottom: 35px;
   font-size: 38px;
   letter-spacing: 2px;
   font-weight: 400;
+  padding-top: 20px;
 }
 
 .home-page-instructions {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 35px;
-  margin-bottom: 65px;
-  font-size: 18px;
+  margin: 65px 0;
+    font-size: 18px;
 }
 
 i {
@@ -52,7 +55,7 @@ i {
 }
 
 .right {
-  border: solid black;
+  border: solid white;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
@@ -60,4 +63,10 @@ i {
   margin-left: 12px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+}
+
+.intro {
+  background-color: #20313b;
+  padding: 20px;
+  color: #fff;
 }

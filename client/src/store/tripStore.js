@@ -82,15 +82,19 @@ class TripStore {
   }
 
   // update number of days in trip
-  @action resetNumDays = (name) => {
-    this.numOfDays = 0;
-    console.log('num days reset', this.numOfDays);
-  }
+  // @action resetNumDays = (name) => {
+  //   this.numOfDays = 0;
+  //   console.log('num days reset', this.numOfDays);
+  // }
 
   // update category event when user changes the category
   @action updateEventCategory = (category) => {
     this.eventCategory = category;
     console.log('category in store', this.eventCategory);
+  }
+
+  @action restStoreTrip = () => {
+    window.location.reload();
   }
 
   //Functionality in DAY

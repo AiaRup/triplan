@@ -4,24 +4,22 @@ import { observer, inject } from 'mobx-react';
 import DayList from './dayList/DayList';
 import PlaceList from './placeList/PlaceList';
 import EventList from './EventList/EventList';
-import _ from 'lodash'
+import _ from 'lodash';
 import './planTrip.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Notification, { notify } from 'react-notify-toast';
-
-
-
-
+import InlineEdit from 'react-inline-editing';
 
 @inject(allStores => ({
   placesArray: allStores.store.placesArray,
   daysArray: allStores.store.daysArray,
   eventsArray: allStores.store.eventsArray,
   user_id: allStores.store.user_id,
-  tripName: allStores.store.tripName,
   cityName: allStores.store.cityName,
-  resetNumDays: allStores.store.resetNumDays
+  resetNumDays: allStores.store.resetNumDays,
+  tripName : allStores.store.tripName,
+  saveTripName : allStores.store.saveTripName
 }))
 @observer
 class PlanTrip extends Component {
@@ -30,23 +28,23 @@ class PlanTrip extends Component {
 
     if (this.props.daysArray.length === 0) {
       // alert('Please add days to your plan')
-      let myColor = { background: '#0E1717', text: "#FFFFFF" };
-      notify.show("Please add days to your plan", "error", 5000, myColor);
+      let myColor = { background: '#0E1717', text: '#FFFFFF' };
+      notify.show('Please add days to your plan', 'error', 5000, myColor);
       return;
     }
 
-    if (this.props.tripName === 'Name Your Trip' || this.props.tripName === "") {
+    if (this.props.tripName === 'Name Your Trip' || this.props.tripName === '') {
       // alert('Please name your trip')
-      let myColor = { background: '#0E1717', text: "#FFFFFF" };
-      notify.show("Please name your trip", "error", 5000, myColor);
+      let myColor = { background: '#0E1717', text: '#FFFFFF' };
+      notify.show('Please name your trip', 'error', 5000, myColor);
       return;
     }
 
     // check if each day is not empty
     for (let i = 0; i < this.props.daysArray.length; i++) {
       if (this.props.daysArray[i].places.length === 0) {
-        let myColor = { background: '#0E1717', text: "#FFFFFF" };
-        notify.show("There is an empty day in yout trip", "error", 5000, myColor);
+        let myColor = { background: '#0E1717', text: '#FFFFFF' };
+        notify.show('There is an empty day in yout trip', 'error', 5000, myColor);
         return;
       }
     }
@@ -77,8 +75,6 @@ class PlanTrip extends Component {
         });
     }
   };
-
-
 
   onDragEnd = result => {
     const daysArray = this.props.daysArray;
@@ -211,16 +207,23 @@ class PlanTrip extends Component {
 
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>
-
+            <div className="name-trip-container">
+              <i className="fa fa-pencil edit-trip-label" aria-hidden="true"></i>
+              <InlineEdit inputClassName="inlineInput" labelClassName="inlineEdit" text={this.props.tripName} onFocusOut={(data) => {
+                this.props.saveTripName(data);
+              }} />
+            </div>
             <div className='place-event-containers'>
               <PlaceList />
               <EventList />
+              <DayList />
+
             </div>
 
-            <DayList />
+            {/* <DayList /> */}
           </div>
           {/* <button onClick={() => { if (window.confirm('Are you sure you want to save your trip?')) { this.saveTrip() } }} className="save-trip-btn">Save Trip</button> */}
-          <button onClick={this.saveTrip} className="save-trip-btn">Save Trip</button>
+          <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn">Save Trip</button>
 
         </DragDropContext>
       </React.Fragment>

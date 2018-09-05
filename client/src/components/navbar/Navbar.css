@@ -1,17 +1,18 @@
 .navbar .navbar-toggler-icon {
-  background-image: url('https://mdbootstrap.com/img/svg/hamburger1.svg?color=6a1b9a');
+  background-image: url('https://mdbootstrap.com/img/svg/hamburger1.svg?color=e22866');
 }
 
-.navbar { 
-  background-color: #1483c6;
+/* .navbar {
+  background-color: #20313b;
   color: white;
   margin: 0 auto;
   padding: 15px;
-  border: 1px solid lightgray;
-  border-radius: 2px;
-  height: 60px;
+  /* border: 1px solid lightgray; */
+  /* border-radius: 2px; */
+  /* height: 60px;
+  line-height: 60px; */
   /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
-}
+/* } */
 
 .loginNavLi {
   pointer-events: none;
@@ -19,7 +20,6 @@
 }
 .custom-nav-link {
   color: white;
-  
 }
 
 .logo-design {
@@ -30,8 +30,29 @@
   color: white;
 }
 
-.color-userName {
-  color:#1D3557;
+
+.bg-light {
+  background-color: #20313b !important;
+  color: white !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: white !important;
+}
+
+.navbar-light .navbar-brand {
+  color: white !important;
+
+}
+
+.btn-secondary {
+  background-color: #e22866;
+  border-color: #e22866;
+}
+
+.btn-secondary:hover {
+  background-color: #e04277;
+  border-color: #e04277;
 }
 
 @media (max-width: 767px) {
