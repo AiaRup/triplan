@@ -6,7 +6,7 @@ import TheEvent from './TheEvent';
 
 const EventListUL = styled.div`
 padding: 8px;
-min-height: 200px;
+min-height: 500px;
 height: auto;
 background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
 transition: background-color 0.2s ease;
@@ -50,11 +50,8 @@ class EventList extends Component {
   render() {
     return (
       <div className="event-list-container">
-      <div className="event-container-headline">
-        <h3>Events</h3>
-        </div>
-        <div className="eventList-background-div">
-        <Droppable droppableId="eventsContainer" >
+        <h5 className='event-container-headline'>Events</h5>
+        <Droppable droppableId="eventsContainer" className="places-background-color">
           {(provided, snapshot) => (
             <DroppableEvent provided={provided} snapshot={snapshot}/>
           )}

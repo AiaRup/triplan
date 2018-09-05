@@ -47,15 +47,15 @@ class TempEventList extends Component {
 
     // if (startDate === endDate) {
     if (start === end) {
-      let myColor = { background: '#0E1717', text: "#FFFFFF" };
-      notify.show("You need to choose a different start and end date", "warning", 5000, myColor);
+      let myColor = { background: '#20313b', text: "#FFFFFF" };
+      notify.show("You need to choose a different start and end date", "custom", 5000, myColor);
       return;
     }
 
     if (this.props.eventCategory.length === 0) {
       // alert('choose an event category')
-      let myColor = { background: '#0E1717', text: "#FFFFFF" };
-      notify.show("Please choose an event category", "warning", 5000, myColor);
+      let myColor = { background: '#20313b', text: "#FFFFFF" };
+      notify.show("Please choose an event category", "custom", 5000, myColor);
       return;
     }
 
@@ -84,8 +84,8 @@ class TempEventList extends Component {
 
         if (response.data.results.length === 0) {
           // console.log('No Events Found!')
-          let myColor = { background: '#0E1717', text: "#FFFFFF" };
-          notify.show("No Events Found!", "warning", 5000, myColor);
+          let myColor = { background: '#20313b', text: "#FFFFFF" };
+          notify.show("No Events Found!", "custom", 5000, myColor);
           return;
         }
 
@@ -177,7 +177,7 @@ class TempEventList extends Component {
             <Collapse isOpened={this.state.toggledCollapse}>
               <div className='date-pick'>
                 <EventPickDate />
-                <button className='btn btn-sm btn-outline-secondary btn-temp-event-date' onClick={this.getEvents}>Events</button>
+                <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
               </div>
             </Collapse>
           </div>

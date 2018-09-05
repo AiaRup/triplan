@@ -1,13 +1,24 @@
-.inlineEdit {
-  font-size: 20px;
-  padding: 10px;
-  margin-bottom: 0
-  }
+
 
 .header-days {
 display: flex;
 flex-wrap: wrap;
+/* justify-content: center; */
+/* background-color: #e22866; */
+/* text-align: center; */
+color: #fff;
+border: 1px solid lightgrey;
+/* border-radius: 5px; */
+height: 40px;
+line-height: 40px;
 }
+
+.header-days h5 {
+  margin-bottom: 0;
+  line-height: 40px;
+  margin-left: 10px;
+}
+
 
   .inlineEdit:hover {
     cursor: text;

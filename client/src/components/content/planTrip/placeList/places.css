@@ -6,13 +6,20 @@
 
 .places-list-container {
   margin: 8px;
-  border-radius: 2px;
-  height: auto;
+  /* background-color: #F8F9FA; */
+
+  /* background: linear-gradient(180deg, #1483c6 50%, #F8F9FA 50%); */
   border: 1px solid lightgrey;
-  height: 300px;
-  width: 45%;
+  /* border-radius: 2px; */
+  height: auto;
+  min-height: 500px;
+  width: 30%;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-  overflow: auto;
+
+}
+
+.places-background-color {
+  background-color: red;
 }
 
 .place-arrow {
@@ -23,17 +30,32 @@
   height: 20px;
   }
 
-.place-container-headline {
+h5.place-container-headline {
+  background-color: #e22866;
   text-align: center;
+<<<<<<< HEAD
   background-color: #1483c6;
   color: white;
   padding-top: 2px;
   padding-bottom: 2px
+=======
+  color: #fff;
+  border: 1px solid lightgrey;
+  /* border-radius: 5px; */
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 0;
+>>>>>>> master
 }
 
 .place-headline {
   margin: 5px;
-  font-weight: 700;
+  font-weight: bold;
+  color: black;
+}
+
+.place-content-li {
+  color: #000;
 }
 
 .single-place-header-section {

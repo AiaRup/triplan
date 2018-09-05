@@ -3,12 +3,12 @@ import { observer, inject } from 'mobx-react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Place from './place/Place';
-import './places.css'
+import './places.css';
 
 
 const PlaceListUL = styled.div`
 padding: 8px;
-min-height: 200px;
+min-height: 500px;
 height: auto;
 background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
 transition: background-color 0.2s ease;
@@ -16,44 +16,42 @@ transition: background-color 0.2s ease;
 `;
 
 @inject(allStores => ({
-  placesArray: allStores.store.placesArray}))
+  placesArray: allStores.store.placesArray }))
 
 
   @observer class DroppablePlaces extends Component {
 
-    render() {
-      return (
-        <PlaceListUL 
+  render() {
+    return (
+      <PlaceListUL
         innerRef={this.props.provided.innerRef}
         isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps} 
         >
           {this.props.placesArray.map((place, index) => <Place key={place.iternalId} placeIndex={index} thePlace={place} verifier="placeOfPlace"/>)}
 
-          {this.props.provided.placeholder}
-        </PlaceListUL>  
-      )};
+        {this.props.provided.placeholder}
+      </PlaceListUL>
+    );}
     };
 
 
 @observer
 class PlaceList extends Component {
- 
+
   render() {
     return (
-        <div className="places-list-container">
-        <div className="place-container-headline">
-          <h3>Places</h3>
-          </div>
-          <div className="placeList-background-div">
+      <React.Fragment>
+        <div className='places-list-container'>
+          <h5 className='place-container-headline'>Places</h5>
           <Droppable droppableId="placesContainer">
-           {(provided, snapshot) => (
-             <DroppablePlaces provided={provided} snapshot={snapshot}/>
-          )}
+            {(provided, snapshot) => (
+              <DroppablePlaces provided={provided} snapshot={snapshot}/>
+            )}
           </Droppable>
           </div>
-        </div>
-    )};
+      </React.Fragment>
+    );}
 };
 
 export default PlaceList;

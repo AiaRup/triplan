@@ -51,14 +51,15 @@ class App extends Component {
           onAuthRequired={onAuthRequired}>
           <div className="App">
             <Navbar />
-            <div className="container-fluid">
+            {/* <div className="container-fluid"> */}
+            <div>
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Content />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
 
                 {this.props.plans.map(
                   (plan, index) =>
-                    <SecureRoute exact path={`/MyTrips/${plan.name}`} key={index} render={() => <OneTrip plan={plan} />} />
+                    <SecureRoute exact path={`/MyTrips/${plan._id}`} key={index} render={() => <OneTrip plan={plan} />} />
                 )}
 
                  <SecureRoute exact path="/About"  render={() => <About/>} />

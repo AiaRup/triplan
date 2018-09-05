@@ -5,24 +5,27 @@
 }
 
 .day-list-container {
-  margin-top: 10px;
+  /* margin-top: 10px; */
+  margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  width: auto;
+  width: 30%;
   height: auto;
+  min-height: 500px;
 }
 
 .day-list-wrapper {
   border: 1px solid lightgrey;
-  border-radius: 2px;
+  /* border-radius: 2px; */
   display: flex;
-  flex-direction: row;
-  min-width: 500px;
-  min-height: 210px;
+  flex-direction: column;
+  /* min-width: 500px; */
+  min-height: 500px;
   height: auto;
   width: auto;
   flex-wrap: nowrap;
   overflow-x: auto;
+  background: #fff;
 }
 
 .day-container {

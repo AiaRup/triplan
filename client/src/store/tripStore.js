@@ -3,7 +3,7 @@ import moment from 'moment';
 
 
 
-class TripStore{
+class TripStore {
 
   @observable user_id = ''
   @observable cityName = 'London'
@@ -13,27 +13,9 @@ class TripStore{
   @observable numOfPlaces = 0;
   @observable numOfEvents = 0;
   @observable eventCategory = [];
+  @observable loading = false;
 
-  //////////////////////////
-  @observable oneTrip = {
-    id: 'id1', // will get from the server
-    name: 'madrid 2018',
-    days:
-      [
-        {
-          date: '22/08/2018', places:
-            [{ position: { lat: 32.067270, lng: 34.779642 }, name: 'place1', type: 'hotel' },
-            { position: { lat: 32.096587, lng: 34.776057 }, name: 'place2', type: 'resturant' }],
-          notes: []
-        },
-        {
-          date: '23/08/2018', places:
-            [{ position: { lat: 32.800028, lng: 35.526261 }, name: 'place11', type: 'cafe' },
-            { position: { lat: 32.799917, lng: 35.526974 }, name: 'place22', type: 'resturant' },
-            { position: { lat: 32.798096, lng: 35.527000 }, name: 'place33', type: 'hotel' }], notes: []
-        }
-      ]
-  }
+
 
   @action addNotes = (note, index) => {
     // console.log('note ', note, 'index ', index);
@@ -45,8 +27,6 @@ class TripStore{
   @action updateNotes = (data, indexD, indexN) => {
     this.oneTrip.days[indexD].notes[indexN].push(data);
   }
-
-  ////////////////////////
 
   @action savePlans = (plans) => {
     this.plansArray = plans;
@@ -82,7 +62,10 @@ class TripStore{
     this.showLogin = !this.showLogin;
   }
 
-  //!!also changes by refernce!?
+  toggleLoading = (showState) => {
+    this.loading= showState;
+  }
+
   // add attraction to places array
   @action addPlace = (place) => {
     this.numOfPlaces++;
@@ -122,15 +105,19 @@ class TripStore{
   }
 
   // update number of days in trip
-  @action resetNumDays = (name) => {
-    this.numOfDays = 0;
-    console.log('num days reset', this.numOfDays);
-  }
+  // @action resetNumDays = (name) => {
+  //   this.numOfDays = 0;
+  //   console.log('num days reset', this.numOfDays);
+  // }
 
   // update category event when user changes the category
   @action updateEventCategory = (category) => {
     this.eventCategory = category;
     console.log('category in store', this.eventCategory);
+  }
+
+  @action restStoreTrip = () => {
+    window.location.reload();
   }
 
   //Functionality in DAY
@@ -181,19 +168,21 @@ class TripStore{
     console.log(JSON.stringify(this.tempEventCalander.endDate));
   }
 
-  // @action getEvents = () => {
-  //   console.log('get events function')
-  // }
-
   //Move from EVENT from TempEvent To EVENTS DIV
 
+  // @action addTempEvent = (event) => {
+
+  //   this.eventsArray.push(event);
+  //   console.log('eventsArray', this.eventsArray);
+
+  // }
 
   // empty temp events
   @action emptyTempEvents = () => {
     this.tempEventArray = [];
   }
 
-  // add temp events to array
+  // add temp events to api div events
   @action addTempEvents = (event) => {
     
     this.tempEventArray.push(event);
