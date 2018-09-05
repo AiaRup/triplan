@@ -26,9 +26,9 @@ transition: background-color 0.2s ease;
       <PlaceListUL
         innerRef={this.props.provided.innerRef}
         isDraggingOver={this.props.snapshot.isDraggingOver}
-        {...this.props.provided.droppableProps}
-      >
-        {this.props.placesArray.map((place, index) => <Place key={place.id} placeIndex={index} thePlace={place} verifier="placeOfPlace"/>)}
+        {...this.props.provided.droppableProps} 
+        >
+          {this.props.placesArray.map((place, index) => <Place key={place.iternalId} placeIndex={index} thePlace={place} verifier="placeOfPlace"/>)}
 
         {this.props.provided.placeholder}
       </PlaceListUL>
@@ -41,16 +41,16 @@ class PlaceList extends Component {
 
   render() {
     return (
-      <React.Fragment>
         <div className='places-list-container'>
           <h5 className='place-container-headline'>Places</h5>
+          <div className="place-overflow">
           <Droppable droppableId="placesContainer">
             {(provided, snapshot) => (
               <DroppablePlaces provided={provided} snapshot={snapshot}/>
             )}
           </Droppable>
-        </div>
-      </React.Fragment>
+          </div>
+          </div>
     );}
 };
 

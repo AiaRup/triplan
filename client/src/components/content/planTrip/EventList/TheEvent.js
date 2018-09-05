@@ -11,12 +11,13 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
-  max-width: ${props => (props.isDragging ? '300px' : 'auto')};
-  width: 250px;
+  background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
+  width: ${props=> (props.isDragging ? '40%' : 'auto')};
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;
+
+// transform: ${props=> (props.isDragging ? 'rotate(20deg)' : 'none')};
 
 @inject(allStores => ({
   deleteEvent: allStores.store.deleteEvent,
@@ -56,9 +57,11 @@ class TheEvent extends Component {
   }
 
   regularOrTempEvent = (toggleCollapse) => {
-    if (this.props.verifier === 'eventOfEvents') {
+    
+    if (this.props.verifier==='eventOfEvents'){
+      console.log('this.props.eventItem.iternalId' , this.props.eventItem.iternalId)
       return (
-        <Draggable draggableId={this.props.eventItem.id} index={this.props.eventIndex}>
+        <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
           {(provided, snapshot) => (
 
             <Container

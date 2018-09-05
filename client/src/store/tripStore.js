@@ -10,6 +10,8 @@ class TripStore {
   @observable tripName = 'Name Your Trip'
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
+  @observable numOfPlaces = 0;
+  @observable numOfEvents = 0;
   @observable eventCategory = [];
   @observable loading = false;
 
@@ -66,7 +68,23 @@ class TripStore {
 
   // add attraction to places array
   @action addPlace = (place) => {
+    this.numOfPlaces++;
+    place.iternalId = 'places_id' + this.numOfPlaces;
+
+    console.log('place for id' ,place)
     this.placesArray.push(place);
+  }
+
+  @action addTempEvent = (theEvent) => {
+  //getting the event object and trying to add internal id into it
+    //!! CHANGES BY FUCKING REFERENCE!!
+    this.theNewEvent = theEvent
+    this.numOfEvents++;
+    console.log('this.theNewEvent', this.theNewEvent)
+    this.theNewEvent.iternalId = 'event_id' + this.numOfEvents;
+    this.eventsArray.push(this.theNewEvent);
+    // console.log('eventsArray', this.eventsArray);
+
   }
 
   // update address when user serch a place on map
@@ -106,6 +124,7 @@ class TripStore {
   @action addDay = () => {
     this.numOfDays++;
     this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: 'day_' + this.numOfDays });
+    console.log('this.numOfdays', this.numOfDays)
   }
 
   @action deleteDay = (index) => {
@@ -149,17 +168,14 @@ class TripStore {
     console.log(JSON.stringify(this.tempEventCalander.endDate));
   }
 
-  // @action getEvents = () => {
-  //   console.log('get events function')
-  // }
-
   //Move from EVENT from TempEvent To EVENTS DIV
-  @action addTempEvent = (event) => {
 
-    this.eventsArray.push(event);
-    console.log('eventsArray', this.eventsArray);
+  // @action addTempEvent = (event) => {
 
-  }
+  //   this.eventsArray.push(event);
+  //   console.log('eventsArray', this.eventsArray);
+
+  // }
 
   // empty temp events
   @action emptyTempEvents = () => {
@@ -168,6 +184,7 @@ class TripStore {
 
   // add temp events to api div events
   @action addTempEvents = (event) => {
+    
     this.tempEventArray.push(event);
   }
 }

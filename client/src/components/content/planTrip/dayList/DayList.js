@@ -28,9 +28,11 @@ class DayList extends Component {
           <h5>
             Days of your Trip
           </h5>
+          
+
+
           <button className="btn btn-secondary btn-sm add-day" onClick={this.props.addDay} data-toggle="tooltip" data-placement="top" title="Add one day">+</button>
         </div>
-
         <div className="day-list-wrapper">
 
           <ul className="day-list">

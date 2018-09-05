@@ -30,7 +30,8 @@ class TempEventList extends Component {
     super();
     this.state = {
       toggledCollapse: false,
-      showSnackBar: false
+      showSnackBar: false,
+      tempEventIternalId: 0
     };
 
   }
@@ -95,11 +96,13 @@ class TempEventList extends Component {
         this.props.emptyTempEvents();
         // create new event object
         let event = {};
-        console.log(response);
+        
+        // console.log(response);
         response.data.results.forEach((eventResult) => {
           event.name = eventResult.title;
           event.id = eventResult.id;
           event.category = eventResult.category;
+    
           event.start = moment(`/Date(${Date.parse(eventResult.start)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.end = moment(`/Date(${Date.parse(eventResult.end)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.type = 'event';
@@ -108,11 +111,21 @@ class TempEventList extends Component {
           if (eventResult.duration !== 0) {
             event.duration = this.convertDuration(eventResult.duration);
           }
+
           // add event to trip store
           this.props.addTempEvents(event);
           // this.props.tempEventArray.push(event);
-          console.log('tempEvent', this.props.tempEventArray);
+          // console.log('tempEvent', this.props.tempEventArray);
 
+          // alert if no event found
+          if (response.data.results.length === 0 ) {
+            alert('No Events Found!')
+            return;
+            
+          }
+          // this.setState({ tempEventIternalId: +1 });
+
+ 
         });
       })
       .catch((error) => {

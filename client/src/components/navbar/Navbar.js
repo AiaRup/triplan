@@ -102,6 +102,7 @@ export default withAuth(
               <li className="nav-item ml-3">
                 <Link className="nav-link" to="/About">About</Link>
               </li>
+      
             </ul>
             {navbarRight ? navbarRight : ''}
           </div>
