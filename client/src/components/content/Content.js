@@ -86,7 +86,7 @@ positionDenied = () => {
    return (
      <React.Fragment>
        <div className="intro">
-         <img src="/images/try-logo2.png" alt=""/>
+         <img src="/images/new-logo.png" alt=""/>
          <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
          <div className="home-page-instructions">
            <p>Search Your Trip Location<i className="right"></i></p>
@@ -96,7 +96,7 @@ positionDenied = () => {
          </div>
 
        </div>
-       <button className="btn btn-sm btn-secondary mt-4 ml-3" onClick={this.resetTrip}>Reset Trip</button>
+       <button className="btn btn-sm btn-secondary mt-4 ml-3 reset-trip" onClick={this.resetTrip}>Reset Trip</button>
 
        <div className="container-fluid">
 

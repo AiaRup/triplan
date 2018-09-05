@@ -215,9 +215,8 @@ class PlanTrip extends Component {
             </div>
             <div className='place-event-containers'>
               <PlaceList />
-              <EventList />
               <DayList />
-
+              <EventList />
             </div>
 
             {/* <DayList /> */}

@@ -80,7 +80,7 @@ export default withAuth(
       return (
         // bg-light mb-3
         <nav className="navbar navbar-expand-md navbar-light bg-light">
-          <span className="navbar-brand"><Link className="navbar-brand" to="/">Triplan</Link></span>
+          <span className="navbar-brand"><Link className="navbar-brand" to="/"><img src="/images/small-logo.png" alt="" /></Link></span>
           <button
             className="navbar-toggler"
             type="button"
