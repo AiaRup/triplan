@@ -58,7 +58,7 @@ class App extends Component {
 
                 {this.props.plans.map(
                   (plan, index) =>
-                    <SecureRoute exact path={`/MyTrips/${plan.name}`} key={index} render={() => <OneTrip plan={plan} />} />
+                    <SecureRoute exact path={`/MyTrips/${plan._id}`} key={index} render={() => <OneTrip plan={plan} />} />
                 )}
 
                  <SecureRoute exact path="/About"  render={() => <About/>} />
