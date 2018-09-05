@@ -1,5 +1,5 @@
 .search-bar {
-  padding-left: 12px;
+  padding: 12px;
   margin: auto;
   margin-top: 100px;
   margin-bottom: 40px;
@@ -17,18 +17,38 @@
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  /* border: 2px solid; */
   box-sizing: border-box;
+  justify-content: center;
 }
 
 .card {
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
   display: block;
   flex-direction: row;
-  border-radius: 1.25rem;
+  /* border-radius: 1.25rem; */
   flex: 0 0 31.3333%;
   padding: 20px;
   margin: 5px;
+  border: 2px solid #e22866;
+  background: #fff;
+  color: #20313b;
+  text-align: center;
+  transition: all .2s ease-in-out;
+}
+
+.card:hover {
+  -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.watch {
+  color: #20313b;
+  text-decoration: none;
+}
+.watch:hover {
+  color: #20313b;
+  text-decoration: none;
 }
 
 /*=====================================================
@@ -137,16 +157,7 @@ h4 {
   right: 36px;
 }
 
-.card:hover {
-  background: orange;
-  color: white;
-  font-size: 1.5rem;
-}
 
-.watch:hover {
-  color: white;
-  text-decoration: none;
-}
 
 .fa-eye {
   font-size: 24px;

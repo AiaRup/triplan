@@ -1,82 +1,91 @@
-.about-page{
-    background-color: rosybrown;
+.about-page {
+  background-color: #20313b;
 }
 
-.about-head{
-    /* margin: 0 100px; */
-    height: 440px;
-    width: 100%;
-    background-image:url(/images/zoug.jpg);
-     background-size: contain;
-
-}
-.about-body{
-    margin: 100px 200px auto;
+.about-body {
+  color: #fff;
+  padding-top: 50px;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 2em;
+  font-size: 20px;
 }
 
-.team-body{
-margin-top: 0px;
+.team-body {
+  background-color: #fff;
+  padding: 30px;
 }
 
-.h1-team{
-    text-align: center;
-    margin: 100px auto;
+.h1-team {
+  text-align: center;
+  color: #e22866;
+  font-weight: bold;
+  padding: 20px 0;
 }
 
-
-.tm_pic_dror{
-    background-image: url(/images/dror.png);
-    width: 230px;
-    height : 230px;
-    border-radius: 50%;
-    /* border: 2px solid; */
-    margin :10px;
+.tm_pic_dror {
+  background-image: url(/images/dror.png);
+  width: 170px;
+  height: 300px;
+  margin: 0 auto;
 }
 
-
-.tm_pic_hodaya{
-    background-image: url(/images/hodaya.png);
-    width: 230px;
-    height : 230px;
-    border-radius: 50%;
-     /* border: 2px solid; */
-     margin :10px;
+.tm_pic_hodaya {
+  background-image: url(/images/hodaya.png);
+  width: 170px;
+  height: 300px;
+  margin: 0 auto;
 }
 
-
-.tm_pic_aia{
-    background-image: url(/images/aia.jpg);
-    width: 230px;
-    height : 230px;
-    border-radius: 50%;
-     /* border: 2px solid; */
-     margin :10px;
-}  
-
-
-.tm_pic_carl{
-     background-image: url(/images/carl.png); 
-     width: 230px;
-     height : 230px;
-     border-radius: 50%;
-     margin :10px;
+.tm_pic_aia {
+  background-image: url(/images/aia.png);
+  width: 170px;
+  height: 300px;
+  margin: 0 auto;
 }
-    
 
+.tm_pic_carl {
+  background-image: url(/images/carl.png);
+  width: 170px;
+  height: 300px;
+  margin: 0 auto;
+}
 
-.tm_name{
-    text-align:center;
+.tm_name {
+  text-align: center;
+  color: #000;
+  font-weight: bold;
 }
 
 .icons {
-    text-align: center;
-    width: 100%;
-    font-size: 2em;
+  text-align: center;
+  width: 100%;
+  font-size: 2em;
 }
 
-.gitIcon{
-    margin : 10px;
+.gitIcon,.linkedinIcon {
+  padding: 0 5px;
+  /* margin: 10px; */
+  color: #e22866;
 }
 
-/* .linkedinIcon{
-} */
+.linkedinIcon:hover, .gitIcon:hover  {
+  color: #20313b;
+}
+
+/* making a line before and after word */
+
+.line-on-sides:before,
+.line-on-sides:after {
+  content: '';
+  display: inline-block;
+  width: 5%;
+  margin: 0 0.5em 0 -55%;
+  vertical-align: middle;
+  border-bottom: 2px solid;
+}
+
+.line-on-sides:after {
+  margin: 0 -55% 0 0.5em;
+}

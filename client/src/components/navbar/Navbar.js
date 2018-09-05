@@ -47,7 +47,7 @@ export default withAuth(
       const authNav = this.state.authenticated ? (
         <ul className="auth-nav nav navbar-nav navbar-right">
           <li className="nav-link mr-3">{this.currentUserName}</li>
-          <li className="nav-item"><button className="btn btn-sm btn-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.logout()}>Log Out</button></li>
+          <li className="nav-item nav-link"><button className="btn btn-sm btn-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.logout()}>Log Out</button></li>
         </ul>
       ) : (
         <ul className="auth-nav nav navbar-nav navbar-right">
@@ -96,10 +96,10 @@ export default withAuth(
               <li className="nav-item ml-3">
                 <Link className="nav-link" to="/">Home</Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ml-3">
                 <Link className="nav-link" to="/MyTrips">My Trips</Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ml-3">
                 <Link className="nav-link" to="/About">About</Link>
               </li>
             </ul>
