@@ -32,7 +32,6 @@ class DroppableEvent extends Component {
           return <TheEvent key={eventItem.iternalId} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents" />;
         })}
 
-
         {this.props.provided.placeholder}
       </EventListUL>
     );
@@ -51,12 +50,14 @@ class EventList extends Component {
     return (
       <div className="event-list-container">
         <h5 className='event-container-headline'>Events</h5>
-        <Droppable droppableId="eventsContainer" className="places-background-color">
-          {(provided, snapshot) => (
-            <DroppableEvent provided={provided} snapshot={snapshot}/>
-          )}
-
-        </Droppable>
+          <div className="eventList-overflow">
+            <Droppable droppableId="eventsContainer" 
+            >
+              {(provided, snapshot) => (
+                <DroppableEvent provided={provided} snapshot={snapshot}/>
+              )}
+            </Droppable>
+          </div>
         </div>
       
     );

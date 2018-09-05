@@ -32,6 +32,7 @@ const PlaceListUL = styled.div`
         innerRef={this.props.provided.innerRef}
         isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps}
+        className="droppable-size"
       >
 
         {this.props.daysArray[this.props.index].places.map((item, index)=>{
@@ -67,7 +68,8 @@ class Day extends Component {
         </div>
         {/* <h4>{this.props.day.name}</h4> */}
 
-        <Droppable droppableId={this.props.day.id}>
+        <Droppable droppableId={this.props.day.id} 
+        >
           {(provided, snapshot)=> (
             <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
           )}

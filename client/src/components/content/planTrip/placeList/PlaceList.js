@@ -41,16 +41,16 @@ class PlaceList extends Component {
 
   render() {
     return (
-      <React.Fragment>
         <div className='places-list-container'>
           <h5 className='place-container-headline'>Places</h5>
+          <div className="place-overflow">
           <Droppable droppableId="placesContainer">
             {(provided, snapshot) => (
               <DroppablePlaces provided={provided} snapshot={snapshot}/>
             )}
           </Droppable>
           </div>
-      </React.Fragment>
+          </div>
     );}
 };
 

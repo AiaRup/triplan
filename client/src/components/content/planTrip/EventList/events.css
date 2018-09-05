@@ -8,40 +8,33 @@
 .temp-events-list-container {
   margin: 8px;
   border: 1px solid lightgrey;
-  /* border-radius: 2px; */
-  height: auto;
+  
 }
 
 .event-list-container {
-  min-height: 200px;
-  width: 45%;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-  height: 300px;
-  overflow: auto;
+  height: 70vh;
+  width: 35%;
+  border-radius: 2px;
+  }
+
+.eventList-overflow {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgrey;
+  background: #fff;
+  width: auto;
+  height: 65vh;
+  overflow-y: scroll;
+  
 }
 
 .temp-events-list-container {
   min-height: 40px;
   width: auto;
+  height: auto;
   background-color: #f8f9fa;
-  /* background-color: white; */
 }
 
-/* . */
-
-.events-list-container {
-  background-color: white;
-
-}
-
-.event-list-container {
-  min-height: 500px;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  /* background: linear-gradient(180deg, #1483c6 50%, white 50%); */
-  /* box-shadow: 2px 2px 2px 1px rgba(230, 222, 222, 0.925); */
-}
 
 .place-arrow {
   transform:rotate(90deg);
@@ -59,7 +52,6 @@
   text-align: center;
   color: #fff;
   border: 1px solid lightgrey;
-  /* border-radius: 5px; */
   height: 40px;
   line-height: 40px;
   margin-bottom: 0;
@@ -97,11 +89,9 @@ ul .ReactCollapse--content {
   color: #000
 }
 
-.eventList-background-div{
+/* .eventList-background-div{
   padding-left: 30px;
   padding-right: 30px;
 }
-/* .btn-color {
-  color: #E63946;
-} */
+ */
 
