@@ -28,23 +28,23 @@ class PlanTrip extends Component {
 
     if (this.props.daysArray.length === 0) {
       // alert('Please add days to your plan')
-      let myColor = { background: '#0E1717', text: '#FFFFFF' };
-      notify.show('Please add days to your plan', 'error', 5000, myColor);
+      let myColor = { background: '#e22866', text: '#FFFFFF' };
+      notify.show('Please add days to your plan', 'custom', 5000, myColor);
       return;
     }
 
     if (this.props.tripName === 'Name Your Trip' || this.props.tripName === '') {
       // alert('Please name your trip')
-      let myColor = { background: '#0E1717', text: '#FFFFFF' };
-      notify.show('Please name your trip', 'error', 5000, myColor);
+      let myColor = { background: '#e22866', text: '#FFFFFF' };
+      notify.show('Please name your trip', 'custom', 5000, myColor);
       return;
     }
 
     // check if each day is not empty
     for (let i = 0; i < this.props.daysArray.length; i++) {
       if (this.props.daysArray[i].places.length === 0) {
-        let myColor = { background: '#0E1717', text: '#FFFFFF' };
-        notify.show('There is an empty day in yout trip', 'error', 5000, myColor);
+        let myColor = { background: '#e22866', text: '#FFFFFF' };
+        notify.show('There is an empty day in yout trip', 'custom', 5000, myColor);
         return;
       }
     }

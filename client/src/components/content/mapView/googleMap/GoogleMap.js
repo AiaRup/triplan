@@ -67,8 +67,8 @@ const MapComponent = compose(
           console.log(place);
 
           if (place.length === 0) {
-            let myColor = { background: '#0E1717', text: "#FFFFFF" };
-            notify.show("Address not found", "error", 5000, myColor);
+            let myColor = { background: '#e22866', text: "#FFFFFF" };
+            notify.show("Address not found", "custom", 5000, myColor);
             return;
           }
 

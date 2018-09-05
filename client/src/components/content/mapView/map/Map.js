@@ -197,8 +197,8 @@ class Map extends Component {
   checkFinishMarkers(markerArray) {
     if (this.finishMarker === this.state.places.length) {
       if (markerArray.length === 0) {
-        let myColor = { background: '#0E1717', text: "#FFFFFF" };
-        notify.show("No attraction found!", "warning", 5000, myColor);
+        let myColor = { background: '#e22866', text: "#FFFFFF" };
+        notify.show("No attraction found!", "custom", 5000, myColor);
         // alert('No attraction found!')
       }
       this.setState({ markers: markerArray });
@@ -210,8 +210,8 @@ class Map extends Component {
     let places = this.props.store.placesArray;
     for (var i = 0; i < places.length && !exist; i++) {
       if (places[i].id === place.id) {
-        let myColor = { background: '#0E1717', text: "#FFFFFF" };
-        notify.show("You Already Choose This Place", "error", 5000, myColor);
+        let myColor = { background: '#e22866', text: "#FFFFFF" };
+        notify.show("You Already Choose This Place", "custom", 5000, myColor);
         // alert('You already have this activity place');
         exist = true;
         return;
