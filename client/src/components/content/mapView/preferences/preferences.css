@@ -40,6 +40,19 @@
   cursor: pointer;
 }
 
+.btn-outline-secondary {
+  color: #20313b;
+  background-color: transparent;
+  background-image: none;
+  border-color: #20313b;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #20313b;
+  border-color: #20313b;
+}
+
 @media only screen and (max-width: 940px) {
   .formSelector {
     top: 45px;

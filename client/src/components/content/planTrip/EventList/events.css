@@ -8,7 +8,7 @@
 .temp-events-list-container {
   margin: 8px;
   border: 1px solid lightgrey;
-  border-radius: 2px;
+  /* border-radius: 2px; */
   height: auto;
 }
 
@@ -16,17 +16,23 @@
   min-height: 40px;
   width: auto;
   background-color: #f8f9fa;
+  /* background-color: white; */
+}
+
+/* . */
+
+.events-list-container {
   background-color: white;
+
 }
 
 .event-list-container {
-  min-height: 200px;
-  width: 50%;
+  min-height: 500px;
+  width: 30%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(180deg, #1483c6 50%, white 50%);
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-
+  /* background: linear-gradient(180deg, #1483c6 50%, white 50%); */
+  /* box-shadow: 2px 2px 2px 1px rgba(230, 222, 222, 0.925); */
 }
 
 .place-arrow {
@@ -35,25 +41,39 @@
   float:right;
   margin: 5px;
   height: 20px;
+  color: #000;
+  font-weight: bold;
+
   }
 
-.event-container-headline {
+  h5.event-container-headline {
+  background-color: #e22866;
   text-align: center;
-  margin-top: 5px;
-  background-color: #1483c6;
-  color: white;
+  color: #fff;
+  border: 1px solid lightgrey;
+  /* border-radius: 5px; */
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 0;
+}
+
+.content-of-event li {
+color: #000
 }
 
 .event-headline {
   margin: 5px;
-  font-weight: 400;
+  font-weight: bold;
+  color: #000;
 }
+
 
 .single-event-header-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: baseline; 
+  align-items: baseline;
+  color: #fff
 }
 
 .event-dlt-btn {
@@ -65,7 +85,11 @@
   background-color: white;
 }
 
-.btn-color {
-  color: #E63946;
+ul .ReactCollapse--content {
+  color: #000
 }
+
+/* .btn-color {
+  color: #E63946;
+} */
 

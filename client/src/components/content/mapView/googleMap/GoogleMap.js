@@ -163,7 +163,7 @@ const MapComponent = compose(
                     <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
                   {marker.website && <a href={marker.website} target="_blank">Website</a>}
                   <br />
-                  <button className='btn btn-primary btn-sm' onClick={() => props.addPlace(marker)}>Add
+                  <button className='btn btn-secondary btn-sm' onClick={() => props.addPlace(marker)}>Add
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                   </button>
                 </div>

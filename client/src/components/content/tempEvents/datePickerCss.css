@@ -12,21 +12,46 @@
 }
 
 .btn-temp-event-date {
-  height: 30px;
-  margin: 2px;
+  margin: 8px;
 }
 
 .datesHead {
-  background-color: #1483c6;
+  background-color: #fff;
+  /* background-color: #e22866; */
   text-align: center;
+  color: #000;
   border: 1px solid lightgrey;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   min-height: 40px;
+  /* line-height: 40px; */
+  /* z-index: 999 !important; */
+}
+.datesHead h5 {
+margin-bottom: 0;
+  background-color: #20313b;
+  /* background-color: #e22866; */
+line-height: 40px;
+color: #fff;
+
 }
 
 .to-event-date,
 .from-event-date {
   text-align: left;
+  display: flex;
+  margin: 8px 2px;
+}
+
+.react-datepicker-wrapper {
+  margin-left: 8px;
+  /* padding: 3px; */
+  /* border-radius: 2px; */
+}
+
+.react-datepicker__input-container {
+  border-radius: 2px;
+  padding: 3px;
+
 }
 
 ;
@@ -38,3 +63,23 @@
 }
 
 ;
+/*
+.Select-menu-outer {
+  z-index: 999 !important;
+}
+
+.Select.is-open { position: relative; z-index: 1000; }
+
+.input-group .form-control, .input-group-btn .btn { z-index: inherit !important; }
+
+.is-open {
+  z-index: 100 !important;
+  }
+
+  .my-select__menu {
+    z-index: 5 !important;
+    }
+
+    .Select-menu {
+      position: fixed !important;
+  } */

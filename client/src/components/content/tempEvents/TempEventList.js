@@ -164,7 +164,7 @@ class TempEventList extends Component {
             <Collapse isOpened={this.state.toggledCollapse}>
               <div className='date-pick'>
                 <EventPickDate />
-                <button className='btn btn-sm btn-outline-secondary btn-temp-event-date' onClick={this.getEvents}>Events</button>
+                <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
               </div>
             </Collapse>
           </div>

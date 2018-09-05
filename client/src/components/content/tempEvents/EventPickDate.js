@@ -92,6 +92,7 @@ export default class DateRange extends React.Component {
         </div>
         <div>
           <Select
+            classNamePrefix="my-select"
             isMulti
             joinValues
             value={this.state.value}
@@ -99,6 +100,7 @@ export default class DateRange extends React.Component {
             options={this.options}
             onChange={this.handleSelectChange}
             components={makeAnimated()}
+            menuContainerStyle={{ zIndex: 1000 }}
             closeMenuOnSelect={false}/>
         </div>
       </div>);
