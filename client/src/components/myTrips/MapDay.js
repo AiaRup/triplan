@@ -20,7 +20,7 @@ const MapWithADirectionsRenderer = compose(
         origin: this.props.route.origin,
         destination: this.props.route.destination,
         travelMode: google.maps.TravelMode.DRIVING,
-        optimizeWaypoints: true,
+        // optimizeWaypoints: true,
         waypoints:
           this.props.route.waypoints
       }, (result, status) => {

@@ -16,7 +16,7 @@ import Notification, { notify } from 'react-notify-toast';
 @inject(allStores => ({
   tempEventArray: allStores.store.tempEventArray,
   tempEventCalander: allStores.store.tempEventCalander,
-  getEvents: allStores.store.getEvents,
+  // getEvents: allStores.store.getEvents,
   testEventsArray: allStores.store.testEventsArray,
   eventCategory: allStores.store.eventCategory,
   address: allStores.store.address,
@@ -47,15 +47,15 @@ class TempEventList extends Component {
 
     // if (startDate === endDate) {
     if (start === end) {
-      let myColor = { background: '#20313b', text: "#FFFFFF" };
-      notify.show("You need to choose a different start and end date", "custom", 5000, myColor);
+      let myColor = { background: '#20313b', text: '#FFFFFF' };
+      notify.show('You need to choose a different start and end date', 'custom', 5000, myColor);
       return;
     }
 
     if (this.props.eventCategory.length === 0) {
       // alert('choose an event category')
-      let myColor = { background: '#20313b', text: "#FFFFFF" };
-      notify.show("Please choose an event category", "custom", 5000, myColor);
+      let myColor = { background: '#20313b', text: '#FFFFFF' };
+      notify.show('Please choose an event category', 'custom', 5000, myColor);
       return;
     }
 
@@ -79,13 +79,16 @@ class TempEventList extends Component {
 
     console.log(URL);
 
-    axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
+    axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
       .then((response) => {
 
         if (response.data.results.length === 0) {
           // console.log('No Events Found!')
-          let myColor = { background: '#20313b', text: "#FFFFFF" };
-          notify.show("No Events Found!", "custom", 5000, myColor);
+          let myColor = { background: '#20313b', text: '#FFFFFF' };
+          notify.show('No Events Found!', 'custom', 5000, myColor);
+
+          // empty old events
+          this.props.emptyTempEvents();
           return;
         }
 
@@ -173,13 +176,13 @@ class TempEventList extends Component {
 
         <div className='temp-event-container'>
           <div className='datesHead'>
-            <h5 onClick={() => this.collapseToggle(toggleCollapse)}>Find Events Nearby &raquo;</h5>
-            <Collapse isOpened={this.state.toggledCollapse}>
-              <div className='date-pick'>
-                <EventPickDate />
-                <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
-              </div>
-            </Collapse>
+            <h5 onClick={() => this.collapseToggle(toggleCollapse)}>Find Events Nearby</h5>
+            {/* <Collapse isOpened={this.state.toggledCollapse}> */}
+            <div className='date-pick'>
+              <EventPickDate />
+              <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
+            </div>
+            {/* </Collapse> */}
           </div>
 
           {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
