@@ -27,7 +27,7 @@ const Day = (props) => {
   return (
     <div className="day-trip">
       <div className="attractions">
-        <h3>Date :{date}</h3>
+        <h3>{date}</h3>
         <h4>Attractions:</h4>
 
         <ul className="list-attractions">
@@ -37,7 +37,7 @@ const Day = (props) => {
             //   <h5 key={i}>{place.name}  {place.category ? '(' + place.category + ')' : ''}</h5>
             // </li>
             // return <li key={i} className="attraction">{place.name} {place.category ? '(' + place.category + ')' : ''} </li>
-            return <h5 key={i}>•{place.name} {place.category ? '(' + place.category + ')' : ''} </h5>
+            return <h5 key={i}> <i class="fa fa-circle"></i> {place.name} {place.category ? '(' + place.category + ')' : ''} </h5>
           })}
         </ul>
 
