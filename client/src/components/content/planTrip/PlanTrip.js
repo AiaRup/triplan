@@ -44,7 +44,7 @@ class PlanTrip extends Component {
     for (let i = 0; i < this.props.daysArray.length; i++) {
       if (this.props.daysArray[i].places.length === 0) {
         let myColor = { background: '#20313b', text: '#FFFFFF' };
-        notify.show('There is an empty day in yout trip', 'custom', 5000, myColor);
+        notify.show('There is an empty day in your trip', 'custom', 5000, myColor);
         return;
       }
     }

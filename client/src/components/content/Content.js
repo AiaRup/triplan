@@ -86,6 +86,7 @@ positionDenied = () => {
    return (
      <React.Fragment>
        <div className="intro">
+         <img src="/images/try-logo2.png" alt=""/>
          <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
          <div className="home-page-instructions">
            <p>Search Your Trip Location<i className="right"></i></p>

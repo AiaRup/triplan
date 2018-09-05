@@ -57,7 +57,7 @@ class about extends Component {
                 <div className='tm_pic_aia'></div>
                 <div className='tm_name'> Aia Rupsom </div>
                 <div className='icons'>
-                  <a className="linkedinIcon" href="https://www.linkedin.com/feed/" target="_blank">
+                  <a className="linkedinIcon" href="https://www.linkedin.com/in/aia-r-8a3881156/" target="_blank">
                     <i className="fa fa-linkedin"></i>
                   </a>
                   <a className="gitIcon" href="https://github.com/AiaRup" target="_blank" >
@@ -71,7 +71,7 @@ class about extends Component {
                 <div className='tm_name'>  Carl Wanunu </div>
                 <div className='icons'>
                   <a className="linkedinIcon" >
-                    <i className="fa fa-linkedin" href="" target="_blank"></i>
+                    <i className="fa fa-linkedin" href="https://www.linkedin.com/in/carlwnn" target="_blank"></i>
                   </a>
                   <a className="gitIcon" href="https://github.com/CarlWnn" target="_blank" >
                     <i className="fa fa-github"></i>
