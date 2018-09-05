@@ -32,16 +32,17 @@ const PlaceListUL = styled.div`
         innerRef={this.props.provided.innerRef}
         isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps}
+        className="droppable-size"
       >
 
         {this.props.daysArray[this.props.index].places.map((item, index)=>{
           if (item.type==='event') {
 
-            return (<TheEvent key={item.id} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>);
+            return (<TheEvent key={item.iternalId} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
 
-          } else if (item.type==='place'){
-            return (<Place key={item.id} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>);}
-        }
+            }else if (item.type==='place'){
+              return(<Place key={item.iternalId} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>)}
+          }
         )}
 
         {this.props.provided.placeholder}
@@ -67,7 +68,8 @@ class Day extends Component {
         </div>
         {/* <h4>{this.props.day.name}</h4> */}
 
-        <Droppable droppableId={this.props.day.id}>
+        <Droppable droppableId={this.props.day.id} 
+        >
           {(provided, snapshot)=> (
             <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>
           )}

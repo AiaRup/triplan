@@ -5,37 +5,32 @@
 }
 
 .day-list-container {
-  /* margin-top: 10px; */
   margin: 8px;
   border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 30%;
-  height: auto;
-  min-height: 500px;
+  height: 70vh;
+  width: 35%;
+  border-radius: 2px;  
 }
 
 .day-list-wrapper {
-  border: 1px solid lightgrey;
-  /* border-radius: 2px; */
   display: flex;
   flex-direction: column;
-  /* min-width: 500px; */
-  min-height: 500px;
-  height: auto;
-  width: auto;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  border: 1px solid lightgrey;
   background: #fff;
+  width: auto;
+  height: 65vh;
+  overflow-y: scroll;
+  
 }
+
 
 .day-container {
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  min-height: 190px;
+  min-height: 15vh;
   height: auto;
-  width: 310px;
-  /* width: auto; */
+  width: auto;
 }
 
 .pick-date {
@@ -43,36 +38,8 @@
   text-align: center;
 }
 
-#snackBar {
-  visibility: hidden;
-  width: auto;
-  z-index: 1;
-  text-align: center;
-  font-size: 25px;
-  /* position: absolute; */
-  padding: 16px;
-  background-color: red;
+.droppable-size {
+  min-height: 15vh;
+  height: auto;
 }
 
-#snackBar.show {
-  visibility: visible;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}

@@ -101,6 +101,7 @@ class Map extends Component {
           });
           this.finishMarker++;
           this.checkFinishMarkers(markerArray);
+
         });
       })
         .catch((error) => {

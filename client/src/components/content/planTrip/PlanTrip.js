@@ -7,7 +7,6 @@ import EventList from './EventList/EventList';
 import _ from 'lodash';
 import './planTrip.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Notification, { notify } from 'react-notify-toast';
 import InlineEdit from 'react-inline-editing';
 
