@@ -7,23 +7,12 @@ import { observer, inject } from 'mobx-react';
 
 import './content.css';
 
-<<<<<<< HEAD
-=======
-const MapViewContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  height: 80vh;
-  width: 95%;
-  border: 1px solid lightgrey;
-`;
-
 
 @inject(allStores => ({
   restStoreTrip: allStores.store.restStoreTrip,
   tripName : allStores.store.tripName,
   saveTripName : allStores.store.saveTripName }))
    @observer
->>>>>>> master
 class Content extends Component {
   state = {
     address: { lat: 51.507351, lng: -0.127758 },

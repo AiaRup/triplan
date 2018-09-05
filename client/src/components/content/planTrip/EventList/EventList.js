@@ -58,7 +58,7 @@ class EventList extends Component {
 
         </Droppable>
         </div>
-      </div>
+      
     );
   }
 }
