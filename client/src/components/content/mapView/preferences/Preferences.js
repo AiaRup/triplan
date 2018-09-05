@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './preferences.css';
 import { Collapse } from 'react-collapse';
 import Checkbox from './Checkbox';
+import { Loading } from '../../../Loading';
+import { observer, inject } from 'mobx-react';
 
 const items = [
   { label: 'Restaurants', type: 'restaurant', icon: 'restaurant.png', checked: false },
@@ -21,14 +23,20 @@ const items = [
   { label: 'Casino', type: 'casino', icon: 'casino.png', checked: false }
 ];
 
+@inject(allStores => ({
+  loading: allStores.store.loading,
+}))
+@observer
 export default class Preferences extends Component {
   constructor() {
     super();
     this.state = {
       toggledCollapse: false,
-      selectedCheckboxes: items
+      selectedCheckboxes: items,
     };
   }
+
+
 
   toggleCheckbox = (index, check) => {
     let newarray = this.state.selectedCheckboxes.map((e, i) => {
@@ -45,7 +53,7 @@ export default class Preferences extends Component {
     formSubmitEvent.preventDefault();
     let select = this.state.selectedCheckboxes.filter((e) => e.checked);
     this.props.updatePlacesNear(select);
-    this.collapseToggle();
+    // this.collapseToggle();
   }
 
   handleClear = (e) => {
@@ -88,6 +96,7 @@ export default class Preferences extends Component {
                 onClick={this.handleClear}>Clear</button>
             </div>
           </form>
+          {this.props.loading && <Loading loading={this.props.loading}/>}
         </Collapse>
         {/* </div>
         </div> */}

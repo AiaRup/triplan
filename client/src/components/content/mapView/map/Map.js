@@ -18,7 +18,8 @@ class Map extends Component {
   }
 
   addMarkers = () => {
-
+    // toggle loading
+    this.props.store.toggleLoading(true);
     // for the clear button
     if (this.state.places.length === 0) {
       this.setState({ markers: [] });
@@ -37,7 +38,7 @@ class Map extends Component {
       axios(`/api/users/googlePlaces/${type}/${this.props.address.lat}/${this.props.address.lng}`).then((response) => {
         console.log('res in axios first fetch', response);
 
-        console.log('response', response)
+        console.log('response', response);
 
         const promises = [];
 
@@ -76,22 +77,22 @@ class Map extends Component {
             }
             if (attraction.price_level !== undefined) {
               switch (attraction.price_level) {
-                case 0:
-                  marker.price = 'Free';
-                  break;
-                case 1:
-                  marker.price = 'Inexpensive';
-                  break;
-                case 2:
-                  marker.price = 'Moderate';
-                  break;
-                case 3:
-                  marker.price = 'Expensive';
-                  break;
-                case 4:
-                  marker.price = 'Very Expensive';
-                  break;
-                default: break;
+              case 0:
+                marker.price = 'Free';
+                break;
+              case 1:
+                marker.price = 'Inexpensive';
+                break;
+              case 2:
+                marker.price = 'Moderate';
+                break;
+              case 3:
+                marker.price = 'Expensive';
+                break;
+              case 4:
+                marker.price = 'Very Expensive';
+                break;
+              default: break;
               }
             }
             markerArray.push(marker);
@@ -197,10 +198,13 @@ class Map extends Component {
   checkFinishMarkers(markerArray) {
     if (this.finishMarker === this.state.places.length) {
       if (markerArray.length === 0) {
-        let myColor = { background: '#e22866', text: "#FFFFFF" };
-        notify.show("No attraction found!", "custom", 5000, myColor);
-        // alert('No attraction found!')
+        let myColor = { background: '#e22866', text: '#FFFFFF' };
+        notify.show('No attraction found!', 'custom', 5000, myColor);
+        // toggle loading
+        this.props.store.toggleLoading(false);
       }
+      // toggle loading
+      this.props.store.toggleLoading(false);
       this.setState({ markers: markerArray });
     }
   }
@@ -210,8 +214,8 @@ class Map extends Component {
     let places = this.props.store.placesArray;
     for (var i = 0; i < places.length && !exist; i++) {
       if (places[i].id === place.id) {
-        let myColor = { background: '#e22866', text: "#FFFFFF" };
-        notify.show("You Already Choose This Place", "custom", 5000, myColor);
+        let myColor = { background: '#e22866', text: '#FFFFFF' };
+        notify.show('You Already Choose This Place', 'custom', 5000, myColor);
         // alert('You already have this activity place');
         exist = true;
         return;
