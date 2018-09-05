@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 65px 0;
+  margin: 50px 0;
     font-size: 18px;
 }
 
@@ -69,4 +69,10 @@ i {
   background-color: #20313b;
   padding: 20px;
   color: #fff;
+}
+
+.intro img {
+  /* text-align: center; */
+  margin: 0 auto;
+  display: block;
 }

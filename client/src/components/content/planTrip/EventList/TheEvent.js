@@ -113,7 +113,7 @@ class TheEvent extends Component {
             </ul>
           </Collapse>
           {/* <button className="btn btn-primary btn-sm" onClick={()=>this.props.addTempEvent(this.props.tempEvent)}>Add</button> */}
-          <button className="btn btn-outline-secondary btn-sm" onClick={this.handleAddEvent}>Add</button>
+          <button className="btn btn-outline-secondary btn-sm ml-3" onClick={this.handleAddEvent}>Add</button>
         </div>
       );
 

@@ -18,13 +18,15 @@ class Map extends Component {
   }
 
   addMarkers = () => {
-    // toggle loading
-    this.props.store.toggleLoading(true);
+
     // for the clear button
     if (this.state.places.length === 0) {
       this.setState({ markers: [] });
       return;
     }
+
+    // toggle loading
+    this.props.store.toggleLoading(true);
 
     // let myColor = { background: '#0E1717', text: "#FFFFFF" };
     // notify.show("Loading...", "custom", 5000, myColor);
