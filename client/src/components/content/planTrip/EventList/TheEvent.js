@@ -83,7 +83,7 @@ class TheEvent extends Component {
                 <ul className="content-of-event">
                   {Object.keys(this.props.eventItem).map((prop, index) => {
                     if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
-                      return <li key={index}>{prop}: {this.props.eventItem[prop]}</li>;
+                      return <li key={index}><u>{prop}</u>: {this.props.eventItem[prop]}</li>;
                     }
                     return null;
                   })}
@@ -109,7 +109,7 @@ class TheEvent extends Component {
             <ul className="content-of-event">
               {Object.keys(this.props.tempEvent).map((prop, index) => {
                 if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
-                  return <li key={index}>{prop}: {this.props.tempEvent[prop]}</li>;
+                  return <li key={index}><u>{prop}</u>: {this.props.tempEvent[prop]}</li>;
                 }
                 return null;
               })}

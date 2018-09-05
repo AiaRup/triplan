@@ -61,7 +61,7 @@ class Place extends Component {
               <ul className="place-content-li">
                 {Object.keys(this.props.thePlace).map((prop, index)=> {
                   if (prop !== 'id' && prop !== 'type' && prop !== 'position') {
-                    return <li key={index}>{prop}: {this.props.thePlace[prop]}</li>;
+                    return <li key={index}><u>{prop}</u>: {this.props.thePlace[prop]}</li>;
                   }
                   return null;
                 })}

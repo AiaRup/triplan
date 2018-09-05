@@ -28,7 +28,7 @@ const Day = (props) => {
     <div className="day-trip">
       <div className="attractions">
         <h3>{date}</h3>
-        <h4>Attractions:</h4>
+        {/* <h4>Attractions:</h4> */}
 
         <ul className="list-attractions">
           {places.map((place, i) => {

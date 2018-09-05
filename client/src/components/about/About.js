@@ -70,8 +70,8 @@ class about extends Component {
                 <div className='tm_pic_carl'></div>
                 <div className='tm_name'>  Carl Wanunu </div>
                 <div className='icons'>
-                  <a className="linkedinIcon" >
-                    <i className="fa fa-linkedin" href="https://www.linkedin.com/in/carlwnn" target="_blank"></i>
+                  <a className="linkedinIcon" href="https://www.linkedin.com/in/carlwnn" target="_blank">
+                    <i className="fa fa-linkedin"></i>
                   </a>
                   <a className="gitIcon" href="https://github.com/CarlWnn" target="_blank" >
                     <i className="fa fa-github"></i>
