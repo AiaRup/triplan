@@ -15,12 +15,20 @@
 /* } */
 
 .loginNavLi {
+  border:2px solid #e04277;
+  color: white;
   pointer-events: none;
-
 }
+
+.loginNavLi button {
+  /* border:2px solid #e04277; */
+  color: white;
+  pointer-events: none;
+}
+/*
 .custom-nav-link {
   color: white;
-}
+} */
 
 .logo-design {
   font-size: 25px;

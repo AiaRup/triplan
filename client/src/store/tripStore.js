@@ -11,6 +11,7 @@ class TripStore {
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
   @observable eventCategory = [];
+  @observable loading = false;
 
 
 
@@ -57,6 +58,10 @@ class TripStore {
   // change display of login form and register form
   @action toggleLoginRegister = () => {
     this.showLogin = !this.showLogin;
+  }
+
+  toggleLoading = (showState) => {
+    this.loading= showState;
   }
 
   // add attraction to places array

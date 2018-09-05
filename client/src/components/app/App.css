@@ -115,6 +115,11 @@ border-radius {
   /* font-family: 'Ubuntu', sans-serif; */
 }
 
+.sweet-loading {
+  margin: 0 auto;
+  width: fit-content;
+}
+
 .container-fluid {
   /* min-height: 100vh; */
 }
