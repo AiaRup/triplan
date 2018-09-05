@@ -29,10 +29,10 @@
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  min-height: 190px;
-  height: 350px;
+  min-height: 350px;
+  height: auto;
   width: 310px;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .pick-date {

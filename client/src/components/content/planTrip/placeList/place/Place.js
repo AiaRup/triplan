@@ -43,7 +43,7 @@ class Place extends Component {
     const toggleCollapse = false;
 
     return (
-      <Draggable draggableId={this.props.thePlace.id} index={this.props.placeIndex}>
+      <Draggable draggableId={this.props.thePlace.iternalId} index={this.props.placeIndex}>
         {(provided, snapshot) => (
 
           <Container

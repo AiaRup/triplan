@@ -8,6 +8,10 @@
   border-bottom: 1px solid #ddd;
 }
 
+.search-bar:focus {
+  outline-style: none;
+}
+
 .card-list {
   width: 60%;
   margin: auto;

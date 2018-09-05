@@ -10,6 +10,8 @@ class TripStore{
   @observable tripName = 'Name Your Trip'
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
+  @observable numOfPlaces = 0;
+  @observable numOfEvents = 0;
   @observable eventCategory = [];
 
   //////////////////////////
@@ -80,9 +82,26 @@ class TripStore{
     this.showLogin = !this.showLogin;
   }
 
+  //!!also changes by refernce!?
   // add attraction to places array
   @action addPlace = (place) => {
+    this.numOfPlaces++;
+    place.iternalId = 'places_id' + this.numOfPlaces;
+
+    console.log('place for id' ,place)
     this.placesArray.push(place);
+  }
+
+  @action addTempEvent = (theEvent) => {
+  //getting the event object and trying to add internal id into it
+    //!! CHANGES BY FUCKING REFERENCE!!
+    this.theNewEvent = theEvent
+    this.numOfEvents++;
+    console.log('this.theNewEvent', this.theNewEvent)
+    this.theNewEvent.iternalId = 'event_id' + this.numOfEvents;
+    this.eventsArray.push(this.theNewEvent);
+    // console.log('eventsArray', this.eventsArray);
+
   }
 
   // update address when user serch a place on map
@@ -167,28 +186,7 @@ class TripStore{
   // }
 
   //Move from EVENT from TempEvent To EVENTS DIV
-  @action addTempEvent = (event) => {
-    // let checker = 0;
-    // const chosenEvent = this.tempEventArray[tempEventIndex];
 
-    // this.eventsArray.forEach(event => {
-    //   if (this.tempEventArray[tempEventIndex].id === event.id) {
-    //     checker = 1;
-    //     alert('You already have this event');
-    //   }
-    // });
-    // if (checker === 0) {
-    //   this.eventsArray.push(chosenEvent);
-    // } else {
-    //   checker = 0;
-    // }
-
-    // const chosenEvent = this.tempEventArray[tempEventIndex];
-
-    this.eventsArray.push(event);
-    console.log('eventsArray', this.eventsArray);
-
-  }
 
   // empty temp events
   @action emptyTempEvents = () => {
@@ -197,6 +195,7 @@ class TripStore{
 
   // add temp events to array
   @action addTempEvents = (event) => {
+    
     this.tempEventArray.push(event);
   }
 }

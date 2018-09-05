@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import PlanTrip from './planTrip/PlanTrip';
 import MapView from './mapView/MapView';
-import styled from 'styled-components';
 import _ from 'lodash';
 import TempEventList from './tempEvents/TempEventList';
 import './content.css';
-
-const MapViewContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  height: 80vh;
-  width: 95%;
-  border: 1px solid lightgrey;
-`;
 
 class Content extends Component {
   state = {

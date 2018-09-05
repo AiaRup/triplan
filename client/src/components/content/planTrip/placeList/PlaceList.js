@@ -28,7 +28,7 @@ transition: background-color 0.2s ease;
         isDraggingOver={this.props.snapshot.isDraggingOver}
         {...this.props.provided.droppableProps} 
         >
-          {this.props.placesArray.map((place, index) => <Place key={place.id} placeIndex={index} thePlace={place} verifier="placeOfPlace"/>)}
+          {this.props.placesArray.map((place, index) => <Place key={place.iternalId} placeIndex={index} thePlace={place} verifier="placeOfPlace"/>)}
 
           {this.props.provided.placeholder}
         </PlaceListUL>  

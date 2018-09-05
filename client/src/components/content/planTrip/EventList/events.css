@@ -16,6 +16,8 @@
   min-height: 200px;
   width: 45%;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  height: 300px;
+  overflow: auto;
 }
 
 .temp-events-list-container {

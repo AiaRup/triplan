@@ -9,9 +9,10 @@
   border-radius: 2px;
   height: auto;
   border: 1px solid lightgrey;
-  min-height: 200px;
+  height: 300px;
   width: 45%;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  overflow: auto;
 }
 
 .place-arrow {

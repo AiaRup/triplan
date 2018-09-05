@@ -37,9 +37,11 @@ class TheEvent extends Component {
   };
 
   regularOrTempEvent = (toggleCollapse) => {
+    
     if (this.props.verifier==='eventOfEvents'){
+      console.log('this.props.eventItem.iternalId' , this.props.eventItem.iternalId)
       return (
-        <Draggable draggableId={this.props.eventItem.id} index={this.props.eventIndex}>
+        <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
           {(provided, snapshot) => (
 
             <Container
