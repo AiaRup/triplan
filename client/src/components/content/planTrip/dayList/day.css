@@ -26,7 +26,7 @@
 
 .day-container {
   margin: 8px;
-  border: 1px solid lightgrey;
+  border: 2px solid lightgrey;
   border-radius: 2px;
   min-height: 15vh;
   height: auto;

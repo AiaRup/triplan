@@ -39,14 +39,16 @@
 
 .card:hover {
   -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-    cursor: pointer;
+  transform: scale(1.1);
+  cursor: pointer;
+  z-index: 1;
 }
 
 .watch {
   color: #20313b;
   text-decoration: none;
 }
+
 .watch:hover {
   color: #20313b;
   text-decoration: none;
@@ -154,9 +156,9 @@ Day
 .mapDay {
   /* width: 50vw; */
   flex-basis: 40%;
-  -webkit-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
 }
 
 .list-attractions {
@@ -174,10 +176,8 @@ box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.75);
   /* top: 156px; */
   margin-top: -43px;
   position: absolute;
-  right: 36px;
+  right: 19px;
 }
-
-
 
 .fa-eye {
   font-size: 24px;
