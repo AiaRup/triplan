@@ -4,10 +4,11 @@ import axios from 'axios';
 import TheEvent from '../planTrip/EventList/TheEvent';
 import EventPickDate from './EventPickDate';
 import './datePickerCss.css';
-import { Collapse } from 'react-collapse';
+// import { Collapse } from 'react-collapse';
 import moment from 'moment';
 import './eventTemp.css';
 import Notification, { notify } from 'react-notify-toast';
+import { Loading } from '../../Loading';
 
 
 
@@ -31,7 +32,8 @@ class TempEventList extends Component {
     this.state = {
       toggledCollapse: false,
       showSnackBar: false,
-      tempEventIternalId: 0
+      tempEventIternalId: 0,
+      loading: false
     };
 
   }
@@ -79,16 +81,21 @@ class TempEventList extends Component {
 
     console.log(URL);
 
+    // show loading events
+    this.setState({ loading: true });
+
     axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
       .then((response) => {
+        // show loading events
+        this.setState({ loading: false });
 
         if (response.data.results.length === 0) {
+          // empty old events
+          this.props.emptyTempEvents();
+
           // console.log('No Events Found!')
           let myColor = { background: '#20313b', text: '#FFFFFF' };
           notify.show('No Events Found!', 'custom', 5000, myColor);
-
-          // empty old events
-          this.props.emptyTempEvents();
           return;
         }
 
@@ -96,13 +103,13 @@ class TempEventList extends Component {
         this.props.emptyTempEvents();
         // create new event object
         let event = {};
-        
+
         // console.log(response);
         response.data.results.forEach((eventResult) => {
           event.name = eventResult.title;
           event.id = eventResult.id;
           event.category = eventResult.category;
-    
+
           event.start = moment(`/Date(${Date.parse(eventResult.start)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.end = moment(`/Date(${Date.parse(eventResult.end)})/`).format('dddd, MMMM Do YYYY, h:mm a');
           event.type = 'event';
@@ -118,14 +125,14 @@ class TempEventList extends Component {
           // console.log('tempEvent', this.props.tempEventArray);
 
           // alert if no event found
-          if (response.data.results.length === 0 ) {
-            alert('No Events Found!')
+          if (response.data.results.length === 0) {
+            alert('No Events Found!');
             return;
-            
+
           }
           // this.setState({ tempEventIternalId: +1 });
 
- 
+
         });
       })
       .catch((error) => {
@@ -181,6 +188,7 @@ class TempEventList extends Component {
             <div className='date-pick'>
               <EventPickDate />
               <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
+              <Loading loading={this.state.loading}/>
             </div>
             {/* </Collapse> */}
           </div>

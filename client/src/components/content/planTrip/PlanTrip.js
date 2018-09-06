@@ -58,6 +58,8 @@ class PlanTrip extends Component {
         tempPlaces: this.props.placesArray,
         tempEvents: this.props.eventsArray
       };
+      // notify user
+      notify.show('Trip Saved successfully', 'success', 5000);
 
       console.log('trip to server', tripUser);
 
@@ -65,7 +67,7 @@ class PlanTrip extends Component {
         .then(response => {
           console.log('back to axios', response);
           // reset days to 0
-          this.props.resetNumDays();
+          // this.props.resetNumDays();
           // Link to trirps page
           // <Link to='MyTrips/'></Link>;
         })

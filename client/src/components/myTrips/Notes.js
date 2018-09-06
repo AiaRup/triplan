@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import InlineEdit from 'react-inline-editing';
 import { observer, inject } from 'mobx-react';
-import pin from './pin.png'
+import pin from './pin.png';
 
 const View = (props) => {
   console.log('note', props.note);
   const edit = () => {
     console.log('click edit');
-  }
+  };
   return (
     <div className="note">
-      <i className="fa fa-pencil" aria-hidden="true" onClick={edit}></i>
+      <i className="fa fa-pencil pencil-notes" aria-hidden="true" onClick={edit}></i>
       <InlineEdit
         text={props.note} onFocusOut={(data) => {
           props.updateNotes(data, props.indexN);
-        }} onFocus={this._handleFocus} />
+        }} onFocus={this._handleFocus} inputClassName="editNote-input"/>
       {/* <p >{props.note}</p> */}
     </div>
 
   );
-}
+};
 
 
 class FormNotes extends Component {
@@ -80,15 +80,15 @@ export default class Notes extends Component {
           )}
         </ul>
       </div>
-    )
+    );
   }
 }
 
 
 
-    //   <form className="form" onSubmit={this.addNotes} >
-      //     <input className="input-form" type="text" placeholder="....."
-      //       // required
-      //       onChange={this.inputChange} value={this.state.input} />
-      //     <button type="submit" className="btn btn-primary btn-sm">Add Notes</button>
-      // </form>
+//   <form className="form" onSubmit={this.addNotes} >
+//     <input className="input-form" type="text" placeholder="....."
+//       // required
+//       onChange={this.inputChange} value={this.state.input} />
+//     <button type="submit" className="btn btn-primary btn-sm">Add Notes</button>
+// </form>

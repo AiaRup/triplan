@@ -204,7 +204,7 @@ class Map extends Component {
         let myColor = { background: '#e22866', text: '#FFFFFF' };
         notify.show('No attraction found!', 'custom', 5000, myColor);
         // toggle loading
-        this.props.store.toggleLoading(false);
+        // this.props.store.toggleLoading(false);
       }
       // toggle loading
       this.props.store.toggleLoading(false);

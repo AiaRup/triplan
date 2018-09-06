@@ -24,21 +24,27 @@ height: auto;
 }
 
 .save-trip-btn {
-  background-color: #ffec82;
+  background-color: #f8a100;
   width: 20%;
-  margin: 0 auto;
-  color: black;
+  margin: 10px auto;
+  color: white;
   /* height: 35px; */
   border-radius: 3px;
-  border: 1px solid #ffec82;
+  border: 1px solid #f8a100;
 
 }
 
 .name-trip-container {
-  text-align: center;
+  /* text-align: center; */
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  /* justify-content: center; */
+  /* margin-bottom: 10px; */
+  width: fit-content;
+  margin: 10px auto;
+}
+
+.name-trip-container div {
+text-align: center;
 }
 
 .edit-trip-label {
