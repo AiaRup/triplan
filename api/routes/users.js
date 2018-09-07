@@ -188,21 +188,21 @@ router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
   //     res.status(200).send(updateUser);
   //   });
 
-    // User.findByIdAndUpdate(idUser, (error, data) => {
-    //   if (error) throw error;
-    //   else {
-    //     console.log('data plans ', data.plans);
-    // loop over plans and find the one idPlan, then find the right day by idDay
+  // User.findByIdAndUpdate(idUser, (error, data) => {
+  //   if (error) throw error;
+  //   else {
+  //     console.log('data plans ', data.plans);
+  // loop over plans and find the one idPlan, then find the right day by idDay
 
 
-    // User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
-    //   if (err) throw err;
-    //   console.log('newUser updated', updateUser);
-    //   res.status(200).send(updateUser);
-    // });
-    // }
-    // });
-  });
+  // User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
+  //   if (err) throw err;
+  //   console.log('newUser updated', updateUser);
+  //   res.status(200).send(updateUser);
+  // });
+  // }
+  // });
+  // });
 });
 
 
