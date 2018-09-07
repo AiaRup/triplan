@@ -179,14 +179,14 @@ router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
 
   const newNote = req.body.plan.note; // !check in client how to pass in body the note
 
-  Plan.create(newNote, (err, noteResult) => {
-    if (err) throw err;
-    // update the user' plan with the new
-    User.findByIdAndUpdate(idUser, { $push: { /*????*/ } }, { new: true }, (err, updateUser) => {
-      if (err) throw err;
-      console.log('newUser updated', updateUser);
-      res.status(200).send(updateUser);
-    });
+  // Plan.create(newNote, (err, noteResult) => {
+  //   if (err) throw err;
+  //   // update the user' plan with the new
+  //   User.findByIdAndUpdate(idUser, { $push: { /*????*/ } }, { new: true }, (err, updateUser) => {
+  //     if (err) throw err;
+  //     console.log('newUser updated', updateUser);
+  //     res.status(200).send(updateUser);
+  //   });
 
     // User.findByIdAndUpdate(idUser, (error, data) => {
     //   if (error) throw error;

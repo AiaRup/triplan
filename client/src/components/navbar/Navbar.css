@@ -7,19 +7,16 @@
   color: white;
   margin: 0 auto;
   padding: 15px;
-<<<<<<< HEAD
   border: 1px solid lightgray;
   border-radius: 2px;
   height: 60px;
 }
-=======
   /* border: 1px solid lightgray; */
   /* border-radius: 2px; */
   /* height: 60px;
   line-height: 60px; */
   /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
 /* } */
->>>>>>> master
 
 .loginNavLi {
   border:2px solid #e04277;
@@ -35,11 +32,7 @@
 /*
 .custom-nav-link {
   color: white;
-<<<<<<< HEAD
-}
-=======
 } */
->>>>>>> master
 
 .collapse-nav-design {
   background-color: #1483c6;
