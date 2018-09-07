@@ -1,16 +1,14 @@
-
-
 .header-days {
-display: flex;
-flex-wrap: wrap;
-/* justify-content: center; */
-/* background-color: #e22866; */
-/* text-align: center; */
-color: #fff;
-border: 1px solid lightgrey;
-/* border-radius: 5px; */
-height: 40px;
-line-height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  /* background-color: #e22866; */
+  /* text-align: center; */
+  color: #fff;
+  border: 1px solid lightgrey;
+  /* border-radius: 5px; */
+  height: 40px;
+  line-height: 40px;
 }
 
 .header-days h5 {
@@ -19,15 +17,26 @@ line-height: 40px;
   margin-left: 10px;
 }
 
+.inlineEdit:hover {
+  cursor: text;
+  /* display: inline; */
+}
 
-  .inlineEdit:hover {
-    cursor: text;
-  }
+.inlineInput {
+  outline: none;
+}
 
-  .inlineInput {
-    font-size: 20px;
-    padding: 10px;
-  }
+.inlineInput {
+  font-size: 20px;
+  padding: 10px;
+  /* background-color: #20313b;
+  color: #fff; */
+  /* text-align: center; */
+  /* display: inline; */
+  width: fit-content;
+
+
+}
 
 .add-day {
   margin-left: auto;

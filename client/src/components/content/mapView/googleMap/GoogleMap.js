@@ -167,9 +167,9 @@ const MapComponent = compose(
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                   </button>
                 </div>
-                {/* <div>
-                  {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
-                </div> */}
+                <div>
+                  {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                </div>
               </div>
             </InfoWindow>}
 

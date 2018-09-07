@@ -182,3 +182,33 @@ Day
 .fa-eye {
   font-size: 24px;
 }
+
+.pencil-notes {
+  margin-right: 8px;
+  font-size: 15px;
+  /* position:relative; */
+    /* top: calc(50% - 5px); */
+    line-height: 32px;
+}
+
+.editNote-input {
+  line-height: 32px;
+  background-color: #20313b;
+  color: #fff
+}
+
+.editNote-input:focus {
+  outline: none;
+}
+
+.editNote-input:hover {
+  cursor: text;
+}
+
+.note label {
+  margin-bottom: 0;
+  line-height: 32px;
+}
+.note label:hover {
+  cursor: text;
+}
