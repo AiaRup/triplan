@@ -62,7 +62,7 @@ class App extends Component {
                     <SecureRoute exact path={`/MyTrips/${plan._id}`} key={index} render={() => <OneTrip plan={plan} />} />
                 )}
 
-                 <SecureRoute exact path="/About"  render={() => <About/>} />
+                <SecureRoute exact path="/About" render={() => <About />} />
 
                 <Route
                   path="/Login"
