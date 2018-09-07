@@ -4,7 +4,7 @@ import './MyTrips.css';
 import CardList from './CardList';
 import SearchTrip from './SearchTrip';
 import { observer, inject } from 'mobx-react';
-import Notes from './Notes';
+// import Notes from './Notes';
 
 @inject('store')
 @observer

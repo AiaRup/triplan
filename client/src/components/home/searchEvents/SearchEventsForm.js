@@ -5,7 +5,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
 import { observer, inject } from 'mobx-react';
 import 'react-datepicker/dist/react-datepicker.css';
-import './datePickerCss.css';
+import './searchEventsForm.css';
 
 @inject(allStores => ({
   EventStartDate: allStores.store.EventStartDate,
@@ -14,8 +14,7 @@ import './datePickerCss.css';
   updateEventCategory: allStores.store.updateEventCategory
 }))
 @observer
-
-export default class DateRange extends React.Component {
+export default class SearchEventsForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -53,9 +52,7 @@ export default class DateRange extends React.Component {
 
     this.setState({ startDate, endDate });
     let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('YYYY/MM/DD');
-    // let formatedStart = moment(`/Date(${Date.parse(startDate)})/`).format('DD/MM/YYYY');
     let formatedEnd = moment(`/Date(${Date.parse(endDate)})/`).format('YYYY/MM/DD');
-    // let formatedEnd = moment(`/Date(${Date.parse(endDate)})/`).format('DD/MM/YYYY');
     this.props.EventStartDate(formatedStart);
     this.props.EventEndDate(formatedEnd);
   }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PlanTrip from './planTrip/PlanTrip';
-import MapView from './mapView/MapView';
+import SearchActivity from './searchActivity/SearchActivity';
 import _ from 'lodash';
-import TempEventList from './tempEvents/TempEventList';
+import TempEventList from './searchEvents/SearchEvents';
 import { observer, inject } from 'mobx-react';
-
-import './content.css';
+import './home.css';
 
 
 @inject(allStores => ({
@@ -13,7 +12,7 @@ import './content.css';
   tripName : allStores.store.tripName,
   saveTripName : allStores.store.saveTripName }))
    @observer
-class Content extends Component {
+class Home extends Component {
   state = {
     address: { lat: 51.507351, lng: -0.127758 },
   }
@@ -93,7 +92,7 @@ positionDenied = () => {
 
          <div className='map-event-container'>
            <div className='map-view-container'>
-             <MapView address={_.clone(this.state.address)}/>
+             <SearchActivity address={_.clone(this.state.address)}/>
            </div>
            <TempEventList/>
          </div>
@@ -113,4 +112,4 @@ positionDenied = () => {
  }
 }
 
-export default Content;
+export default Home;

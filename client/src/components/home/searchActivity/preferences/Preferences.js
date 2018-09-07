@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './preferences.css';
 import { Collapse } from 'react-collapse';
 import Checkbox from './Checkbox';
-import { Loading } from '../../../Loading';
+import { Loading } from '../../Loading';
 import { observer, inject } from 'mobx-react';
 
 const items = [

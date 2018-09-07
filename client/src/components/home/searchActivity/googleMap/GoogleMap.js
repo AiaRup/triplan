@@ -140,7 +140,7 @@ const MapComponent = compose(
       {props.markers.map((marker) =>
         <Marker key={marker.id}
           position={{ lat: marker.position.lat, lng: marker.position.lng }}
-          icon={{ url: require(`../../../../markersIcons/${marker.icon}`) }}
+          icon={{ url: require(`../../../../images/marker-icons/${marker.icon}`) }}
           onClick={() => props.showInfo(marker.id)}
           onMouseOver={() => props.onHoverBox(marker.id)}
           onMouseOut={() => props.onHoverBox(marker.id)} >
