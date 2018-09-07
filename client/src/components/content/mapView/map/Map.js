@@ -79,22 +79,22 @@ class Map extends Component {
             }
             if (attraction.price_level !== undefined) {
               switch (attraction.price_level) {
-              case 0:
-                marker.price = 'Free';
-                break;
-              case 1:
-                marker.price = 'Inexpensive';
-                break;
-              case 2:
-                marker.price = 'Moderate';
-                break;
-              case 3:
-                marker.price = 'Expensive';
-                break;
-              case 4:
-                marker.price = 'Very Expensive';
-                break;
-              default: break;
+                case 0:
+                  marker.price = 'Free';
+                  break;
+                case 1:
+                  marker.price = 'Inexpensive';
+                  break;
+                case 2:
+                  marker.price = 'Moderate';
+                  break;
+                case 3:
+                  marker.price = 'Expensive';
+                  break;
+                case 4:
+                  marker.price = 'Very Expensive';
+                  break;
+                default: break;
               }
             }
             markerArray.push(marker);
@@ -233,6 +233,7 @@ class Map extends Component {
       <React.Fragment>
         <Notification options={{ zIndex: 200, top: '50px' }} />
         <GoogleMap
+          openPrefernces={this.props.store.openPrefernces}
           markers={this.state.markers}
           // address={this.props.address}
           updateAddress={this.props.updateAddress}

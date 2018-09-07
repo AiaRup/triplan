@@ -77,6 +77,9 @@ const MapComponent = compose(
 
           this.props.saveCity(place[0].vicinity);
 
+          //show the prefernces after search a new place in searchBox
+          this.props.openPrefernces(true);
+
           const lat = place[0].geometry.location.lat();
           const lng = place[0].geometry.location.lng();
           let bounds = new google.maps.LatLngBounds();
