@@ -45,21 +45,21 @@ class TheEvent extends Component {
     let events = this.props.eventsArray;
     for (var i = 0; i < events.length && !exist; i++) {
       if (events[i].id === this.props.tempEvent.id) {
-        let myColor = { background: '#e22866', text: "#FFFFFF" };
-        notify.show("You Already Choose This Event", "custom", 5000, myColor);
+        let myColor = { background: '#e22866', text: '#FFFFFF' };
+        notify.show('You Already Choose This Event', 'custom', 5000, myColor);
         // alert('You already have this activity place');
         exist = true;
         return;
       }
     }
 
-    this.props.addTempEvent(this.props.tempEvent)
+    this.props.addTempEvent(this.props.tempEvent);
   }
 
   regularOrTempEvent = (toggleCollapse) => {
-    
+
     if (this.props.verifier==='eventOfEvents'){
-      console.log('this.props.eventItem.iternalId' , this.props.eventItem.iternalId)
+      console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
       return (
         <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
           {(provided, snapshot) => (
@@ -82,7 +82,7 @@ class TheEvent extends Component {
               <Collapse isOpened={this.state.toggledCollapse}>
                 <ul className="content-of-event">
                   {Object.keys(this.props.eventItem).map((prop, index) => {
-                    if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
+                    if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId') {
                       return <li key={index}><u>{prop}</u>: {this.props.eventItem[prop]}</li>;
                     }
                     return null;
@@ -108,7 +108,7 @@ class TheEvent extends Component {
           <Collapse isOpened={this.state.toggledCollapse}>
             <ul className="content-of-event">
               {Object.keys(this.props.tempEvent).map((prop, index) => {
-                if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position') {
+                if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId') {
                   return <li key={index}><u>{prop}</u>: {this.props.tempEvent[prop]}</li>;
                 }
                 return null;

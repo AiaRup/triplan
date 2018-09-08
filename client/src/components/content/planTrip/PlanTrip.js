@@ -58,6 +58,8 @@ class PlanTrip extends Component {
         tempPlaces: this.props.placesArray,
         tempEvents: this.props.eventsArray
       };
+      // notify user
+      notify.show('Trip Saved successfully', 'success', 5000);
 
       // let myColor = { background: '#20313b', text: '#FFFFFF' };
       notify.show('Your trip has been successfully saved!', 'success', 5000);
@@ -68,7 +70,7 @@ class PlanTrip extends Component {
         .then(response => {
           console.log('back to axios', response);
           // reset days to 0
-          this.props.resetNumDays();
+          // this.props.resetNumDays();
           // Link to trirps page
           // <Link to='MyTrips/'></Link>;
 
