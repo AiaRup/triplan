@@ -233,7 +233,7 @@ class Map extends Component {
       <React.Fragment>
         <Notification options={{ zIndex: 200, top: '50px' }} />
         <GoogleMap
-          openPrefernces={this.props.store.openPrefernces}
+          togglePrefernces={this.props.store.togglePrefernces}
           markers={this.state.markers}
           // address={this.props.address}
           updateAddress={this.props.updateAddress}

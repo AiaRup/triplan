@@ -17,7 +17,7 @@ class TripStore {
 
   @observable isOpenPrefernces = false;
 
-  @action openPrefernces = (click) => {
+  @action togglePrefernces = (click) => {
     this.isOpenPrefernces = click || !this.isOpenPrefernces;
   }
 

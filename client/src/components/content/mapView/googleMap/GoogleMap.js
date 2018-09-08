@@ -78,7 +78,7 @@ const MapComponent = compose(
           this.props.saveCity(place[0].vicinity);
 
           //show the prefernces after search a new place in searchBox
-          this.props.openPrefernces(true);
+          this.props.togglePrefernces(true);
 
           const lat = place[0].geometry.location.lat();
           const lng = place[0].geometry.location.lng();

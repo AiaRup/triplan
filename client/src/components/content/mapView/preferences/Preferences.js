@@ -26,7 +26,7 @@ const items = [
 @inject(allStores => ({
   loading: allStores.store.loading,
   isOpenPrefernces: allStores.store.isOpenPrefernces,
-  openPrefernces: allStores.store.openPrefernces
+  togglePrefernces: allStores.store.togglePrefernces
 }))
 @observer
 export default class Preferences extends Component {
@@ -70,7 +70,7 @@ export default class Preferences extends Component {
   render() {
     return (
       <div className="formSelector">
-        <p className="header-preference" onClick={() => this.props.openPrefernces()}>Find Activity &raquo;</p>
+        <p className="header-preference" onClick={() => this.props.togglePrefernces()}>Find Activity &raquo;</p>
         <Collapse isOpened={this.props.isOpenPrefernces}>
           <form onSubmit={this.handleFormSubmit} >
             {this.state.selectedCheckboxes.map((box, index) =>

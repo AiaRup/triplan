@@ -61,8 +61,6 @@ class PlanTrip extends Component {
       // notify user
       notify.show('Trip Saved successfully', 'success', 5000);
 
-      // let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('Your trip has been successfully saved!', 'success', 5000);
 
       console.log('trip to server', tripUser);
 
