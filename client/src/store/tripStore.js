@@ -15,6 +15,11 @@ class TripStore {
   @observable eventCategory = [];
   @observable loading = false;
 
+  @observable isOpenPrefernces = false;
+
+  @action openPrefernces = (click) => {
+    this.isOpenPrefernces = click || !this.isOpenPrefernces;
+  }
 
 
   @action addNotes = (note, index) => {
@@ -63,7 +68,7 @@ class TripStore {
   }
 
   toggleLoading = (showState) => {
-    this.loading= showState;
+    this.loading = showState;
   }
 
   // add attraction to places array
@@ -71,12 +76,12 @@ class TripStore {
     this.numOfPlaces++;
     place.iternalId = 'places_id' + this.numOfPlaces;
 
-    console.log('place for id' ,place)
+    console.log('place for id', place)
     this.placesArray.push(place);
   }
 
   @action addTempEvent = (theEvent) => {
-  //getting the event object and trying to add internal id into it
+    //getting the event object and trying to add internal id into it
     //!! CHANGES BY FUCKING REFERENCE!!
     this.theNewEvent = theEvent
     this.numOfEvents++;
@@ -184,7 +189,7 @@ class TripStore {
 
   // add temp events to api div events
   @action addTempEvents = (event) => {
-    
+
     this.tempEventArray.push(event);
   }
 }

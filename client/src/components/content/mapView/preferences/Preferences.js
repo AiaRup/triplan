@@ -25,18 +25,17 @@ const items = [
 
 @inject(allStores => ({
   loading: allStores.store.loading,
+  isOpenPrefernces: allStores.store.isOpenPrefernces,
+  openPrefernces: allStores.store.openPrefernces
 }))
 @observer
 export default class Preferences extends Component {
   constructor() {
     super();
     this.state = {
-      toggledCollapse: false,
       selectedCheckboxes: items,
     };
   }
-
-
 
   toggleCheckbox = (index, check) => {
     let newarray = this.state.selectedCheckboxes.map((e, i) => {
@@ -67,20 +66,12 @@ export default class Preferences extends Component {
     this.props.updatePlacesNear([]);
   }
 
-  collapseToggle = () => {
-    this.setState(prevState => ({
-      toggledCollapse: !prevState.toggledCollapse
-    }));
-  };
 
   render() {
-    const toggleCollapse = false;
     return (
-      // <div className="container">
-      //   <div className="row">
       <div className="formSelector">
-        <p className="header-preference" onClick={() => this.collapseToggle(toggleCollapse)}>Find Activity &raquo;</p>
-        <Collapse isOpened={this.state.toggledCollapse}>
+        <p className="header-preference" onClick={() => this.props.openPrefernces()}>Find Activity &raquo;</p>
+        <Collapse isOpened={this.props.isOpenPrefernces}>
           <form onSubmit={this.handleFormSubmit} >
             {this.state.selectedCheckboxes.map((box, index) =>
               <Checkbox
@@ -96,10 +87,8 @@ export default class Preferences extends Component {
                 onClick={this.handleClear}>Clear</button>
             </div>
           </form>
-          {this.props.loading && <Loading loading={this.props.loading}/>}
+          {this.props.loading && <Loading loading={this.props.loading} />}
         </Collapse>
-        {/* </div>
-        </div> */}
       </div>
     );
   }
