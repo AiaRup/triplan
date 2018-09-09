@@ -77,6 +77,9 @@ const MapComponent = compose(
 
           this.props.saveCity(place[0].vicinity);
 
+          //show the prefernces after search a new place in searchBox
+          this.props.togglePrefernces(true);
+
           const lat = place[0].geometry.location.lat();
           const lng = place[0].geometry.location.lng();
           let bounds = new google.maps.LatLngBounds();
@@ -167,9 +170,9 @@ const MapComponent = compose(
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
                   </button>
                 </div>
-                {/* <div>
-                  {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
-                </div> */}
+                <div>
+                  {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                </div>
               </div>
             </InfoWindow>}
 

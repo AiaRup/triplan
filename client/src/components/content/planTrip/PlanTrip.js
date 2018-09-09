@@ -17,8 +17,8 @@ import InlineEdit from 'react-inline-editing';
   user_id: allStores.store.user_id,
   cityName: allStores.store.cityName,
   resetNumDays: allStores.store.resetNumDays,
-  tripName : allStores.store.tripName,
-  saveTripName : allStores.store.saveTripName
+  tripName: allStores.store.tripName,
+  saveTripName: allStores.store.saveTripName
 }))
 @observer
 class PlanTrip extends Component {
@@ -58,6 +58,9 @@ class PlanTrip extends Component {
         tempPlaces: this.props.placesArray,
         tempEvents: this.props.eventsArray
       };
+      // notify user
+      notify.show('Trip Saved successfully', 'success', 5000);
+
 
       console.log('trip to server', tripUser);
 
@@ -65,9 +68,10 @@ class PlanTrip extends Component {
         .then(response => {
           console.log('back to axios', response);
           // reset days to 0
-          this.props.resetNumDays();
+          // this.props.resetNumDays();
           // Link to trirps page
           // <Link to='MyTrips/'></Link>;
+
         })
         .catch(function (error) {
           console.log(error.response);
