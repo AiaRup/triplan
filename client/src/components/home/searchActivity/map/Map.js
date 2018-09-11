@@ -235,7 +235,7 @@ class Map extends Component {
         <GoogleMap
           togglePrefernces={this.props.store.togglePrefernces}
           markers={this.state.markers}
-          // address={this.props.address}
+          address={this.props.address}
           updateAddress={this.props.updateAddress}
           addPlace={this.addPlace}
           saveCity={this.props.store.saveCity}

@@ -45,23 +45,17 @@ const MapComponent = compose(
   lifecycle({
     componentWillMount() {
       const refs = {};
+
       this.setState({
         bounds: null,
-        center: { lat: 51.507351, lng: -0.127758 },
-        marker: { lat: 51.507351, lng: -0.127758 },
+        center: { lat: this.props.address.lat, lng: this.props.address.lng },
+        marker: { lat: this.props.address.lat, lng: this.props.address.lng },
         onSearchBoxMounted: ref => {
           refs.searchBox = ref;
         },
         onMapMounted: ref => {
           refs.map = ref;
-          // this.setState({ bounds: refs.map.getBounds() }); //maybe comment out
         },
-        // onBoundsChanged: () => {
-        //   this.setState({
-        //     bounds: refs.map.getBounds(),
-        //     center: refs.map.getCenter(),
-        //   })
-        // },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
           console.log(place);
@@ -83,8 +77,7 @@ const MapComponent = compose(
           const lat = place[0].geometry.location.lat();
           const lng = place[0].geometry.location.lng();
           let bounds = new google.maps.LatLngBounds();
-          // const bounds = new google.maps.LatLngBounds();
-          // const bounds = refs.map.getBounds();
+
           if (place[0].geometry.viewport) {
             bounds.union(place[0].geometry.viewport);
           } else {
@@ -123,8 +116,8 @@ const MapComponent = compose(
     <GoogleMap
       ref={props.onMapMounted}
       defaultZoom={14}
-      // onBoundsChanged={props.onBoundsChanged}
-      center={props.center}
+      // center={props.center}
+      center={{ lat: props.address.lat, lng: props.address.lng }}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}>
 
       <SearchBox
@@ -138,7 +131,8 @@ const MapComponent = compose(
           className="autocomplete" />
       </SearchBox>
 
-      <Marker position={props.marker} />
+      {/* <Marker position={props.marker} /> */}
+      <Marker position={{ lat: props.address.lat, lng: props.address.lng }} />
 
       {props.markers.map((marker) =>
         <Marker key={marker.id}

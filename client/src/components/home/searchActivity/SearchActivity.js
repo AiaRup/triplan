@@ -15,11 +15,11 @@ export default class MapView extends Component {
     };
   }
 
-  // componentDidUpdate = (prevProps) => {
-  //   if (prevProps.address !== this.props.address) {
-  //     this.setState({ address: this.props.address });
-  //   }
-  // }
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.address !== this.props.address) {
+      this.setState({ address: this.props.address });
+    }
+  }
 
   updateAddress = (address) => {
     this.setState({
