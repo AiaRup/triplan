@@ -1,8 +1,21 @@
+/* event list */
+.temp-event-container {
+  margin-left: 8px;
+  border: 1px solid lightgrey;
+  max-height: 80vh;
+  width: 25%;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.date-picker {
+  display: flex;
+}
+
 .dates-headline {
   margin-top: 8px;
   font-size: 18px;
   font-weight: 400;
-  /* color: white; */
 }
 
 .eventDatePicker {
@@ -17,19 +30,14 @@
 
 .datesHead {
   background-color: #fff;
-  /* background-color: #e22866; */
   text-align: center;
   color: #000;
   border: 1px solid lightgrey;
-  /* border-radius: 5px; */
   min-height: 40px;
-  /* line-height: 40px; */
-  /* z-index: 999 !important; */
 }
 .datesHead h5 {
 margin-bottom: 0;
   background-color: #20313b;
-  /* background-color: #e22866; */
 line-height: 40px;
 color: #fff;
 
@@ -44,8 +52,6 @@ color: #fff;
 
 .react-datepicker-wrapper {
   margin-left: 8px;
-  /* padding: 3px; */
-  /* border-radius: 2px; */
 }
 
 .react-datepicker__input-container {
@@ -63,26 +69,6 @@ color: #fff;
 }
 
 ;
-/*
-.Select-menu-outer {
-  z-index: 999 !important;
-}
-
-.Select.is-open { position: relative; z-index: 1000; }
-
-.input-group .form-control, .input-group-btn .btn { z-index: inherit !important; }
-
-.is-open {
-  z-index: 100 !important;
-  }
-
-  .my-select__menu {
-    z-index: 5 !important;
-    }
-
-    .Select-menu {
-      position: fixed !important;
-  } */
 
   .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
     background-color: #216ba5;

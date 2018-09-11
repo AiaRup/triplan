@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InlineEdit from 'react-inline-editing';
 import { observer, inject } from 'mobx-react';
-import pin from './pin.png';
+// import pin from './pin.png';
 
 const View = (props) => {
   console.log('note', props.note);

@@ -6,7 +6,7 @@ import axios from 'axios';
 import { observer, inject } from 'mobx-react';
 
 import Navbar from '../navbar/Navbar';
-import Content from '../content/Content';
+import Home from '../home/Home';
 import Login from '../auth/Login';
 import MyTrips from '../myTrips/MyTrips';
 import OneTrip from '../myTrips/OneTrip';
@@ -54,7 +54,7 @@ class App extends Component {
             {/* <div className="container-fluid"> */}
             <div>
               <Switch>
-                <SecureRoute exact path="/Home" render={() => <Content />} />
+                <SecureRoute exact path="/Home" render={() => <Home />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
 
                 {this.props.plans.map(
