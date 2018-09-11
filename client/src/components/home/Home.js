@@ -23,7 +23,7 @@ const styles = {
   tripName : allStores.store.tripName,
   saveTripName : allStores.store.saveTripName }))
    @observer
-class Home extends React.Component {
+class Home extends Component {
   state = {
     value: 0,
     address: { lat: 51.507351, lng: -0.127758 },
