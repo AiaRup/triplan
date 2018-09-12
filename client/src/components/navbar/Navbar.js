@@ -46,7 +46,7 @@ export default withAuth(
       }
       const authNav = this.state.authenticated ? (
         <ul className="auth-nav nav navbar-nav navbar-right">
-          <li className="nav-link mr-3">{this.currentUserName}</li>
+          <li className="nav-link mr-3 userNameColor">{this.currentUserName}</li>
           <li className="nav-item nav-link"><button className="btn btn-sm btn-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.logout()}>Log Out</button></li>
         </ul>
       ) : (

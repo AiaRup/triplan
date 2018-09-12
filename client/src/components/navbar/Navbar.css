@@ -29,25 +29,12 @@
   color: white;
   pointer-events: none;
 }
-/*
-.custom-nav-link {
-  color: white;
-} */
+
 
 .collapse-nav-design {
   background-color: #1483c6;
   color: white;
 }
-
-
-.logo-design {
-  font-size: 25px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  margin-left: 20px;
-  color: white;
-}
-
 
 .bg-light {
   background-color: #20313b !important;
@@ -59,13 +46,19 @@
  box-shadow:0px 1px 1px rgba(255, 255, 255, 0.8); */
 }
 
-.navbar-light .navbar-nav .nav-link {
+.navbar-light,
+.navbar-nav,
+.nav-link,
+.navbar-brand {
   color: white !important;
 }
 
-.navbar-light .navbar-brand {
-  color: white !important;
+.nav-link:hover {
+  color: #e22866 !important;
+}
 
+.userNameColor:hover {
+  color: white !important;
 }
 
 .btn-secondary {

@@ -77,6 +77,9 @@ positionDenied = () => {
    return (
      <React.Fragment>
        <div className="intro">
+          <video width="320" height="240" controls>
+            <source src="../public/videos/car.mp4" type="video/mp4"/>>
+          </video>
          <img src="/images/new-logo.png" alt=""/>
          <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
          <div className="home-page-instructions">
