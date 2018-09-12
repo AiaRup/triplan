@@ -6,16 +6,13 @@
 
 .places-list-container {
   margin: 8px;
-  border: 1px solid lightgrey;
   height: 70vh;
   width: 35%;
   border-radius: 2px;
-  
 }
 .place-overflow {
   display: flex;
   flex-direction: column;
-  border: 1px solid lightgrey;
   background: #fff;
   width: auto;
   height: 65vh;
@@ -33,10 +30,9 @@
   }
 
 h5.place-container-headline {
-  background-color: #e22866;
+  background-color: #f50057;
   text-align: center;
   color: #fff;
-  border: 1px solid lightgrey;
   height: 40px;
   line-height: 40px;
   margin-bottom: 0;
@@ -63,15 +59,6 @@ h5.place-container-headline {
 
 }
 
-.btn-color {
-  color: #E63946;
-}
-
-
-/* .placeList-background-div{
-  padding-left: 30px;
-  padding-right: 30px;
-} */
 
 
 

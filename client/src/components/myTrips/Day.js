@@ -1,7 +1,7 @@
 import React from 'react';
 import MapDay from './MapDay';
 import Notes from './Notes';
-import pin from './pin.png'
+import pin from '../../images/pin.png';
 
 const Day = (props) => {
   console.log('id day ', props.day._id);
@@ -21,9 +21,9 @@ const Day = (props) => {
 
   console.log('route', route);
 
-  const updateDirections = (ans) => {
-    // directions = ans;
-  }
+  // const updateDirections = (ans) => {
+  //   // directions = ans;
+  // }
   return (
     <div className="day-trip">
       <div className="attractions">
@@ -37,7 +37,7 @@ const Day = (props) => {
             //   <h5 key={i}>{place.name}  {place.category ? '(' + place.category + ')' : ''}</h5>
             // </li>
             // return <li key={i} className="attraction">{place.name} {place.category ? '(' + place.category + ')' : ''} </li>
-            return <h5 key={i}> <i class="fa fa-circle"></i> {place.name} {place.category ? '(' + place.category + ')' : ''} </h5>
+            return <h5 key={i}> <i className="fa fa-circle"></i> {place.name} {place.category ? '(' + place.category + ')' : ''} </h5>;
           })}
         </ul>
 

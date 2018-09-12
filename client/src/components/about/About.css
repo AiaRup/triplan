@@ -19,7 +19,7 @@
 
 .h1-team {
   text-align: center;
-  color: #e22866;
+  color: #f50057;
   font-weight: bold;
   padding: 20px 0;
 }
@@ -67,8 +67,7 @@
 
 .gitIcon,.linkedinIcon {
   padding: 0 5px;
-  /* margin: 10px; */
-  color: #e22866;
+  color: #f50057;
 }
 
 .linkedinIcon:hover, .gitIcon:hover  {

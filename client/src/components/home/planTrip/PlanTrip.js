@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { observer, inject } from 'mobx-react';
 import DayList from './dayList/DayList';
-import PlaceList from './placeList/PlaceList';
+import PlaceList from '../../home/planTrip/placeList/PlaceList';
 import EventList from './EventList/EventList';
-import _ from 'lodash';
+// import _ from 'lodash';
 import './planTrip.css';
 import axios from 'axios';
 import Notification, { notify } from 'react-notify-toast';
@@ -24,6 +24,7 @@ import InlineEdit from 'react-inline-editing';
 class PlanTrip extends Component {
 
   saveTrip = (event) => {
+    
 
     if (this.props.daysArray.length === 0) {
       // alert('Please add days to your plan')
@@ -76,8 +77,15 @@ class PlanTrip extends Component {
         .catch(function (error) {
           console.log(error.response);
         });
+
+        // emailTrip(tripUser);
     }
   };
+
+  // //!EMAIL THE TRIP WHEN SAVE IS DONE
+  // emailTrip = tripUser => {
+
+  // };
 
   onDragEnd = result => {
     const daysArray = this.props.daysArray;

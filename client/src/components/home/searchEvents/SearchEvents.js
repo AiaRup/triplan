@@ -1,32 +1,43 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import axios from 'axios';
+import { Paper, Grid, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
 import TheEvent from '../planTrip/EventList/TheEvent';
-import EventPickDate from './EventPickDate';
-import './datePickerCss.css';
-// import { Collapse } from 'react-collapse';
+import EventPickDate from './SearchEventsForm';
+import './searchEventsForm.css';
 import moment from 'moment';
-import './eventTemp.css';
 import Notification, { notify } from 'react-notify-toast';
-import { Loading } from '../../Loading';
 
+import FindIcon from '@material-ui/icons/Search';
+import { Loading } from '../Loading';
 
-
-// const apiKey = '2H98vvmL8G3zZvx7';
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 @inject(allStores => ({
   tempEventArray: allStores.store.tempEventArray,
   tempEventCalander: allStores.store.tempEventCalander,
-  // getEvents: allStores.store.getEvents,
   testEventsArray: allStores.store.testEventsArray,
   eventCategory: allStores.store.eventCategory,
   address: allStores.store.address,
   emptyTempEvents: allStores.store.emptyTempEvents,
   addTempEvents: allStores.store.addTempEvents,
-
 }))
 @observer
-class TempEventList extends Component {
+class SearchEvents extends Component {
   constructor() {
     super();
     this.state = {
@@ -35,17 +46,14 @@ class TempEventList extends Component {
       tempEventIternalId: 0,
       loading: false
     };
-
   }
 
+  // get events from the api
   getEvents = () => {
-
     const { startDate, endDate } = this.props.tempEventCalander;
 
     let start = moment(`/Date(${Date.parse(startDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
     let end = moment(`/Date(${Date.parse(endDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
-
-    console.log('star end date', startDate, endDate);
 
     // if (startDate === endDate) {
     if (start === end) {
@@ -55,45 +63,39 @@ class TempEventList extends Component {
     }
 
     if (this.props.eventCategory.length === 0) {
-      // alert('choose an event category')
       let myColor = { background: '#20313b', text: '#FFFFFF' };
       notify.show('Please choose an event category', 'custom', 5000, myColor);
       return;
     }
 
-
+    // variables to send to the api
     const USER_TOKEN = '9bgBCdDfmWp8NxrBqoNZ808YqGIf6m';
     const AuthStr = 'Bearer ' + USER_TOKEN;
     let categories = '';
     const { lat, lng } = this.props.address;
-    console.log('adress in events', this.props.address);
-
 
     // get selected categories
     if (this.props.eventCategory.length) {
       let tempArr = this.props.eventCategory.map((category) => category.value);
       categories = tempArr.toString();
-      console.log('arr category', categories);
     }
 
     const URL = `https://api.predicthq.com/v1/events/??relevance=rank,start_around&category=${categories}&within=10km@${lat},${lng}&start.gte=${startDate}&start.lte=${endDate}`;
-    // const URL = `https://api.predicthq.com/v1/events/??relevance=rank,start_around,location_around&category=${categories}&location_around.origin=${lat},${lng}&location_around.offset=10km&start.gte=${startDate}&start.lte=${endDate}`;
-
-    console.log(URL);
 
     // show loading events
     this.setState({ loading: true });
 
+    // get events from the api
     axios.get(URL, { 'headers': { 'Authorization': AuthStr }})
       .then((response) => {
-        // show loading events
+        // hide loading events
         this.setState({ loading: false });
 
         if (response.data.results.length === 0) {
-          // empty old events
+          // empty old events on page
           this.props.emptyTempEvents();
 
-          // console.log('No Events Found!')
+          // show toast with 'no event found'
           let myColor = { background: '#20313b', text: '#FFFFFF' };
           notify.show('No Events Found!', 'custom', 5000, myColor);
           return;
@@ -104,7 +106,6 @@ class TempEventList extends Component {
         // create new event object
         let event = {};
 
-        // console.log(response);
         response.data.results.forEach((eventResult) => {
           event.name = eventResult.title;
           event.id = eventResult.id;
@@ -121,31 +122,14 @@ class TempEventList extends Component {
 
           // add event to trip store
           this.props.addTempEvents(event);
-          // this.props.tempEventArray.push(event);
-          // console.log('tempEvent', this.props.tempEventArray);
-
-          // alert if no event found
-          if (response.data.results.length === 0) {
-            alert('No Events Found!');
-            return;
-
-          }
-          // this.setState({ tempEventIternalId: +1 });
-
-
         });
       })
       .catch((error) => {
         console.log(Error.error);
       });
-
-    // console.log(res);
-    //     this.props.testEventsArray.push(res);
-    //     console.log(`testEventsArray: ${JSON.stringify(this.props.testEventsArray)}`);
-    //     console.log(`start date: ${JSON.stringify(this.props.tempEventCalander[0])}`, `end date: ${this.props.tempEventCalander[1]}`);
-
   };
 
+  // diaplay nice duration of event on the page
   convertDuration(seconds) {
     let days = Math.floor(seconds / (3600 * 24));
     seconds -= days * 3600 * 24;
@@ -167,44 +151,59 @@ class TempEventList extends Component {
     }
   }
 
-  collapseToggle = () => {
-    this.setState(prevState => ({
-      toggledCollapse: !prevState.toggledCollapse
-    }));
-  };
-
   render() {
-
-    const toggleCollapse = false;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
         <Notification options={{ zIndex: 200, top: '50px' }} />
 
         <div className='temp-event-container'>
-          <div className='datesHead'>
-            <h5 onClick={() => this.collapseToggle(toggleCollapse)}>Find Events Nearby</h5>
-            {/* <Collapse isOpened={this.state.toggledCollapse}> */}
-            <div className='date-pick'>
-              <EventPickDate />
-              <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
-              <Loading loading={this.state.loading}/>
-            </div>
-            {/* </Collapse> */}
-          </div>
+          <Grid container spacing={24}>
+            <Grid item xs={12} sm={12} md={4}>
+              <Paper>
+                <div className='headline-find-events'>
+                  <h5>Find Events Nearby</h5>
+                  <div className='date-pick'>
+                    <EventPickDate />
+                    <Button variant="fab" color="secondary" mini aria-label="Find" onClick={this.getEvents} className={classes.button}>
+                      <FindIcon />
+                    </Button>
 
-          {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
-            <TheEvent key={theTempEvent.id}
-              verifier="eventOfTempEvent"
-              tempEventIndex={tempEventIndex}
-              tempEventName={theTempEvent.name}
-              tempEvent={theTempEvent} />)}
-
+                    <Loading loading={this.state.loading}/>
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper>
+                <div className='headline-find-events'>
+                  <h5>Events List</h5>
+                  <div className="listEvents">
+                    {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
+                      <TheEvent key={theTempEvent.id}
+                        verifier="eventOfTempEvent"
+                        tempEventIndex={tempEventIndex}
+                        tempEventName={theTempEvent.name}
+                        tempEvent={theTempEvent} />)}
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper>
+                <div className='headline-find-events'>
+                  <h5>Event Details</h5>
+                  <div className="event-details">
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
-
       </React.Fragment>
     );
   }
 }
 
-export default TempEventList;
+export default withStyles(styles)(SearchEvents);

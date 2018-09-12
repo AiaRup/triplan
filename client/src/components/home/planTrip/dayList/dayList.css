@@ -1,0 +1,26 @@
+.header-days {
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  border: 1px solid lightgrey;
+}
+
+.header-days h5 {
+  margin-bottom: 0;
+  line-height: 40px;
+  margin-left: 20px;
+}
+
+.inlineEdit:hover {
+  cursor: text;
+}
+
+.inlineInput {
+  outline: none;
+}
+
+.inlineInput {
+  font-size: 20px;
+  padding: 10px;
+  width: fit-content;
+}

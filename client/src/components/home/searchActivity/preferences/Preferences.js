@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import './preferences.css';
 import { Collapse } from 'react-collapse';
 import Checkbox from './Checkbox';
-import { Loading } from '../../../Loading';
+import { Loading } from '../../Loading';
 import { observer, inject } from 'mobx-react';
+import { IconButton } from '@material-ui/core';
+import FindIcon from '@material-ui/icons/Search';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const items = [
   { label: 'Restaurants', type: 'restaurant', icon: 'restaurant.png', checked: false },
@@ -82,9 +86,13 @@ export default class Preferences extends Component {
                 key={box.label} />
             )}
             <div className="pref-buttons">
-              <button className="btn btn-sm btn-outline-secondary" type="submit">Find</button>
-              <button className="btn btn-sm btn-secondary" type="button"
-                onClick={this.handleClear}>Clear</button>
+              <IconButton mini color="secondary" aria-label="Find" type="submit">
+                <FindIcon />
+              </IconButton>
+
+              <IconButton mini color="secondary" aria-label="Clear" onClick={this.handleClear}>
+                <DeleteIcon />
+              </IconButton>
             </div>
           </form>
           {this.props.loading && <Loading loading={this.props.loading} />}

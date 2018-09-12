@@ -8,17 +8,14 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 15px;
-  /* border-radius: 2px; */
   width: 100%;
   height: auto;
-  /* background-color: green; */
 }
 
 .place-event-containers {
 display: flex;
 flex-direction: row;
 justify-content: space-around;
-/* border-radius: 2px; */
 width: 100%;
 height: auto;
 }
@@ -27,18 +24,15 @@ height: auto;
   background-color: #f8a100;
   width: 20%;
   margin: 10px auto;
+  display: block;
   color: white;
-  /* height: 35px; */
   border-radius: 3px;
   border: 1px solid #f8a100;
 
 }
 
 .name-trip-container {
-  /* text-align: center; */
   display: flex;
-  /* justify-content: center; */
-  /* margin-bottom: 10px; */
   width: fit-content;
   margin: 10px auto;
 }

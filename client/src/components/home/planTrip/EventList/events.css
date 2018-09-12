@@ -7,8 +7,6 @@
 .event-list-container,
 .temp-events-list-container {
   margin: 8px;
-  border: 1px solid lightgrey;
-
 }
 
 .event-list-container {
@@ -20,12 +18,10 @@
 .eventList-overflow {
   display: flex;
   flex-direction: column;
-  border: 1px solid lightgrey;
   background: #fff;
   width: auto;
   height: 65vh;
   overflow-y: scroll;
-
 }
 
 .temp-events-list-container {
@@ -48,10 +44,9 @@
   }
 
   h5.event-container-headline {
-  background-color: #e22866;
+  background-color: #f50057;
   text-align: center;
   color: #fff;
-  border: 1px solid lightgrey;
   height: 40px;
   line-height: 40px;
   margin-bottom: 0;
@@ -73,9 +68,7 @@ color: #000;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* align-items: baseline; */
   color: #fff;
-  /* padding: 5px; */
 }
 
 .event-dlt-btn {
@@ -91,9 +84,5 @@ ul .ReactCollapse--content {
   color: #000
 }
 
-/* .eventList-background-div{
-  padding-left: 30px;
-  padding-right: 30px;
-}
- */
+
 
