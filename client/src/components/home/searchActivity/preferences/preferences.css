@@ -20,18 +20,15 @@
 
 .pref-buttons {
   display: flex;
-  /* justify-content: space-between; */
   justify-content: space-around;
 }
 
 .formSelector form {
-  /* margin-top: 10px; */
   padding-bottom: 5px;
 }
 
 .pref-buttons {
   display: flex;
-  /* justify-content: space-between; */
   justify-content: space-around;
 }
 
