@@ -1,15 +1,15 @@
 /* event list */
 .temp-event-container {
-  margin-left: 8px;
-  border: 1px solid lightgrey;
-  max-height: 80vh;
-  width: 25%;
   background-color: #fff;
-  overflow-y: auto;
+  min-height: 660px;
 }
 
 .date-picker {
   display: flex;
+}
+
+.date-pick {
+  padding: 10px;
 }
 
 .dates-headline {
@@ -28,19 +28,23 @@
   margin: 8px;
 }
 
-.datesHead {
+.headline-find-events {
   background-color: #fff;
   text-align: center;
   color: #000;
-  border: 1px solid lightgrey;
   min-height: 40px;
 }
-.datesHead h5 {
+.headline-find-events h5 {
 margin-bottom: 0;
   background-color: #20313b;
 line-height: 40px;
 color: #fff;
 
+}
+
+.listEvents, .event-details {
+  overflow-y: auto;
+  height: 600px;;
 }
 
 .to-event-date,
@@ -69,6 +73,8 @@ color: #fff;
 }
 
 ;
+
+
 
   .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
     background-color: #216ba5;

@@ -6,21 +6,19 @@
 
 .day-list-container {
   margin: 8px;
-  border: 1px solid lightgrey;
   height: 70vh;
   width: 35%;
-  border-radius: 2px;  
+  border-radius: 2px;
 }
 
 .day-list-wrapper {
   display: flex;
   flex-direction: column;
-  border: 1px solid lightgrey;
   background: #fff;
   width: auto;
   height: 65vh;
   overflow-y: scroll;
-  
+
 }
 
 

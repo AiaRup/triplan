@@ -3,7 +3,7 @@
 }
 
 .loginNavLi {
-  border:2px solid #e04277;
+  border:2px solid #f50057;
   color: white;
   pointer-events: none;
 }
@@ -30,6 +30,7 @@
   background-color: #20313b !important;
   color: white !important;
   box-shadow: -1px 1px 3px grey;
+  /* margin-bottom: 10px; */
 
 }
 
@@ -42,13 +43,13 @@
 }
 
 .btn-secondary {
-  background-color: #e22866;
-  border-color: #e22866;
+  background-color: #f50057;
+  border-color: #f50057;
 }
 
 .btn-secondary:hover {
-  background-color: #e04277;
-  border-color: #e04277;
+  background-color: #f50057;
+  border-color: #f50057;
 }
 
 .activeLink {
