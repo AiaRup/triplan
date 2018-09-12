@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-// import InlineEdit from 'react-inline-editing';
-
+import AddIcon from '@material-ui/icons/Add';
+import { Button } from '@material-ui/core';
 import Day from './Day';
 import './dayList.css';
-
-
 
 @inject(allStores => ({
   daysArray: allStores.store.daysArray,
@@ -21,20 +19,13 @@ class DayList extends Component {
     return (
       <div className="day-list-container">
         <div className="header-days">
-          {/* <InlineEdit inputClassName="inlineInput" labelClassName="inlineEdit" text={this.props.tripName} onFocusOut={(data) => {
-            this.props.saveTripName(data);
-          }} />
-          <i className="fa fa-pencil" aria-hidden="true"></i> */}
-          <h5>
-            Days of your Trip
-          </h5>
-          
-
-
-          <button className="btn btn-secondary btn-sm add-day" onClick={this.props.addDay} data-toggle="tooltip" data-placement="top" title="Add one day">+</button>
+          <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.props.addDay}>
+            <AddIcon />
+          </Button>
+          <h5> Days of your Trip </h5>
         </div>
-        <div className="day-list-wrapper">
 
+        <div className="day-list-wrapper">
           <ul className="day-list">
             {this.props.daysArray.map((day, index) => <li key={day.id}><Day index={index} day={day}/></li>)}
           </ul>
@@ -46,3 +37,4 @@ class DayList extends Component {
 }
 
 export default DayList;
+

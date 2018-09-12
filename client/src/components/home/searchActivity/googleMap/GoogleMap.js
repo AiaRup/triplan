@@ -1,15 +1,13 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
-// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
 import Notification, { notify } from 'react-notify-toast';
-
-// const google=window.google;
-
+import AddIcon from '@material-ui/icons/Add';
+import { Button } from '@material-ui/core';
 
 const MapComponent = compose(
   withStateHandlers(() =>
@@ -21,20 +19,20 @@ const MapComponent = compose(
       toggleCollapse: false,
       indexCollapse: null
     }),
-    {
-      showInfo: ({ isOpen, infoIndex }) => (index) => ({
-        isOpen: infoIndex !== index || !isOpen,
-        infoIndex: index
-      }),
-      onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
-        isOpenHover: infoIndexHover !== index || !isOpenHover,
-        infoIndexHover: index
-      }),
-      collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
-        toggleCollapse: indexCollapse !== index || !toggleCollapse,
-        indexCollapse: index
-      })
-    },
+  {
+    showInfo: ({ isOpen, infoIndex }) => (index) => ({
+      isOpen: infoIndex !== index || !isOpen,
+      infoIndex: index
+    }),
+    onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
+      isOpenHover: infoIndexHover !== index || !isOpenHover,
+      infoIndexHover: index
+    }),
+    collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
+      toggleCollapse: indexCollapse !== index || !toggleCollapse,
+      indexCollapse: index
+    })
+  },
   ),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE',
@@ -67,8 +65,8 @@ const MapComponent = compose(
           console.log(place);
 
           if (place.length === 0) {
-            let myColor = { background: '#e22866', text: "#FFFFFF" };
-            notify.show("Address not found", "custom", 5000, myColor);
+            let myColor = { background: '#e22866', text: '#FFFFFF' };
+            notify.show('Address not found', 'custom', 5000, myColor);
             return;
           }
 
@@ -90,7 +88,7 @@ const MapComponent = compose(
           } else {
             bounds.extend(place[0].geometry.location);
           }
-          const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
+          const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
           this.setState({
             bounds: bounds,
             center: nextCenter,
@@ -150,30 +148,39 @@ const MapComponent = compose(
 
           {(props.isOpen && props.infoIndex === marker.id) &&
             <InfoWindow onCloseClick={props.showInfo}>
-              <div className="info-window">
-                <div className='info-content'>
-                  <p className='info-header'>{marker.name}</p>
-                  <p>{marker.address}</p>
-                  <p>{marker.phone}</p>
-                  {marker.price && <p>Price level: {marker.price}</p>}
-                  {marker.rating && <p>Rating: {marker.rating}</p>}
-                  <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
-                  {marker.openHours &&
+              <React.Fragment>
+                <div className="info-window">
+                  <div className='info-content'>
+                    <p className='info-header'>{marker.name}</p>
+                    <p>{marker.address}</p>
+                    <p>{marker.phone}</p>
+                    {marker.price && <p>Price level: {marker.price}</p>}
+                    {marker.rating && <p>Rating: {marker.rating}</p>}
+                    <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
+                    {marker.openHours &&
                     <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
                       {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
                     </Collapse>}
-                  {marker.openHours &&
+                    {marker.openHours &&
                     <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
-                  {marker.website && <a href={marker.website} target="_blank">Website</a>}
-                  <br />
-                  <button className='btn btn-secondary btn-sm' onClick={() => props.addPlace(marker)}>Add
+                    {marker.website && <a href={marker.website} target="_blank">Website</a>}
+                    <br />
+                    {/* <button className='btn btn-secondary btn-sm' onClick={() => props.addPlace(marker)}>
                     <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
-                  </button>
+                  </button> */}
+
+                  </div>
+                  <div>
+                    {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                  </div>
+
                 </div>
-                <div>
-                  {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                <div className="add-attraction">
+                  <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
+                    <AddIcon />
+                  </Button>
                 </div>
-              </div>
+              </React.Fragment>
             </InfoWindow>}
 
           {(props.isOpenHover && props.infoIndexHover === marker.id) && <InfoBox

@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import axios from 'axios';
+import { Paper, Grid, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
 import TheEvent from '../planTrip/EventList/TheEvent';
 import EventPickDate from './SearchEventsForm';
 import './searchEventsForm.css';
 import moment from 'moment';
 import Notification, { notify } from 'react-notify-toast';
+
+import FindIcon from '@material-ui/icons/Search';
 import { Loading } from '../Loading';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 @inject(allStores => ({
   tempEventArray: allStores.store.tempEventArray,
@@ -133,30 +152,58 @@ class SearchEvents extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
       <React.Fragment>
         <Notification options={{ zIndex: 200, top: '50px' }} />
 
         <div className='temp-event-container'>
-          <div className='datesHead'>
-            <h5>Find Events Nearby</h5>
-            <div className='date-pick'>
-              <EventPickDate />
-              <button className='btn btn-sm btn-secondary btn-temp-event-date' onClick={this.getEvents}>Find</button>
-              <Loading loading={this.state.loading}/>
-            </div>
-          </div>
+          <Grid container spacing={24}>
+            <Grid item xs={12} sm={12} md={4}>
+              <Paper>
+                <div className='headline-find-events'>
+                  <h5>Find Events Nearby</h5>
+                  <div className='date-pick'>
+                    <EventPickDate />
+                    <Button variant="fab" color="secondary" mini aria-label="Find" onClick={this.getEvents} className={classes.button}>
+                      <FindIcon />
+                    </Button>
 
-          {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
-            <TheEvent key={theTempEvent.id}
-              verifier="eventOfTempEvent"
-              tempEventIndex={tempEventIndex}
-              tempEventName={theTempEvent.name}
-              tempEvent={theTempEvent} />)}
+                    <Loading loading={this.state.loading}/>
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper>
+                <div className='headline-find-events'>
+                  <h5>Events List</h5>
+                  <div className="listEvents">
+                    {this.props.tempEventArray.map((theTempEvent, tempEventIndex) =>
+                      <TheEvent key={theTempEvent.id}
+                        verifier="eventOfTempEvent"
+                        tempEventIndex={tempEventIndex}
+                        tempEventName={theTempEvent.name}
+                        tempEvent={theTempEvent} />)}
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <Paper>
+                <div className='headline-find-events'>
+                  <h5>Event Details</h5>
+                  <div className="event-details">
+                  </div>
+                </div>
+              </Paper>
+            </Grid>
+          </Grid>
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default SearchEvents;
+export default withStyles(styles)(SearchEvents);
