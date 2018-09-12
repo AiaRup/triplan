@@ -192,6 +192,10 @@ class TripStore {
 
     this.tempEventArray.push(event);
   }
+
+  @action emailTrip = () => {
+    console.log('hi')
+  }
 }
 
 
