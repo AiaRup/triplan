@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import AddIcon from '@material-ui/icons/Add';
-import { Button } from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 import Day from './Day';
 import './dayList.css';
 
@@ -19,9 +19,11 @@ class DayList extends Component {
     return (
       <div className="day-list-container">
         <div className="header-days">
-          <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.props.addDay}>
-            <AddIcon />
-          </Button>
+          <Tooltip title="Add one day to the trip">
+            <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.props.addDay}>
+              <AddIcon />
+            </Button>
+          </Tooltip>
           <h5> Days of your Trip </h5>
         </div>
 

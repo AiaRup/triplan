@@ -86,11 +86,11 @@ export default class Preferences extends Component {
                 key={box.label} />
             )}
             <div className="pref-buttons">
-              <IconButton mini color="secondary" aria-label="Find" type="submit">
+              <IconButton color="secondary" aria-label="Find" type="submit">
                 <FindIcon />
               </IconButton>
 
-              <IconButton mini color="secondary" aria-label="Clear" onClick={this.handleClear}>
+              <IconButton color="secondary" aria-label="Clear" onClick={this.handleClear}>
                 <DeleteIcon />
               </IconButton>
             </div>
