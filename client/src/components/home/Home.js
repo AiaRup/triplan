@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlanTrip from './planTrip/PlanTrip';
 import SearchActivity from './searchActivity/SearchActivity';
-import _ from 'lodash';
+// import _ from 'lodash';
 import TempEventList from './searchEvents/SearchEvents';
 import { observer, inject } from 'mobx-react';
 import './home.css';
@@ -19,21 +19,24 @@ const styles = {
 };
 
 @inject(allStores => ({
+  togglePrefernces: allStores.store.togglePrefernces,
   restStoreTrip: allStores.store.restStoreTrip,
   tripName: allStores.store.tripName,
-  saveTripName: allStores.store.saveTripName
+  saveTripName: allStores.store.saveTripName,
+  saveAddress: allStores.store.saveAddress,
+  // address: allStores.store.address,
 }))
 @observer
 class Home extends Component {
   state = {
     value: 0,
-    address: { lat: 51.507351, lng: -0.127758 },
+    // address: { lat: 51.507351, lng: -0.127758 },
   };
 
   geoSettings = {
     enableHighAccuracy: false,
     maximumAge: 30000,
-    timeout: 20000
+    timeout: 60000
   };
 
   handleChange = (event, value) => {
@@ -41,11 +44,17 @@ class Home extends Component {
   };
 
   positionDenied = () => {
-    this.setState({ address: { lat: 51.507351, lng: -0.127758 } });
+    // this.setState({ address: { lat: 51.507351, lng: -0.127758 } });
+    this.props.saveAddress({ lat: 51.507351, lng: -0.127758 });
   };
 
   revealPosition = (position) => {
-    this.setState({ address: { lat: position.coords.latitude, lng: position.coords.longitude } });
+    // this.setState({ address: { lat: position.coords.latitude, lng: position.coords.longitude } });
+    const address = { lat: position.coords.latitude, lng: position.coords.longitude };
+    console.log('address in reveal position: ', address);
+    this.props.saveAddress(address);
+    // open prefernces
+    this.props.togglePrefernces(true);
   };
 
   // Start everything off
@@ -116,7 +125,8 @@ class Home extends Component {
 
           <div className='map-event-container'>
             <div className='map-view-container'>
-              <SearchActivity address={this.state.address} />
+              {/* <SearchActivity address={this.state.address} /> */}
+              <SearchActivity />
             </div>
             <TempEventList />
           </div>

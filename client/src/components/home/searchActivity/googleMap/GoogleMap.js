@@ -7,6 +7,7 @@ import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
 import Notification, { notify } from 'react-notify-toast';
+import _ from 'lodash';
 
 // const google=window.google;
 
@@ -50,6 +51,7 @@ const MapComponent = compose(
         bounds: null,
         center: { lat: this.props.address.lat, lng: this.props.address.lng },
         marker: { lat: this.props.address.lat, lng: this.props.address.lng },
+
         onSearchBoxMounted: ref => {
           refs.searchBox = ref;
         },
@@ -58,7 +60,6 @@ const MapComponent = compose(
         },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
-          console.log(place);
 
           if (place.length === 0) {
             let myColor = { background: '#e22866', text: "#FFFFFF" };
@@ -69,27 +70,31 @@ const MapComponent = compose(
           // empty temp events array
           this.props.emptyEvents();
 
-          this.props.saveCity(place[0].vicinity);
-
           //show the prefernces after search a new place in searchBox
           this.props.togglePrefernces(true);
 
-          const lat = place[0].geometry.location.lat();
-          const lng = place[0].geometry.location.lng();
-          let bounds = new google.maps.LatLngBounds();
+          if (place[0].geometry) {
+            this.props.saveCity(place[0].vicinity);
 
-          if (place[0].geometry.viewport) {
-            bounds.union(place[0].geometry.viewport);
-          } else {
-            bounds.extend(place[0].geometry.location);
+            const lat = place[0].geometry.location.lat();
+            const lng = place[0].geometry.location.lng();
+
+            let bounds = new google.maps.LatLngBounds();
+            if (place[0].geometry.viewport) {
+              bounds.union(place[0].geometry.viewport);
+            } else {
+              bounds.extend(place[0].geometry.location);
+            }
+
+            const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
+            this.setState({
+              bounds: bounds,
+              center: nextCenter,
+              marker: place[0].geometry.location,
+            });
+            //update to the current address
+            this.props.updateAddress({ lat: lat, lng: lng });
           }
-          const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
-          this.setState({
-            bounds: bounds,
-            center: nextCenter,
-            marker: place[0].geometry.location,
-          });
-          this.props.updateAddress({ lat: lat, lng: lng });
         },
         addPlace: (marker) => {
           const newActivity = { type: 'place' };
@@ -117,12 +122,12 @@ const MapComponent = compose(
       ref={props.onMapMounted}
       defaultZoom={14}
       // center={props.center}
-      center={{ lat: props.address.lat, lng: props.address.lng }}
+      center={props.address}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}>
 
       <SearchBox
         ref={props.onSearchBoxMounted}
-        bounds={props.bounds}
+        // bounds={props.bounds}
         controlPosition={google.maps.ControlPosition.TOP_CENTER}
         onPlacesChanged={props.onPlacesChanged} >
         <input
@@ -132,7 +137,7 @@ const MapComponent = compose(
       </SearchBox>
 
       {/* <Marker position={props.marker} /> */}
-      <Marker position={{ lat: props.address.lat, lng: props.address.lng }} />
+      <Marker position={props.address} />
 
       {props.markers.map((marker) =>
         <Marker key={marker.id}
@@ -170,14 +175,15 @@ const MapComponent = compose(
               </div>
             </InfoWindow>}
 
-          {(props.isOpenHover && props.infoIndexHover === marker.id) && <InfoBox
-            options={{ closeBoxURL: '', enableEventPropagation: true }} >
-            <div className='info-box'>
-              <p className='info-header'><b>{marker.name}</b></p>
-              <p>{marker.address}</p>
-              <p>{marker.phone}</p>
-            </div>
-          </InfoBox>}
+          {(props.isOpenHover && props.infoIndexHover === marker.id) &&
+            <InfoBox
+              options={{ closeBoxURL: '', enableEventPropagation: true }} >
+              <div className='info-box'>
+                <p className='info-header'><b>{marker.name}</b></p>
+                <p>{marker.address}</p>
+                <p>{marker.phone}</p>
+              </div>
+            </InfoBox>}
         </Marker>)
       }
     </GoogleMap>

@@ -14,13 +14,12 @@ class TripStore {
   @observable numOfEvents = 0;
   @observable eventCategory = [];
   @observable loading = false;
-
   @observable isOpenPrefernces = false;
 
   @action togglePrefernces = (click) => {
     this.isOpenPrefernces = click || !this.isOpenPrefernces;
+    console.log('isOpenPrefernces ', this.isOpenPrefernces);
   }
-
 
   @action addNotes = (note, index) => {
     // console.log('note ', note, 'index ', index);

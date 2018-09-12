@@ -28,16 +28,13 @@ class Map extends Component {
     // toggle loading
     this.props.store.toggleLoading(true);
 
-    // let myColor = { background: '#0E1717', text: "#FFFFFF" };
-    // notify.show("Loading...", "custom", 5000, myColor);
-
     this.finishMarker = 0;
     const markerArray = [];
 
     this.state.places.forEach((element) => {
       let type = element.type;
 
-      axios(`/api/users/googlePlaces/${type}/${this.props.address.lat}/${this.props.address.lng}`).then((response) => {
+      axios(`/api/users/googlePlaces/${type}/${this.props.store.address.lat}/${this.props.store.address.lng}`).then((response) => {
         console.log('res in axios first fetch', response);
 
         console.log('response', response);
@@ -200,15 +197,22 @@ class Map extends Component {
 
   checkFinishMarkers(markerArray) {
     if (this.finishMarker === this.state.places.length) {
+      // off loading
+      this.props.store.toggleLoading(false);
+      // render the markers result on map
+      this.setState({ markers: markerArray });
+
       if (markerArray.length === 0) {
         let myColor = { background: '#e22866', text: '#FFFFFF' };
         notify.show('No attraction found!', 'custom', 5000, myColor);
-        // toggle loading
-        // this.props.store.toggleLoading(false);
+        return;
       }
-      // toggle loading
-      this.props.store.toggleLoading(false);
-      this.setState({ markers: markerArray });
+
+      // close prefernces after found attraction and the markers are show on map
+      setTimeout(() => {
+        this.props.store.togglePrefernces();
+      }, 500);
+
     }
   }
 
@@ -235,7 +239,7 @@ class Map extends Component {
         <GoogleMap
           togglePrefernces={this.props.store.togglePrefernces}
           markers={this.state.markers}
-          address={this.props.address}
+          address={this.props.store.address}
           updateAddress={this.props.updateAddress}
           addPlace={this.addPlace}
           saveCity={this.props.store.saveCity}
