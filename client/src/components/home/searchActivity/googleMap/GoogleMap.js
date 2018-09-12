@@ -8,6 +8,7 @@ import { Collapse } from 'react-collapse';
 import Notification, { notify } from 'react-notify-toast';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
+import drawStarts from '../../../utils/drawStarts';
 
 const MapComponent = compose(
   withStateHandlers(() =>
@@ -116,7 +117,7 @@ const MapComponent = compose(
   withGoogleMap
 )((props) => {
   return <div>
-    <Notification options={{ zIndex: 200, top: '250px' }} />
+    <Notification options={{ zIndex: 400, top: '250px' }} />
 
     <GoogleMap
       ref={props.onMapMounted}
@@ -155,7 +156,8 @@ const MapComponent = compose(
                     <p>{marker.address}</p>
                     <p>{marker.phone}</p>
                     {marker.price && <p>Price level: {marker.price}</p>}
-                    {marker.rating && <p>Rating: {marker.rating}</p>}
+                    {marker.rating &&
+                      <div className="rating-Info"> <p>Rating: {marker.rating}</p> {drawStarts(marker.rating)}</div>}
                     <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
                     {marker.openHours &&
                     <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
@@ -164,16 +166,10 @@ const MapComponent = compose(
                     {marker.openHours &&
                     <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
                     {marker.website && <a href={marker.website} target="_blank">Website</a>}
-                    <br />
-                    {/* <button className='btn btn-secondary btn-sm' onClick={() => props.addPlace(marker)}>
-                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
-                  </button> */}
-
                   </div>
                   <div>
                     {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
                   </div>
-
                 </div>
                 <div className="add-attraction">
                   <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>

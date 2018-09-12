@@ -206,7 +206,7 @@ class PlanTrip extends Component {
   render() {
     return (
       <React.Fragment>
-        <Notification options={{ zIndex: 200, top: '250px' }} />
+        <Notification options={{ zIndex: 400, top: '250px' }} />
 
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>

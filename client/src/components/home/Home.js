@@ -113,7 +113,7 @@ class Home extends Component {
    return (
      <React.Fragment>
 
-       <Paper className={classes.root} elevation={0}>
+       <Paper className={classes.root} elevation={0} >
          <Tabs
            value={this.state.value}
            onChange={this.handleChange}

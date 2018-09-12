@@ -156,7 +156,7 @@ class SearchEvents extends Component {
 
     return (
       <React.Fragment>
-        <Notification options={{ zIndex: 200, top: '50px' }} />
+        <Notification options={{ zIndex: 400, top: '250px' }} />
 
         <div className='temp-event-container'>
           <Grid container spacing={24}>
