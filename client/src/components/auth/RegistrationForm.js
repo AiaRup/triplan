@@ -9,7 +9,8 @@ import { observer, inject } from 'mobx-react';
 
 @inject(allStores => ({
   toggleLoginRegister: allStores.store.toggleLoginRegister,
-  showLogin: allStores.store.showLogin
+  showLogin: allStores.store.showLogin,
+  userEmail: allStores.store.user_email
 }))
 @observer
   export default withAuth(
@@ -67,6 +68,8 @@ import { observer, inject } from 'mobx-react';
             console.log(err);
             this.setState({ showErrorDiv: true });
           });
+          //!!check where the data goes to
+          this.props.userEmail = this.state.email;
       }
       render() {
         if (this.state.sessionToken) {

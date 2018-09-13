@@ -124,10 +124,10 @@ class Home extends Component {
            <Tab label="Find Events" icon={<EventIcon />} />
            <Tab label="Plan Your Trip" icon={<ScheduleIcon />} />
          </Tabs>
-         <SwipeableViews
+         {/* <SwipeableViews
            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
            index={this.state.value}
-           onChangeIndex={this.handleChangeIndex}>
+           onChangeIndex={this.handleChangeIndex}> */}
 
            <TabContainer dir={theme.direction}>
              <div className='map-event-container'>
@@ -144,7 +144,7 @@ class Home extends Component {
            <TabContainer dir={theme.direction}>
              <PlanTrip />
            </TabContainer>
-         </SwipeableViews>
+         {/* </SwipeableViews> */}
        </Paper>
 
        <Button variant="contained" color="default" className={classes.button} onClick={this.resetTrip}>

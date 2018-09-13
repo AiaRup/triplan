@@ -17,7 +17,7 @@ const Container = styled.div`
   font-size: 18px;
 `;
 
-// transform: ${props=> (props.isDragging ? 'rotate(20deg)' : 'none')};
+
 
 @inject(allStores => ({
   deleteEvent: allStores.store.deleteEvent,

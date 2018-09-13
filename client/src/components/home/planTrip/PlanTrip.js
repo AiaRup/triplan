@@ -82,11 +82,6 @@ class PlanTrip extends Component {
     }
   };
 
-  // //!EMAIL THE TRIP WHEN SAVE IS DONE
-  // emailTrip = tripUser => {
-
-  // };
-
   onDragEnd = result => {
     const daysArray = this.props.daysArray;
     const placesArray = this.props.placesArray;
