@@ -34,25 +34,26 @@
 }
 
 .info-window .info-header {
-  color: rgb(255, 115, 0);
+  color: #f50057;
   font-weight: bold;
 }
 
 .info-window .info-content {
   flex-basis: 170px;
 }
+
 .info-box {
-  background-color: rgb(0, 0, 0);
+  background-color: #20313b;
   color: azure;
   padding: 12px;
   max-width: 230px;
   border-radius: 10px;
-  opacity: 0.8;
+  /* opacity: 0.9; */
 }
 
 
 .info-box .info-header {
-  color: rgb(255, 115, 0)
+  color: #f50057;
 }
 #slider-hours {
   transform: translateX(-150px);
@@ -66,6 +67,15 @@
 
 #slider-hours.slideOut {
   transform: translateX(-100%);
+}
+
+.add-attraction {
+  text-align: end;
+  padding: 8px;
+}
+
+.rating-Info p {
+  margin-bottom: 0;
 }
 
 @media only screen and (max-width: 940px) {

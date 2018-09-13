@@ -1,16 +1,16 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
-// import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { InfoBox } from 'react-google-maps/lib/components/addons/InfoBox';
 import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
 import Notification, { notify } from 'react-notify-toast';
 import _ from 'lodash';
-
+import AddIcon from '@material-ui/icons/Add';
+import { Button } from '@material-ui/core';
+import drawStarts from '../../../utils/drawStarts';
 // const google=window.google;
-
 
 const MapComponent = compose(
   withStateHandlers(() =>
@@ -62,8 +62,8 @@ const MapComponent = compose(
           const place = refs.searchBox.getPlaces();
 
           if (place.length === 0) {
-            let myColor = { background: '#e22866', text: "#FFFFFF" };
-            notify.show("Address not found", "custom", 5000, myColor);
+            let myColor = { background: '#e22866', text: '#FFFFFF' };
+            notify.show('Address not found', 'custom', 5000, myColor);
             return;
           }
 
@@ -116,7 +116,7 @@ const MapComponent = compose(
   withGoogleMap
 )((props) => {
   return <div>
-    <Notification options={{ zIndex: 200, top: '250px' }} />
+    <Notification options={{ zIndex: 400, top: '150px' }} />
 
     <GoogleMap
       ref={props.onMapMounted}
@@ -149,30 +149,34 @@ const MapComponent = compose(
 
           {(props.isOpen && props.infoIndex === marker.id) &&
             <InfoWindow onCloseClick={props.showInfo}>
-              <div className="info-window">
-                <div className='info-content'>
-                  <p className='info-header'>{marker.name}</p>
-                  <p>{marker.address}</p>
-                  <p>{marker.phone}</p>
-                  {marker.price && <p>Price level: {marker.price}</p>}
-                  {marker.rating && <p>Rating: {marker.rating}</p>}
-                  <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
-                  {marker.openHours &&
-                    <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
-                      {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
-                    </Collapse>}
-                  {marker.openHours &&
-                    <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
-                  {marker.website && <a href={marker.website} target="_blank">Website</a>}
-                  <br />
-                  <button className='btn btn-secondary btn-sm' onClick={() => props.addPlace(marker)}>Add
-                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
-                  </button>
+              <React.Fragment>
+                <div className="info-window">
+                  <div className='info-content'>
+                    <p className='info-header'>{marker.name}</p>
+                    <p>{marker.address}</p>
+                    <p>{marker.phone}</p>
+                    {marker.price && <p>Price level: {marker.price}</p>}
+                    {marker.rating &&
+                      <div className="rating-Info"> <p>Rating: {marker.rating}</p> {drawStarts(marker.rating)}</div>}
+                    <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
+                    {marker.openHours &&
+                      <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
+                        {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
+                      </Collapse>}
+                    {marker.openHours &&
+                      <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
+                    {marker.website && <a href={marker.website} target="_blank">Website</a>}
+                  </div>
+                  <div>
+                    {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                  </div>
                 </div>
-                <div>
-                  {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                <div className="add-attraction">
+                  <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
+                    <AddIcon />
+                  </Button>
                 </div>
-              </div>
+              </React.Fragment>
             </InfoWindow>}
 
           {(props.isOpenHover && props.infoIndexHover === marker.id) &&

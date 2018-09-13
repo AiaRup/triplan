@@ -98,7 +98,7 @@ class TheEvent extends Component {
     } else if (this.props.verifier === 'eventOfTempEvent') {
       return (
         <div className="events-list-container">
-          <Notification options={{ zIndex: 200, top: '250px' }} />
+          <Notification options={{ zIndex: 400, top: '250px' }} />
 
           <div className="single-event-header-section">
             <h6 className="event-headline">{this.props.tempEventName}</h6>

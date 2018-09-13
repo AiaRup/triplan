@@ -8,14 +8,41 @@ import './home.css';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import { Paper, Tabs, Tab, Typography, Button } from '@material-ui/core';
+import SwipeableViews from 'react-swipeable-views';
 
-const styles = {
+import MarkerIcon from '@material-ui/icons/Place';
+import EventIcon from '@material-ui/icons/Event';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import RestartIcon from '@material-ui/icons/Refresh';
+
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
   root: {
     flexGrow: 1,
+    marginTop: 10
   },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  }
+});
+
+const TabContainer = (props) => {
+  const { children, dir } = props;
+
+  return (
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+      {children}
+    </Typography>
+  );
+};
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  dir: PropTypes.string.isRequired,
 };
 
 @inject(allStores => ({
@@ -43,6 +70,10 @@ class Home extends Component {
     this.setState({ value });
   };
 
+  handleChangeIndex = index => {
+    this.setState({ value: index });
+  };
+
   positionDenied = () => {
     // this.setState({ address: { lat: 51.507351, lng: -0.127758 } });
     this.props.saveAddress({ lat: 51.507351, lng: -0.127758 });
@@ -56,6 +87,7 @@ class Home extends Component {
     // open prefernces
     this.props.togglePrefernces(true);
   };
+
 
   // Start everything off
   handlePermission = () => {
@@ -76,10 +108,8 @@ class Home extends Component {
   }
 
   resetTrip = () => {
-    console.log('inRest');
     this.props.restStoreTrip();
   }
-
 
   componentDidMount = () => {
     if (!('geolocation' in navigator)) {
@@ -89,58 +119,52 @@ class Home extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-
+    const { classes, theme } = this.props;
+    const { value } = this.state;
     return (
       <React.Fragment>
 
-
-        <div className="intro">
-          <img src="/images/new-logo.png" alt="" />
-          <h1 className="home-page-headline">Plan Your Perfect Trip</h1>
-          <div className="home-page-instructions">
-            <p>Search Your Trip Location<i className="right"></i></p>
-            <p>Choose Attractions To Visit<i className="right"></i></p>
-            <p>Search Events To Add To Your Trip</p>
-          </div>
-
-        </div>
-        <button className="btn btn-sm btn-secondary mt-4 ml-3 reset-trip" onClick={this.resetTrip}>Reset Trip</button>
-
-
-        <Paper className={classes.root}>
+        <Paper className={classes.root} elevation={0} >
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
+            indicatorColor="secondary"
+            textColor="secondary"
             centered >
-            <Tab label="Find Attractions" />
-            <Tab label="Find Events" />
-            <Tab label="Plan Your Trip" />
+            <Tab label="Find Attractions" icon={<MarkerIcon />} />
+            <Tab label="Find Events" icon={<EventIcon />} />
+            <Tab label="Plan Your Trip" icon={<ScheduleIcon />} />
           </Tabs>
+          {/* <SwipeableViews
+             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+             index={this.state.value}
+           onChangeIndex={this.handleChangeIndex}
+           > */}
+
+          {value === 0 && <TabContainer dir={theme.direction}>
+            <div className='map-event-container'>
+              <div className='map-view-container'>
+                <SearchActivity />
+              </div>
+            </div>
+          </TabContainer>
+          }
+          {value === 1 && <TabContainer dir={theme.direction}>
+            <TempEventList />
+          </TabContainer>
+          }
+          {value === 2 && <TabContainer dir={theme.direction}>
+            <PlanTrip />
+          </TabContainer>
+          }
+          {/* </SwipeableViews> */}
+
         </Paper>
 
-        <div className="container-fluid">
+        <Button variant="contained" color="default" className={classes.button} onClick={this.resetTrip}>
+          Reset Trip <RestartIcon className={classes.rightIcon} />
+        </Button>
 
-          <div className='map-event-container'>
-            <div className='map-view-container'>
-              {/* <SearchActivity address={this.state.address} /> */}
-              <SearchActivity />
-            </div>
-            <TempEventList />
-          </div>
-        </div>
-
-        <div className='plan-trip-container'>
-          <div className="home-page-instructions">
-            <p>Name Your Trip<i className="right"></i></p>
-            <p>Add Days To Your Trip<i className="right"></i></p>
-            <p>Drag & Drop To The Right Day</p>
-          </div>
-
-          <PlanTrip />
-        </div>
       </React.Fragment>
     );
   }
@@ -148,7 +172,8 @@ class Home extends Component {
 
 Home.propTypes = {
   classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(styles, { withTheme: true })(Home);
 
