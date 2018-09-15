@@ -52,15 +52,17 @@
   margin-bottom: 0;
 }
 
-.content-of-event li {
+.content-of-event {
 color: #000;
 padding: 5px;
+max-width: 100%;
 }
 
 .event-headline {
   margin: 5px;
   font-weight: bold;
   color: #000;
+  display: inline;
 }
 
 
@@ -71,10 +73,10 @@ padding: 5px;
   color: #fff;
 }
 
-.event-dlt-btn {
+/* .event-dlt-btn {
   color: #1D3557;
   border: 1px solid lightgray;
-}
+} */
 
 .collapse-color {
   background-color: white;
@@ -82,6 +84,10 @@ padding: 5px;
 
 ul .ReactCollapse--content {
   color: #000
+}
+
+.delete-draggable {
+  color: #20313b;
 }
 
 
