@@ -22,20 +22,20 @@ const MapComponent = compose(
       toggleCollapse: false,
       indexCollapse: null
     }),
-    {
-      showInfo: ({ isOpen, infoIndex }) => (index) => ({
-        isOpen: infoIndex !== index || !isOpen,
-        infoIndex: index
-      }),
-      onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
-        isOpenHover: infoIndexHover !== index || !isOpenHover,
-        infoIndexHover: index
-      }),
-      collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
-        toggleCollapse: indexCollapse !== index || !toggleCollapse,
-        indexCollapse: index
-      })
-    },
+  {
+    showInfo: ({ isOpen, infoIndex }) => (index) => ({
+      isOpen: infoIndex !== index || !isOpen,
+      infoIndex: index
+    }),
+    onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
+      isOpenHover: infoIndexHover !== index || !isOpenHover,
+      infoIndexHover: index
+    }),
+    collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
+      toggleCollapse: indexCollapse !== index || !toggleCollapse,
+      indexCollapse: index
+    })
+  },
   ),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE',
@@ -86,7 +86,7 @@ const MapComponent = compose(
               bounds.extend(place[0].geometry.location);
             }
 
-            const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
+            const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
             this.setState({
               bounds: bounds,
               center: nextCenter,
@@ -176,11 +176,16 @@ const MapComponent = compose(
                     {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
                   </div>
                 </div>
-                <div className="add-attraction">
+                <div className={props.animate ? 'add-attraction animate zoom' : 'add-attraction'}>
                   <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
                     <AddIcon />
                   </Button>
                 </div>
+                {/* <div className="add-attraction">
+                  <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
+                    <AddIcon />
+                  </Button>
+                </div> */}
               </React.Fragment>
             </InfoWindow>}
 

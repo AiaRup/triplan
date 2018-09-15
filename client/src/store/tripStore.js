@@ -16,25 +16,7 @@ class TripStore {
   @observable loading = false;
   @observable isOpenPrefernces = false;
 
-  @action togglePrefernces = (click) => {
-    this.isOpenPrefernces = click || !this.isOpenPrefernces;
-    console.log('isOpenPrefernces ', this.isOpenPrefernces);
-  }
 
-  @action addNotes = (note, index) => {
-    // console.log('note ', note, 'index ', index);
-    this.oneTrip.days[index].notes.push(note);
-    // this.oneTrip.days[index].notes = note;
-    console.log(`oneTrip.days[${index}].notes, ${note} `);
-  }
-
-  @action updateNotes = (data, indexD, indexN) => {
-    this.oneTrip.days[indexD].notes[indexN].push(data);
-  }
-
-  @action savePlans = (plans) => {
-    this.plansArray = plans;
-  }
 
   @observable plansArray = [];
 
@@ -52,8 +34,37 @@ class TripStore {
 
 
   @observable showLogin = true;
+  @observable animate = false;
 
   /*********** ACTIONS ***********/
+  // toggle preferences div on map
+  @action togglePrefernces = (click) => {
+    this.isOpenPrefernces = click || !this.isOpenPrefernces;
+    console.log('isOpenPrefernces ', this.isOpenPrefernces);
+  }
+
+  @action toggleAnimation = () => {
+    this.animate = !this.animate;
+    console.log('isanimate ', this.animate);
+  }
+
+  // add note to trip array on store
+  @action addNotes = (note, index) => {
+    // console.log('note ', note, 'index ', index);
+    this.oneTrip.days[index].notes.push(note);
+    // this.oneTrip.days[index].notes = note;
+    console.log(`oneTrip.days[${index}].notes, ${note} `);
+  }
+
+  // update note on trip array on store
+  @action updateNotes = (data, indexD, indexN) => {
+    this.oneTrip.days[indexD].notes[indexN].push(data);
+  }
+
+
+  @action savePlans = (plans) => {
+    this.plansArray = plans;
+  }
 
   // save the user Id recieved from mongo
   @action configUser = (userID) => {
@@ -75,16 +86,16 @@ class TripStore {
     this.numOfPlaces++;
     place.iternalId = 'places_id' + this.numOfPlaces;
 
-    console.log('place for id', place)
+    console.log('place for id', place);
     this.placesArray.push(place);
   }
 
   @action addTempEvent = (theEvent) => {
     //getting the event object and trying to add internal id into it
     //!! CHANGES BY FUCKING REFERENCE!!
-    this.theNewEvent = theEvent
+    this.theNewEvent = theEvent;
     this.numOfEvents++;
-    console.log('this.theNewEvent', this.theNewEvent)
+    console.log('this.theNewEvent', this.theNewEvent);
     this.theNewEvent.iternalId = 'event_id' + this.numOfEvents;
     this.eventsArray.push(this.theNewEvent);
     // console.log('eventsArray', this.eventsArray);
@@ -128,7 +139,7 @@ class TripStore {
   @action addDay = () => {
     this.numOfDays++;
     this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: 'day_' + this.numOfDays });
-    console.log('this.numOfdays', this.numOfDays)
+    console.log('this.numOfdays', this.numOfDays);
   }
 
   @action deleteDay = (index) => {

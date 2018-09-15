@@ -46,6 +46,9 @@ export default withAuth(
 
       onError = err => {
         console.log('error logging in', err);
+        if (err.type === 'OAUTH_ERROR') {
+          <Redirect to={{ pathname: '/' }} />;
+        }
       };
 
       render() {

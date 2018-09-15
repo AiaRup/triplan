@@ -35,10 +35,6 @@ class Map extends Component {
       let type = element.type;
 
       axios(`/api/users/googlePlaces/${type}/${this.props.store.address.lat}/${this.props.store.address.lng}`).then((response) => {
-        console.log('res in axios first fetch', response);
-
-        console.log('response', response);
-
         const promises = [];
 
         response.data.results.forEach((location) => {
@@ -47,7 +43,6 @@ class Map extends Component {
 
         //  create all the markers after result arrives from second api request
         Promise.all(promises).then((values) => {
-          console.log('values in promises all', values);
 
           values.forEach((att) => {
             const attraction = att.data.result;
@@ -76,22 +71,22 @@ class Map extends Component {
             }
             if (attraction.price_level !== undefined) {
               switch (attraction.price_level) {
-                case 0:
-                  marker.price = 'Free';
-                  break;
-                case 1:
-                  marker.price = 'Inexpensive';
-                  break;
-                case 2:
-                  marker.price = 'Moderate';
-                  break;
-                case 3:
-                  marker.price = 'Expensive';
-                  break;
-                case 4:
-                  marker.price = 'Very Expensive';
-                  break;
-                default: break;
+              case 0:
+                marker.price = 'Free';
+                break;
+              case 1:
+                marker.price = 'Inexpensive';
+                break;
+              case 2:
+                marker.price = 'Moderate';
+                break;
+              case 3:
+                marker.price = 'Expensive';
+                break;
+              case 4:
+                marker.price = 'Very Expensive';
+                break;
+              default: break;
               }
             }
             markerArray.push(marker);
@@ -148,6 +143,11 @@ class Map extends Component {
     }
     // add the place to temp places div only if it doesnt already exist
     this.props.store.addPlace(place);
+    this.props.store.toggleAnimation();
+
+    setTimeout(() => {
+      this.props.store.toggleAnimation();
+    }, 3000);
   }
 
   render() {
@@ -162,6 +162,7 @@ class Map extends Component {
           addPlace={this.addPlace}
           saveCity={this.props.store.saveCity}
           emptyEvents={this.props.store.emptyTempEvents}
+          animate={this.props.store.animate}
         />
       </React.Fragment>
     );
