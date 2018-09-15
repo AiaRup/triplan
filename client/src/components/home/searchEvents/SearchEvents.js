@@ -44,7 +44,8 @@ class SearchEvents extends Component {
       toggledCollapse: false,
       showSnackBar: false,
       tempEventIternalId: 0,
-      loading: false
+      loading: false,
+      eventDetails: []
     };
   }
 
@@ -55,7 +56,6 @@ class SearchEvents extends Component {
     let start = moment(`/Date(${Date.parse(startDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
     let end = moment(`/Date(${Date.parse(endDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
 
-    // if (startDate === endDate) {
     if (start === end) {
       let myColor = { background: '#20313b', text: '#FFFFFF' };
       notify.show('You need to choose a different start and end date', 'custom', 5000, myColor);
@@ -90,6 +90,8 @@ class SearchEvents extends Component {
       .then((response) => {
         // hide loading events
         this.setState({ loading: false });
+        // empty event details
+        this.setState({ eventDetails: [] });
 
         if (response.data.results.length === 0) {
           // empty old events on page
@@ -103,31 +105,48 @@ class SearchEvents extends Component {
 
         // empty old events
         this.props.emptyTempEvents();
-        // create new event object
-        let event = {};
 
+        // go through events results
         response.data.results.forEach((eventResult) => {
-          event.name = eventResult.title;
-          event.id = eventResult.id;
-          event.category = eventResult.category;
+          // create new event object
+          let event = {};
+          // ask for event address from google api
+          axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${eventResult.location[1]},${eventResult.location[0]}&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`).then((addressResult) => {
 
-          event.start = moment(`/Date(${Date.parse(eventResult.start)})/`).format('dddd, MMMM Do YYYY, h:mm a');
-          event.end = moment(`/Date(${Date.parse(eventResult.end)})/`).format('dddd, MMMM Do YYYY, h:mm a');
-          event.type = 'event';
-          event.position = { lat: eventResult.location[1], lng: eventResult.location[0] };
+            event.type = 'event';
+            event.position = { lat: eventResult.location[1], lng: eventResult.location[0] };
+            event.name = eventResult.title;
+            event.id = eventResult.id;
+            event.category = eventResult.category;
 
-          if (eventResult.duration !== 0) {
-            event.duration = this.convertDuration(eventResult.duration);
-          }
+            event.start = moment.utc(eventResult.start).format('DD/MM/YYYY, HH:mm');
+            if (eventResult.start !== eventResult.end) {
+              event.end = moment.utc(eventResult.end).format('DD/MM/YYYY, HH:mm ');
+            }
 
-          // add event to trip store
-          this.props.addTempEvents(event);
+            if (eventResult.duration !== 0) {
+              event.duration = this.convertDuration(eventResult.duration);
+            }
+
+            if (addressResult.data.results.length !== 0) {
+              event.address = addressResult.data.results[0].formatted_address;
+            }
+
+            if (eventResult.description) {
+              event.description = eventResult.description;
+            }
+            // add event to trip store
+            this.props.addTempEvents(event);
+          })
+            .catch((error) => {
+              console.log(Error.error);
+            });
         });
       })
       .catch((error) => {
         console.log(Error.error);
       });
-  };
+  }
 
   // diaplay nice duration of event on the page
   convertDuration(seconds) {
@@ -141,6 +160,9 @@ class SearchEvents extends Component {
       if (hrs === 0) {
         return `${mnts} Minutes.`;
       }
+      else if (mnts === 0) {
+        return `${hrs} Hrs.`;
+      }
       return `${hrs} Hrs, ${mnts} Minutes`;
     }
     else {
@@ -149,6 +171,11 @@ class SearchEvents extends Component {
       }
       return `${days} days, ${hrs} Hrs, ${mnts} Minutes`;
     }
+  }
+
+  showEventDetails = (eventID) => {
+    const event = this.props.tempEventArray.filter(event => event.id === eventID);
+    this.setState({ eventDetails: event });
   }
 
   render() {
@@ -185,7 +212,8 @@ class SearchEvents extends Component {
                         verifier="eventOfTempEvent"
                         tempEventIndex={tempEventIndex}
                         tempEventName={theTempEvent.name}
-                        tempEvent={theTempEvent} />)}
+                        tempEvent={theTempEvent}
+                        showEventDetails={this.showEventDetails} />)}
                   </div>
                 </div>
               </Paper>
@@ -195,6 +223,14 @@ class SearchEvents extends Component {
                 <div className='headline-find-events'>
                   <h5>Event Details</h5>
                   <div className="event-details">
+                    {this.state.eventDetails.map((theEvent, tempEventIndex) =>
+                      <TheEvent key={theEvent.id}
+                        verifier="eventDetails"
+                        tempEventIndex={tempEventIndex}
+                        tempEventName={theEvent.name}
+                        tempEvent={theEvent}
+                        animate={this.props.animate}
+                      />)}
                   </div>
                 </div>
               </Paper>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Place from '../placeList/place/Place';
 import PickDate from './PickDate';
 import TheEvent from '../EventList/TheEvent';
+import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
 import './day.css';
 
 
@@ -38,11 +39,11 @@ const PlaceListUL = styled.div`
         {this.props.daysArray[this.props.index].places.map((item, index)=>{
           if (item.type==='event') {
 
-            return (<TheEvent key={item.iternalId} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>)
+            return (<TheEvent key={item.iternalId} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>);
 
-            }else if (item.type==='place'){
-              return(<Place key={item.iternalId} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>)}
-          }
+          } else if (item.type==='place'){
+            return (<Place key={item.iternalId} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>);}
+        }
         )}
 
         {this.props.provided.placeholder}
@@ -61,14 +62,15 @@ class Day extends Component {
     return (
 
       <div className="day-container">
-        <button className="btn btn-secondary btn-sm" onClick={()=>this.props.deleteDay(this.props.index)}>X</button>
+        <span className="delete-day" onClick={()=>this.props.deleteDay(this.props.index)}><DeleteIcon color="secondary"/></span>
+        {/* <button className="btn btn-secondary btn-sm" onClick={()=>this.props.deleteDay(this.props.index)}>X</button> */}
 
         <div className="pick-date">
           <PickDate dayIndex={this.props.index}/>
         </div>
         {/* <h4>{this.props.day.name}</h4> */}
 
-        <Droppable droppableId={this.props.day.id} 
+        <Droppable droppableId={this.props.day.id}
         >
           {(provided, snapshot)=> (
             <DragNdropPlaceInDay index={this.props.index} provided={provided} snapshot={snapshot}/>

@@ -44,7 +44,23 @@ color: #fff;
 
 .listEvents, .event-details {
   overflow-y: auto;
-  height: 600px;;
+  height: 600px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.event-temp {
+  padding: 8px;
+}
+.event-temp:hover {
+  cursor: pointer;
+}
+
+.content-of-event-dragable {
+  color: #000;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .to-event-date,
