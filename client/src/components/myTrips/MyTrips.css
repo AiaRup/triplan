@@ -20,6 +20,10 @@
   justify-content: center;
 }
 
+.card-list h2 {
+  text-align: center;
+}
+
 .card {
   /* box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.14); */
   /* box-shadow: 0px 4px 3px -3px rgba(0,0,0,0.75); */
@@ -34,14 +38,12 @@
   color: #20313b;
   text-align: center;
   transition: all .2s ease-in-out;
-
   /* border-radius: 10px; */
 }
 
 .card:nth-child(odd) {
   border-bottom: 1px solid #20313b;
 }
-
 
 .card:hover {
   -webkit-transform: scale(1.1);
@@ -66,7 +68,7 @@
 }
 
 /*=====================================================
-Day
+Trip Day
 =======================================================*/
 
 .day-trip {
@@ -170,20 +172,16 @@ Day
   right: 19px;
 }
 
-.fa-eye {
-  font-size: 24px;
-}
-
 .pencil-notes {
   margin-right: 8px;
   font-size: 15px;
-    line-height: 32px;
+  line-height: 32px;
 }
 
 .editNote-input {
   line-height: 32px;
   background-color: #20313b;
-  color: #fff
+  color: #fff;
 }
 
 .editNote-input:focus {
@@ -198,6 +196,7 @@ Day
   margin-bottom: 0;
   line-height: 32px;
 }
+
 .note label:hover {
   cursor: text;
 }

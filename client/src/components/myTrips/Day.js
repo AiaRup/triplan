@@ -28,15 +28,9 @@ const Day = (props) => {
     <div className="day-trip">
       <div className="attractions">
         <h3>{date}</h3>
-        {/* <h4>Attractions:</h4> */}
-
         <ul className="list-attractions">
           {places.map((place, i) => {
             console.log('place in map', place, i);
-            // return <li>
-            //   <h5 key={i}>{place.name}  {place.category ? '(' + place.category + ')' : ''}</h5>
-            // </li>
-            // return <li key={i} className="attraction">{place.name} {place.category ? '(' + place.category + ')' : ''} </li>
             return <h5 key={i}> <i className="fa fa-circle"></i> {place.name} {place.category ? '(' + place.category + ')' : ''} </h5>;
           })}
         </ul>

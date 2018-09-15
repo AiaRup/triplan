@@ -95,6 +95,11 @@ const MapComponent = compose(
             //update to the current address
             this.props.updateAddress({ lat: lat, lng: lng });
           }
+          else {
+            let myColor = { background: '#e22866', text: '#FFFFFF' };
+            notify.show('Could not display this address', 'custom', 5000, myColor);
+            // check how to clear the input value !
+          }
         },
         addPlace: (marker) => {
           const newActivity = { type: 'place' };

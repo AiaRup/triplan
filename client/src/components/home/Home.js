@@ -9,7 +9,7 @@ import './home.css';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Tabs, Tab, Typography, Button } from '@material-ui/core';
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
 
 import MarkerIcon from '@material-ui/icons/Place';
 import EventIcon from '@material-ui/icons/Event';

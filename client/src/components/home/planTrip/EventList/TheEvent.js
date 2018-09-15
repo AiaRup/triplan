@@ -16,8 +16,8 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
-  width: ${props=> (props.isDragging ? '40%' : 'auto')};
+  background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+  width: ${props => (props.isDragging ? '40%' : 'auto')};
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;
@@ -70,7 +70,7 @@ class TheEvent extends Component {
 
   regularOrTempEvent = (toggleCollapse) => {
 
-    if (this.props.verifier==='eventOfEvents'){
+    if (this.props.verifier === 'eventOfEvents') {
       console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
       return (
         <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
@@ -113,8 +113,10 @@ class TheEvent extends Component {
       return (
         <div className="event-temp">
           <Notification options={{ zIndex: 400, top: '250px' }} />
-          <span style={{ marginRight: '10px' }}><DayIcon/></span>
-          <h6 className="event-headline" onClick={() => this.props.showEventDetails(this.props.tempEvent.id)}>{this.props.tempEventName}</h6>
+
+          <h6 className="event-headline" onClick={() => this.props.showEventDetails(this.props.tempEvent.id)}>{this.props.tempEventName}
+            <span><DayIcon /></span>
+          </h6>
         </div>
       );
     } else if (this.props.verifier === 'eventDetails') {
