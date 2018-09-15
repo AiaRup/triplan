@@ -27,7 +27,7 @@
   display: block;
   /* flex-direction: row; */
   /* flex: 0 0 31.3333%; */
-  padding: 20px;
+  padding: 20px 60px;
   margin: 10px;
   border-bottom: 1px solid #f50057;
   background: #fff;
@@ -45,7 +45,7 @@
 
 .card:hover {
   -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  transform: scale(1.05);
   cursor: pointer;
   z-index: 1;
 }
@@ -58,6 +58,11 @@
 .watch:hover {
   color: #20313b;
   text-decoration: none;
+}
+
+.icons-container {
+  float: right;
+  /* text-align: right; */
 }
 
 /*=====================================================
