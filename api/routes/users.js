@@ -98,7 +98,7 @@ router.post('/users/:id/plantrip', (req, res) => {
 //     return res.status(400).send('Id not in the correct format');
 //   }
 
-//   User.findByID(idUser, (err, userResult) => {
+//   User.findById(idUser, (err, userResult) => {
 
 //     if (err) throw err;
 //     const result = userResult.plans.filter((plan)=> plan._id === planID);
@@ -205,6 +205,19 @@ router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
   // });
 });
 
+
+// 5) to handle delete a trip
+router.delete('/users/:userId/myTrips/:tripId', (req, res) => {
+  const userId = req.params.userId;
+  const tripId = req.params.tripId;
+  console.log('userId ', userId, 'tripId ', tripId);
+  // delete the trip from the DB collection
+  User.findByIdAndUpdate(userId, { $pull: { plans: { _id: tripId } } }, { new: true }, (err, updatedUser) => {
+    if (err) throw err;
+    res.status(200).send(updatedUser);
+  });
+
+});
 
 
 module.exports = router;
