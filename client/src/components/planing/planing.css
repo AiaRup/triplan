@@ -1,0 +1,77 @@
+.map-event-container {
+  display: flex;
+  flex: wrap;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+.plan-trip-container {
+  background-color: #20313b;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  min-height: 80vh;
+  height: auto;
+  width: 100%;
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+
+.map-view-container {
+  display: flex;
+  justify-content: flex-start;
+  height: 80vh;
+  width: 100%;
+  border: 2px solid lightgray;
+}
+
+.home-page-headline {
+  text-align: center;
+  font-size: 38px;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+h1.home-page-headline {
+margin-bottom: 0;
+line-height: 125px;
+}
+
+.home-page-instructions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 50px 0;
+    font-size: 18px;
+}
+
+
+.right {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-right: 12px;
+  margin-left: 12px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.intro {
+  background-color: #20313b;
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.intro img {
+  margin-right: 40px;
+
+}
+
+.reset-trip {
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+  margin: 20px 30px;
+}

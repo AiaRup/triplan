@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { observer, inject } from 'mobx-react';
 import DayList from './dayList/DayList';
-import PlaceList from '../../home/planTrip/placeList/PlaceList';
+import PlaceList from '../../planing/planTrip/placeList/PlaceList';
 import EventList from './EventList/EventList';
 // import _ from 'lodash';
 import './planTrip.css';

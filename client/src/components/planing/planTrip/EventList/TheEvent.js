@@ -113,10 +113,11 @@ class TheEvent extends Component {
       return (
         <div className="event-temp">
           <Notification options={{ zIndex: 400, top: '250px' }} />
-
-          <h6 className="event-headline" onClick={() => this.props.showEventDetails(this.props.tempEvent.id)}>{this.props.tempEventName}
+          <div className="event-headline">
             <span><DayIcon /></span>
-          </h6>
+            <h6 onClick={() => this.props.showEventDetails(this.props.tempEvent.id)}>{this.props.tempEventName}
+            </h6>
+          </div>
         </div>
       );
     } else if (this.props.verifier === 'eventDetails') {

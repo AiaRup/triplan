@@ -11,6 +11,7 @@ import Login from '../auth/Login';
 import MyTrips from '../myTrips/MyTrips';
 import OneTrip from '../myTrips/OneTrip';
 import About from '../about/About';
+import Planing from '../planing/Planing';
 
 
 function onAuthRequired({ history }) {
@@ -63,6 +64,7 @@ class App extends Component {
                 )}
 
                 <SecureRoute exact path="/About" render={() => <About />} />
+                <SecureRoute exact path="/Planing" render={() => <Planing />} />
 
                 <Route
                   path="/Login"
