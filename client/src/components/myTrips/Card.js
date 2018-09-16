@@ -1,56 +1,3 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import MarkerIcon from '@material-ui/icons/Place';
-// import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
-// import EditIcon from '@material-ui/icons/EditOutlined';
-// import DeleteIcon from '@material-ui/icons/DeleteForeverTwoTone';
-// import axios from 'axios';
-
-
-
-// const Card = (props) => {
-//   const handleDeleteTrip = () => {
-//     const userId= props.
-//     console.log('delete trip id: ', props.plan._id);
-//     axios.delete(`cities/${postId}/comments/${commentId}`)
-//     .then(() => {
-//       let newArray = this.state.cities.map((city, index) => {
-//         if (index === indexPost) {
-//           let commentsArr = city.comments.filter((comment, index) => index !== indexComment);
-//           city.comments = commentsArr;
-//           return city;
-//         }
-//         else return city;
-//       });
-
-//       this.setState({ cities: newArray }); })
-//     .catch(function (error) {
-//       console.log(error);
-// });
-//   }
-//   return (
-//     <div className="card">
-//       <div className="icons-container">
-//         <EditIcon />
-//         <span onClick={handleDeleteTrip}>
-//           <DeleteIcon>
-//           </DeleteIcon>
-//         </span>
-//       </div>
-//       <Link className="watch" to={`MyTrips/${props.plan._id}`} >
-//         <h3>{props.plan.name[0].toUpperCase() + props.plan.name.slice(1)}</h3>
-//         <span style={{ marginRight: '10px' }}><MarkerIcon /> {props.plan.city}, </span>
-//         <span><DayIcon /> {props.plan.days.length} Days</span>
-//       </Link>
-//     </div>
-//   );
-// };
-
-
-
-// export default Card;
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MarkerIcon from '@material-ui/icons/Place';
@@ -62,6 +9,8 @@ import { observer, inject } from 'mobx-react';
 
 
 @inject(allStores => ({
+  saveFilterPlans: allStores.store.saveFilterPlans,
+  savePlans: allStores.store.savePlans,
   plansArray: allStores.store.plansArray,
   user_id: allStores.store.user_id,
   daysArray: allStores.store.daysArray,
@@ -79,22 +28,11 @@ class Card extends React.Component {
   handleDeleteTrip = () => {
     const userId = this.props.user_id;
     const tripId = this.props.plan._id;
-    // console.log('delete trip id');
     axios.delete(`api/users/users/${userId}/myTrips/${tripId}`)
-      .then((data) => {
-        console.log('data from axiox after delete trip ', data);
-
-        // let newArray = this.state.cities.map((city, index) => {
-        //   if (index === indexPost) {
-        //     let commentsArr = city.comments.filter((comment, index) => index !== indexComment);
-        //     city.comments = commentsArr;
-        //     return city;
-        //   }
-        //   else return city;
-        // });
-
-        // this.setState({ cities: newArray });
-
+      .then((user) => {
+        console.log('plans from axiox after delete trip ', user.data.plans);
+        this.props.savePlans(user.data.plans)
+        // this.props.saveFilterPlans(user.data.plans)
       }).catch(function (error) {
         console.log(error);
       });

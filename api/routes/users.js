@@ -127,7 +127,7 @@ router.get('/users_trips/:user_id', (req, res) => {
 
 // enable CORS request to google - first fetch
 router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
-  rp(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+  rp(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`)
     .then(function (placesRes) {
       console.log('placesRes:', placesRes);
       res.send(placesRes);
@@ -140,7 +140,7 @@ router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
 
 // second fetch - get more info on the place found by the first request
 router.get('/placeSearch/:placeID', (req, res) => {
-  rp(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.params.placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+  rp(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.params.placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`)
     .then(function (placeRes) {
       console.log('one place result:', placeRes);
       res.send(placeRes);

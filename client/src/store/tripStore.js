@@ -17,7 +17,7 @@ class TripStore {
   @observable isOpenPrefernces = false;
 
 
-
+  @observable filter_plans = [];
   @observable plansArray = [];
 
   @observable daysArray = [];
@@ -61,9 +61,15 @@ class TripStore {
     this.oneTrip.days[indexD].notes[indexN].push(data);
   }
 
+  // saves the filterd trips after search trips
+  @action saveFilterPlans = (plans) => {
+    this.filter_plans = plans;
+  }
 
+  // saves the trips of the connected user
   @action savePlans = (plans) => {
     this.plansArray = plans;
+    // this.filter_plans = plans;
   }
 
   // save the user Id recieved from mongo

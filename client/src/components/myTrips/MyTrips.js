@@ -26,8 +26,9 @@ class MyTrips extends Component {
         console.log(response);
         let plans = response.data;
         this.props.store.savePlans(plans);
+        this.props.store.saveFilterPlans(plans);
         console.log('got response! ');
-        this.setState({ user_plans: plans, filter_plans: plans });
+        // this.setState({ user_plans: plans, filter_plans: plans });
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
@@ -36,17 +37,22 @@ class MyTrips extends Component {
 
 
   searchTrips = (query) => {
-    let trips = this.state.user_plans.filter((trip) => {
+    // let trips = this.state.user_plans.filter((trip) => {
+    let trips = this.props.store.plansArray.filter((trip) => {
       return trip.name.toLowerCase().includes(query.toLowerCase());
     });
-    this.setState({ filter_plans: trips });
+    // this.setState({ filter_plans: trips });
+    this.props.store.saveFilterPlans(trips);
+    console.log('search trips ', trips);
   }
+
+
 
   render() {
     return (
       <div className="all">
         <SearchTrip searchTrips={this.searchTrips} />
-        <CardList plans={this.state.filter_plans} />
+        <CardList plans={this.props.store.filter_plans} />
       </div>
     );
   }
