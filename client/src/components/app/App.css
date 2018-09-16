@@ -62,30 +62,9 @@ body {
   font-size: 0;
   color: rgb(245, 0, 87);
   letter-spacing: 0;
-  /* -webkit-transition: .2s linear;
-	-moz-transition: .2s linear;
-	-ms-transition: .2s linear;
-	-o-transition: .2s linear;
-	transition: .2s linear; */
+
 }
 
-/* .zoom {
-	-webkit-transition: .2s linear;
-	-moz-transition: .2s linear;
-	-ms-transition: .2s linear;
-	-o-transition: .2s linear;
-	transition: .2s linear;
-	-webkit-transform: rotate(180deg);
-	-moz-transform: rotate(180deg);
-	-ms-transform: rotate(180deg);
-	-o-transform: rotate(180deg);
-	transform: rotate(180deg);
-	-webkit-transform-origin: 20px 48px;
-	-moz-transform-origin: 20px 48px;
-	-o-transform-origin: 20px 48px;
-	-ms-transform-origin: 20px 48px;
-	transform-origin: 20px 48px;
-} */
 
 @keyframes animate {
   0% {

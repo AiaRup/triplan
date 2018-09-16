@@ -59,16 +59,7 @@
 
 .event-temp:hover {
   cursor: pointer;
-  background: #f50057;
-}
-
-.event-headline span {
-  float: left;
-  /* margin-left: 10px; */
-}
-
-.event-headline span :hover {
-  color: white;
+  border: 1px solid #f50057;
 }
 
 .content-of-event-dragable {

@@ -62,9 +62,19 @@ max-width: 100%;
   margin: 5px;
   font-weight: bold;
   color: #000;
-  display: inline;
+  display: flex;
 }
 
+
+ .event-headline span {
+  flex: 1;
+  margin-right: 10px;
+ }
+
+ .event-headline h6 {
+  flex: 10;
+  margin-bottom: 0;
+ }
 
 .single-event-header-section {
   display: flex;
