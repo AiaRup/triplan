@@ -6,8 +6,11 @@ import { compose, withProps, lifecycle, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { Collapse } from 'react-collapse';
 import Notification, { notify } from 'react-notify-toast';
+import _ from 'lodash';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
+import drawStarts from '../../../utils/drawStarts';
+// const google=window.google;
 
 const MapComponent = compose(
   withStateHandlers(() =>
@@ -43,26 +46,20 @@ const MapComponent = compose(
   lifecycle({
     componentWillMount() {
       const refs = {};
+
       this.setState({
         bounds: null,
-        center: { lat: 51.507351, lng: -0.127758 },
-        marker: { lat: 51.507351, lng: -0.127758 },
+        center: { lat: this.props.address.lat, lng: this.props.address.lng },
+        marker: { lat: this.props.address.lat, lng: this.props.address.lng },
+
         onSearchBoxMounted: ref => {
           refs.searchBox = ref;
         },
         onMapMounted: ref => {
           refs.map = ref;
-          // this.setState({ bounds: refs.map.getBounds() }); //maybe comment out
         },
-        // onBoundsChanged: () => {
-        //   this.setState({
-        //     bounds: refs.map.getBounds(),
-        //     center: refs.map.getCenter(),
-        //   })
-        // },
         onPlacesChanged: () => {
           const place = refs.searchBox.getPlaces();
-          console.log(place);
 
           if (place.length === 0) {
             let myColor = { background: '#e22866', text: '#FFFFFF' };
@@ -73,28 +70,36 @@ const MapComponent = compose(
           // empty temp events array
           this.props.emptyEvents();
 
-          this.props.saveCity(place[0].vicinity);
-
           //show the prefernces after search a new place in searchBox
           this.props.togglePrefernces(true);
 
-          const lat = place[0].geometry.location.lat();
-          const lng = place[0].geometry.location.lng();
-          let bounds = new google.maps.LatLngBounds();
-          // const bounds = new google.maps.LatLngBounds();
-          // const bounds = refs.map.getBounds();
-          if (place[0].geometry.viewport) {
-            bounds.union(place[0].geometry.viewport);
-          } else {
-            bounds.extend(place[0].geometry.location);
+          if (place[0].geometry) {
+            this.props.saveCity(place[0].vicinity);
+
+            const lat = place[0].geometry.location.lat();
+            const lng = place[0].geometry.location.lng();
+
+            let bounds = new google.maps.LatLngBounds();
+            if (place[0].geometry.viewport) {
+              bounds.union(place[0].geometry.viewport);
+            } else {
+              bounds.extend(place[0].geometry.location);
+            }
+
+            const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
+            this.setState({
+              bounds: bounds,
+              center: nextCenter,
+              marker: place[0].geometry.location,
+            });
+            //update to the current address
+            this.props.updateAddress({ lat: lat, lng: lng });
           }
-          const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
-          this.setState({
-            bounds: bounds,
-            center: nextCenter,
-            marker: place[0].geometry.location,
-          });
-          this.props.updateAddress({ lat: lat, lng: lng });
+          else {
+            let myColor = { background: '#e22866', text: '#FFFFFF' };
+            notify.show('Could not display this address', 'custom', 5000, myColor);
+            // check how to clear the input value !
+          }
         },
         addPlace: (marker) => {
           const newActivity = { type: 'place' };
@@ -116,18 +121,18 @@ const MapComponent = compose(
   withGoogleMap
 )((props) => {
   return <div>
-    <Notification options={{ zIndex: 200, top: '250px' }} />
+    <Notification options={{ zIndex: 400, top: '150px' }} />
 
     <GoogleMap
       ref={props.onMapMounted}
       defaultZoom={14}
-      // onBoundsChanged={props.onBoundsChanged}
-      center={props.center}
+      // center={props.center}
+      center={props.address}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}>
 
       <SearchBox
         ref={props.onSearchBoxMounted}
-        bounds={props.bounds}
+        // bounds={props.bounds}
         controlPosition={google.maps.ControlPosition.TOP_CENTER}
         onPlacesChanged={props.onPlacesChanged} >
         <input
@@ -136,7 +141,8 @@ const MapComponent = compose(
           className="autocomplete" />
       </SearchBox>
 
-      <Marker position={props.marker} />
+      {/* <Marker position={props.marker} /> */}
+      <Marker position={props.address} />
 
       {props.markers.map((marker) =>
         <Marker key={marker.id}
@@ -155,42 +161,43 @@ const MapComponent = compose(
                     <p>{marker.address}</p>
                     <p>{marker.phone}</p>
                     {marker.price && <p>Price level: {marker.price}</p>}
-                    {marker.rating && <p>Rating: {marker.rating}</p>}
+                    {marker.rating &&
+                      <div className="rating-Info"> <p>Rating: {marker.rating}</p> {drawStarts(marker.rating)}</div>}
                     <p>{marker.openNow ? 'Open Now!' : 'Close Now!'}</p>
                     {marker.openHours &&
-                    <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
-                      {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
-                    </Collapse>}
+                      <Collapse isOpened={(props.toggleCollapse && props.indexCollapse === marker.id)}>
+                        {marker.openHours.map((day, index) => <p key={index}>{day}</p>)}
+                      </Collapse>}
                     {marker.openHours &&
-                    <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
+                      <p onClick={() => props.collapseToggle(marker.id)}>Opening Hours &raquo;</p>}
                     {marker.website && <a href={marker.website} target="_blank">Website</a>}
-                    <br />
-                    {/* <button className='btn btn-secondary btn-sm' onClick={() => props.addPlace(marker)}>
-                    <i className="fa fa-plus fa-fw" aria-hidden="true"></i>
-                  </button> */}
-
                   </div>
                   <div>
                     {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
                   </div>
-
                 </div>
-                <div className="add-attraction">
+                <div className={props.animate ? 'add-attraction animate zoom' : 'add-attraction'}>
                   <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
                     <AddIcon />
                   </Button>
                 </div>
+                {/* <div className="add-attraction">
+                  <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
+                    <AddIcon />
+                  </Button>
+                </div> */}
               </React.Fragment>
             </InfoWindow>}
 
-          {(props.isOpenHover && props.infoIndexHover === marker.id) && <InfoBox
-            options={{ closeBoxURL: '', enableEventPropagation: true }} >
-            <div className='info-box'>
-              <p className='info-header'><b>{marker.name}</b></p>
-              <p>{marker.address}</p>
-              <p>{marker.phone}</p>
-            </div>
-          </InfoBox>}
+          {(props.isOpenHover && props.infoIndexHover === marker.id) &&
+            <InfoBox
+              options={{ closeBoxURL: '', enableEventPropagation: true }} >
+              <div className='info-box'>
+                <p className='info-header'><b>{marker.name}</b></p>
+                <p>{marker.address}</p>
+                <p>{marker.phone}</p>
+              </div>
+            </InfoBox>}
         </Marker>)
       }
     </GoogleMap>
