@@ -32,12 +32,18 @@
 }
 
 .pick-date {
-  border: 1px solid  lightgrey;
-  text-align: center;
+  border-bottom: 1px solid  lightgrey;
 }
 
 .droppable-size {
   min-height: 15vh;
   height: auto;
+}
+
+.delete-day {
+  float: right;
+}
+.delete-day:hover {
+  cursor: pointer;
 }
 

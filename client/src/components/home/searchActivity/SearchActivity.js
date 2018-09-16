@@ -10,22 +10,23 @@ export default class MapView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: props.address,
+      // address: props.store.address,
       places: []
     };
   }
 
   // componentDidUpdate = (prevProps) => {
-  //   if (prevProps.address !== this.props.address) {
-  //     this.setState({ address: this.props.address });
+  //   if (prevProps.address !== this.props.store.address) {
+  //     // this.setState({ address: this.props.store.address });
+  //     this.props.store.saveAddress(this.props.store.address);
   //   }
   // }
 
   updateAddress = (address) => {
     this.setState({
-      address: address,
       places: []
     });
+    // update the current address in store
     this.props.store.saveAddress(address);
   }
 
@@ -37,7 +38,7 @@ export default class MapView extends Component {
   render() {
     return (
       <div id="map-container">
-        <Map address={this.state.address}
+        <Map
           places={_.clone(this.state.places)}
           updateAddress={this.updateAddress} />
         <Preferences updatePlacesNear={this.updatePlacesNear} />

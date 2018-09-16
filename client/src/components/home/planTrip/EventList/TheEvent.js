@@ -5,14 +5,19 @@ import styled from 'styled-components';
 import { Collapse } from 'react-collapse';
 import './events.css';
 import Notification, { notify } from 'react-notify-toast';
+import AddIcon from '@material-ui/icons/Add';
+import { Button, Tooltip } from '@material-ui/core';
+import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
+import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
+
 
 
 const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
-  width: ${props=> (props.isDragging ? '40%' : 'auto')};
+  background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+  width: ${props => (props.isDragging ? '40%' : 'auto')};
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;
@@ -23,7 +28,9 @@ const Container = styled.div`
   deleteEvent: allStores.store.deleteEvent,
   addTempEvent: allStores.store.addTempEvent,
   tempEventArray: allStores.store.tempEventArray,
-  eventsArray: allStores.store.eventsArray
+  eventsArray: allStores.store.eventsArray,
+  toggleAnimation: allStores.store.toggleAnimation,
+  animate: allStores.store.animate
 }))
 
 @observer
@@ -54,11 +61,16 @@ class TheEvent extends Component {
     }
 
     this.props.addTempEvent(this.props.tempEvent);
+    this.props.toggleAnimation();
+
+    setTimeout(() => {
+      this.props.toggleAnimation();
+    }, 1500);
   }
 
   regularOrTempEvent = (toggleCollapse) => {
 
-    if (this.props.verifier==='eventOfEvents'){
+    if (this.props.verifier === 'eventOfEvents') {
       console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
       return (
         <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
@@ -72,7 +84,9 @@ class TheEvent extends Component {
             >
               <div className="single-event-header-section">
 
-                <button className="btn btn-secondary btn-sm" onClick={() => this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}>x</button>
+                <span className="delete-draggable" onClick={() => this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}><DeleteIcon /></span>
+
+                {/* <button className="btn btn-secondary btn-sm" onClick={() => this.props.deleteEvent(this.props.eventIndex, this.props.dayVerifier, this.props.dayIndex)}>x</button> */}
 
                 <h6 className="event-headline">{this.props.eventName}</h6>
 
@@ -80,9 +94,9 @@ class TheEvent extends Component {
               </div>
 
               <Collapse isOpened={this.state.toggledCollapse}>
-                <ul className="content-of-event">
+                <ul className="content-of-event-dragable">
                   {Object.keys(this.props.eventItem).map((prop, index) => {
-                    if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId') {
+                    if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId' && prop !== 'description') {
                       return <li key={index}><u>{prop}</u>: {this.props.eventItem[prop]}</li>;
                     }
                     return null;
@@ -97,37 +111,44 @@ class TheEvent extends Component {
 
     } else if (this.props.verifier === 'eventOfTempEvent') {
       return (
-        <div className="events-list-container">
-          <Notification options={{ zIndex: 200, top: '250px' }} />
+        <div className="event-temp">
+          <Notification options={{ zIndex: 400, top: '250px' }} />
 
-          <div className="single-event-header-section">
-            <h6 className="event-headline">{this.props.tempEventName}</h6>
-            <div className="place-arrow" onClick={() => this.collapseToggle(toggleCollapse)}>&raquo;</div>
-          </div>
-
-          <Collapse isOpened={this.state.toggledCollapse}>
-            <ul className="content-of-event">
-              {Object.keys(this.props.tempEvent).map((prop, index) => {
-                if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId') {
-                  return <li key={index}><u>{prop}</u>: {this.props.tempEvent[prop]}</li>;
-                }
-                return null;
-              })}
-            </ul>
-          </Collapse>
-          {/* <button className="btn btn-primary btn-sm" onClick={()=>this.props.addTempEvent(this.props.tempEvent)}>Add</button> */}
-          <button className="btn btn-outline-secondary btn-sm ml-3" onClick={this.handleAddEvent}>Add</button>
+          <h6 className="event-headline" onClick={() => this.props.showEventDetails(this.props.tempEvent.id)}>{this.props.tempEventName}
+            <span><DayIcon /></span>
+          </h6>
         </div>
       );
-
+    } else if (this.props.verifier === 'eventDetails') {
+      return (
+        <div className="event-detail-container">
+          <Notification options={{ zIndex: 400, top: '250px' }} />
+          <h6 className="event-detail-header">{this.props.tempEventName}</h6>
+          <div className="content-of-event">
+            {Object.keys(this.props.tempEvent).map((prop, index) => {
+              if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId' && prop !== 'description') {
+                return <p key={index}><u>{prop}</u>: {this.props.tempEvent[prop]}</p>;
+              } else if (prop === 'description') {
+                return <p key={index}><u>{prop}</u>: {this.props.tempEvent[prop]}</p>;
+              }
+              return null;
+            })}
+            <div className={this.props.animate ? 'add-event-div animate zoom' : 'add-event-div'}>
+              <Tooltip title="Add Event to Plan Trip">
+                <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.handleAddEvent}>
+                  <AddIcon />
+                </Button>
+              </Tooltip>
+            </div>
+          </div>
+        </div>
+      );
     }
 
   }
   render() {
     const toggleCollapse = false;
-
     return this.regularOrTempEvent(toggleCollapse);
-
   }
 }
 
