@@ -62,7 +62,7 @@ export default withAuth(
       return (
         // bg-light mb-3
         <nav className="navbar navbar-expand-md navbar-light bg-light">
-          <span className="navbar-brand"><Link className="navbar-brand" to="/"><img src="/images/small-logo.png" alt="" /></Link></span>
+          <span className="navbar-brand"><Link className="navbar-brand" to="/"><img src="/images/logo-design.png" width="110px" height="65px" alt="" /></Link></span>
           <button
             className="navbar-toggler"
             type="button"
@@ -77,6 +77,9 @@ export default withAuth(
             <ul className="navbar-nav mr-auto">
               <li className="nav-item ml-3">
                 <NavLink className="nav-link" activeClassName="activeLink" to="/Home">Home</NavLink>
+              </li>
+              <li className="nav-item ml-3">
+                <NavLink className="nav-link" activeClassName="activeLink" to="/Planing">Plan Trip</NavLink>
               </li>
               <li className="nav-item ml-3">
                 <NavLink className="nav-link" activeClassName="activeLink" to="/MyTrips">My Trips</NavLink>
