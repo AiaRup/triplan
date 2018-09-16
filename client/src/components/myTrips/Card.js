@@ -9,6 +9,7 @@ import { observer, inject } from 'mobx-react';
 
 
 @inject(allStores => ({
+  query: allStores.store.query,
   saveFilterPlans: allStores.store.saveFilterPlans,
   savePlans: allStores.store.savePlans,
   plansArray: allStores.store.plansArray,
@@ -32,7 +33,11 @@ class Card extends React.Component {
       .then((user) => {
         console.log('plans from axiox after delete trip ', user.data.plans);
         this.props.savePlans(user.data.plans)
-        // this.props.saveFilterPlans(user.data.plans)
+        const query = this.props.query;
+        let trips = this.props.plansArray.filter((trip) => {
+          return trip.name.toLowerCase().includes(query.toLowerCase());
+        });
+        this.props.saveFilterPlans(trips);
       }).catch(function (error) {
         console.log(error);
       });

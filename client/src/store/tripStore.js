@@ -16,6 +16,7 @@ class TripStore {
   @observable loading = false;
   @observable isOpenPrefernces = false;
 
+  @observable query = '';
 
   @observable filter_plans = [];
   @observable plansArray = [];
@@ -59,6 +60,11 @@ class TripStore {
   // update note on trip array on store
   @action updateNotes = (data, indexD, indexN) => {
     this.oneTrip.days[indexD].notes[indexN].push(data);
+  }
+
+  // saves the query when seraching a trip
+  @action saveQuery = (q) => {
+    this.query = q;
   }
 
   // saves the filterd trips after search trips

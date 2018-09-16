@@ -10,24 +10,23 @@ import { observer, inject } from 'mobx-react';
 @observer
 class MyTrips extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      user_plans: [],
-      filter_plans: []
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     user_plans: [],
+  //     filter_plans: []
+  //   };
+  // }
 
   componentDidMount = () => {
     let u_id = this.props.store.user_id;
     console.log('user id: ' + u_id);
     axios.get(`api/users/users_trips/${u_id}`)
       .then(response => {
-        console.log(response);
+        console.log('response from axios in get all trips ', response);
         let plans = response.data;
         this.props.store.savePlans(plans);
         this.props.store.saveFilterPlans(plans);
-        console.log('got response! ');
         // this.setState({ user_plans: plans, filter_plans: plans });
       })
       .catch(error => {
@@ -37,6 +36,7 @@ class MyTrips extends Component {
 
 
   searchTrips = (query) => {
+    this.props.store.saveQuery(query);
     // let trips = this.state.user_plans.filter((trip) => {
     let trips = this.props.store.plansArray.filter((trip) => {
       return trip.name.toLowerCase().includes(query.toLowerCase());
