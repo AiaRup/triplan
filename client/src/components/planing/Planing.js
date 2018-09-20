@@ -131,7 +131,7 @@ class Planing extends Component {
             indicatorColor="secondary"
             textColor="secondary"
             centered >
-            <Tab label="Find Attractions" icon={<MarkerIcon />} style={{ borderRight: '1px solid light #eee' }} />
+            <Tab label="Find Attractions" icon={<MarkerIcon />}/>
             <Tab label="Find Events" icon={<EventIcon />} />
             <Tab label="Plan Your Trip" icon={<ScheduleIcon />} />
           </Tabs>

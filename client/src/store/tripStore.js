@@ -15,6 +15,8 @@ class TripStore {
   @observable eventCategory = [];
   @observable loading = false;
   @observable isOpenPrefernces = false;
+  @observable tripIdToEdit = '';
+
 
   @observable query = '';
 
@@ -76,6 +78,11 @@ class TripStore {
   @action savePlans = (plans) => {
     this.plansArray = plans;
     // this.filter_plans = plans;
+  }
+
+  // save trip Id when user is editing a trip
+  @action saveTripId = (tripId) => {
+    this.tripIdToEdit = tripId;
   }
 
   // save the user Id recieved from mongo
@@ -156,6 +163,10 @@ class TripStore {
 
   @action deleteDay = (index) => {
     this.daysArray.splice(index, 1);
+  }
+
+  @action updateDaysWhenEditTrip = (days) => {
+    this.daysArray = days;
   }
 
   @action chooseDate = (dayIndex, date) => {

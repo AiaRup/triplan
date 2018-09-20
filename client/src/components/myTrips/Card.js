@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MarkerIcon from '@material-ui/icons/Place';
 import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
-import EditIcon from '@material-ui/icons/EditOutlined';
+// import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import axios from 'axios';
 import { observer, inject } from 'mobx-react';
@@ -46,7 +46,7 @@ class Card extends React.Component {
   // editTrip = () => {
   //   console.log('delete trip id: ', this.props.plan._id);
   //   this.props.saveTripId(this.props.plan._id);
-  //   //!check if there is a trip that wasn't save yet    console.log('plan', this.props.plan.days);
+  //   //check if there is a trip that wasn't save yet    console.log('plan', this.props.plan.days);
   //   this.props.updateDaysInStore(this.props.plan.days);
   // };
 
@@ -55,7 +55,7 @@ class Card extends React.Component {
     return (
       <div className="card">
         <div className="icons-container">
-          <EditIcon onClick={this.editTrip} />
+          {/* <EditIcon onClick={this.editTrip} /> */}
           <DeleteIcon onClick={this.handleDeleteTrip} />
         </div>
 
