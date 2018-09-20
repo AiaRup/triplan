@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 // const request = require('request');
 const cors = require('cors');
 
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const plansRouter = require('./routes/plans');
@@ -20,6 +19,7 @@ mongoose.connect(connection, { useNewUrlParser: true })
   .then(() => { console.log('Successfully connected to mongoDB'); })
   .catch(error => console.error(error));
 
+// const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -35,6 +35,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('node_modules'));
+// Client
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // adding CORS
 // app.use((req, res, next) => {
@@ -46,9 +48,10 @@ app.use(express.static('node_modules'));
 // });
 
 
-app.use('/api', indexRouter);
+
 app.use('/api/users', usersRouter);
 app.use('/api/plans', plansRouter);
+app.use('/', indexRouter);
 
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -69,5 +72,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
+
+
+// app.listen(port, () => console.log(`Client side Listening on port ${port}`));
 
 module.exports = app;

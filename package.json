@@ -1,13 +1,25 @@
 {
-  "name": "triplan-app",
-  "version": "0.1.0",
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "postinstall": "npm install --prefix api && npm install --prefix client",
-    "client": "cd client && npm start",
-    "server": "cd api && npm start",
-    "start": "concurrently -p \"[{name}]\" -n \"client,server\" -c \"bgBlue.bold,bgMagenta.bold,bgGreen.bold\" \"npm run -s client\" \"npm run -s server\" "
-    },
+    "postinstall": "npm install && npm install --prefix client",
+    "start": "nodemon ./bin/www",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
   "dependencies": {
-    "concurrently": "^4.0.1"
+    "@okta/okta-sdk-nodejs": "^1.2.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "mongoose": "^5.2.4",
+    "morgan": "~1.9.0",
+    "react-router-dom": "^4.3.1",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
   }
 }
