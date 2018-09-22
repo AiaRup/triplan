@@ -6,6 +6,9 @@
     "start": "nodemon ./bin/www",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
+  "engines": {
+    "node": "8.11.3"
+  },
   "dependencies": {
     "@okta/okta-sdk-nodejs": "^1.2.0",
     "body-parser": "^1.18.3",
