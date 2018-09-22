@@ -1,5 +1,9 @@
 import React from 'react';
 import './About.css';
+import dror from '../../images/about-images/James.png';
+import carl from '../../images/about-images/Aaron.png';
+import aia from '../../images/about-images/Emily.png';
+import hodaya from '../../images/about-images/Lisa.png';
 
 const About = () => {
   return (
@@ -23,7 +27,7 @@ const About = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-3">
-              <div className='tm_pic_dror'> </div>
+              <img className='tm_pic' src={dror} alt=""/>
               <div className='tm_name'> Dror Dvash  </div>
               <div className='icons'>
                 <a className="linkedinIcon" href="https://www.linkedin.com/in/dror-dvash/" target="_blank" rel='noreferrer noopener'>
@@ -36,7 +40,7 @@ const About = () => {
               <div className='intro-member-member-member'> </div>
             </div>
             <div className="col-md-3">
-              <div className='tm_pic_hodaya'></div>
+              <img className='tm_pic' src={hodaya} alt=""/>
               <div className='tm_name'> Hodaya Pirian </div>
               <div className='icons'>
                 <a className="linkedinIcon" href="https://www.linkedin.com/in/hodaya-p/" target="_blank" rel='noreferrer noopener'>
@@ -49,7 +53,7 @@ const About = () => {
               <div className='intro-member-member'> </div>
             </div>
             <div className="col-md-3">
-              <div className='tm_pic_aia'></div>
+              <img className='tm_pic' src={aia} alt=""/>
               <div className='tm_name'> Aia Rupsom </div>
               <div className='icons'>
                 <a className="linkedinIcon" href="https://www.linkedin.com/in/aia-r-8a3881156/" target="_blank" rel='noreferrer noopener'>
@@ -62,7 +66,7 @@ const About = () => {
               <div className='intro-member-member'>    </div>
             </div>
             <div className="col-md-3">
-              <div className='tm_pic_carl'></div>
+              <img className='tm_pic' src={carl} alt=""></img>
               <div className='tm_name'>  Carl Wanunu </div>
               <div className='icons'>
                 <a className="linkedinIcon" href="https://www.linkedin.com/in/carlwnn" target="_blank" rel='noreferrer noopener'>

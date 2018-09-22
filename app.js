@@ -78,13 +78,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// });
-
-
-// app.listen(port, () => console.log(`Client side Listening on port ${port}`));
-
 module.exports = app;
