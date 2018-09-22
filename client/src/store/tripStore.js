@@ -18,8 +18,9 @@ class TripStore {
   @observable tripIdToEdit = '';
 
 
+  @observable query = '';
 
-
+  @observable filter_plans = [];
   @observable plansArray = [];
 
   @observable daysArray = [];
@@ -63,9 +64,20 @@ class TripStore {
     this.oneTrip.days[indexD].notes[indexN].push(data);
   }
 
+  // saves the query when seraching a trip
+  @action saveQuery = (q) => {
+    this.query = q;
+  }
 
+  // saves the filterd trips after search trips
+  @action saveFilterPlans = (plans) => {
+    this.filter_plans = plans;
+  }
+
+  // saves the trips of the connected user
   @action savePlans = (plans) => {
     this.plansArray = plans;
+    // this.filter_plans = plans;
   }
 
   // save trip Id when user is editing a trip
