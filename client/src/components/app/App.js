@@ -48,7 +48,7 @@ class App extends Component {
         <Security
           issuer="https://dev-497398.oktapreview.com/oauth2/default"
           client_id="0oafxn6oaswdPH4HZ0h7"
-          redirect_uri="https://triplan.herokuapp.com/"
+          redirect_uri="https://triplan.herokuapp.com/implicit/callback"
           onAuthRequired={onAuthRequired}>
           <div className="App">
             <Navbar />
