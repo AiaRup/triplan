@@ -16,7 +16,7 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+  background-color: ${props => (props.isDragging ? 'white' : 'white')};
   width: ${props => (props.isDragging ? '40%' : 'auto')};
   transition: max-width 0.2 ease;
   font-size: 18px;
@@ -124,7 +124,18 @@ class TheEvent extends Component {
       return (
         <div className="event-detail-container">
           <Notification options={{ zIndex: 400, top: '250px' }} />
+
           <h6 className="event-detail-header">{this.props.tempEventName}</h6>
+
+          <div className={this.props.animate ? 'add-event-div animate zoom' : 'add-event-div'}>
+              <Tooltip title="Add Event to Plan Trip">
+                <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.handleAddEvent}>
+                  <AddIcon />
+                </Button>
+              </Tooltip>
+            </div>
+
+          
           <div className="content-of-event">
             {Object.keys(this.props.tempEvent).map((prop, index) => {
               if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId' && prop !== 'description') {
@@ -134,13 +145,7 @@ class TheEvent extends Component {
               }
               return null;
             })}
-            <div className={this.props.animate ? 'add-event-div animate zoom' : 'add-event-div'}>
-              <Tooltip title="Add Event to Plan Trip">
-                <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.handleAddEvent}>
-                  <AddIcon />
-                </Button>
-              </Tooltip>
-            </div>
+           
           </div>
         </div>
       );

@@ -13,7 +13,7 @@ const PlaceListUL = styled.div`
   padding: 8px;
   min-height: 120px;
   height: auto;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
+  background-color: ${props => (props.isDraggingOver ? '#f8a10070' : 'white')};
   transition: background-color 0.2s ease;
 `;
 

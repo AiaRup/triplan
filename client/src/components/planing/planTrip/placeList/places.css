@@ -6,17 +6,20 @@
 
 .places-list-container {
   margin: 8px;
-  height: 70vh;
-  width: 35%;
+  min-height: 55vh;
+  height: auto;
+  min-width: 32%;
+  width: auto;
   border-radius: 2px;
+  background-color: white;
+
 }
 .place-overflow {
   display: flex;
   flex-direction: column;
   background: #fff;
   width: auto;
-  height: 65vh;
-  overflow-y: scroll;
+  height: auto;
 }
 
 .place-arrow {

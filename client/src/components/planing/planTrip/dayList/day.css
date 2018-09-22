@@ -6,21 +6,22 @@
 
 .day-list-container {
   margin: 8px;
-  height: 70vh;
-  width: 35%;
+  min-height: 55vh;
+  min-width: 35%;
+  width: auto;
   border-radius: 2px;
+  height: auto;
+  background-color: white;
 }
 
 .day-list-wrapper {
+  min-height: 55vh;
   display: flex;
   flex-direction: column;
   background: #fff;
   width: auto;
-  height: 65vh;
-  overflow-y: scroll;
-
+  height: auto;
 }
-
 
 .day-container {
   margin: 8px;

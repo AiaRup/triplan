@@ -11,6 +11,7 @@
 
 .date-pick {
   padding: 10px;
+  /* background-color: #f8a10070; */
 }
 
 .dates-headline {
@@ -54,7 +55,9 @@
 
 .event-temp {
   padding: 8px;
+  border: 1px solid #ffffff00;
   margin-bottom: 5px;
+  background-color: rgba(233, 233, 233, 0.466);
 }
 
 .event-temp:hover {

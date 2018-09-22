@@ -3,11 +3,18 @@ import moment from 'moment';
 
 
 
+
 class TripStore {
 
-  @observable user_email = '';
+  // @observable user_email = '';
   @observable user_id = '';
+
+  //city name in the homepage
+  @observable cityDestination = '';
+
+  //city name in the map
   @observable cityName = 'London';
+  
   @observable tripName = 'Name Your Trip';
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;

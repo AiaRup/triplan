@@ -69,7 +69,7 @@ import { observer, inject } from 'mobx-react';
             this.setState({ showErrorDiv: true });
           });
           //!!check where the data goes to
-          this.props.userEmail = this.state.email;
+          // this.props.userEmail = this.state.email;
       }
       render() {
         if (this.state.sessionToken) {
