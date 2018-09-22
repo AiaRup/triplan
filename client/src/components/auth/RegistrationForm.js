@@ -12,19 +12,19 @@ import { observer, inject } from 'mobx-react';
   showLogin: allStores.store.showLogin
 }))
 @observer
-  export default withAuth(
-    class RegistrationForm extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          firstName: '', lastName: '', email: '', password: '', sessionToken: null,
-          emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
-          showErrorDiv: false
-        };
+export default withAuth(
+  class RegistrationForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        firstName: '', lastName: '', email: '', password: '', sessionToken: null,
+        emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
+        showErrorDiv: false
+      };
 
-        this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
-        this.checkAuthentication();
-      }
+      this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
+      this.checkAuthentication();
+    }
 
       checkAuthentication = async () => {
         const sessionToken = await this.props.auth.getIdToken();
@@ -85,7 +85,7 @@ import { observer, inject } from 'mobx-react';
                     {this.state.showErrorDiv && <div className="o-form-error-container o-form-has-errors" data-se="o-form-error-container">
                       <div className="okta-form-infobox-error infobox infobox-error" role="alert">
                         <span className="icon error-16"></span>
-                        <p>Error, A user with this Email already exists.</p>
+                        <p>Cannot create a new user (User with this Email may already exists or Server is down).</p>
                       </div>
                     </div>}
                     <h2 className="okta-form-title o-form-head">Create Account</h2>
@@ -170,6 +170,6 @@ import { observer, inject } from 'mobx-react';
           </div>
         );
       }
-    }
-  );
+  }
+);
 
