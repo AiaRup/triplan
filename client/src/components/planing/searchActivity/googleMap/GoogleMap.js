@@ -173,7 +173,7 @@ const MapComponent = compose(
                     {marker.website && <a href={marker.website} target="_blank">Website</a>}
                   </div>
                   <div>
-                    {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
+                    {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
                   </div>
                 </div>
                 <div className={props.animate ? 'add-attraction animate zoom' : 'add-attraction'}>
