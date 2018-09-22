@@ -98,7 +98,7 @@ router.post('/users/:id/plantrip', (req, res) => {
 //     return res.status(400).send('Id not in the correct format');
 //   }
 
-//   User.findByID(idUser, (err, userResult) => {
+//   User.findById(idUser, (err, userResult) => {
 
 //     if (err) throw err;
 //     const result = userResult.plans.filter((plan)=> plan._id === planID);
@@ -127,7 +127,7 @@ router.get('/users_trips/:user_id', (req, res) => {
 
 // enable CORS request to google - first fetch
 router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
-  rp(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+  rp(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.lat},${req.params.lng}&radius=2000&type=${req.params.type}&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`)
     .then(function (placesRes) {
       console.log('placesRes:', placesRes);
       res.send(placesRes);
@@ -140,7 +140,7 @@ router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
 
 // second fetch - get more info on the place found by the first request
 router.get('/placeSearch/:placeID', (req, res) => {
-  rp(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.params.placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE`)
+  rp(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${req.params.placeID}&fields=name,rating,international_phone_number,formatted_address,price_level,website,permanently_closed,place_id,photo,geometry,opening_hours&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`)
     .then(function (placeRes) {
       console.log('one place result:', placeRes);
       res.send(placeRes);
@@ -205,6 +205,19 @@ router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
   // });
 });
 
+
+// 5) to handle delete a trip
+router.delete('/users/:userId/myTrips/:tripId', (req, res) => {
+  const userId = req.params.userId;
+  const tripId = req.params.tripId;
+  console.log('userId ', userId, 'tripId ', tripId);
+  // delete the trip from the DB collection
+  User.findByIdAndUpdate(userId, { $pull: { plans: { _id: tripId } } }, { new: true }, (err, updatedUser) => {
+    if (err) throw err;
+    res.status(200).send(updatedUser);
+  });
+
+});
 
 
 module.exports = router;
