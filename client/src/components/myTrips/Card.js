@@ -22,17 +22,13 @@ import { observer, inject } from 'mobx-react';
 @observer
 class Card extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   handleDeleteTrip = () => {
     const userId = this.props.user_id;
     const tripId = this.props.plan._id;
     axios.delete(`api/users/users/${userId}/myTrips/${tripId}`)
       .then((user) => {
         console.log('plans from axiox after delete trip ', user.data.plans);
-        this.props.savePlans(user.data.plans)
+        this.props.savePlans(user.data.plans);
         const query = this.props.query;
         let trips = this.props.plansArray.filter((trip) => {
           return trip.name.toLowerCase().includes(query.toLowerCase());
