@@ -9,7 +9,17 @@ import './planTrip.css';
 import axios from 'axios';
 import Notification, { notify } from 'react-notify-toast';
 import InlineEdit from 'react-inline-editing';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 @inject(allStores => ({
   placesArray: allStores.store.placesArray,
   daysArray: allStores.store.daysArray,
@@ -22,6 +32,17 @@ import InlineEdit from 'react-inline-editing';
 }))
 @observer
 class PlanTrip extends Component {
+  state = {
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   saveTrip = (event) => {
 
@@ -48,36 +69,65 @@ class PlanTrip extends Component {
       }
     }
 
-    if (window.confirm('Are you sure you want to save your trip?')) {
-      const tripUser = {
-        plan: {
-          name: this.props.tripName,
-          days: this.props.daysArray,
-          city: this.props.cityName
-        },
-        tempPlaces: this.props.placesArray,
-        tempEvents: this.props.eventsArray
-      };
-      // notify user
-      notify.show('Trip Saved successfully', 'success', 5000);
+    // if (window.confirm('Are you sure you want to save your trip?')) {
+    this.handleClickOpen(); // open the dialog only after all the details are filled
+    // const tripUser = {
+    //   plan: {
+    //     name: this.props.tripName,
+    //     days: this.props.daysArray,
+    //     city: this.props.cityName
+    //   },
+    //   tempPlaces: this.props.placesArray,
+    //   tempEvents: this.props.eventsArray
+    // };
+    // // notify user
+    // // notify.show('Trip Saved successfully', 'success', 5000);
 
+    // console.log('trip to server', tripUser);
 
-      console.log('trip to server', tripUser);
+    // axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
+    //   .then(response => {
+    //     console.log('back to axios', response);
+    //     // reset days to 0
+    //     // this.props.resetNumDays();
+    //     // Link to trirps page
+    //     // <Link to='MyTrips/'></Link>;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error.response);
+    //   });
 
-      axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
-        .then(response => {
-          console.log('back to axios', response);
-          // reset days to 0
-          // this.props.resetNumDays();
-          // Link to trirps page
-          // <Link to='MyTrips/'></Link>;
-
-        })
-        .catch(function (error) {
-          console.log(error.response);
-        });
-    }
+    // }
   };
+
+  handleSave = () => {
+    const tripUser = {
+      plan: {
+        name: this.props.tripName,
+        days: this.props.daysArray,
+        city: this.props.cityName
+      },
+      tempPlaces: this.props.placesArray,
+      tempEvents: this.props.eventsArray
+    };
+    // notify user
+    // notify.show('Trip Saved successfully', 'success', 5000);
+
+    console.log('trip to server', tripUser);
+
+    axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
+      .then(response => {
+        console.log('back to axios', response);
+        // reset days to 0
+        // this.props.resetNumDays();
+        // Link to trirps page
+        // <Link to='MyTrips/'></Link>;
+        this.handleClose(); // close the dialog after adding trip sucsess
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+  }
 
   onDragEnd = result => {
     const daysArray = this.props.daysArray;
@@ -228,6 +278,32 @@ class PlanTrip extends Component {
           <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn">Save Trip</button>
 
         </DragDropContext>
+
+        <Dialog
+          open={this.state.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {'Are you sure you want to save your trip?'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Check you don't forget something...
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleSave} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
       </React.Fragment>
     );
   }
