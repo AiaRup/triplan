@@ -4,7 +4,6 @@ const oktaClient = require('../lib/oktaClient');
 const ObjectID = require('mongodb').ObjectID;
 const User = require('../models/userModel');
 const Plan = require('../models/planModel').plan;
-const request = require('request');
 var rp = require('request-promise');
 
 
@@ -109,21 +108,20 @@ router.post('/users/:id/plantrip', (req, res) => {
 
 
 // 3) getting all my trips
+// router.get('/users_trips/:user_id', (req, res) => {
+//   let user_id = req.params.user_id;
+//   console.log('param id is:');
+//   console.log(user_id);
 
-router.get('/users_trips/:user_id', (req, res) => {
-  let user_id = req.params.user_id;
-  console.log('param id is:');
-  console.log(user_id);
+//   User.findById(user_id, (error, data) => {
+//     if (error) throw error;
+//     else {
+//       console.log(data.plans);
+//       res.send(data.plans);
+//     }
+//   });
 
-  User.findById(user_id, (error, data) => {
-    if (error) throw error;
-    else {
-      console.log(data.plans);
-      res.send(data.plans);
-    }
-  });
-
-});
+// });
 
 // enable CORS request to google - first fetch
 router.get('/googlePlaces/:type/:lat/:lng', (req, res) => {
@@ -212,7 +210,7 @@ router.delete('/users/:userId/myTrips/:tripId', (req, res) => {
   const tripId = req.params.tripId;
   console.log('userId ', userId, 'tripId ', tripId);
   // delete the trip from the DB collection
-  User.findByIdAndUpdate(userId, { $pull: { plans: { _id: tripId } } }, { new: true }, (err, updatedUser) => {
+  User.findByIdAndUpdate(userId, { $pull: { plans: { _id: tripId }}}, { new: true }, (err, updatedUser) => {
     if (err) throw err;
     res.status(200).send(updatedUser);
   });
