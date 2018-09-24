@@ -1,6 +1,6 @@
-#widget-container1 {
+#widget-container1, #okta-sign-in {
   width: 400px;
-  margin: 100px auto;
+  margin: 80px auto 8px;
 }
 
 #okta-register {
@@ -130,7 +130,38 @@
   border-color: #0074b3;
 }
 
-#okta-register.auth-container1 .button-primary {
+#okta-register.auth-container1 .button-primary,
+#okta-sign-in.auth-container .button-primary {
+  color: #fff;
+  background-color: #20313b;
+  background: -o-linear-gradient(top, #20313b 0%, #004b75 100%);
+  background: -ms-linear-gradient(top, #20313b 0%, #004b75 100%);
+  background: linear-gradient(#20313b, #004b75);
+  border-color: #004b75;
+  border-bottom-color: #00456a;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+}
+
+#okta-register.auth-container1 .button.button-primary.link-button-disabled:hover,
+#okta-register.auth-container1 .button.button-primary.link-button-disabled:focus,
+#okta-register.auth-container1 .button.button-primary.link-button-disabled:active, {
+  cursor: default;
+  background-image: none;
+}
+
+.button.button-primary.link-button-disabled {
+  background-color: #20313b !important;
+  background: -o-linear-gradient(top, #004b75 0%, #20313b 100%)!important;
+  background: -ms-linear-gradient(top, #004b75 0%, #20313b 100%)!important;
+  background-image: linear-gradient(#004b75, #20313b)!important;
+  border-color: #003d5e!important;
+  border-bottom-color: #003a59!important;
+  text-decoration: none!important;
+  cursor: default!important;
+  background-image: none;
+  opacity: 0.4;
+}
+/* #okta-register.auth-container1 .button-primary {
   color: #fff;
   background-color: #007dc1;
   background: -o-linear-gradient(top, #007dc1 0%, #0073b2 100%);
@@ -139,8 +170,19 @@
   border-color: #004b75;
   border-bottom-color: #00456a;
   box-shadow: rgba(0, 0, 0, 0.15) 0 1px 0, rgba(255, 255, 255, 0.1) 0 1px 0 0 inset;
+} */
+#okta-register.auth-container1 .button-primary:hover, #okta-register.auth-container1 .button-primary:focus, #okta-register.auth-container1 .button-primary:active, #okta-register.auth-container1 .button-primary:focus,
+#okta-sign-in.auth-container .button-primary:hover, #okta-sign-in.auth-container .button-primary:focus, #okta-sign-in.auth-container .button-primary:active, #okta-sign-in.auth-container .button-primary:focus {
+  background-color: #20313b;
+  background: -o-linear-gradient(top, #004b75 0%, #20313b 100%);
+  background: -ms-linear-gradient(top, #004b75 0%, #20313b 100%);
+  background-image: linear-gradient(#004b75, #20313b);
+  border-color: #003d5e;
+  border-bottom-color: #003a59;
+  text-decoration: none;
+  cursor: pointer;
 }
-#okta-register.auth-container1 .button-primary:hover, #okta-register.auth-container1 .button-primary:focus, #okta-register.auth-container1 .button-primary:active, #okta-register.auth-container1 .button-primary:focus {
+/* #okta-register.auth-container1 .button-primary:hover, #okta-register.auth-container1 .button-primary:focus, #okta-register.auth-container1 .button-primary:active, #okta-register.auth-container1 .button-primary:focus {
   background-color: #0087d0;
   background: -o-linear-gradient(top, #0087d0 0%, #007dc1 100%);
   background: -ms-linear-gradient(top, #0087d0 0%, #007dc1 100%);
@@ -149,7 +191,17 @@
   border-bottom-color: #003a59;
   text-decoration: none;
   cursor: pointer;
-}
+} */
+
+/* #okta-signin-submit {
+  background-color: #20313b !important;
+  background: -o-linear-gradient(top, #004b75 0%, #20313b 100%) !important;
+  background: -ms-linear-gradient(top, #004b75 0%, #20313b 100%) !important;
+  background-image: linear-gradient(#004b75, #20313b) !important;
+  border-color: #003d5e;
+  border-bottom-color: #003a59;
+  text-decoration: none;
+} */
 #okta-register.auth-container1 .button-primary:hover, #okta-register.auth-container1 .button-primary:focus, #okta-register.auth-container1 .button-primary:active, #okta-register.auth-container1 .button-primary:focus {
   box-shadow: none;
 }
@@ -322,6 +374,17 @@
 
 #okta-register a:active, #okta-sign-in a:link, #okta-sign-in a:visited {
   text-decoration: none;
+}
+
+.loading-gif {
+  position: absolute;
+  display: block;
+  bottom: -16px;
+  background: #fff;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media only screen and (max-width: 600px) {
