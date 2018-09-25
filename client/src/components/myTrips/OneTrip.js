@@ -1,25 +1,24 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import Day from './Day';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import './oneTrip.css';
-/*=====================================================
-Display Trip
-=======================================================*/
+import DayMapView from './DayMapView';
+
+
 @inject('store')
 @observer
 export default class OneTrip extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: '1'
     };
   }
 
-  toggle(tab) {
+  toggle = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
@@ -28,7 +27,6 @@ export default class OneTrip extends Component {
   }
   render() {
     const { name, days, city } = this.props.plan;
-    console.log('id trip ', this.props.plan._id);
     let sortDays = days.sort((a, b) => {
       let x = a.date;
       let y = b.date;
@@ -68,7 +66,7 @@ export default class OneTrip extends Component {
               <Col sm="12">
                 <div className="timeline">
                   {sortDays.map((day, i) =>
-                    <Day day={day} index={i} key={i} />
+                    <Day day={day} index={i} key={i}/>
                   )}
                 </div>
               </Col>
@@ -76,19 +74,16 @@ export default class OneTrip extends Component {
           </TabPane>
           <TabPane tabId="2">
             <Row>
-              <Col sm="6">
-                <Card body>
+              <Col sm="12">
+                {/* <Card body>
                   <CardTitle>Special Title Treatment</CardTitle>
                   <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
                   <Button>Go somewhere</Button>
-                </Card>
-              </Col>
-              <Col sm="6">
-                <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card>
+                </Card> */}
+                {sortDays.map((day, i) =>
+                  <DayMapView day={day} index={i} key={i} city={city} />
+                )}
+
               </Col>
             </Row>
           </TabPane>
