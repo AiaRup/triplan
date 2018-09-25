@@ -3,7 +3,7 @@
   margin: auto;
   margin-top: 100px;
   margin-bottom: 40px;
-  width: 60%;
+  width: 55%;
   border-bottom: 1px solid #ddd;
 }
 
@@ -33,6 +33,10 @@
   /* flex: 0 0 31.3333%; */
   padding: 20px 60px;
   margin: 10px;
+  /* margin-right: 45px;
+  margin-left: 45px; */
+  margin-right: 10%;
+  margin-left: 10%;
   border-bottom: 1px solid #f50057;
   background: #fff;
   color: #20313b;
@@ -42,7 +46,7 @@
 }
 
 .card:nth-child(odd) {
-  border-bottom: 1px solid #20313b;
+  /* border-bottom: 1px solid #20313b; */
 }
 
 .card:hover {
