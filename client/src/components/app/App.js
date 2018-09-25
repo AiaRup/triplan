@@ -19,6 +19,7 @@ function onAuthRequired({ history }) {
 }
 
 @inject(allStores => ({
+  tripIdSaved: allStores.store.tripIdToEdit,
   configUser: allStores.store.configUser,
   plans: allStores.store.plansArray,
   userInStore: allStores.store.user_id
@@ -64,6 +65,8 @@ class App extends Component {
                   (plan, index) =>
                     <SecureRoute exact path={`/MyTrips/${plan._id}`} key={index} render={() => <OneTrip plan={plan} />} />
                 )}
+
+                <SecureRoute exact path={`/MyTrips/${this.props.tripIdSaved}`} render={() => <OneTrip plan={this.props.plans[this.props.plans.length - 1]} />} />
 
                 <SecureRoute exact path="/About" render={() => <About />} />
                 <SecureRoute exact path="/Planing" render={() => <Planing />} />

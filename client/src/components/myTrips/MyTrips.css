@@ -13,7 +13,7 @@
 
 .card-list {
   width: 80%;
-  margin: auto;
+  margin: 0 auto 15px auto;
   /* display: flex; */
   /* flex-wrap: wrap; */
   box-sizing: border-box;
@@ -31,19 +31,19 @@
   display: block;
   /* flex-direction: row; */
   /* flex: 0 0 31.3333%; */
-  padding: 20px 30px;
+  padding: 10px 20px;
   margin: 10px auto;
-  border-bottom: 1px solid #f50057;
+  border-bottom: 1.5px solid #f50057;
   background: #fff;
   color: #20313b;
   text-align: center;
   transition: all .2s ease-in-out;
-  width: 70%;
+  width: 60%;
   /* border-radius: 10px; */
 }
 
 .card:nth-child(odd) {
-  border-bottom: 1px solid #20313b;
+  border-bottom: 1.5px solid #20313b;
 }
 
 .card:hover {
@@ -69,7 +69,7 @@
 }
 
 
-@media only screen and (max-width: 520px) {
+@media only screen and (max-width: 660px) {
   .card {
     width: 93%;
     padding: 15px;

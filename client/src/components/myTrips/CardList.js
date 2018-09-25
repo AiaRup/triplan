@@ -8,7 +8,7 @@ const CardList = (props) => {
       {
         props.plans.length > 0 ? props.plans.map((plan, i) => <Card plan={plan} key={i} />)
           :
-          <h2> No Trips were Found. </h2>
+          <h2> No Trips Were Found. </h2>
       }
     </div>
   );
