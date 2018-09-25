@@ -32,7 +32,7 @@ export default class OneTrip extends Component {
           {/* <h1> Name Trip: {name}</h1> */}
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
         </div>
-        {/* <button type="button" onClick={this.props.store.emailTrip}>Send Trip To Email</button> */}
+        <button type="button" onClick={this.props.store.emailTrip}>Send Trip To Email</button>
         <div className="day-list-trip">
           {/* {days.map((day, i) => */}
           {sortDays.map((day, i) =>
