@@ -9,8 +9,12 @@ import './planTrip.css';
 import axios from 'axios';
 import Notification, { notify } from 'react-notify-toast';
 import InlineEdit from 'react-inline-editing';
-
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { SecureRoute } from '@okta/okta-react';
+import OneTrip from '../../myTrips/OneTrip';
 @inject(allStores => ({
+  savePlans: allStores.store.savePlans,
+  saveTripId: allStores.store.saveTripId,
   placesArray: allStores.store.placesArray,
   daysArray: allStores.store.daysArray,
   eventsArray: allStores.store.eventsArray,
@@ -22,7 +26,11 @@ import InlineEdit from 'react-inline-editing';
 }))
 @observer
 class PlanTrip extends Component {
-
+  state = {
+    isSave: false,
+    id: null,
+    plan: []
+  }
   saveTrip = (event) => {
 
     if (this.props.daysArray.length === 0) {
@@ -67,10 +75,13 @@ class PlanTrip extends Component {
       axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
         .then(response => {
           console.log('back to axios', response);
-          // reset days to 0
-          // this.props.resetNumDays();
-          // Link to trirps page
-          // <Link to='MyTrips/'></Link>;
+          const id = response.data.plans[response.data.plans.length - 1]._id;
+          const plan = response.data.plans[response.data.plans.length - 1];
+
+          this.props.saveTripId(id);
+          this.props.savePlans(response.data.plans);
+
+          this.setState({ isSave: true, plan: plan, id: id });
 
         })
         .catch(function (error) {
@@ -207,6 +218,11 @@ class PlanTrip extends Component {
     return (
       <React.Fragment>
         <Notification options={{ zIndex: 400, top: '250px' }} />
+
+        {
+          this.state.isSave &&
+          <Redirect to={`/MyTrips/${this.state.id}`} />
+        }
 
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>
