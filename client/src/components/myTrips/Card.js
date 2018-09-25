@@ -58,7 +58,9 @@ class Card extends React.Component {
         <Link className="watch" to={`MyTrips/${this.props.plan._id}`} >
           <h3>{this.props.plan.name[0].toUpperCase() + this.props.plan.name.slice(1)}</h3>
           <span style={{ marginRight: '10px' }}><MarkerIcon /> {this.props.plan.city}, </span>
-          <span><DayIcon /> {this.props.plan.days.length} Days</span>
+          {this.props.plan.days.length === 1 ?
+            <span><DayIcon /> {this.props.plan.days.length} Day</span> :
+            <span><DayIcon /> {this.props.plan.days.length} Days</span> }
         </Link>
       </div>
     );
