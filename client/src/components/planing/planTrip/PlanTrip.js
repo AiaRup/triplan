@@ -16,11 +16,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import { Redirect } from 'react-router-dom';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 @inject(allStores => ({
+  savePlans: allStores.store.savePlans,
+  saveTripId: allStores.store.saveTripId,
   placesArray: allStores.store.placesArray,
   daysArray: allStores.store.daysArray,
   eventsArray: allStores.store.eventsArray,
@@ -34,7 +37,10 @@ function Transition(props) {
 class PlanTrip extends Component {
   state = {
     open: false,
-  };
+    isSave: false,
+    id: null,
+    plan: []
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -43,6 +49,7 @@ class PlanTrip extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
 
   saveTrip = (event) => {
 
@@ -69,35 +76,7 @@ class PlanTrip extends Component {
       }
     }
 
-    // if (window.confirm('Are you sure you want to save your trip?')) {
-    this.handleClickOpen(); // open the dialog only after all the details are filled
-    // const tripUser = {
-    //   plan: {
-    //     name: this.props.tripName,
-    //     days: this.props.daysArray,
-    //     city: this.props.cityName
-    //   },
-    //   tempPlaces: this.props.placesArray,
-    //   tempEvents: this.props.eventsArray
-    // };
-    // // notify user
-    // // notify.show('Trip Saved successfully', 'success', 5000);
-
-    // console.log('trip to server', tripUser);
-
-    // axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
-    //   .then(response => {
-    //     console.log('back to axios', response);
-    //     // reset days to 0
-    //     // this.props.resetNumDays();
-    //     // Link to trirps page
-    //     // <Link to='MyTrips/'></Link>;
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error.response);
-    //   });
-
-    // }
+    this.handleClickOpen(); // open the dialog only after all the details are filled and ok
   };
 
   handleSave = () => {
@@ -110,19 +89,24 @@ class PlanTrip extends Component {
       tempPlaces: this.props.placesArray,
       tempEvents: this.props.eventsArray
     };
-    // notify user
-    // notify.show('Trip Saved successfully', 'success', 5000);
+
 
     console.log('trip to server', tripUser);
 
     axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
       .then(response => {
+        // notify user
+        notify.show('Trip Saved successfully', 'success', 5000);
+
         console.log('back to axios', response);
-        // reset days to 0
-        // this.props.resetNumDays();
-        // Link to trirps page
-        // <Link to='MyTrips/'></Link>;
-        this.handleClose(); // close the dialog after adding trip sucsess
+        const id = response.data.plans[response.data.plans.length - 1]._id;
+        const plan = response.data.plans[response.data.plans.length - 1];
+
+        this.props.saveTripId(id);
+        this.props.savePlans(response.data.plans);
+
+        this.setState({ isSave: true, plan: plan, id: id });
+
       })
       .catch(function (error) {
         console.log(error.response);
@@ -257,6 +241,11 @@ class PlanTrip extends Component {
     return (
       <React.Fragment>
         <Notification options={{ zIndex: 400, top: '250px' }} />
+
+        {
+          this.state.isSave &&
+          <Redirect to={`/MyTrips/${this.state.id}`} />
+        }
 
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>
