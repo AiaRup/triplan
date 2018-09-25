@@ -6,9 +6,9 @@ import TheEvent from './TheEvent';
 
 const EventListUL = styled.div`
 padding: 8px;
-min-height: 500px;
 height: auto;
-background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
+min-height: 55vh;
+background-color: ${props => (props.isDraggingOver ? '#f8a10070' : 'white')};
 transition: background-color 0.2s ease;
 `;
 

@@ -52,6 +52,7 @@ class PlanTrip extends Component {
 
 
   saveTrip = (event) => {
+    
 
     if (this.props.daysArray.length === 0) {
       // alert('Please add days to your plan')
@@ -76,6 +77,37 @@ class PlanTrip extends Component {
       }
     }
 
+    if (window.confirm('Are you sure you want to save your trip?')) {
+      const tripUser = {
+        plan: {
+          name: this.props.tripName,
+          days: this.props.daysArray,
+          city: this.props.cityName
+        },
+        tempPlaces: this.props.placesArray,
+        tempEvents: this.props.eventsArray
+      };
+      // notify user
+      notify.show('Trip Saved successfully', 'success', 5000);
+
+
+      console.log('trip to server', tripUser);
+
+      axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
+        .then(response => {
+          console.log('back to axios', response);
+          // reset days to 0
+          // this.props.resetNumDays();
+          // Link to trirps page
+          // <Link to='MyTrips/'></Link>;
+
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+
+        // emailTrip(tripUser);
+    }
     this.handleClickOpen(); // open the dialog only after all the details are filled and ok
   };
 
@@ -264,7 +296,7 @@ class PlanTrip extends Component {
             {/* <DayList /> */}
           </div>
           {/* <button onClick={() => { if (window.confirm('Are you sure you want to save your trip?')) { this.saveTrip() } }} className="save-trip-btn">Save Trip</button> */}
-          <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn">Save Trip</button>
+          <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn"></button>
 
         </DragDropContext>
 

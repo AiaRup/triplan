@@ -27,8 +27,25 @@ const styles = theme => ({
   },
   rightIcon: {
     marginLeft: theme.spacing.unit,
+  },
+  planTripTab: {
+    border: '1px solid light #000',
+    borderRadius: '2px', 
+    backgroundColor: '#F50057', 
+    color: 'white'
+  },
+  tabsMargin: {
+    margin: 'auto 150px auto 150px'
+  },
+  tabStyle: {
+    fontSize: '18px',
+    border: '.5px solid #f500562a',
+    padding: '20px',
+    width: '33%',
+    borderRadius: '3px'
   }
 });
+
 
 const TabContainer = (props) => {
   const { children, dir } = props;
@@ -130,10 +147,11 @@ class Planing extends Component {
             onChange={this.handleChange}
             indicatorColor="secondary"
             textColor="secondary"
-            centered >
-            <Tab label="Find Attractions" icon={<MarkerIcon />}/>
-            <Tab label="Find Events" icon={<EventIcon />} />
-            <Tab label="Plan Your Trip" icon={<ScheduleIcon />} />
+            centered
+            >
+            <Tab label="Find Attractions" icon={<MarkerIcon />} style={{ borderRight: '1px solid light #eee'}} className={classes.tabStyle} />
+            <Tab label="Find Events" icon={<EventIcon />} className={`${classes.tabStyle} ${classes.tabsMargin}`}/>
+            <Tab label="Plan Your Trip" icon={<ScheduleIcon />} className={`${classes.planTripTab} ${classes.tabStyle}`} style={{color:'white'}} />
           </Tabs>
           {/* <SwipeableViews
              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

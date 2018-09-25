@@ -10,7 +10,7 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
+  background-color: ${props=> (props.isDragging ? 'white' : 'white')};
   transition: max-width 0.2 ease;
 `;
 
