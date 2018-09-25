@@ -1,9 +1,6 @@
 import { observable, action } from 'mobx';
 import moment from 'moment';
 
-
-
-
 class TripStore {
 
   // @observable user_email = '';

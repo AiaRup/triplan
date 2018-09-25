@@ -21,20 +21,49 @@ height: auto;
 }
 
 .save-trip-btn {
-  background-color: #f8a100;
-  width: 20%;
-  margin: 10px auto;
   display: block;
+  position: -webkit-sticky;
+  position: sticky;
+  float: right;
+  /* margin-left: -25px; */
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  border-radius: 50%;  
+  background-color: #f8a100;
   color: white;
-  border-radius: 3px;
-  border: 1px solid #f8a100;
+  border: 1px solid #f86300;
+  font-size: 18px;
+  
 
+}
+
+.save-trip-btn:after {
+  content: 'Save';
+  font-size: 16px;
+}
+
+.save-trip-btn:hover {
+  background-color: #f8a100;
+  width: 12%;
+  height: 50px;
+  transition: .3s ease;
+  border-radius: 5px;
+  font-size: 20px;
+  color: white;
+}
+
+.save-trip-btn:hover:after {
+  content: 'Save Trip';
+  font-size: 20px;
 }
 
 .name-trip-container {
   display: flex;
+  justify-content: center;
   width: fit-content;
   margin: 10px auto;
+  width: 80px;
 }
 
 .name-trip-container div {
@@ -50,7 +79,9 @@ text-align: center;
 .inlineEdit {
   font-size: 20px;
   padding: 10px;
-  margin-bottom: 0
+  margin-bottom: 0;
+  width: 200px;
+  text-align: left;
   }
 
   @media only screen and (max-width: 760px) {
