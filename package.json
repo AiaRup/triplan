@@ -1,0 +1,12 @@
+{
+  "name": "triplan-app",
+  "version": "0.1.0",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd api && npm start",
+    "start": "concurrently -p \"[{name}]\" -n \"client,server\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run -s client\" \"npm run -s server\" "
+  },
+  "dependencies": {
+    "concurrently": "^4.0.1"
+  }
+}

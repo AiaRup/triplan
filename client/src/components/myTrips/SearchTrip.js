@@ -2,7 +2,7 @@ import React from 'react'
 
 const SearchTrip = (props) => {
   const handleSearch = (event) => {
-    props.searchTrips(event.target.value)
+    props.searchTrips(event.target.value);
   }
 
   return (

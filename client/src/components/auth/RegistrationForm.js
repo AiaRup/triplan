@@ -5,6 +5,8 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import axios from 'axios';
 import './RegisterForm.css';
 import { observer, inject } from 'mobx-react';
+import loadingGif from '../../images/loading.gif';
+// import loadingGif from '../../images/loading-register.gif';
 
 
 @inject(allStores => ({
@@ -13,19 +15,19 @@ import { observer, inject } from 'mobx-react';
   userEmail: allStores.store.user_email
 }))
 @observer
-  export default withAuth(
-    class RegistrationForm extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          firstName: '', lastName: '', email: '', password: '', sessionToken: null,
-          emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
-          showErrorDiv: false
-        };
+export default withAuth(
+  class RegistrationForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        firstName: '', lastName: '', email: '', password: '', sessionToken: null,
+        emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
+        showErrorDiv: false, showLoading: false
+      };
 
-        this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
-        this.checkAuthentication();
-      }
+      this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
+      this.checkAuthentication();
+    }
 
       checkAuthentication = async () => {
         const sessionToken = await this.props.auth.getIdToken();
@@ -48,7 +50,7 @@ import { observer, inject } from 'mobx-react';
 
       handleSubmit = (e) => {
         // e.preventDefault();
-        this.setState({ showErrorDiv: false });
+        this.setState({ showErrorDiv: false, showLoading: true });
         axios.post('/api/users', this.state)
           .then(user => {
             this.oktaAuth
@@ -60,13 +62,14 @@ import { observer, inject } from 'mobx-react';
                 // save the user oktaID before redirect
                 localStorage.setItem('oktaID', res.user.id);
                 this.setState({
-                  sessionToken: res.sessionToken
+                  sessionToken: res.sessionToken,
+                  showLoading: false
                 });
               });
           })
           .catch(err => {
             console.log(err);
-            this.setState({ showErrorDiv: true });
+            this.setState({ showErrorDiv: true, showLoading: false });
           });
           //!!check where the data goes to
           // this.props.userEmail = this.state.email;
@@ -80,7 +83,8 @@ import { observer, inject } from 'mobx-react';
           <div id="widget-container1">
             <div id="okta-register" className="auth-container1 main-container">
               <div className="okta-register-header auth-header">
-                <img src="//logo.clearbit.com/okta.com" className="auth-org-logo" alt="" />
+                <img src="//logo.clearbit.com/okta.com?greyscale=true" className="auth-org-logo" alt="" />
+                {this.state.showLoading && <img src={loadingGif} className="loading-gif" alt=""/>}
               </div>
               <div className="auth-content">
                 <div className="auth-content-inner">
@@ -158,7 +162,8 @@ import { observer, inject } from 'mobx-react';
                         }} />
                     </div>
                     <div className="o-form-button-bar">
-                      <input className="button button-primary" type="submit" value="Register" id="submit" data-type="save" />
+                      {this.state.showLoading ? <input className="button button-primary link-button-disabled" type="submit" value="Register" id="submit" data-type="save" disabled /> :
+                      <input className="button button-primary" type="submit" value="Register" id="submit" data-type="save"/>}
                     </div>
                     <div className="signin-container">
                       <div className="content">
@@ -173,6 +178,6 @@ import { observer, inject } from 'mobx-react';
           </div>
         );
       }
-    }
-  );
+  }
+);
 

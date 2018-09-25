@@ -9,8 +9,21 @@ import './planTrip.css';
 import axios from 'axios';
 import Notification, { notify } from 'react-notify-toast';
 import InlineEdit from 'react-inline-editing';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import { Redirect } from 'react-router-dom';
 
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 @inject(allStores => ({
+  savePlans: allStores.store.savePlans,
+  saveTripId: allStores.store.saveTripId,
   placesArray: allStores.store.placesArray,
   daysArray: allStores.store.daysArray,
   eventsArray: allStores.store.eventsArray,
@@ -22,6 +35,21 @@ import InlineEdit from 'react-inline-editing';
 }))
 @observer
 class PlanTrip extends Component {
+  state = {
+    open: false,
+    isSave: false,
+    id: null,
+    plan: []
+  }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
 
   saveTrip = (event) => {
     
@@ -80,7 +108,42 @@ class PlanTrip extends Component {
 
         // emailTrip(tripUser);
     }
+    this.handleClickOpen(); // open the dialog only after all the details are filled and ok
   };
+
+  handleSave = () => {
+    const tripUser = {
+      plan: {
+        name: this.props.tripName,
+        days: this.props.daysArray,
+        city: this.props.cityName
+      },
+      tempPlaces: this.props.placesArray,
+      tempEvents: this.props.eventsArray
+    };
+
+
+    console.log('trip to server', tripUser);
+
+    axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
+      .then(response => {
+        // notify user
+        notify.show('Trip Saved successfully', 'success', 5000);
+
+        console.log('back to axios', response);
+        const id = response.data.plans[response.data.plans.length - 1]._id;
+        const plan = response.data.plans[response.data.plans.length - 1];
+
+        this.props.saveTripId(id);
+        this.props.savePlans(response.data.plans);
+
+        this.setState({ isSave: true, plan: plan, id: id });
+
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+  }
 
   onDragEnd = result => {
     const daysArray = this.props.daysArray;
@@ -211,6 +274,11 @@ class PlanTrip extends Component {
       <React.Fragment>
         <Notification options={{ zIndex: 400, top: '250px' }} />
 
+        {
+          this.state.isSave &&
+          <Redirect to={`/MyTrips/${this.state.id}`} />
+        }
+
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>
             <div className="name-trip-container">
@@ -231,6 +299,32 @@ class PlanTrip extends Component {
           <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn"></button>
 
         </DragDropContext>
+
+        <Dialog
+          open={this.state.open}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {'Are you sure you want to save your trip?'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Check you don't forget something...
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleSave} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
       </React.Fragment>
     );
   }

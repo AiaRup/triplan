@@ -5,7 +5,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer, } from 'rea
 
 const MapWithADirectionsRenderer = compose(
   withProps({
-    googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyAewucBzhp4DIePd6P0JHbpkQ4JtPzCShE',
+    googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0',
     loadingElement: <div style={{ height: '100%' }} />,
     containerElement: <div style={{ height: '400px', weight: '350px' }} />,
     mapElement: <div style={{ height: '100%' }} />,
@@ -55,16 +55,6 @@ const MapWithADirectionsRenderer = compose(
       {props.directions && <DirectionsRenderer directions={props.directions} />}
     </GoogleMap>;
   }
-
-
-
-
-  // return <GoogleMap
-  //   defaultZoom={7}
-  //   defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
-  //   defaultCenter={new google.maps.LatLng(lat, lng)} >
-  //   {props.directions && <DirectionsRenderer directions={props.directions}/> }
-  // </GoogleMap>;
 }
 );
 

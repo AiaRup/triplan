@@ -81,3 +81,9 @@ line-height: 125px;
     flex-direction: column;
   }
 }
+/*
+button[role="tab"] {
+  border-right: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border: 1px solid lightgrey;
+} */
