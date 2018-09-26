@@ -64,21 +64,9 @@ export default class OneTrip extends Component {
         <div className="trip-header">
           {/* <h1> Name Trip: {name}</h1> */}
       
-          {/* <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1> */}
+          <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
         </div>
-        <button type="button" onClick={this.printTrip}>Print Trip</button>
-        {/* <button type="button" onClick={this.props.store.emailTrip}>Send Trip To Email</button> */}
-        <div className="day-list-trip">
-          {/* {days.map((day, i) => */}
-          {sortDays.map((day, i) =>
-            <Day day={day} index={i} key={i} />
-          )}
 
-
-          <h2 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h2>
-
-
-        </div>
         <Nav tabs>
           <NavItem className="tab-in-one-trip">
             <NavLink
