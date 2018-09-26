@@ -9,6 +9,23 @@ Display Trip
 @observer
 export default class OneTrip extends Component {
 
+
+  //!!get all info from array of trips - make a class?
+  printTrip = () => {
+    const daysArray = this.props.store.plansArray[0].days;
+    // const details = {};
+    const day = daysArray.map(day => day.date)
+
+    const info = daysArray.map(day => {
+      return day.places.map(place=>{
+        return ([place.name, place.address])
+      })
+      })
+
+    // console.log(JSON.stringify(daysArray))
+    console.log(day , info)
+  }
+
   render() {
 
     const divStyle = {
@@ -32,7 +49,8 @@ export default class OneTrip extends Component {
           {/* <h1> Name Trip: {name}</h1> */}
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
         </div>
-        <button type="button" onClick={this.props.store.emailTrip}>Send Trip To Email</button>
+        <button type="button" onClick={this.printTrip}>Print Trip</button>
+        {/* <button type="button" onClick={this.props.store.emailTrip}>Send Trip To Email</button> */}
         <div className="day-list-trip">
           {/* {days.map((day, i) => */}
           {sortDays.map((day, i) =>

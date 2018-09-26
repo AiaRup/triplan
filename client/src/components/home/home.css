@@ -23,21 +23,22 @@
   flex-direction: row;
   align-items: center;
   margin-top: 50px;
+  padding-bottom: 80px;
 }
 
-input#auto_complete_search.search-bar {
-  padding: 12px;
-  margin: auto;
-  margin: 0;
-  margin-bottom: 0;
-  width: 40%;
+.location-search-input {
+  width: 235px;
+  height: 35px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
   border-bottom: 1px solid #ddd;
   box-shadow: 1px 1px 5px 0px #444242c7;
   padding-left: 5px;
   padding-right: 5px;
-  height: 35px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute ;
 }
 
 .btnStylePlan,
@@ -80,5 +81,9 @@ input#auto_complete_search.search-bar {
   input#auto_complete_search.search-bar {
     width: 200px;
     margin-bottom: 3px;
+  }
+
+  .autocomplete-dropdown-container {
+    position: relative ;
   }
 }
