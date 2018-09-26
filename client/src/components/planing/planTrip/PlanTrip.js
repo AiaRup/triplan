@@ -264,7 +264,7 @@ class PlanTrip extends Component {
             {/* <DayList /> */}
           </div>
           {/* <button onClick={() => { if (window.confirm('Are you sure you want to save your trip?')) { this.saveTrip() } }} className="save-trip-btn">Save Trip</button> */}
-          <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn">Save Trip</button>
+          <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn"></button>
 
         </DragDropContext>
 
