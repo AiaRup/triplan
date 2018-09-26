@@ -13,18 +13,11 @@
   pointer-events: none;
 }
 
+/*
 .collapse-nav-design {
   background-color: #1483c6;
   color: white;
-}
-
-.logo-design {
-  font-size: 25px;
-  font-weight: 500;
-  margin-bottom: 8px;
-  margin-left: 20px;
-  color: white;
-}
+} */
 
 .bg-light {
   background-color: #20313b !important;
@@ -42,10 +35,19 @@
   color: white !important;
 }
 
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #e22866 !important;
+}
+
+.userNameColor:hover {
+  color: white !important;
+}
+
 
 .navbar-brand {
   padding: 0;
 }
+
 .btn-secondary {
   background-color: #f50057;
   border-color: #f50057;

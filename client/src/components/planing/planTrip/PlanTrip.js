@@ -297,5 +297,4 @@ class PlanTrip extends Component {
     );
   }
 }
-
 export default PlanTrip;

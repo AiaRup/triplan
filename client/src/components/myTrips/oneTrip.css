@@ -55,12 +55,12 @@ Overall
 Tabs
 ==============*/
 
-.container-trip .active.nav-link {
+.container-trip .tab-in-one-trip .active.nav-link {
   color: #f50057;
   font-weight: bold;
 }
 
-.container-trip .nav-item:hover {
+.container-trip .tab-in-one-trip.nav-item:hover {
   cursor: pointer;
   color: #f50057;
 }

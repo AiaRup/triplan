@@ -19,13 +19,33 @@ const DayMapView = (props) => {
 
   console.log('route', route);
 
+  const getLetter = (index) => {
+    const startLetter = 65;
+    return String.fromCharCode(startLetter + index);
+  }
+
 
   return (
     <div className="wrapper-day-map">
-      <div className="day-date-map"><span className="date-in-day-map">{date}</span> <span>{props.city}</span></div>
+      <div className="day-date-map"><span className="date-in-day-map">{date}</span> <span className="city-in-day-map">{props.city}</span></div>
 
       <div className="day-content-map-view">
-        <MapDay route={route} directions={false} />
+
+        <div id="map-canvas">
+          <MapDay route={route} directions={false} />
+        </div>
+        <div className="route-directions">
+          {places.map((place, i) => {
+            return (
+              <div key={i} className="wrapper-place-direction">
+                <span className="circle-att">{getLetter(i)}</span>
+                <p>{place.name}</p>
+                <span style={{ color: '#999', marginLeft: '5px', display: 'block' }}>#{place.category}</span>
+              </div>
+            );
+          })}
+
+        </div>
       </div>
 
     </div>

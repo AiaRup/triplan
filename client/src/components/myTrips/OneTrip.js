@@ -6,7 +6,6 @@ import classnames from 'classnames';
 import './oneTrip.css';
 import DayMapView from './DayMapView';
 
-
 @inject('store')
 @observer
 export default class OneTrip extends Component {
@@ -27,6 +26,7 @@ export default class OneTrip extends Component {
   }
   render() {
     const { name, days, city } = this.props.plan;
+
     let sortDays = days.sort((a, b) => {
       let x = a.date;
       let y = b.date;
@@ -38,7 +38,7 @@ export default class OneTrip extends Component {
           <h2 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h2>
         </div>
         <Nav tabs>
-          <NavItem>
+          <NavItem className="tab-in-one-trip">
             <NavLink
               className={classnames({ active: this.state.activeTab === '1' })}
               onClick={() => { this.toggle('1'); }}
@@ -46,7 +46,7 @@ export default class OneTrip extends Component {
               TIMELINE
             </NavLink>
           </NavItem>
-          <NavItem>
+          <NavItem className="tab-in-one-trip">
             <NavLink
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
@@ -73,19 +73,14 @@ export default class OneTrip extends Component {
             </Row>
           </TabPane>
           <TabPane tabId="2">
-            <Row>
-              <Col sm="12">
-                {/* <Card body>
-                  <CardTitle>Special Title Treatment</CardTitle>
-                  <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                  <Button>Go somewhere</Button>
-                </Card> */}
+            {/* <Row> */}
+              {/* <Col sm="12"> */}
                 {sortDays.map((day, i) =>
                   <DayMapView day={day} index={i} key={i} city={city} />
                 )}
 
-              </Col>
-            </Row>
+              {/* </Col> */}
+            {/* </Row> */}
           </TabPane>
         </TabContent>
       </div>

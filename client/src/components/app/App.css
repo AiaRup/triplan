@@ -55,8 +55,8 @@ body {
   top: 300px;
   width: 30px;
   left: 80%;
-  opacity: 0;
-  animation: animate 1s ease forwards;
+  opacity: 1;
+  animation: animate 2s ease forwards;
   /* animation: animate 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) backwards;
   -webkit-animation: animate 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) backwards; */
   font-size: 0;
