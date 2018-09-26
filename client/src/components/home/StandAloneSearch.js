@@ -21,15 +21,17 @@ class LocationSearchInput extends React.Component {
       .then(results => getLatLng(results[0]))
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error));
+
+      this.setState({ address });
   };
 
+  
   render() {
     return (
       <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
-        // className="search-bar"  location-search-input
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
@@ -47,10 +49,10 @@ class LocationSearchInput extends React.Component {
                 const className = suggestion.active
                   ? 'suggestion-item--active'
                   : 'suggestion-item';
-                // inline style for demonstration purpose
+
                 const style = suggestion.active
-                  ? { backgroundColor: '#f50057', cursor: 'pointer', margin: '2px',border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', color: 'white', width:'232px'}
-                  : { backgroundColor: '#ffffff', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', width:'232px'};
+                  ? { backgroundColor: '#f50057', cursor: 'pointer', margin: '2px',border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', color: 'white', width:'253px'}
+                  : { backgroundColor: '#ffffff', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', width:'253px'};
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {

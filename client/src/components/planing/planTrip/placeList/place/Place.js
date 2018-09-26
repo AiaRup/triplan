@@ -60,7 +60,7 @@ class Place extends Component {
             <Collapse isOpened={this.state.toggledCollapse}>
               <ul className="place-content-li">
                 {Object.keys(this.props.thePlace).map((prop, index)=> {
-                  if (prop !== 'id' && prop !== 'type' && prop !== 'position' && prop !== 'iternalId') {
+                  if (prop !== 'id' && prop !== 'type' && prop !== 'position' && prop !== 'iternalId' && prop !== 'photo') {
                     return <li key={index}><u>{prop}</u>: {this.props.thePlace[prop]}</li>;
                   }
                   return null;
