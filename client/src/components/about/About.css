@@ -89,3 +89,13 @@
 .line-on-sides:after {
   margin: 0 -55% 0 0.5em;
 }
+
+@media only screen and (max-width: 750px) {
+  .about-body {
+    width: 90%;
+    font-size: 16px;
+  }
+  .h1-team {
+    font-size: 28px
+  }
+}

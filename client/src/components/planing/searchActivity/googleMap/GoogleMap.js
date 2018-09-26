@@ -105,7 +105,7 @@ const MapComponent = compose(
           const newActivity = { type: 'place' };
           for (let prop in marker) {
             if (marker.hasOwnProperty(prop)) {
-              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id' || prop === 'position') {
+              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id' || prop === 'position' || prop === 'rating' || prop === 'photo') {
                 newActivity[prop] = marker[prop];
               }
             }

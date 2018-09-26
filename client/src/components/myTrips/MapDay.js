@@ -24,6 +24,8 @@ const MapWithADirectionsRenderer = compose(
         waypoints:
           this.props.route.waypoints
       }, (result, status) => {
+        console.log('result', result);
+
         if (status === google.maps.DirectionsStatus.OK) {
           this.setState({
             directions: result,
@@ -49,9 +51,11 @@ const MapWithADirectionsRenderer = compose(
     return <p>No Route Can Be calculated for this day</p>;
   } else {
     return <GoogleMap
-      defaultZoom={7}
+      defaultZoom={14}
+      zoom={14}
       defaultOptions={{ mapTypeControl: false, rotateControl: false, scrollwheel: false }}
-      defaultCenter={new google.maps.LatLng(lat, lng)} >
+      defaultCenter={new google.maps.LatLng(lat, lng)}
+      center={new google.maps.LatLng(lat, lng)}>
       {props.directions && <DirectionsRenderer directions={props.directions} />}
     </GoogleMap>;
   }

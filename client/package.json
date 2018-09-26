@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "@material-ui/icons": "^3.0.1",
-    "@okta/okta-react": "^1.0.3",
+    "@okta/okta-react": "^1.1.1",
     "@okta/okta-signin-widget": "^2.10.0",
     "autoprefixer": "7.1.6",
     "availity-reactstrap-validation": "^2.0.6",
