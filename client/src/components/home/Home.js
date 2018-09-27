@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { default as LocationSearchInput } from './StandAloneSearch';
 import './home.css';
 
-
-
-
 class Home extends Component {
-
-  autoCompleteOffers = () => {
-    let input = document.getElementById('auto_complete_search');
-    const autoComplete = new window.google.maps.places.Autocomplete(input);
-    console.log(autoComplete);
-  }
 
   routeToPlan = (e) => {
     e.preventDefault();
     this.props.history.push('/planing');
-
-
   }
 
   render() {
@@ -26,10 +16,9 @@ class Home extends Component {
         <div className="home-search-container">
           <h1 className="headlineStyle">Where Would You Like to Travel?</h1>
           <div className="search-bar-wrapper">
-            <input type='text' className="search-bar" placeholder="Enter City" id="auto_complete_search" onChange={this.autoCompleteOffers}/>
+            <LocationSearchInput/>
             <button className="btnStyle">Get Ideas</button>
-            <button className="btnStylePlan" onClick={this.routeToPlan}>Plan My Trip</button>
-
+            <button className="btnStylePlan" onClick={this.routeToPlan}>Plan The Trip</button>
           </div>
         </div>
       </div>
@@ -38,3 +27,6 @@ class Home extends Component {
 }
 
 export default withRouter(Home);
+
+
+

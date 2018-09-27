@@ -101,7 +101,7 @@ class TripStore {
     this.showLogin = !this.showLogin;
   }
 
-  toggleLoading = (showState) => {
+  @action toggleLoading = (showState) => {
     this.loading = showState;
   }
 
@@ -231,10 +231,10 @@ class TripStore {
     this.tempEventArray.push(event);
   }
 
-  // @action emailTrip = () => {
-  //   console.log('user email is', this.user_email)
-  //   console.log('hi')
-  // }
+  @action emailTrip = () => {
+    console.log('user email is', this.user_email)
+    console.log('hi')
+  }
 }
 
 

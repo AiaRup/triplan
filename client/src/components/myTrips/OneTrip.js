@@ -12,6 +12,33 @@ export default class OneTrip extends Component {
   constructor(props) {
     super(props);
 
+
+  //!!get all info from array of trips - make a class?
+  // printTrip = () => {
+  //   const daysArray = this.props.store.plansArray[0].days;
+  //   // const details = {};
+  //   const day = daysArray.map(day => day.date)
+
+  //   const info = daysArray.map(day => {
+  //     return day.places.map(place=>{
+  //       return ([place.name, place.address])
+  //     })
+  //     })
+
+  //   // console.log(JSON.stringify(daysArray))
+  //   console.log(day , info)
+  // }
+
+  // render() {
+
+  //   const divStyle = {
+  //     padding: '5px',
+  //     border: '1px solid lightgrey',
+  //     backgroundColor: 'orange',
+  //     display: 'flex',
+  //     justifyContent: 'center' 
+      
+      
     this.state = {
       activeTab: '1'
     };
@@ -35,8 +62,11 @@ export default class OneTrip extends Component {
     return (
       <div className="container-trip">
         <div className="trip-header">
-          <h2 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h2>
+          {/* <h1> Name Trip: {name}</h1> */}
+      
+          <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
         </div>
+
         <Nav tabs>
           <NavItem className="tab-in-one-trip">
             <NavLink
