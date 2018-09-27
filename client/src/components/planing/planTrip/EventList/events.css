@@ -98,5 +98,13 @@ ul .ReactCollapse--content {
   color: #20313b;
 }
 
+.fade-header {
+  color: #fff;
+  margin: 10px 0;
+  background-color: #20313b;
+  padding: 5px;
+
+}
+
 
 
