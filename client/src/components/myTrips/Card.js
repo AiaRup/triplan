@@ -13,15 +13,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import red from '@material-ui/core/colors/red';
-import purple from '@material-ui/core/colors/purple';
+// import red from '@material-ui/core/colors/red';
+// import purple from '@material-ui/core/colors/purple';
+// const primary = red[500]; // #F44336
+// const primary = purple.A200;
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const primary = red[500]; // #F44336
-// const primary = purple.A200;
 
 @inject(allStores => ({
   query: allStores.store.query,
@@ -81,7 +81,7 @@ class Card extends React.Component {
           <span style={{ marginRight: '10px' }}><MarkerIcon /> {this.props.plan.city}, </span>
           {this.props.plan.days.length === 1 ?
             <span><DayIcon /> {this.props.plan.days.length} Day</span> :
-            <span><DayIcon /> {this.props.plan.days.length} Days</span> }
+            <span><DayIcon /> {this.props.plan.days.length} Days</span>}
         </Link>
 
         <Dialog
@@ -101,7 +101,7 @@ class Card extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color={primary}>
+            <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
             <Button onClick={this.handleDeleteTrip} color="primary">

@@ -30,8 +30,7 @@ class LocationSearchInput extends React.Component {
         console.log('Success', latLng);
         this.props.store.saveAddress(latLng);
         this.props.store.emptyTempEvents();
-        this.props.store.togglePrefernces();
-      } )
+      })
       .catch(error => console.error('Error', error));
     this.setState({ address });
 
@@ -68,8 +67,8 @@ class LocationSearchInput extends React.Component {
                   : 'suggestion-item';
 
                 const style = suggestion.active
-                  ? { backgroundColor: '#f50057', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', color: 'white', width:'253px' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', width:'253px' };
+                  ? { backgroundColor: '#f50057', cursor: 'pointer', margin: '2px', border: '1px solid lightgrey', borderRadius: '3px', padding: '3px', color: 'white', width: '253px' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer', margin: '2px', border: '1px solid lightgrey', borderRadius: '3px', padding: '3px', width: '253px' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {

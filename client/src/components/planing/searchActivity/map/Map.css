@@ -1,3 +1,24 @@
+#Tooltip1 {
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+
+.popover-header {
+  background: #f50057;
+  color: white;
+}
+
+.bs-popover-left .arrow::after {
+  border-left-color: #f50057;
+  right: 1px;
+}
+
+.bs-popover-bottom .arrow::after {
+  border-bottom-color: #f50057;
+  right: 1px;
+}
+
 #map {
   height: 100%
 }
@@ -51,10 +72,10 @@
   /* opacity: 0.9; */
 }
 
-
 .info-box .info-header {
   color: #f50057;
 }
+
 #slider-hours {
   transform: translateX(-150px);
   transition: transform 400ms ease-in;

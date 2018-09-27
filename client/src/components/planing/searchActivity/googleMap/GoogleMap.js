@@ -10,7 +10,6 @@ import _ from 'lodash';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
 import drawStarts from '../../../utils/drawStarts';
-import { Popover, PopoverHeader } from 'reactstrap';
 
 // const google=window.google;
 
@@ -24,20 +23,20 @@ const MapComponent = compose(
       toggleCollapse: false,
       indexCollapse: null
     }),
-  {
-    showInfo: ({ isOpen, infoIndex }) => (index) => ({
-      isOpen: infoIndex !== index || !isOpen,
-      infoIndex: index
-    }),
-    onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
-      isOpenHover: infoIndexHover !== index || !isOpenHover,
-      infoIndexHover: index
-    }),
-    collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
-      toggleCollapse: indexCollapse !== index || !toggleCollapse,
-      indexCollapse: index
-    })
-  },
+    {
+      showInfo: ({ isOpen, infoIndex }) => (index) => ({
+        isOpen: infoIndex !== index || !isOpen,
+        infoIndex: index
+      }),
+      onHoverBox: ({ isOpenHover, infoIndexHover }) => (index) => ({
+        isOpenHover: infoIndexHover !== index || !isOpenHover,
+        infoIndexHover: index
+      }),
+      collapseToggle: ({ toggleCollapse, indexCollapse }) => (index) => ({
+        toggleCollapse: indexCollapse !== index || !toggleCollapse,
+        indexCollapse: index
+      })
+    },
   ),
   withProps({
     googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&language=en&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0',
@@ -88,7 +87,7 @@ const MapComponent = compose(
               bounds.extend(place[0].geometry.location);
             }
 
-            const nextCenter = _.get([{ position: { lat: lat, lng: lng }}], '0.position', this.state.center);
+            const nextCenter = _.get([{ position: { lat: lat, lng: lng } }], '0.position', this.state.center);
             this.setState({
               bounds: bounds,
               center: nextCenter,
@@ -112,9 +111,10 @@ const MapComponent = compose(
               }
             }
           }
+
+          this.props.addPlace(newActivity);
           //close the infoWindow after click add place
           this.props.showInfo(this.props.infoIndex);
-          this.props.addPlace(newActivity);
         },
       });
     }, // end componentWillMount
@@ -122,7 +122,7 @@ const MapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) => {
-  return <div>
+  return <div  >
     <Notification options={{ zIndex: 400, top: '150px' }} />
 
     <GoogleMap
@@ -178,20 +178,11 @@ const MapComponent = compose(
                     {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
                   </div>
                 </div>
-                {/* <div className={props.animate ? 'add-attraction animate zoom' : 'add-attraction'}> */}
                 <div className='add-attraction'>
                   <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
                     <AddIcon />
                   </Button>
-                  {/* <Popover placement="bottom" isOpen={this.state.fadeIn} target="Tooltip" toggle={this.toggleFade}>
-                    <PopoverHeader>Attraction Added to Plan Board!</PopoverHeader>
-                  </Popover> */}
                 </div>
-                {/* <div className="add-attraction">
-                  <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
-                    <AddIcon />
-                  </Button>
-                </div> */}
               </React.Fragment>
             </InfoWindow>}
 

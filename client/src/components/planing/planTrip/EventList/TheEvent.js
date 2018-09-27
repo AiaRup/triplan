@@ -80,7 +80,7 @@ class TheEvent extends Component {
     setTimeout(() => {
       // this.props.toggleAnimation();
       this.toggleFade();
-    }, 1400);
+    }, 98400);
   }
 
   regularOrTempEvent = (toggleCollapse) => {

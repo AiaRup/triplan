@@ -4,6 +4,7 @@ import axios from 'axios';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 import Notification, { notify } from 'react-notify-toast';
+import { Popover, PopoverHeader } from 'reactstrap';
 
 @inject('store')
 @observer
@@ -13,9 +14,17 @@ class Map extends Component {
     this.state = {
       places: props.places,
       markers: [],
+      fadeIn: false
     };
     this.finishMarker = 0;
   }
+
+  toggleFade = () => {
+    this.setState({
+      fadeIn: !this.state.fadeIn
+    });
+  }
+
 
   addMarkers = () => {
 
@@ -71,22 +80,22 @@ class Map extends Component {
             }
             if (attraction.price_level !== undefined) {
               switch (attraction.price_level) {
-              case 0:
-                marker.price = 'Free';
-                break;
-              case 1:
-                marker.price = 'Inexpensive';
-                break;
-              case 2:
-                marker.price = 'Moderate';
-                break;
-              case 3:
-                marker.price = 'Expensive';
-                break;
-              case 4:
-                marker.price = 'Very Expensive';
-                break;
-              default: break;
+                case 0:
+                  marker.price = 'Free';
+                  break;
+                case 1:
+                  marker.price = 'Inexpensive';
+                  break;
+                case 2:
+                  marker.price = 'Moderate';
+                  break;
+                case 3:
+                  marker.price = 'Expensive';
+                  break;
+                case 4:
+                  marker.price = 'Very Expensive';
+                  break;
+                default: break;
               }
             }
             markerArray.push(marker);
@@ -143,16 +152,21 @@ class Map extends Component {
     }
     // add the place to temp places div only if it doesnt already exist
     this.props.store.addPlace(place);
-    this.props.store.toggleAnimation();
+
+    this.toggleFade(); // become true
 
     setTimeout(() => {
-      this.props.store.toggleAnimation();
-    }, 3000);
+      this.toggleFade(); // become false
+    }, 2500);
   }
 
   render() {
     return (
       <React.Fragment>
+        <div id="Tooltip1"></div>
+        <Popover placement="left" isOpen={this.state.fadeIn} target="Tooltip1" toggle={this.toggleFade}>
+          <PopoverHeader>Attraction Added to Plan Board!</PopoverHeader>
+        </Popover>
         <Notification options={{ zIndex: 400, top: '150px' }} />
         <GoogleMap
           togglePrefernces={this.props.store.togglePrefernces}
