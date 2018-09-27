@@ -11,7 +11,7 @@ class TripStore {
 
   //city name in the map
   @observable cityName = 'London';
-  
+
   @observable tripName = 'Name Your Trip';
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
@@ -101,7 +101,7 @@ class TripStore {
     this.showLogin = !this.showLogin;
   }
 
-  toggleLoading = (showState) => {
+  @action toggleLoading = (showState) => {
     this.loading = showState;
   }
 

@@ -4,8 +4,10 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import './home.css';
+import { observer, inject } from 'mobx-react';
 
-
+@inject('store')
+@observer
 class LocationSearchInput extends React.Component {
   constructor(props) {
     super(props);
@@ -18,14 +20,29 @@ class LocationSearchInput extends React.Component {
 
   handleSelect = address => {
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
+      .then(results => {
+        console.log('result', results);
+        this.props.store.saveCity(results[0].address_components[0].short_name);
+        return getLatLng(results[0]);
+      }
+      )
+      .then(latLng => {
+        console.log('Success', latLng);
+        this.props.store.saveAddress(latLng);
+        this.props.store.emptyTempEvents();
+        this.props.store.togglePrefernces();
+      } )
       .catch(error => console.error('Error', error));
+    this.setState({ address });
 
-      this.setState({ address });
+    // this.props.store.togglePrefernces();
+    // this.props.store.saveCity;
+    // this.props.store.emptyTempEvents();
+    // this.props.store.address;
+    // this.props.store.saveAddress(address);
   };
 
-  
+
   render() {
     return (
       <PlacesAutocomplete
@@ -35,13 +52,13 @@ class LocationSearchInput extends React.Component {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <input 
+            <input
               {...getInputProps({
                 placeholder: 'Search City ...',
                 className: 'location-search-input',
                 autoFocus: true
-              })} 
-              
+              })}
+
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
@@ -51,8 +68,8 @@ class LocationSearchInput extends React.Component {
                   : 'suggestion-item';
 
                 const style = suggestion.active
-                  ? { backgroundColor: '#f50057', cursor: 'pointer', margin: '2px',border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', color: 'white', width:'253px'}
-                  : { backgroundColor: '#ffffff', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', width:'253px'};
+                  ? { backgroundColor: '#f50057', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', color: 'white', width:'253px' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer', margin: '2px', border:'1px solid lightgrey', borderRadius: '3px', padding: '3px', width:'253px' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
