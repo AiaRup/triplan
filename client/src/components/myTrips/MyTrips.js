@@ -20,10 +20,6 @@ class MyTrips extends Component {
   }
 
   componentDidMount = () => {
-    // let u_id = this.props.store.user_id;
-    // console.log('user id in store', u_id);
-    // console.log('user id in store', this.props.store.user_id);
-
     // if there is no id in store
     // if (!this.props.store.user_id) {
     const userId = localStorage.getItem('oktaID');
@@ -32,23 +28,17 @@ class MyTrips extends Component {
       axios.get(`/api/users/users/${userId}`)
         .then((response) => {
           console.log('response', response);
-
           // set user trips
           if (response.data.length !== 0) {
-            // axios.get(`api/users/users_trips/${response.data[0]._id}`)
-            // .then(response => {
-            // let plans = response.data;
             let plans = response.data[0].plans;
             this.props.store.savePlans(plans);
             this.props.store.saveFilterPlans(plans);
             // do not show loading gif
             this.setState({ isLoading: false });
-            // })
-            // .catch(error => {
-            //   console.log('Error fetching and parsing user trips', error);
-            // });
           }
-        });
+        }).catch(error => {
+          console.log('Error fetching and parsing user trips', error);
+        });;
     }
   }
   // }

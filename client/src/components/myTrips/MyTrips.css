@@ -49,7 +49,7 @@
 .card:hover {
   -webkit-transform: scale(1.03);
   transform: scale(1.03);
-  cursor: pointer;
+  /* cursor: pointer; */
   z-index: 1;
 }
 
@@ -65,9 +65,13 @@
 
 .icons-container {
   float: right;
+  cursor: pointer;
   /* text-align: right; */
 }
 
+.icons-container:hover {
+  color: #f50057;
+}
 
 @media only screen and (max-width: 660px) {
   .card {
