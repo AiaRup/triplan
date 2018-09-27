@@ -1,48 +1,74 @@
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import Day from './Day';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
-import './oneTrip.css';
 import DayMapView from './DayMapView';
+import classnames from 'classnames';
+import Day from './Day';
+import './oneTrip.css';
+
+//for email
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 @inject('store')
 @observer
 export default class OneTrip extends Component {
   constructor(props) {
     super(props);
-
-
-  //!!get all info from array of trips - make a class?
-  // printTrip = () => {
-  //   const daysArray = this.props.store.plansArray[0].days;
-  //   // const details = {};
-  //   const day = daysArray.map(day => day.date)
-
-  //   const info = daysArray.map(day => {
-  //     return day.places.map(place=>{
-  //       return ([place.name, place.address])
-  //     })
-  //     })
-
-  //   // console.log(JSON.stringify(daysArray))
-  //   console.log(day , info)
-  // }
-
-  // render() {
-
-  //   const divStyle = {
-  //     padding: '5px',
-  //     border: '1px solid lightgrey',
-  //     backgroundColor: 'orange',
-  //     display: 'flex',
-  //     justifyContent: 'center' 
-      
-      
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+
+      //for email
+      open: false,
+      email: ''
     };
   }
+  
+  printTrip = () => {
+    window.print()
+};
+
+  //!! for email
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  enterEmail = (e) => {
+    this.setState({ email: e.target.value })
+  }
+
+  sendAndClose = () => {
+    console.log(this.state.email)
+    const tripArr = [];
+    const daysArray = this.props.plan.days;
+
+    daysArray.map((dayTrip, i) => {
+
+      daysArray[i].places.map(place => {
+        const day = {};
+        day.date = daysArray[i].date;
+        day.name = place.name;
+        day.address = place.address;
+        day.category = place.category;
+
+        tripArr.push(day);
+    });
+  });
+  console.log('tripArr', tripArr)
+
+    this.setState({ open: false });
+};
+
 
   toggle = (tab) => {
     if (this.state.activeTab !== tab) {
@@ -65,7 +91,44 @@ export default class OneTrip extends Component {
           {/* <h1> Name Trip: {name}</h1> */}
       
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
+
+          <button onClick={window.print} className='print-email-btn'>Print Trip</button>
+          <button onClick={this.handleClickOpen} className='print-email-btn'>Email Trip</button>
+
         </div>
+
+        <div className="email-modal">
+          <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Send Trip plan</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Enter An Email To Get The Trip Info
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Email Address"
+                type="email"
+                fullWidth
+                onChange={this.enterEmail}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={()=>this.sendAndClose(this.state.email)} color="primary">
+                Send Trip!
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+
 
         <Nav tabs>
           <NavItem className="tab-in-one-trip">
