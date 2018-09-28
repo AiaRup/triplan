@@ -7,17 +7,10 @@ import './events.css';
 import Notification, { notify } from 'react-notify-toast';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
-// import { Button, Tooltip } from '@material-ui/core';
 import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
 import { UncontrolledTooltip, Popover, PopoverHeader } from 'reactstrap';
-// import { Button, , PopoverBody } from 'reactstrap';
-
 // import Fade from '@material-ui/core/Fade';
-
-
-
-
 
 const Container = styled.div`
   margin: 8px;
@@ -28,7 +21,6 @@ const Container = styled.div`
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;
-
 
 
 @inject(allStores => ({
@@ -75,12 +67,10 @@ class TheEvent extends Component {
 
     this.props.addTempEvent(this.props.tempEvent);
     this.toggleFade();
-    // this.props.toggleAnimation();
 
     setTimeout(() => {
-      // this.props.toggleAnimation();
       this.toggleFade();
-    }, 198400);
+    }, 3000);
   }
 
   regularOrTempEvent = (toggleCollapse) => {
