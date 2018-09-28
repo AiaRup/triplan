@@ -20,7 +20,11 @@ ul {
   list-style: none;
 }
 
-body {
+body,
+html {
+  /* width: 100%; */
+  /* min-height: 100%; */
+  max-height: 100vh;
   background-color: #fff;
 }
 
@@ -30,8 +34,8 @@ body {
   flex-direction: column;
 }
 
-#root {
-  height: 100%;
+#root, .App {
+  height: 100vh;
   font-family: 'Montserrat', sans-serif;
 }
 

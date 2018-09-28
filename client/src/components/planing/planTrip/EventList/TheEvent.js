@@ -65,8 +65,8 @@ class TheEvent extends Component {
     let events = this.props.eventsArray;
     for (var i = 0; i < events.length && !exist; i++) {
       if (events[i].id === this.props.tempEvent.id) {
-        let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('You Already Choose This Event', 'custom', 3500, myColor);
+        let myColor = { background: '#f50057', text: '#FFFFFF' };
+        notify.show('You Already Chose This Event', 'custom', 3000, myColor);
         // alert('You already have this activity place');
         exist = true;
         return;
@@ -80,7 +80,7 @@ class TheEvent extends Component {
     setTimeout(() => {
       // this.props.toggleAnimation();
       this.toggleFade();
-    }, 1400);
+    }, 198400);
   }
 
   regularOrTempEvent = (toggleCollapse) => {
