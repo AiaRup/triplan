@@ -66,7 +66,7 @@ class TheEvent extends Component {
     for (var i = 0; i < events.length && !exist; i++) {
       if (events[i].id === this.props.tempEvent.id) {
         let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('You Already Choose This Event', 'custom', 5000, myColor);
+        notify.show('You Already Choose This Event', 'custom', 3500, myColor);
         // alert('You already have this activity place');
         exist = true;
         return;

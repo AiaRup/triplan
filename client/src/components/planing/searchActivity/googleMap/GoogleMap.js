@@ -65,7 +65,7 @@ const MapComponent = compose(
 
           if (place.length === 0) {
             let myColor = { background: '#e22866', text: '#FFFFFF' };
-            notify.show('Address not found', 'custom', 5000, myColor);
+            notify.show('Address not found', 'custom', 3500, myColor);
             return;
           }
 
@@ -99,7 +99,7 @@ const MapComponent = compose(
           }
           else {
             let myColor = { background: '#e22866', text: '#FFFFFF' };
-            notify.show('Could not display this address', 'custom', 5000, myColor);
+            notify.show('Could not display this address', 'custom', 3500, myColor);
             // check how to clear the input value !
           }
         },

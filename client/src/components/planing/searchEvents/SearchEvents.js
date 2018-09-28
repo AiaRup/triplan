@@ -58,13 +58,13 @@ class SearchEvents extends Component {
 
     if (start === end) {
       let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('You need to choose a different start and end date', 'custom', 5000, myColor);
+      notify.show('You need to choose a different start and end date', 'custom', 3500, myColor);
       return;
     }
 
     if (this.props.eventCategory.length === 0) {
       let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('Please choose an event category', 'custom', 5000, myColor);
+      notify.show('Please choose an event category', 'custom', 3500, myColor);
       return;
     }
 
@@ -99,7 +99,7 @@ class SearchEvents extends Component {
 
           // show toast with 'no event found'
           let myColor = { background: '#20313b', text: '#FFFFFF' };
-          notify.show('No Events Found!', 'custom', 5000, myColor);
+          notify.show('No Events Found!', 'custom', 3500, myColor);
           return;
         }
 

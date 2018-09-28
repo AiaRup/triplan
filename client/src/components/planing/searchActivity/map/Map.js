@@ -118,7 +118,7 @@ class Map extends Component {
 
       if (markerArray.length === 0) {
         let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('No attraction found!', 'custom', 5000, myColor);
+        notify.show('No attraction found!', 'custom', 3500, myColor);
         return;
       }
 
@@ -136,7 +136,7 @@ class Map extends Component {
     for (var i = 0; i < places.length && !exist; i++) {
       if (places[i].id === place.id) {
         let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('You Already Choose This Place', 'custom', 5000, myColor);
+        notify.show('You Already Choose This Place', 'custom', 3500, myColor);
         exist = true;
         return;
       }
