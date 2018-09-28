@@ -21,6 +21,7 @@ class TripStore {
   @observable loading = false;
   @observable isOpenPrefernces = false;
   @observable tripIdToEdit = '';
+  @observable goToMapOnUserClick = true;
 
 
   @observable query = '';
@@ -54,6 +55,12 @@ class TripStore {
   @action toggleAnimation = () => {
     this.animate = !this.animate;
     console.log('isanimate ', this.animate);
+  }
+
+  // prevent user from going to the map on empty input or bad input on Homepage
+  @action toggleGoToMap = (stateToggle) => {
+    this.goToMapOnUserClick = stateToggle;
+    console.log('go to map ', this.goToMapOnUserClick);
   }
 
   // add note to trip array on store
