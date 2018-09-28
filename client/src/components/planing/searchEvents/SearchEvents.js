@@ -57,14 +57,14 @@ class SearchEvents extends Component {
     let end = moment(`/Date(${Date.parse(endDate)})/`).format('dddd, MMMM Do YYYY, h:mm a');
 
     if (start === end) {
-      let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('You need to choose a different start and end date', 'custom', 5000, myColor);
+      let myColor = { background: '#f50057', text: '#FFFFFF' };
+      notify.show('You need to choose a different start and end date', 'custom', 3000, myColor);
       return;
     }
 
     if (this.props.eventCategory.length === 0) {
-      let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('Please choose an event category', 'custom', 5000, myColor);
+      let myColor = { background: '#f50057', text: '#FFFFFF' };
+      notify.show('Please choose an event category', 'custom', 3000, myColor);
       return;
     }
 
@@ -98,8 +98,8 @@ class SearchEvents extends Component {
           this.props.emptyTempEvents();
 
           // show toast with 'no event found'
-          let myColor = { background: '#20313b', text: '#FFFFFF' };
-          notify.show('No Events Found!', 'custom', 5000, myColor);
+          let myColor = { background: '#f50057', text: '#FFFFFF' };
+          notify.show('No Events Found!', 'custom', 3000, myColor);
           return;
         }
 

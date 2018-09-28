@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Place from '../placeList/place/Place';
 import PickDate from './PickDate';
 import TheEvent from '../EventList/TheEvent';
-import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
+import DeleteIcon from '@material-ui/icons/DeleteRounded';
 import './day.css';
 
 

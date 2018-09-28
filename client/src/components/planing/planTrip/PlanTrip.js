@@ -55,23 +55,23 @@ class PlanTrip extends Component {
 
     if (this.props.daysArray.length === 0) {
       // alert('Please add days to your plan')
-      let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('Please add days to your plan', 'custom', 5000, myColor);
+      let myColor = { background: '#f50057', text: '#FFFFFF' };
+      notify.show('Please add days to your plan', 'custom', 3000, myColor);
       return;
     }
 
     if (this.props.tripName === 'Name Your Trip' || this.props.tripName === '') {
       // alert('Please name your trip')
-      let myColor = { background: '#20313b', text: '#FFFFFF' };
-      notify.show('Please name your trip', 'custom', 5000, myColor);
+      let myColor = { background: '#f50057', text: '#FFFFFF' };
+      notify.show('Please name your trip', 'custom', 3000, myColor);
       return;
     }
 
     // check if each day is not empty
     for (let i = 0; i < this.props.daysArray.length; i++) {
       if (this.props.daysArray[i].places.length === 0) {
-        let myColor = { background: '#20313b', text: '#FFFFFF' };
-        notify.show('There is an empty day in your trip', 'custom', 5000, myColor);
+        let myColor = { background: '#f50057', text: '#FFFFFF' };
+        notify.show('There is an empty day in your trip', 'custom', 3000, myColor);
         return;
       }
     }
@@ -249,11 +249,13 @@ class PlanTrip extends Component {
 
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div className='plan-trip-container'>
+
             <div className="name-trip-container">
               <i className="fa fa-pencil edit-trip-label" aria-hidden="true"></i>
               <InlineEdit inputClassName="inlineInput" labelClassName="inlineEdit" text={this.props.tripName} onFocusOut={(data) => {
                 this.props.saveTripName(data);
               }} />
+              <button onClick={this.saveTrip} className="btn save-trip-btn">Save Trip</button>
             </div>
             <div className='place-event-containers'>
               <PlaceList />
@@ -264,7 +266,7 @@ class PlanTrip extends Component {
             {/* <DayList /> */}
           </div>
           {/* <button onClick={() => { if (window.confirm('Are you sure you want to save your trip?')) { this.saveTrip() } }} className="save-trip-btn">Save Trip</button> */}
-          <button onClick={this.saveTrip} className="btn btn-secondary save-trip-btn"></button>
+          {/* <button onClick={this.saveTrip} className="btn save-trip-btn">Save Trip</button> */}
 
         </DragDropContext>
 
@@ -281,7 +283,7 @@ class PlanTrip extends Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              Check you don't forget something...
+            Is your trip perfect now?
             </DialogContentText>
           </DialogContent>
           <DialogActions>

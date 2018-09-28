@@ -3,7 +3,12 @@ import { withRouter } from 'react-router-dom';
 import { default as LocationSearchInput } from './StandAloneSearch';
 import './home.css';
 import { observer, inject } from 'mobx-react';
+import bgImage from '../../images/travelBG.jpg';
 
+const styles = {
+  backgroundImage: `url(${bgImage})`
+
+};
 @inject('store')
 @observer
 class Home extends Component {
@@ -16,7 +21,8 @@ class Home extends Component {
 
   render() {
     return (
-      <div style={{ height: '89.9vh', overflow: 'auto', backgroundImage: 'url(/images/travelBG.jpg)' }}>
+      // <div style={{ height: '89.9vh', overflow: 'auto', backgroundImage: 'url(/images/travelBG.jpg)' }}>
+      <div style={styles} className="bg-home">
         <div className="home-search-container">
           <h1 className="headlineStyle">Where Would You Like to Travel?</h1>
           <div className="search-bar-wrapper">

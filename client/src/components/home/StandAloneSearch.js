@@ -33,12 +33,6 @@ class LocationSearchInput extends React.Component {
       })
       .catch(error => console.error('Error', error));
     this.setState({ address });
-
-    // this.props.store.togglePrefernces();
-    // this.props.store.saveCity;
-    // this.props.store.emptyTempEvents();
-    // this.props.store.address;
-    // this.props.store.saveAddress(address);
   };
 
 

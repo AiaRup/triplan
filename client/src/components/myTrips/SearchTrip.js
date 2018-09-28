@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const SearchTrip = (props) => {
   const handleSearch = (event) => {
     props.searchTrips(event.target.value);
-  }
+  };
 
   return (
-    <div className="row">
+    <div className="row-search" style={{ textAlign: 'center' }}>
       <span style={{
         width: '100%',
         textAlign: 'center'
@@ -17,6 +17,6 @@ const SearchTrip = (props) => {
     </div>
   );
 
-}
+};
 
 export default SearchTrip;

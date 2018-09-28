@@ -60,3 +60,10 @@ h5.place-container-headline {
   color: #fff;
   padding: 5px;
 }
+
+.delete-dragg-place {
+  color: #20313b;
+}
+.delete-dragg-place:hover {
+  cursor: pointer;
+}

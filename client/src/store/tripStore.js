@@ -232,8 +232,8 @@ class TripStore {
   }
 
   @action emailTrip = () => {
-    console.log('user email is', this.user_email)
-    console.log('hi')
+    console.log('user email is', this.user_email);
+    console.log('hi');
   }
 }
 

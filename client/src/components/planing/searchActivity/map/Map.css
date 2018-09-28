@@ -7,17 +7,24 @@
 .popover-header {
   background: #f50057;
   color: white;
+  /* border: 1px solid #f50057; */
 }
 
 .bs-popover-left .arrow::after {
   border-left-color: #f50057;
-  right: 1px;
+  /* border-bottom-color: #f50057; */
+  /* right: 1px; */
 }
 
 .bs-popover-bottom .arrow::after {
   border-bottom-color: #f50057;
-  right: 1px;
+  /* right: 1px; */
 }
+
+.bs-popover-auto[x-placement^=bottom] .popover-header::before, .bs-popover-bottom .popover-header::before {
+    border-bottom: 1px solid #f50057;
+}
+
 
 #map {
   height: 100%

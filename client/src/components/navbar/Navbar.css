@@ -50,12 +50,12 @@
 
 .btn-secondary {
   background-color: #f50057;
-  border-color: #f50057;
+  /* border-color: #f50057; */
 }
 
 .btn-secondary:hover {
   background-color: #f50057;
-  border-color: #f50057;
+  /* border-color: #f50057; */
 }
 
 .activeLink {
