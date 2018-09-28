@@ -93,14 +93,14 @@ class Card extends React.Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-            This Action is Permanent. No turning back.
+              This Action is Permanent. No turning back.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleDeleteTrip} color="primary">
+            <Button onClick={this.handleDeleteTrip} color="secondary">
               Delete
             </Button>
           </DialogActions>

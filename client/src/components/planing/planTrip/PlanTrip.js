@@ -283,14 +283,14 @@ class PlanTrip extends Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-            Is your trip perfect now?
+              Is your trip perfect now?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleSave} color="primary">
+            <Button onClick={this.handleSave} color="secondary">
               Save
             </Button>
           </DialogActions>
