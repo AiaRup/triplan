@@ -85,11 +85,12 @@ export default class OneTrip extends Component {
   render() {
     const { name, days, city } = this.props.plan;
     const notes = this.state.notes;
-    let sortDays = days.sort((a, b) => {
-      let x = a.date;
-      let y = b.date;
-      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    let sortDays = days.slice().sort((a, b) => {
+      a = a.date.split('/').reverse().join('');
+      b = b.date.split('/').reverse().join('');
+      return a > b ? 1 : a < b ? -1 : 0;
     });
+
     return (
       <div className="container-trip">
         <div className="trip-header">
@@ -125,7 +126,7 @@ export default class OneTrip extends Component {
           </NavItem>
           <NavItem className="days-of-trip" disabled>
             <NavLink>
-              {days.length === 1? <span>1 Day in {city}</span> : <span>{days.length} Days in {city}</span>}
+              {days.length === 1 ? <span>1 Day in {city}</span> : <span>{days.length} Days in {city}</span>}
             </NavLink>
           </NavItem>
         </Nav>
@@ -135,7 +136,7 @@ export default class OneTrip extends Component {
               <Col sm="12">
                 <div className="timeline">
                   {sortDays.map((day, i) =>
-                    <Day day={day} index={i} key={i}/>
+                    <Day day={day} index={i} key={i} />
                   )}
                 </div>
               </Col>
@@ -149,13 +150,13 @@ export default class OneTrip extends Component {
           <TabPane tabId="3">
             <Row>
               <Col md="12" lg="4">
-                <InputWithIcon icon="Satisfied" inputLabel="What Did You Enjoy?" notes={notes.good} noteType="good" handleNotesChange={this.handleNotesChange} color='#EBC2C0'/>
+                <InputWithIcon icon="Satisfied" inputLabel="What Did You Enjoy?" notes={notes.good} noteType="good" handleNotesChange={this.handleNotesChange} color='#EBC2C0' />
               </Col>
               <Col md="12" lg="4">
-                <InputWithIcon icon="NotSatisfied" inputLabel="What Went Wrong?" notes={notes.bad} noteType="bad" handleNotesChange={this.handleNotesChange} color='#EBD7C0'/>
+                <InputWithIcon icon="NotSatisfied" inputLabel="What Went Wrong?" notes={notes.bad} noteType="bad" handleNotesChange={this.handleNotesChange} color='#EBD7C0' />
               </Col>
               <Col md="12" lg="4">
-                <InputWithIcon icon="NoteIcon" inputLabel="Other Thoughts?" notes={notes.neutral} noteType="neutral" handleNotesChange={this.handleNotesChange} color='#9E9E9E'/>
+                <InputWithIcon icon="NoteIcon" inputLabel="Other Thoughts?" notes={notes.neutral} noteType="neutral" handleNotesChange={this.handleNotesChange} color='#9E9E9E' />
               </Col>
             </Row>
           </TabPane>
