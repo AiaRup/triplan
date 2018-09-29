@@ -68,7 +68,8 @@
 .content-of-event-dragable {
   color: #000;
   padding: 10px;
-  font-size: 16px;
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
 .to-event-date,

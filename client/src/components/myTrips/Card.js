@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MarkerIcon from '@material-ui/icons/Place';
 import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
-// import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import { observer, inject } from 'mobx-react';
@@ -13,15 +12,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import red from '@material-ui/core/colors/red';
-import purple from '@material-ui/core/colors/purple';
+
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const primary = red[500]; // #F44336
-// const primary = purple.A200;
 
 @inject(allStores => ({
   query: allStores.store.query,
@@ -81,7 +77,7 @@ class Card extends React.Component {
           <span style={{ marginRight: '10px' }}><MarkerIcon /> {this.props.plan.city}, </span>
           {this.props.plan.days.length === 1 ?
             <span><DayIcon /> {this.props.plan.days.length} Day</span> :
-            <span><DayIcon /> {this.props.plan.days.length} Days</span> }
+            <span><DayIcon /> {this.props.plan.days.length} Days</span>}
         </Link>
 
         <Dialog
@@ -97,14 +93,14 @@ class Card extends React.Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              This operation cannot be undone.
+              This Action is Permanent. No turning back.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color={primary}>
+            <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleDeleteTrip} color="primary">
+            <Button onClick={this.handleDeleteTrip} color="secondary">
               Delete
             </Button>
           </DialogActions>

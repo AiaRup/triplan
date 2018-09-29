@@ -56,7 +56,7 @@ class App extends Component {
           <div className="App">
             <Navbar />
             {/* <div className="container-fluid"> */}
-            <div>
+            <div className='wrapper-app'>
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Home />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />

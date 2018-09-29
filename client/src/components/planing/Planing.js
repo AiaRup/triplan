@@ -28,22 +28,6 @@ const styles = theme => ({
   rightIcon: {
     marginLeft: theme.spacing.unit,
   }
-  // planTripTab: {
-  //   border: '1px solid light #000',
-  //   borderRadius: '2px', 
-  //   backgroundColor: '#F50057', 
-  //   color: 'white'
-  // },
-  // tabsMargin: {
-  //   margin: 'auto 150px auto 150px'
-  // },
-  // tabStyle: {
-  //   fontSize: '18px',
-  //   border: '.5px solid #f500562a',
-  //   padding: '20px',
-  //   width: '33%',
-  //   borderRadius: '3px'
-  // }
 });
 
 
@@ -74,13 +58,6 @@ TabContainer.propTypes = {
 class Planing extends Component {
   state = {
     value: 0,
-    // address: { lat: 51.507351, lng: -0.127758 },
-  };
-
-  geoSettings = {
-    enableHighAccuracy: false,
-    maximumAge: 30000,
-    timeout: 60000
   };
 
   handleChange = (event, value) => {
@@ -91,49 +68,10 @@ class Planing extends Component {
     this.setState({ value: index });
   };
 
-  positionDenied = () => {
-    // this.setState({ address: { lat: 51.507351, lng: -0.127758 } });
-    this.props.saveAddress({ lat: 51.507351, lng: -0.127758 });
-  };
-
-  revealPosition = (position) => {
-    // this.setState({ address: { lat: position.coords.latitude, lng: position.coords.longitude } });
-    const address = { lat: position.coords.latitude, lng: position.coords.longitude };
-    console.log('address in reveal position: ', address);
-    this.props.saveAddress(address);
-    // open prefernces
-    this.props.togglePrefernces(true);
-  };
-
-
-  // Start everything off
-  handlePermission = () => {
-    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      if (result.state === 'granted') {
-        console.log('Permission to get user location: ' + result.state);
-        navigator.geolocation.getCurrentPosition(this.revealPosition, this.positionDenied, this.geoSettings);
-      } else if (result.state === 'prompt') {
-        console.log('Permission to get user location:: ' + result.state);
-        navigator.geolocation.getCurrentPosition(this.revealPosition, this.positionDenied, this.geoSettings);
-      } else if (result.state === 'denied') {
-        console.log('Permission to get user location:: ' + result.state);
-      }
-      result.onchange = () => {
-        console.log('Permission to get user location:: ' + result.state);
-      };
-    });
-  }
-
   resetTrip = () => {
     this.props.restStoreTrip();
   }
 
-  componentDidMount = () => {
-    if (!('geolocation' in navigator)) {
-      alert('No geolocation available!');
-    }
-    this.handlePermission();
-  }
 
   render() {
     const { classes, theme } = this.props;
@@ -148,10 +86,10 @@ class Planing extends Component {
             indicatorColor="secondary"
             textColor="secondary"
             centered
-            >
-            <Tab label="Find Attractions" icon={<MarkerIcon />} style={{ borderRight: '1px solid light #eee'}} className={classes.tabStyle} />
-            <Tab label="Find Events" icon={<EventIcon />} className={`${classes.tabStyle} ${classes.tabsMargin}`}/>
-            <Tab label="Plan Your Trip" icon={<ScheduleIcon />} className={`${classes.planTripTab} ${classes.tabStyle}`}  />
+          >
+            <Tab label="Find Attractions" icon={<MarkerIcon />} style={{ borderRight: '1px solid light #eee' }} className={classes.tabStyle} />
+            <Tab label="Find Events" icon={<EventIcon />} className={`${classes.tabStyle} ${classes.tabsMargin}`} />
+            <Tab label="Plan Your Trip" icon={<ScheduleIcon />} className={`${classes.planTripTab} ${classes.tabStyle}`} />
           </Tabs>
           {/* <SwipeableViews
              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
