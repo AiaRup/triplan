@@ -6,7 +6,6 @@ const { Schema } = mongoose;
 let daySchema = new Schema({
   date: String,
   places: [Schema.Types.Mixed],
-  notes: [String]
 });
 // let daySchema = new Schema({
 //   date: String,

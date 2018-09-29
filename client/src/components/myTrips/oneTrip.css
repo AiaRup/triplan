@@ -219,7 +219,7 @@ Tab TimeLine
 @media screen and (max-width: 1000px) {
   .container-trip {
     width: 100%;
-    min-width: 778px;
+    /* min-width: 778px; */
     padding: 8px;
   }
 }
@@ -245,10 +245,6 @@ Tab TimeLine
     border-color: transparent #20313b transparent transparent;
   }
 
-  /* .content-att {
-    left: 50px;
-  } */
-
 /* Make sure all circles are at the same spot */
   .left-att::after, .right-att::after {
     left: -38px;
@@ -272,7 +268,7 @@ Tab Map
 /*=============
 Notes
 ==============*/
-
+/*
 .notes {
   flex-basis: 25%;
   margin: 0;
@@ -315,12 +311,12 @@ Notes
 
 .mapDay {
   /* width: 50vw; */
-  flex-basis: 40%;
+  /* flex-basis: 40%;
   -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-}
-
+} */
+/*
 .list-attractions {
   list-style: initial;
   color: #000;
@@ -365,5 +361,5 @@ Notes
 
 .note label:hover {
   cursor: text;
-}
+} */
 
