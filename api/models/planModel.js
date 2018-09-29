@@ -7,7 +7,8 @@ let planSchema = new Schema({
   days: [Day],
   city: String,
   tempPlaces: { type:[Schema.Types.Mixed], default: [] },
-  tempEvents: { type:[Schema.Types.Mixed], default: [] }
+  tempEvents: { type:[Schema.Types.Mixed], default: [] },
+  notes: { type:Schema.Types.Mixed, default: {}}
 }, { minimize: false }, { usePushEach: true });
 
 let Plan = mongoose.model('plan', planSchema);

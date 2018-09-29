@@ -87,7 +87,12 @@ class PlanTrip extends Component {
         city: this.props.cityName
       },
       tempPlaces: this.props.placesArray,
-      tempEvents: this.props.eventsArray
+      tempEvents: this.props.eventsArray,
+      notes: {
+        good: [],
+        bad: [],
+        neutral: []
+      }
     };
 
 

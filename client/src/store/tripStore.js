@@ -92,6 +92,14 @@ class TripStore {
     // this.filter_plans = plans;
   }
 
+  @action updatePlanInStore = (planToUpdate) => {
+    this.plansArray.map((plan, i) => {
+      if (plan._id === planToUpdate._id) {
+        this.plansArray[i] = planToUpdate;
+      }
+    });
+  }
+
   // save trip Id when user is editing a trip
   @action saveTripId = (tripId) => {
     this.tripIdToEdit = tripId;

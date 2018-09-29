@@ -27,7 +27,9 @@ function onAuthRequired({ history }) {
 @observer
 class App extends Component {
 
+  updatePlanInApp = (plan) => {
 
+  }
 
   componentDidMount = () => {
     const userId = localStorage.getItem('oktaID');

@@ -38,7 +38,7 @@ class MyTrips extends Component {
           }
         }).catch(error => {
           console.log('Error fetching and parsing user trips', error);
-        });;
+        });
     }
   }
   // }

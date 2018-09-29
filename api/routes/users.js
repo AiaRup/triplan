@@ -74,7 +74,12 @@ router.post('/users/:id/plantrip', (req, res) => {
   const newPlan = {
     name: req.body.plan.name,
     days: req.body.plan.days,
-    city: req.body.plan.city
+    city: req.body.plan.city,
+    notes: {
+      good: [],
+      bad: [],
+      neutral: []
+    }
   };
 
   Plan.create(newPlan, (err, planResult) => {
@@ -164,43 +169,31 @@ router.get('/placeSearch/:placeID', (req, res) => {
 
 
 // 4) to update notes of user's plan
-
-router.post('/users/:idUser/plantrip/:idPlan/days/:idDay', (req, res) => {
+router.post('/users/:idUser/:idPlan/notes', (req, res) => {
   const idUser = req.params.idUser;
   const idPlan = req.params.idPlan;
-  const idDay = req.params.idDay;
 
   // check mongo id validation
-  if (!ObjectID.isValid(idUser) || !ObjectID.isValid(idPlan) || !ObjectID.isValid(idDay)) {
+  if (!ObjectID.isValid(idUser) || !ObjectID.isValid(idPlan)) {
     return res.status(400).send('Id not in the correct format');
   }
 
-  const newNote = req.body.plan.note; // !check in client how to pass in body the note
+  const newNotes = req.body.notes;
+  console.log('note arrive to server', newNotes);
 
-  // Plan.create(newNote, (err, noteResult) => {
-  //   if (err) throw err;
-  //   // update the user' plan with the new
-  //   User.findByIdAndUpdate(idUser, { $push: { /*????*/ } }, { new: true }, (err, updateUser) => {
-  //     if (err) throw err;
-  //     console.log('newUser updated', updateUser);
-  //     res.status(200).send(updateUser);
-  //   });
+  // update Plan model on server
+  Plan.findByIdAndUpdate(idPlan, { notes: newNotes }, { new: true }, (err, updatePlan) => {
+    if (err) throw err;
+    console.log('new plan updated', updatePlan);
+  });
 
-  // User.findByIdAndUpdate(idUser, (error, data) => {
-  //   if (error) throw error;
-  //   else {
-  //     console.log('data plans ', data.plans);
-  // loop over plans and find the one idPlan, then find the right day by idDay
-
-
-  // User.findByIdAndUpdate(req.params.id, { $push: { plans: planResult }, tempPlaces: req.body.tempPlaces, tempEvents: req.body.tempEvents }, { new: true }, (err, updateUser) => {
-  //   if (err) throw err;
-  //   console.log('newUser updated', updateUser);
-  //   res.status(200).send(updateUser);
-  // });
-  // }
-  // });
-  // });
+  // update user plan notes on user model
+  User.findOneAndUpdate({ '_id': idUser, 'plans._id': idPlan }, { $set: { 'plans.$.notes': newNotes }}, { new: true }, (error, data) => {
+  // User.findByIdAndUpdate({ '_id': idUser, 'plans._id': idPlan }, { $set: { 'plans.$.notes': newNotes }}, (error, data) => {
+    if (error) throw error;
+    console.log('data plans on user new server ', data.plans);
+    res.status(200).send(data.plans);
+  });
 });
 
 
@@ -214,7 +207,6 @@ router.delete('/users/:userId/myTrips/:tripId', (req, res) => {
     if (err) throw err;
     res.status(200).send(updatedUser);
   });
-
 });
 
 
