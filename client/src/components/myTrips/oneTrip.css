@@ -213,6 +213,22 @@ Tab TimeLine
   display: table;
 }
 
+/* email */
+.print-email-btn {
+  background-color: orange;
+  width: 100px;
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  height: 35px;
+  margin: 20px;
+  border: 1px lightgray solid;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.print-email-btn:hover {
+  background-color: #f50057;;
+}
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
 
