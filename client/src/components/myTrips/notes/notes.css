@@ -30,23 +30,27 @@
   margin-bottom: .2rem;
 }
 
-.icon-input-note {
-
-}
-
-.delete-note-icon:hover {
+.delete-note-icon svg:hover {
   cursor: pointer;
   color: rgb(238, 95, 95);
 }
 
+.editNote-input:focus {
+  outline: none;
+}
+
+.editNote-input:hover {
+  cursor: text;
+}
+
 
 @media screen and (max-width: 992px) {
-  .MuiGrid-item-122:nth-child(even) {
+  /* .MuiGrid-item-122:nth-child(even) {
     width: calc(100% - 32px);
   }
   .MuiGrid-item-122 div {
     width: calc(100% - 32px);
-  }
+  } */
   .tab-content .col-md-12 {
     text-align: center;
   }

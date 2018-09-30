@@ -8,8 +8,8 @@ class Note extends Component {
 
   handleDelete = () => {
     this.props.handleNote(this.props.noteType, 'delete', this.props.index);
-    console.log('delete button');
   }
+
 
   render() {
     return (
@@ -17,8 +17,8 @@ class Note extends Component {
         <i className="fa fa-pencil pencil-notes" aria-hidden="true"></i>
         <InlineEdit
           text={this.props.note} onFocusOut={(data) => {
-            console.log('new note', data);
-          }} onFocus={this._handleFocus} inputClassName="editNote-input"/>
+            this.props.handleNote(this.props.noteType, 'update', this.props.index, data);
+          }} inputClassName="editNote-input"/>
         <span className="delete-note-icon">
           <DeleteIcon onClick={this.handleDelete}/>
         </span>

@@ -45,8 +45,6 @@ class InputWithIcon extends Component {
   handleSubmit = (event) => {
     if (event.keyCode === 13) {
       this.props.handleNotesChange(this.props.noteType, 'add', 0, this.state.value);
-      console.log('in submit note to add', this.state.value);
-      // this.setState({ value: '' });
       event.preventDefault();
     }
   }
@@ -74,7 +72,6 @@ class InputWithIcon extends Component {
                     classes={{
                       underline: this.classes.cssUnderline }}
                     onChange={this.handleChange}
-                    // value={this.state.value}
                   />
                 </FormControl>
               </form>
