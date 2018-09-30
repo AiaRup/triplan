@@ -96,14 +96,14 @@ class PlanTrip extends Component {
     };
 
 
-    console.log('trip to server', tripUser);
+    // console.log('trip to server', tripUser);
 
     axios.post(`/api/users/users/${this.props.user_id}/plantrip`, tripUser)
       .then(response => {
         // notify user
         // notify.show('Trip Saved successfully', 'success', 5000);
 
-        console.log('back to axios', response);
+        // console.log('back to axios', response);
         const id = response.data.plans[response.data.plans.length - 1]._id;
         const plan = response.data.plans[response.data.plans.length - 1];
 

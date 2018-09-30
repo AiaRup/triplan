@@ -61,13 +61,12 @@ export default class OneTrip extends Component {
     // update notes on server
     axios.post(`/api/users/users/${this.props.store.user_id}/${this.props.plan._id}/notes`, { notes })
       .then((response) => {
-        // const planToUpdate = response.filter((plan) => plan._id === this.props.plan._id);
-        this.setState({ notes: response.data[0].notes });
-        this.props.store.updatePlanInStore(response.data[0]);
-        console.log('res notes server', response);
+        console.log('res notes from server', response);
+        const newPlanFromServer = response.data.filter((plan) => plan._id === this.props.plan._id);
+        console.log('newplanfromserver', newPlanFromServer);
 
-        // this.setState({ notes: response.notes })
-        console.log(response);
+        // const planToUpdate = response.filter((plan) => plan._id === this.props.plan._id);
+        this.setState({ notes: newPlanFromServer[0].notes }, () => this.props.store.updatePlanInStore(newPlanFromServer[0]));
       })
       .catch((error) => {
         console.log(error);

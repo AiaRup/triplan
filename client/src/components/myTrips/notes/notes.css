@@ -3,7 +3,7 @@
   background-color: rgb(157, 229, 157);
   width: 100%;
   margin: 10px;
-  flex: 1 1 auto;
+  /* flex: 1 1 auto; */
   transition: width 0.7s ease-out;
   padding: 10px;
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2)
@@ -52,10 +52,11 @@
   }
   .notes-container {
     flex-direction: row;
-    /* align-items: baseline; */
+    justify-content: space-between;
+    padding: 20px;
   }
   .one-note {
-    width: 30%;
+    width: 350px;
     align-self: center
     }
 }
