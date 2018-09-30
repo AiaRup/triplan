@@ -265,7 +265,7 @@ Tab TimeLine
 
 /* Make sure that all arrows are pointing leftwards */
   .container-att::before {
-    left: 5px;
+    left: 29px;
     top: 33px;
     border: medium solid rgb(32, 49, 59);
     border-width: 10px 10px 10px 0;
