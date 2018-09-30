@@ -86,6 +86,10 @@
   .day-content-map-view {
     display: block;  }
     #map-canvas {
-      width: 400px;
+      flex-basis: 400px;
     }
+  }
+@media screen and (max-width: 500px) {
+  #map-canvas {
+    flex-basis: 300px;  }
   }

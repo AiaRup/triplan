@@ -157,7 +157,7 @@ class Map extends Component {
 
     setTimeout(() => {
       this.toggleFade(); // become false
-    }, 2500);
+    }, 1500);
   }
 
   render() {

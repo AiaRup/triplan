@@ -253,7 +253,7 @@ Tab TimeLine
   }
 
   .container-trip .container-att{
-    width: 600px;
+    width: 80%;
   }
 
 /* Full-width containers */
@@ -287,13 +287,46 @@ Tab TimeLine
     margin: 0;
   }
   .trip-header {
-    width: 450px;
+    width:90%;
     margin: 15px auto;
   }
   .trip-header h1 {
     font-size: 30px;
   }
 }
+
+@media screen and (max-width: 450px) {
+.content-att {
+  padding: 15px;
+
+}
+.container-trip .container-att{
+  width: 95%;
+  padding: 10px;
+}
+
+.container-att {
+  margin: 0;
+  /* content: none; */
+
+}
+.container-att::before, .container-att::after {
+  content: none;
+  background-color: none;
+  border: none;
+}
+.day-date {
+  margin: 0 0 5px 0;
+}
+
+}
+
+/* @media screen and (max-width: 778px) {
+  .trip-header {
+    width: 450px;
+    margin: 15px auto;
+  }
+} */
 
 /*=============
 Tab Map
