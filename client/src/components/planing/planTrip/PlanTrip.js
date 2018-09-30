@@ -4,7 +4,6 @@ import { observer, inject } from 'mobx-react';
 import DayList from './dayList/DayList';
 import PlaceList from '../../planing/planTrip/placeList/PlaceList';
 import EventList from './EventList/EventList';
-// import _ from 'lodash';
 import './planTrip.css';
 import axios from 'axios';
 import Notification, { notify } from 'react-notify-toast';
