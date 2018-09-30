@@ -52,7 +52,7 @@ class Home extends Component {
       } else if (result.state === 'denied') {
         console.log('Permission to get user location:: ' + result.state);
         let myColor = { background: '#f50057', text: '#FFFFFF' };
-        notify.show('Previously you refused to confirm location. Please give permission to access your location in the browser setting.', 'custom', 3000, myColor);
+        notify.show('Previously you refused to access your location. Please give permission to access your location in the browser setting.', 'custom', 3000, myColor);
         this.props.store.toggleGoToMap(false);
       }
       result.onchange = () => {

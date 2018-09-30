@@ -7,6 +7,7 @@ import NotSatisfied from '@material-ui/icons/SentimentDissatisfiedOutlined';
 import NoteIcon from '@material-ui/icons/NoteAddOutlined';
 import pink from '@material-ui/core/colors/pink';
 import Note from './Note';
+import uuidv1 from 'uuid/v1';
 import './notes.css';
 
 const styles = theme => ({
@@ -37,17 +38,16 @@ class InputWithIcon extends Component {
 
   handleChange = (event) => {
     this.setState({ value: event.target.value });
-    console.log('in change input', event.target.value);
+    // console.log('in change input', event.target.value);
 
   }
 
   handleSubmit = (event) => {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this.props.handleNotesChange(this.props.noteType, 'add', 0, this.state.value);
-      console.log('in submit', this.state.value);
-      this.setState({ value: '' });
+      console.log('in submit note to add', this.state.value);
+      // this.setState({ value: '' });
       event.preventDefault();
-
     }
   }
 
@@ -74,6 +74,7 @@ class InputWithIcon extends Component {
                     classes={{
                       underline: this.classes.cssUnderline }}
                     onChange={this.handleChange}
+                    // value={this.state.value}
                   />
                 </FormControl>
               </form>
@@ -81,7 +82,7 @@ class InputWithIcon extends Component {
           </Grid>
         </div>
         <div className="notes-container">
-          {this.props.notes.map((note, i) => <Note key={i} note={note} index={i} handleNote={this.props.handleNotesChange} noteType={this.props.noteType} color={this.props.color}/>)}
+          {this.props.notes.map((note, i) => <Note key={uuidv1()} note={note} index={i} handleNote={this.props.handleNotesChange} noteType={this.props.noteType} color={this.props.color}/>)}
         </div>
       </div>
     );
