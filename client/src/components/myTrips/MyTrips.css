@@ -9,6 +9,8 @@
 
 .search-bar:focus {
   outline-style: none;
+  border-bottom: 1px solid #f50057;
+  outline-style: none;
 }
 
 .card-list {
