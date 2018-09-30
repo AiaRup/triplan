@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "concurrently": "^4.0.1",
+    "nodemailer": "^4.6.8",
     "react-places-autocomplete": "^7.2.0"
   }
 }

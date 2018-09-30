@@ -14,6 +14,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+// import nodemailer from 'nodemailer';
+
 
 
 @inject('store')
@@ -35,39 +37,40 @@ export default class OneTrip extends Component {
 };
 
   //!! for email
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+//   handleClickOpen = () => {
+//     this.setState({ open: true });
+//   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+//   handleClose = () => {
+//     this.setState({ open: false });
+//   };
 
-  enterEmail = (e) => {
-    this.setState({ email: e.target.value })
-  }
+//   enterEmail = (e) => {
+//     this.setState({ email: e.target.value })
+//   }
 
-  sendAndClose = () => {
-    console.log(this.state.email)
-    const tripArr = [];
-    const daysArray = this.props.plan.days;
+//   sendAndClose = (e) => {
+//     e.preventDefualt()
+//     console.log(this.state.email)
+//     const tripArr = [];
+//     const daysArray = this.props.plan.days;
 
-    daysArray.map((dayTrip, i) => {
+//     daysArray.map((dayTrip, i) => {
 
-      daysArray[i].places.map(place => {
-        const day = {};
-        day.date = daysArray[i].date;
-        day.name = place.name;
-        day.address = place.address;
-        day.category = place.category;
+//       daysArray[i].places.map(place => {
+//         const day = {};
+//         day.date = daysArray[i].date;
+//         day.name = place.name;
+//         day.address = place.address;
+//         day.category = place.category;
 
-        tripArr.push(day);
-    });
-  });
-  console.log('tripArr', tripArr)
+//         tripArr.push(day);
+//     });
+//   });
+//   console.log('tripArr', tripArr)
 
-    this.setState({ open: false });
-};
+//     this.setState({ open: false });
+// };
 
 
   toggle = (tab) => {
@@ -93,7 +96,7 @@ export default class OneTrip extends Component {
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
 
           <button onClick={window.print} className='print-email-btn'>Print Trip</button>
-          <button onClick={this.handleClickOpen} className='print-email-btn'>Email Trip</button>
+          {/* <button onClick={this.handleClickOpen} className='print-email-btn'>Email Trip</button> */}
 
         </div>
 
@@ -103,6 +106,7 @@ export default class OneTrip extends Component {
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
           >
+          {/* <form action="send" method="POST"> */}
             <DialogTitle id="form-dialog-title">Send Trip plan</DialogTitle>
             <DialogContent>
               <DialogContentText>
@@ -122,10 +126,11 @@ export default class OneTrip extends Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button onClick={()=>this.sendAndClose(this.state.email)} color="primary">
+              <Button type="submit" onClick={()=>this.sendAndClose(this.state.email)} color="primary">
                 Send Trip!
               </Button>
             </DialogActions>
+            {/* </form> */}
           </Dialog>
         </div>
 
