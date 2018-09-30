@@ -8,7 +8,11 @@ import bgImage from '../../images/travelBG.jpg';
 import Notification, { notify } from 'react-notify-toast';
 
 const styles = {
-  backgroundImage: `url(${bgImage})`
+  // backgroundImage: `url(${bgImage})`
+  // background: `linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
+  //   url(${bgImage})`
+  background: `linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.1)),
+    url(${bgImage})`
 
 };
 @inject('store')

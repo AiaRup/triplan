@@ -215,7 +215,7 @@ Tab TimeLine
 
 /* email */
 .print-email-btn {
-  background-color: orange;
+  /* background-color: orange;
   width: 100px;
   border-radius: 5px;
   color: rgb(255, 255, 255);
@@ -223,11 +223,18 @@ Tab TimeLine
   margin: 20px;
   border: 1px lightgray solid;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 18px; */
+  color: rgb(136, 132, 132);
+  width: 100%;
+  padding: 0 20px;
+  text-align: right;
+  display:block;
+
 }
 
 .print-email-btn:hover {
-  background-color: #f50057;;
+  /* background-color: #f50057;; */
+  cursor: pointer;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
@@ -245,9 +252,13 @@ Tab TimeLine
     left: 70px;
   }
 
+  .container-trip .container-att{
+    width: 80%;
+  }
+
 /* Full-width containers */
   .container-att {
-    width: 600px;
+    /* width: 600px; */
     margin: 0 81px;
     padding: 25px;
   }
@@ -256,7 +267,7 @@ Tab TimeLine
   .container-att::before {
     left: 5px;
     top: 33px;
-    border: medium solid #20313b;
+    border: medium solid rgb(32, 49, 59);
     border-width: 10px 10px 10px 0;
     border-color: transparent #20313b transparent transparent;
   }
@@ -275,7 +286,47 @@ Tab TimeLine
   .day-date {
     margin: 0;
   }
+  .trip-header {
+    width:90%;
+    margin: 15px auto;
+  }
+  .trip-header h1 {
+    font-size: 30px;
+  }
 }
+
+@media screen and (max-width: 450px) {
+.content-att {
+  padding: 15px;
+
+}
+.container-trip .container-att{
+  width: 95%;
+  padding: 10px;
+}
+
+.container-att {
+  margin: 0;
+  /* content: none; */
+
+}
+.container-att::before, .container-att::after {
+  content: none;
+  background-color: none;
+  border: none;
+}
+.day-date {
+  margin: 0 0 5px 0;
+}
+
+}
+
+/* @media screen and (max-width: 778px) {
+  .trip-header {
+    width: 450px;
+    margin: 15px auto;
+  }
+} */
 
 /*=============
 Tab Map
@@ -356,19 +407,6 @@ Notes
   line-height: 32px;
 }
 
-.editNote-input {
-  line-height: 32px;
-  background-color: #20313b;
-  color: #fff;
-}
-
-.editNote-input:focus {
-  outline: none;
-}
-
-.editNote-input:hover {
-  cursor: text;
-}
 
 .note label {
   margin-bottom: 0;

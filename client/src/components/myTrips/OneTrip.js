@@ -2,6 +2,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import DayMapView from './DayMapView';
+import PrintIcon from '@material-ui/icons/PrintRounded';
 import classnames from 'classnames';
 import Day from './Day';
 import './oneTrip.css';
@@ -18,7 +19,7 @@ import './oneTrip.css';
 
 
 // import DayMapView from './DayMapView';
-import InputWithIcon from './notes/inputField';
+import InputWithIcon from './notes/InputWithIcon';
 import axios from 'axios';
 
 @inject('store')
@@ -35,46 +36,46 @@ export default class OneTrip extends Component {
       email: ''
     };
   }
-  
+
   printTrip = () => {
-    window.print()
-};
+    window.print();
+  };
 
   //!! for email
-//   handleClickOpen = () => {
-//     this.setState({ open: true });
-//   };
+  //   handleClickOpen = () => {
+  //     this.setState({ open: true });
+  //   };
 
-//   handleClose = () => {
-//     this.setState({ open: false });
-//   };
+  //   handleClose = () => {
+  //     this.setState({ open: false });
+  //   };
 
-//   enterEmail = (e) => {
-//     this.setState({ email: e.target.value })
-//   }
+  //   enterEmail = (e) => {
+  //     this.setState({ email: e.target.value })
+  //   }
 
-//   sendAndClose = (e) => {
-//     e.preventDefualt()
-//     console.log(this.state.email)
-//     const tripArr = [];
-//     const daysArray = this.props.plan.days;
+  //   sendAndClose = (e) => {
+  //     e.preventDefualt()
+  //     console.log(this.state.email)
+  //     const tripArr = [];
+  //     const daysArray = this.props.plan.days;
 
-//     daysArray.map((dayTrip, i) => {
+  //     daysArray.map((dayTrip, i) => {
 
-//       daysArray[i].places.map(place => {
-//         const day = {};
-//         day.date = daysArray[i].date;
-//         day.name = place.name;
-//         day.address = place.address;
-//         day.category = place.category;
+  //       daysArray[i].places.map(place => {
+  //         const day = {};
+  //         day.date = daysArray[i].date;
+  //         day.name = place.name;
+  //         day.address = place.address;
+  //         day.category = place.category;
 
-//         tripArr.push(day);
-//     });
-//   });
-//   console.log('tripArr', tripArr)
+  //         tripArr.push(day);
+  //     });
+  //   });
+  //   console.log('tripArr', tripArr)
 
-//     this.setState({ open: false });
-// };
+  //     this.setState({ open: false });
+  // };
 
 
   handleNotesChange = (noteType, action, i, text) => {
@@ -127,7 +128,8 @@ export default class OneTrip extends Component {
 
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
 
-          <button onClick={window.print} className='print-email-btn'>Print Trip</button>
+          <span onClick={window.print} className='print-email-btn'><PrintIcon/></span>
+          {/* <button onClick={window.print} className='print-email-btn'>Print Trip</button> */}
           {/* <button onClick={this.handleClickOpen} className='print-email-btn'>Email Trip</button> */}
 
         </div>
@@ -138,8 +140,8 @@ export default class OneTrip extends Component {
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
           > */}
-          {/* <form action="send" method="POST"> */}
-            {/* <DialogTitle id="form-dialog-title">Send Trip plan</DialogTitle>
+        {/* <form action="send" method="POST"> */}
+        {/* <DialogTitle id="form-dialog-title">Send Trip plan</DialogTitle>
             <DialogContent>
               <DialogContentText>
                 Enter An Email To Get The Trip Info
@@ -162,8 +164,8 @@ export default class OneTrip extends Component {
                 Send Trip!
               </Button>
             </DialogActions> */}
-            {/* </form> */}
-          {/* </Dialog>
+        {/* </form> */}
+        {/* </Dialog>
         </div> */}
 
 

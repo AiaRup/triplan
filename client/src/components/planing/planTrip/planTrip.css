@@ -30,11 +30,9 @@ height: auto;
   height: 80px;
   top: 0px;
   border-radius: 50%;
-  background-color: #f8a100;
-  background-image: linear-gradient(to left top, #20313b, #26416b, #67438c, #b82c86, #f50057);
-  /* background-image: linear-gradient(to left top, #ffffff, #eed4f8, #f3a2da, #fc66a3, #f50057); */
-  /* background-image: linear-gradient(to left top, #f8a100, #ff841a, #ff6430, #ff3f43, #f50057); */
+  background-color: #876A49;
   color: #fff;
+  /* color: black; */
   /* border: 1px solid #f86300; */
   box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
   font-size: 14px;
@@ -46,35 +44,13 @@ height: auto;
   font-size: 16px;
 } */
 
-.save-trip-btn:hover {
-  /* background-color: #dba135; */
-  background-image: linear-gradient(to right bottom, #20313b, #26416b, #67438c, #b82c86, #f50057);
-  /* background-image: linear-gradient(to right bottom, #ffffff, #eed4f8, #f3a2da, #fc66a3, #f50057); */
-  /* background-image: linear-gradient(to right bottom, #f8a100, #ff841a, #ff6430, #ff3f43, #f50057); */
-  /* width: 12%;
-  height: 50px;
-  transition: .3s ease;
-  border-radius: 5px;
-  font-size: 20px; */
-  color: #fff;
+.save-trip-btn:hover, .save-trip-btn:active {
+  background-color: #C4C4C4;;
+  color: #000;
   border: none;
 
 }
 
-.save-trip-btn:active {
-  /* background-color: #dba135; */
-  background-image: linear-gradient(to right bottom, #20313b, #26416b, #67438c, #b82c86, #f50057);
-  /* background-image: linear-gradient(to right bottom, #ffffff, #eed4f8, #f3a2da, #fc66a3, #f50057); */
-  /* background-image: linear-gradient(to right bottom, #f8a100, #ff841a, #ff6430, #ff3f43, #f50057); */
-  /* width: 12%;
-  height: 50px;
-  transition: .3s ease;
-  border-radius: 5px;
-  font-size: 20px; */
-  color: #fff;
-  border: none;
-
-}
 
 /* .save-trip-btn:hover:after {
   content: 'Save Trip';

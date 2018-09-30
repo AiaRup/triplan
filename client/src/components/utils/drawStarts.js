@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function drawStarts(stars) {
   const starsToDraw = [];
-  if (!stars) {
+  if (!stars || stars === 'Unknown') {
     return;
   }
   if (stars % 1 === 0) {
