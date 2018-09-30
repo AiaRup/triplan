@@ -1,0 +1,63 @@
+
+.one-note {
+  background-color: rgb(157, 229, 157);
+  width: 100%;
+  margin: 10px;
+  /* flex: 1 1 auto; */
+  transition: width 0.7s ease-out;
+  padding: 10px;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2)
+}
+
+.one-note div {
+  display: inline-block;
+  margin: 3px 5px;
+}
+
+.one-note svg {
+  display: block;
+  margin-left: auto}
+
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+.MuiSvgIcon-root-215 {
+  margin-bottom: .2rem;
+}
+
+.icon-input-note {
+
+}
+
+.delete-note-icon:hover {
+  cursor: pointer;
+  color: rgb(238, 95, 95);
+}
+
+
+@media screen and (max-width: 992px) {
+  .MuiGrid-item-122:nth-child(even) {
+    width: calc(100% - 32px);
+  }
+  .MuiGrid-item-122 div {
+    width: calc(100% - 32px);
+  }
+  .tab-content .col-md-12 {
+    text-align: center;
+  }
+  .notes-container {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  .one-note {
+    width: 350px;
+    align-self: center
+    }
+}
+

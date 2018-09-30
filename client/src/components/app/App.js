@@ -22,12 +22,11 @@ function onAuthRequired({ history }) {
   tripIdSaved: allStores.store.tripIdToEdit,
   configUser: allStores.store.configUser,
   plans: allStores.store.plansArray,
-  userInStore: allStores.store.user_id
+  userInStore: allStores.store.user_id,
+  savePlans: allStores.store.savePlans
 }))
 @observer
 class App extends Component {
-
-
 
   componentDidMount = () => {
     const userId = localStorage.getItem('oktaID');
@@ -37,8 +36,10 @@ class App extends Component {
         .then((response) => {
           // set user id on store
           if (response.data.length !== 0) {
-            if (this.props.userInStore !== response.data[0]._id)
+            if (this.props.userInStore !== response.data[0]._id) {
               this.props.configUser(response.data[0]._id);
+              // this.props.savePlans(response.data[0].plans);
+            }
           }
         });
     }

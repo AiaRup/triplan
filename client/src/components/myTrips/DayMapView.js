@@ -17,7 +17,7 @@ const DayMapView = (props) => {
   positions.splice(positions.length - 1, 1);
   route.waypoints = positions;
 
-  console.log('route', route);
+  // console.log('route', route);
 
   const getLetter = (index) => {
     const startLetter = 65;

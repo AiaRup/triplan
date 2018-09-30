@@ -27,7 +27,7 @@ class MyTrips extends Component {
       // get user id from mongo
       axios.get(`/api/users/users/${userId}`)
         .then((response) => {
-          console.log('response', response);
+          // console.log('response', response);
           // set user trips
           if (response.data.length !== 0) {
             let plans = response.data[0].plans;
@@ -38,7 +38,7 @@ class MyTrips extends Component {
           }
         }).catch(error => {
           console.log('Error fetching and parsing user trips', error);
-        });;
+        });
     }
   }
   // }

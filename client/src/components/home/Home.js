@@ -52,7 +52,7 @@ class Home extends Component {
       } else if (result.state === 'denied') {
         console.log('Permission to get user location:: ' + result.state);
         let myColor = { background: '#f50057', text: '#FFFFFF' };
-        notify.show('You need to give permission to access your location in the browser.', 'custom', 3000, myColor);
+        notify.show('Previously you refused to access your location. Please give permission to access your location in the browser setting.', 'custom', 3000, myColor);
         this.props.store.toggleGoToMap(false);
       }
       result.onchange = () => {
@@ -77,14 +77,18 @@ class Home extends Component {
     this.handlePermission();
   }
 
+  componentDidMount = () => {
+    this.props.store.toggleGoToMap(false);
+  }
+
   render() {
     return (
       <div style={styles} className="bg-home">
-        <Notification options={{ zIndex: 400, top: '250px' }} />
+        <Notification options={{ zIndex: 400, bottom: '450px' }} />
         <div className="home-search-container">
           <h1 className="headlineStyle">Where Would You Like to Travel?</h1>
           <div className="search-bar-wrapper">
-            <LocationSearchInput saveCity={this.props.store.saveCity} toggleGoToMap={this.props.store.toggleGoToMap} saveAddress={this.props.store.saveAddress} emptyTempEvents={this.props.store.emptyTempEvents}/>
+            <LocationSearchInput saveCity={this.props.store.saveCity} toggleGoToMap={this.props.store.toggleGoToMap} saveAddress={this.props.store.saveAddress} emptyTempEvents={this.props.store.emptyTempEvents} />
             <button className="btnStylePlan" onClick={this.routeToPlan}>Plan Trip</button>
             <button className="btnStyle" onClick={this.goUserLocation}>Plan In My Location</button>
           </div>

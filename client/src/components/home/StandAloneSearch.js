@@ -35,8 +35,13 @@ const PlacesWithStandaloneSearchBox = compose(
           console.log('result', places);
           const lat = places[0].geometry.location.lat();
           const lng = places[0].geometry.location.lng();
+          if ([0].address_components) {
+            this.props.saveCity(places[0].address_components[0].short_name);
+          } else {
+            this.props.saveCity(places[0].name);
+          }
 
-          this.props.saveCity(places[0].address_components[0].short_name);
+
           this.props.saveAddress({ lat: lat, lng: lng });
           this.props.emptyTempEvents();
           this.props.toggleGoToMap(true);

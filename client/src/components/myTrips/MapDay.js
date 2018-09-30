@@ -15,7 +15,7 @@ const MapWithADirectionsRenderer = compose(
   lifecycle({
     componentDidMount() {
       const DirectionsService = new google.maps.DirectionsService();
-      console.log('in did mount-props :', this.props.routes);
+      // console.log('in did mount-props :', this.props.routes);
       DirectionsService.route({
         origin: this.props.route.origin,
         destination: this.props.route.destination,
@@ -24,7 +24,7 @@ const MapWithADirectionsRenderer = compose(
         waypoints:
           this.props.route.waypoints
       }, (result, status) => {
-        console.log('result', result);
+        // console.log('result', result);
 
         if (status === google.maps.DirectionsStatus.OK) {
           this.setState({
@@ -40,13 +40,13 @@ const MapWithADirectionsRenderer = compose(
     }
   })
 )(props => {
-  console.log('in render map');
+  // console.log('in render map');
   // console.log('props directions', props.directions);
   const { lat, lng } = props.route.origin.location;
   const routelog = props.route;
-  console.log('lat lng', lat, lng);
-  console.log('route log', routelog);
-  console.log('props.direction', props.directions);
+  // console.log('lat lng', lat, lng);
+  // console.log('route log', routelog);
+  // console.log('props.direction', props.directions);
 
   if (!props.directions) {
     return <p>No Route Can Be calculated for this day</p>;

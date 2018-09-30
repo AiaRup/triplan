@@ -49,18 +49,18 @@ class TripStore {
   // toggle preferences div on map
   @action togglePrefernces = (click) => {
     this.isOpenPrefernces = click || !this.isOpenPrefernces;
-    console.log('isOpenPrefernces ', this.isOpenPrefernces);
+    // console.log('isOpenPrefernces ', this.isOpenPrefernces);
   }
 
   @action toggleAnimation = () => {
     this.animate = !this.animate;
-    console.log('isanimate ', this.animate);
+    // console.log('isanimate ', this.animate);
   }
 
   // prevent user from going to the map on empty input or bad input on Homepage
   @action toggleGoToMap = (stateToggle) => {
     this.goToMapOnUserClick = stateToggle;
-    console.log('go to map ', this.goToMapOnUserClick);
+    // console.log('go to map ', this.goToMapOnUserClick);
   }
 
   // add note to trip array on store
@@ -68,7 +68,7 @@ class TripStore {
     // console.log('note ', note, 'index ', index);
     this.oneTrip.days[index].notes.push(note);
     // this.oneTrip.days[index].notes = note;
-    console.log(`oneTrip.days[${index}].notes, ${note} `);
+    // console.log(`oneTrip.days[${index}].notes, ${note} `);
   }
 
   // update note on trip array on store
@@ -92,6 +92,17 @@ class TripStore {
     // this.filter_plans = plans;
   }
 
+  @action updatePlanInStore = (planToUpdate) => {
+    console.log('plan to update arrive to store', planToUpdate);
+
+    this.plansArray.forEach((plan, i) => {
+      if (plan._id === planToUpdate._id) {
+        console.log('plan to update in plan array', this.plansArray[i]);
+        this.plansArray[i] = planToUpdate;
+      }
+    });
+  }
+
   // save trip Id when user is editing a trip
   @action saveTripId = (tripId) => {
     this.tripIdToEdit = tripId;
@@ -100,7 +111,7 @@ class TripStore {
   // save the user Id recieved from mongo
   @action configUser = (userID) => {
     this.user_id = userID;
-    console.log('id in store', this.user_id);
+    // console.log('id in store', this.user_id);
   }
 
   // change display of login form and register form
@@ -117,7 +128,7 @@ class TripStore {
     this.numOfPlaces++;
     place.iternalId = 'places_id' + this.numOfPlaces;
 
-    console.log('place for id', place);
+    // console.log('place for id', place);
     this.placesArray.push(place);
   }
 
@@ -126,7 +137,7 @@ class TripStore {
     //!! CHANGES BY FUCKING REFERENCE!!
     this.theNewEvent = theEvent;
     this.numOfEvents++;
-    console.log('this.theNewEvent', this.theNewEvent);
+    // console.log('this.theNewEvent', this.theNewEvent);
     this.theNewEvent.iternalId = 'event_id' + this.numOfEvents;
     this.eventsArray.push(this.theNewEvent);
     // console.log('eventsArray', this.eventsArray);
@@ -136,18 +147,18 @@ class TripStore {
   // update address when user serch a place on map
   @action saveAddress = (address) => {
     this.address = address;
-    console.log('address in store', this.address);
+    // console.log('address in store', this.address);
   }
 
   // update city when user serch a place on map
   @action saveCity = (city) => {
     this.cityName = city;
-    console.log('city in store', this.cityName);
+    // console.log('city in store', this.cityName);
   }
   // update trip name when user changes the name
   @action saveTripName = (name) => {
     this.tripName = name;
-    console.log('name in store', this.tripName);
+    // console.log('name in store', this.tripName);
   }
 
   // update number of days in trip
@@ -159,7 +170,7 @@ class TripStore {
   // update category event when user changes the category
   @action updateEventCategory = (category) => {
     this.eventCategory = category;
-    console.log('category in store', this.eventCategory);
+    // console.log('category in store', this.eventCategory);
   }
 
   @action restStoreTrip = () => {
@@ -170,7 +181,7 @@ class TripStore {
   @action addDay = () => {
     this.numOfDays++;
     this.daysArray.push({ date: moment(`/Date(${Date.parse(new Date())})/`).format('DD/MM/YYYY'), places: [], id: 'day_' + this.numOfDays });
-    console.log('this.numOfdays', this.numOfDays);
+    // console.log('this.numOfdays', this.numOfDays);
   }
 
   @action deleteDay = (index) => {
@@ -182,8 +193,8 @@ class TripStore {
   }
 
   @action chooseDate = (dayIndex, date) => {
-    console.log('date day store', date);
-    console.log('index day', dayIndex);
+    // console.log('date day store', date);
+    // console.log('index day', dayIndex);
 
     this.daysArray[dayIndex].date = date;
   }
@@ -207,15 +218,15 @@ class TripStore {
   }
 
   @action EventStartDate = (startDate) => {
-    console.log('startDate', startDate);
+    // console.log('startDate', startDate);
     this.tempEventCalander.startDate = startDate;
-    console.log(JSON.stringify(this.tempEventCalander.startDate));
+    // console.log(JSON.stringify(this.tempEventCalander.startDate));
   }
 
   @action EventEndDate = (endDate) => {
-    console.log('endDate', endDate);
+    // console.log('endDate', endDate);
     this.tempEventCalander.endDate = endDate;
-    console.log(JSON.stringify(this.tempEventCalander.endDate));
+    // console.log(JSON.stringify(this.tempEventCalander.endDate));
   }
 
   //Move from EVENT from TempEvent To EVENTS DIV
