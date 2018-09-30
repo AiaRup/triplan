@@ -10,9 +10,12 @@
 }
 
 .event-list-container {
-  height: 70vh;
-  width: 35%;
+  min-height: 55vh;
+  height: auto;
+  min-width: 32%;
+  width: auto;
   border-radius: 2px;
+  background-color: white;
   }
 
 .eventList-overflow {
@@ -20,8 +23,7 @@
   flex-direction: column;
   background: #fff;
   width: auto;
-  height: 65vh;
-  overflow-y: scroll;
+  height: auto;
 }
 
 .temp-events-list-container {
@@ -40,7 +42,7 @@
   height: 20px;
   color: #000;
   font-weight: bold;
-
+  /* background-color: #f500562a; */
   }
 
   h5.event-container-headline {
@@ -50,6 +52,7 @@
   height: 40px;
   line-height: 40px;
   margin-bottom: 0;
+  width: auto;
 }
 
 .content-of-event {
@@ -57,6 +60,8 @@ color: #000;
 padding: 5px;
 max-width: 100%;
 }
+
+
 
 .event-headline {
   margin: 5px;
@@ -81,12 +86,8 @@ max-width: 100%;
   flex-direction: row;
   justify-content: space-between;
   color: #fff;
+  padding: 5px;
 }
-
-/* .event-dlt-btn {
-  color: #1D3557;
-  border: 1px solid lightgray;
-} */
 
 .collapse-color {
   background-color: white;
@@ -99,6 +100,19 @@ ul .ReactCollapse--content {
 .delete-draggable {
   color: #20313b;
 }
+.delete-draggable:hover {
+  cursor: pointer;
+}
+
+.fade-header {
+  color: #fff;
+  margin: 10px 0;
+  background-color: #20313b;
+  padding: 5px;
+
+}
+
+
 
 
 

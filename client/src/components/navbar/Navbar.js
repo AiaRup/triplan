@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 import './Navbar.css';
-import logo from '../../images/logo-design.png';
-
 export default withAuth(
   class Navbar extends Component {
     constructor(props) {
@@ -48,7 +46,7 @@ export default withAuth(
       }
       const authNav = this.state.authenticated ? (
         <ul className="auth-nav nav navbar-nav navbar-right">
-          <li className="nav-link mr-3">{this.currentUserName}</li>
+          <li className="nav-link mr-3 userNameColor">{this.currentUserName}</li>
           <li className="nav-item nav-link"><button className="btn btn-sm btn-secondary my-2 my-sm-0" type="button" onClick={() => this.props.auth.logout()}>Log Out</button></li>
         </ul>
       ) : (
@@ -64,7 +62,7 @@ export default withAuth(
       return (
         // bg-light mb-3
         <nav className="navbar navbar-expand-md navbar-light bg-light">
-          <span className="navbar-brand"><Link className="navbar-brand" to="/"><img src={logo} width="110px" height="65px" alt="" /></Link></span>
+          <span className="navbar-brand"><Link className="navbar-brand" to="/"><img src="/images/logo-design.png" width="110px" height="65px" alt="" /></Link></span>
           <button
             className="navbar-toggler"
             type="button"

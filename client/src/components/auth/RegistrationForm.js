@@ -5,11 +5,14 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import axios from 'axios';
 import './RegisterForm.css';
 import { observer, inject } from 'mobx-react';
+import loadingGif from '../../images/loading.gif';
+// import loadingGif from '../../images/loading-register.gif';
 
 
 @inject(allStores => ({
   toggleLoginRegister: allStores.store.toggleLoginRegister,
-  showLogin: allStores.store.showLogin
+  showLogin: allStores.store.showLogin,
+  userEmail: allStores.store.user_email
 }))
 @observer
 export default withAuth(
@@ -19,7 +22,7 @@ export default withAuth(
       this.state = {
         firstName: '', lastName: '', email: '', password: '', sessionToken: null,
         emailValid: false, firstNameValid: false, lastNameValid: false, passwordValid: false,
-        showErrorDiv: false
+        showErrorDiv: false, showLoading: false
       };
 
       this.oktaAuth = new OktaAuth({ url: 'https://dev-497398.oktapreview.com' });
@@ -47,7 +50,7 @@ export default withAuth(
 
       handleSubmit = (e) => {
         // e.preventDefault();
-        this.setState({ showErrorDiv: false });
+        this.setState({ showErrorDiv: false, showLoading: true });
         axios.post('/api/users', this.state)
           .then(user => {
             this.oktaAuth
@@ -59,14 +62,17 @@ export default withAuth(
                 // save the user oktaID before redirect
                 localStorage.setItem('oktaID', res.user.id);
                 this.setState({
-                  sessionToken: res.sessionToken
+                  sessionToken: res.sessionToken,
+                  showLoading: false
                 });
               });
           })
           .catch(err => {
             console.log(err);
-            this.setState({ showErrorDiv: true });
+            this.setState({ showErrorDiv: true, showLoading: false });
           });
+          //!!check where the data goes to
+          // this.props.userEmail = this.state.email;
       }
       render() {
         if (this.state.sessionToken) {
@@ -77,7 +83,8 @@ export default withAuth(
           <div id="widget-container1">
             <div id="okta-register" className="auth-container1 main-container">
               <div className="okta-register-header auth-header">
-                <img src="//logo.clearbit.com/okta.com" className="auth-org-logo" alt="" />
+                <img src="//logo.clearbit.com/okta.com?greyscale=true" className="auth-org-logo" alt="" />
+                {this.state.showLoading && <img src={loadingGif} className="loading-gif" alt=""/>}
               </div>
               <div className="auth-content">
                 <div className="auth-content-inner">
@@ -85,7 +92,7 @@ export default withAuth(
                     {this.state.showErrorDiv && <div className="o-form-error-container o-form-has-errors" data-se="o-form-error-container">
                       <div className="okta-form-infobox-error infobox infobox-error" role="alert">
                         <span className="icon error-16"></span>
-                        <p>Cannot create a new user (User with this Email may already exists or Server is down).</p>
+                        <p>Error, A user with this Email already exists.</p>
                       </div>
                     </div>}
                     <h2 className="okta-form-title o-form-head">Create Account</h2>
@@ -155,7 +162,8 @@ export default withAuth(
                         }} />
                     </div>
                     <div className="o-form-button-bar">
-                      <input className="button button-primary" type="submit" value="Register" id="submit" data-type="save" />
+                      {this.state.showLoading ? <input className="button button-primary link-button-disabled" type="submit" value="Register" id="submit" data-type="save" disabled /> :
+                      <input className="button button-primary" type="submit" value="Register" id="submit" data-type="save"/>}
                     </div>
                     <div className="signin-container">
                       <div className="content">

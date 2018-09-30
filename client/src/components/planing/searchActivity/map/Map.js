@@ -4,6 +4,7 @@ import axios from 'axios';
 import GoogleMap from '../googleMap/GoogleMap';
 import { observer, inject } from 'mobx-react';
 import Notification, { notify } from 'react-notify-toast';
+import { Popover, PopoverHeader } from 'reactstrap';
 
 @inject('store')
 @observer
@@ -13,9 +14,17 @@ class Map extends Component {
     this.state = {
       places: props.places,
       markers: [],
+      fadeIn: false
     };
     this.finishMarker = 0;
   }
+
+  toggleFade = () => {
+    this.setState({
+      fadeIn: !this.state.fadeIn
+    });
+  }
+
 
   addMarkers = () => {
 
@@ -117,8 +126,8 @@ class Map extends Component {
       this.setState({ markers: markerArray });
 
       if (markerArray.length === 0) {
-        let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('No attraction found!', 'custom', 5000, myColor);
+        let myColor = { background: '#f50057', text: '#FFFFFF' };
+        notify.show('No Attraction Found!', 'custom', 3000, myColor);
         return;
       }
 
@@ -135,24 +144,29 @@ class Map extends Component {
     let places = this.props.store.placesArray;
     for (var i = 0; i < places.length && !exist; i++) {
       if (places[i].id === place.id) {
-        let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('You Already Choose This Place', 'custom', 5000, myColor);
+        let myColor = { background: '#f50057', text: '#FFFFFF' };
+        notify.show('You Already Chose This Place!', 'custom', 3000, myColor);
         exist = true;
         return;
       }
     }
     // add the place to temp places div only if it doesnt already exist
     this.props.store.addPlace(place);
-    this.props.store.toggleAnimation();
+
+    this.toggleFade(); // become true
 
     setTimeout(() => {
-      this.props.store.toggleAnimation();
-    }, 3000);
+      this.toggleFade(); // become false
+    }, 1500);
   }
 
   render() {
     return (
       <React.Fragment>
+        <div id="Tooltip1"></div>
+        <Popover placement="left" isOpen={this.state.fadeIn} target="Tooltip1" toggle={this.toggleFade}>
+          <PopoverHeader>Attraction Added to Plan Board!</PopoverHeader>
+        </Popover>
         <Notification options={{ zIndex: 400, top: '150px' }} />
         <GoogleMap
           togglePrefernces={this.props.store.togglePrefernces}

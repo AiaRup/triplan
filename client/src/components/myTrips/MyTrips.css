@@ -3,17 +3,19 @@
   margin: auto;
   margin-top: 100px;
   margin-bottom: 40px;
-  width: 60%;
+  width: 50%;
   border-bottom: 1px solid #ddd;
 }
 
 .search-bar:focus {
   outline-style: none;
+  border-bottom: 1px solid #f50057;
+  outline-style: none;
 }
 
 .card-list {
   width: 80%;
-  margin: auto;
+  margin: 0 auto 15px auto;
   /* display: flex; */
   /* flex-wrap: wrap; */
   box-sizing: border-box;
@@ -31,24 +33,25 @@
   display: block;
   /* flex-direction: row; */
   /* flex: 0 0 31.3333%; */
-  padding: 20px 60px;
-  margin: 10px;
-  border-bottom: 1px solid #f50057;
+  padding: 10px 20px;
+  margin: 10px auto;
+  border-bottom: 1.5px solid #f50057;
   background: #fff;
   color: #20313b;
   text-align: center;
   transition: all .2s ease-in-out;
+  width: 60%;
   /* border-radius: 10px; */
 }
 
 .card:nth-child(odd) {
-  border-bottom: 1px solid #20313b;
+  border-bottom: 1.5px solid #20313b;
 }
 
 .card:hover {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.05);
-  cursor: pointer;
+  -webkit-transform: scale(1.03);
+  transform: scale(1.03);
+  /* cursor: pointer; */
   z-index: 1;
 }
 
@@ -64,139 +67,20 @@
 
 .icons-container {
   float: right;
+  cursor: pointer;
   /* text-align: right; */
 }
 
-/*=====================================================
-Trip Day
-=======================================================*/
-
-.day-trip {
-  box-sizing: border-box;
-  padding: 25px;
-  display: flex;
-}
-
-.day-list-trip {
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.trip-header {
-  text-align: center;
-}
-
-.trip-header>h1 {
+.icons-container:hover {
   color: #f50057;
-  font-weight: bolder;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
-.line-on-sides:before,
-.line-on-sides:after {
-  content: '';
-  display: inline-block;
-  width: 5%;
-  margin: 0 0.5em 0 -55%;
-  vertical-align: middle;
-  border-bottom: 2px solid;
-}
-
-.line-on-sides:after {
-  margin: 0 -55% 0 0.5em;
-}
-
-.notes {
-  flex-basis: 25%;
-  margin: 0;
-  padding: 20px;
-  margin-left: 30px;
-  text-align: center;
-  background-color: #20313b;
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-}
-
-.input-notes {
-  background: #0077b7;
-}
-
-.note {
-  font-style: italic;
-  display: flex;
-  text-align: center;
-  padding: 5px;
-  border-bottom: 1px #fff solid;
-  color: #fff
-}
-
-.attraction {
-  font-size: large;
-}
-
-.attractions {
-  flex-basis: 37%;
-  margin-right: 25px;
-  box-sizing: border-box;
-  padding: 8px;
-}
-
-.attractions>h3 {
-  text-align: center;
-  border-bottom: #20313b 1px solid;
-  margin-bottom: 15px;
-}
-
-.mapDay {
-  /* width: 50vw; */
-  flex-basis: 40%;
-  -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-}
-
-.list-attractions {
-  list-style: initial;
-  color: #000;
-}
-
-.fa-circle {
-  font-size: small;
-  margin-left: 4px;
-  color: #20313b;
-}
-
-.pin-note {
-  margin-top: -43px;
-  position: absolute;
-  right: 19px;
-}
-
-.pencil-notes {
-  margin-right: 8px;
-  font-size: 15px;
-  line-height: 32px;
-}
-
-.editNote-input {
-  line-height: 32px;
-  background-color: #20313b;
-  color: #fff;
-}
-
-.editNote-input:focus {
-  outline: none;
-}
-
-.editNote-input:hover {
-  cursor: text;
-}
-
-.note label {
-  margin-bottom: 0;
-  line-height: 32px;
-}
-
-.note label:hover {
-  cursor: text;
+@media only screen and (max-width: 660px) {
+  .card {
+    width: 93%;
+    padding: 15px;
+  }
+  .search-bar {
+    width: 70%;
+  }
 }

@@ -15,7 +15,7 @@ class SignInWidget extends Component {
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
-      logo: '//logo.clearbit.com/okta.com',
+      logo: '//logo.clearbit.com/okta.com?greyscale=true',
       features: {
         registration: true
       },
@@ -24,11 +24,6 @@ class SignInWidget extends Component {
           'errors.E0000004': 'Invalid Credentials- User not registered or Password is incorrect.'
         }
       },
-      // authParams: {
-      //   issuer: 'default',
-      //   responseType: [ 'id_token', 'token' ],
-      //   display: 'page'
-      // },
       registration: {
         click: () => {
           this.props.toggleLoginRegister();
@@ -36,21 +31,6 @@ class SignInWidget extends Component {
       }
     });
     this.widget.renderEl({ el }, this.props.onSuccess, this.props.onError);
-
-    // if (!this.widget.token.hasTokensInUrl()) {
-    //   this.widget.renderEl({ el }, this.props.onSuccess, this.props.onError);
-    // } else {
-    //   this.widget.token.parseTokensFromUrl(
-    //     function success(res) {
-    //       // Add the token to tokenManager to automatically renew the token when needed
-    //       this.widget.tokenManager.add('id_token', res[0]);
-    //       this.widget.tokenManager.add('access_token', res[1]);
-    //     },
-    //     function error(err) {
-    //       console.log('handle error', err);
-    //     }
-    //   );
-    // }
   }
 
   componentWillUnmount() {

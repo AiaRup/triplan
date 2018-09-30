@@ -10,6 +10,7 @@ import _ from 'lodash';
 import AddIcon from '@material-ui/icons/Add';
 import { Button } from '@material-ui/core';
 import drawStarts from '../../../utils/drawStarts';
+
 // const google=window.google;
 
 const MapComponent = compose(
@@ -62,8 +63,8 @@ const MapComponent = compose(
           const place = refs.searchBox.getPlaces();
 
           if (place.length === 0) {
-            let myColor = { background: '#e22866', text: '#FFFFFF' };
-            notify.show('Address not found', 'custom', 5000, myColor);
+            let myColor = { background: '#f50057', text: '#FFFFFF' };
+            notify.show('Address not found', 'custom', 3000, myColor);
             return;
           }
 
@@ -96,8 +97,8 @@ const MapComponent = compose(
             this.props.updateAddress({ lat: lat, lng: lng });
           }
           else {
-            let myColor = { background: '#e22866', text: '#FFFFFF' };
-            notify.show('Could not display this address', 'custom', 5000, myColor);
+            let myColor = { background: '#f50057', text: '#FFFFFF' };
+            notify.show('Could not display this address', 'custom', 3000, myColor);
             // check how to clear the input value !
           }
         },
@@ -105,14 +106,15 @@ const MapComponent = compose(
           const newActivity = { type: 'place' };
           for (let prop in marker) {
             if (marker.hasOwnProperty(prop)) {
-              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id' || prop === 'position') {
+              if (prop === 'name' || prop === 'address' || prop === 'phone' || prop === 'category' || prop === 'price' || prop === 'id' || prop === 'position' || prop === 'rating' || prop === 'photo') {
                 newActivity[prop] = marker[prop];
               }
             }
           }
+
+          this.props.addPlace(newActivity);
           //close the infoWindow after click add place
           this.props.showInfo(this.props.infoIndex);
-          this.props.addPlace(newActivity);
         },
       });
     }, // end componentWillMount
@@ -120,7 +122,7 @@ const MapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) => {
-  return <div>
+  return <div >
     <Notification options={{ zIndex: 400, top: '150px' }} />
 
     <GoogleMap
@@ -173,19 +175,14 @@ const MapComponent = compose(
                     {marker.website && <a href={marker.website} target="_blank">Website</a>}
                   </div>
                   <div>
-                    {/* {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                    {marker.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${marker.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
                   </div>
                 </div>
-                <div className={props.animate ? 'add-attraction animate zoom' : 'add-attraction'}>
+                <div className='add-attraction'>
                   <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
                     <AddIcon />
                   </Button>
                 </div>
-                {/* <div className="add-attraction">
-                  <Button variant="fab" color="secondary" mini aria-label="Add" onClick={() => props.addPlace(marker)}>
-                    <AddIcon />
-                  </Button>
-                </div> */}
               </React.Fragment>
             </InfoWindow>}
 

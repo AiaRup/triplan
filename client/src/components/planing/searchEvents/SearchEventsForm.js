@@ -64,28 +64,30 @@ export default class SearchEventsForm extends React.Component {
   render () {
     return (
       <div className='date-pick-container'>
-        <div className='from-event-date'>
-      From:
-          <DatePicker
-            selected={this.state.startDate}
-            selectsStart
-            startDate={this.state.startDate}
-            onChange={this.handleChangeStart}
-            minDate={moment()}
-            maxDate={moment().add(6, 'months')}
-            dateFormat="DD/MM/YYYY" />
-        </div>
-        <div className='to-event-date'>
-       To:
-          <DatePicker
-            selected={this.state.endDate}
-            selectsEnd
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            onChange={this.handleChangeEnd}
-            minDate={moment()}
-            maxDate={moment().add(6, 'months')}
-            dateFormat="DD/MM/YYYY" />
+        <div className="container-pick-date-events">
+          <div className='from-event-date'>
+        From:
+            <DatePicker
+              selected={this.state.startDate}
+              selectsStart
+              startDate={this.state.startDate}
+              onChange={this.handleChangeStart}
+              minDate={moment()}
+              maxDate={moment().add(6, 'months')}
+              dateFormat="DD/MM/YYYY" />
+          </div>
+          <div className='to-event-date'>
+         To:
+            <DatePicker
+              selected={this.state.endDate}
+              selectsEnd
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeEnd}
+              minDate={moment()}
+              maxDate={moment().add(6, 'months')}
+              dateFormat="DD/MM/YYYY" />
+          </div>
         </div>
         <div>
           <Select

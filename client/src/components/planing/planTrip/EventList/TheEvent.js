@@ -6,30 +6,29 @@ import { Collapse } from 'react-collapse';
 import './events.css';
 import Notification, { notify } from 'react-notify-toast';
 import AddIcon from '@material-ui/icons/Add';
-import { Button, Tooltip } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
-
-
+import { UncontrolledTooltip, Popover, PopoverHeader } from 'reactstrap';
+// import Fade from '@material-ui/core/Fade';
 
 const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
+  background-color: ${props => (props.isDragging ? 'white' : 'white')};
   width: ${props => (props.isDragging ? '40%' : 'auto')};
   transition: max-width 0.2 ease;
   font-size: 18px;
 `;
 
-// transform: ${props=> (props.isDragging ? 'rotate(20deg)' : 'none')};
 
 @inject(allStores => ({
   deleteEvent: allStores.store.deleteEvent,
   addTempEvent: allStores.store.addTempEvent,
   tempEventArray: allStores.store.tempEventArray,
   eventsArray: allStores.store.eventsArray,
-  toggleAnimation: allStores.store.toggleAnimation,
+  // toggleAnimation: allStores.store.toggleAnimation,
   animate: allStores.store.animate
 }))
 
@@ -38,7 +37,13 @@ class TheEvent extends Component {
 
   constructor() {
     super();
-    this.state = { toggledCollapse: false };
+    this.state = { toggledCollapse: false, fadeIn: false };
+  }
+
+  toggleFade = () => {
+    this.setState({
+      fadeIn: !this.state.fadeIn
+    });
   }
 
   collapseToggle = () => {
@@ -52,8 +57,8 @@ class TheEvent extends Component {
     let events = this.props.eventsArray;
     for (var i = 0; i < events.length && !exist; i++) {
       if (events[i].id === this.props.tempEvent.id) {
-        let myColor = { background: '#e22866', text: '#FFFFFF' };
-        notify.show('You Already Choose This Event', 'custom', 5000, myColor);
+        let myColor = { background: '#f50057', text: '#FFFFFF' };
+        notify.show('You Already Chose This Event', 'custom', 3000, myColor);
         // alert('You already have this activity place');
         exist = true;
         return;
@@ -61,10 +66,10 @@ class TheEvent extends Component {
     }
 
     this.props.addTempEvent(this.props.tempEvent);
-    this.props.toggleAnimation();
+    this.toggleFade();
 
     setTimeout(() => {
-      this.props.toggleAnimation();
+      this.toggleFade();
     }, 1500);
   }
 
@@ -124,7 +129,23 @@ class TheEvent extends Component {
       return (
         <div className="event-detail-container">
           <Notification options={{ zIndex: 400, top: '250px' }} />
+
           <h6 className="event-detail-header">{this.props.tempEventName}</h6>
+
+          <div className={this.props.animate ? 'add-event-div animate zoom' : 'add-event-div'}>
+            {/* <Tooltip title="Add Event to Plan Trip" TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}> */}
+            <UncontrolledTooltip placement="top" target="Tooltip"> Add Event to Plan Trip
+            </UncontrolledTooltip >
+            <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.handleAddEvent} id="Tooltip">
+              <AddIcon />
+            </Button>
+            <Popover placement="bottom" isOpen={this.state.fadeIn} target="Tooltip" toggle={this.toggleFade}>
+              <PopoverHeader>Event Added to Plan Board!</PopoverHeader>
+            </Popover>
+
+          </div>
+
+
           <div className="content-of-event">
             {Object.keys(this.props.tempEvent).map((prop, index) => {
               if (prop !== 'type' && prop !== 'name' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId' && prop !== 'description') {
@@ -134,13 +155,7 @@ class TheEvent extends Component {
               }
               return null;
             })}
-            <div className={this.props.animate ? 'add-event-div animate zoom' : 'add-event-div'}>
-              <Tooltip title="Add Event to Plan Trip">
-                <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.handleAddEvent}>
-                  <AddIcon />
-                </Button>
-              </Tooltip>
-            </div>
+
           </div>
         </div>
       );

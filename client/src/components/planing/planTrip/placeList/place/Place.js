@@ -3,6 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { inject } from 'mobx-react';
 import styled from 'styled-components';
 import { Collapse } from 'react-collapse';
+import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
 import '../places.css';
 
 
@@ -10,7 +11,7 @@ const Container = styled.div`
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  background-color: ${props=> (props.isDragging ? 'lightgreen' : 'white')};
+  background-color: ${props=> (props.isDragging ? 'white' : 'white')};
   transition: max-width 0.2 ease;
 `;
 
@@ -53,15 +54,16 @@ class Place extends Component {
             {...provided.dragHandleProps}
           >
             <div className='single-place-header-section'>
-              <button type="button" className="btn btn-sm btn-secondary" onClick={this.placeOrDayDelete}>x</button>
+              {/* <button type="button" className="btn btn-sm btn-secondary" onClick={this.placeOrDayDelete}>x</button> */}
+              <span className="delete-dragg-place" onClick={this.placeOrDayDelete}><DeleteIcon /></span>
               <h6 className='place-headline'>{this.props.thePlace.name}</h6>
               <div className="place-arrow" onClick={()=>this.collapseToggle(toggleCollapse)}>&raquo;</div>
             </div>
             <Collapse isOpened={this.state.toggledCollapse}>
               <ul className="place-content-li">
                 {Object.keys(this.props.thePlace).map((prop, index)=> {
-                  if (prop !== 'id' && prop !== 'type' && prop !== 'position' && prop !== 'iternalId') {
-                    return <li key={index}><u>{prop}</u>: {this.props.thePlace[prop]}</li>;
+                  if (prop !== 'id' && prop !== 'type' && prop !== 'position' && prop !== 'iternalId' && prop !== 'photo') {
+                    return <li key={index}><u>{prop}</u>: {this.props.thePlace[prop] || 'Unknown'}</li>;
                   }
                   return null;
                 })}

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Place from '../placeList/place/Place';
 import PickDate from './PickDate';
 import TheEvent from '../EventList/TheEvent';
-import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
+import DeleteIcon from '@material-ui/icons/DeleteRounded';
 import './day.css';
 
 
@@ -13,7 +13,7 @@ const PlaceListUL = styled.div`
   padding: 8px;
   min-height: 120px;
   height: auto;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
+  background-color: ${props => (props.isDraggingOver ? '#f8a10070' : 'white')};
   transition: background-color 0.2s ease;
 `;
 

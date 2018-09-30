@@ -4,49 +4,68 @@ import './MyTrips.css';
 import CardList from './CardList';
 import SearchTrip from './SearchTrip';
 import { observer, inject } from 'mobx-react';
-// import Notes from './Notes';
+import { PulseLoader } from 'react-spinners';
+import { css } from 'react-emotion';
 
+const override = css`
+    display: block;
+    margin: 20px auto;
+`;
 @inject('store')
 @observer
 class MyTrips extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      user_plans: [],
-      filter_plans: []
-    };
+  state = {
+    isLoading: true
   }
 
   componentDidMount = () => {
-    let u_id = this.props.store.user_id;
-    console.log('user id: ' + u_id);
-    axios.get(`api/users/users_trips/${u_id}`)
-      .then(response => {
-        console.log(response);
-        let plans = response.data;
-        this.props.store.savePlans(plans);
-        console.log('got response! ');
-        this.setState({ user_plans: plans, filter_plans: plans });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
+    // if there is no id in store
+    // if (!this.props.store.user_id) {
+    const userId = localStorage.getItem('oktaID');
+    if (userId !== null) {
+      // get user id from mongo
+      axios.get(`/api/users/users/${userId}`)
+        .then((response) => {
+          // console.log('response', response);
+          // set user trips
+          if (response.data.length !== 0) {
+            let plans = response.data[0].plans;
+            this.props.store.savePlans(plans);
+            this.props.store.saveFilterPlans(plans);
+            // do not show loading gif
+            this.setState({ isLoading: false });
+          }
+        }).catch(error => {
+          console.log('Error fetching and parsing user trips', error);
+        });
+    }
   }
+  // }
 
 
   searchTrips = (query) => {
-    let trips = this.state.user_plans.filter((trip) => {
+    this.props.store.saveQuery(query);
+    let trips = this.props.store.plansArray.filter((trip) => {
       return trip.name.toLowerCase().includes(query.toLowerCase());
     });
-    this.setState({ filter_plans: trips });
+    this.props.store.saveFilterPlans(trips);
   }
 
   render() {
     return (
       <div className="all">
         <SearchTrip searchTrips={this.searchTrips} />
-        <CardList plans={this.state.filter_plans} />
+        <div className='sweet-loading'>
+          <PulseLoader
+            className={override}
+            sizeUnit={'px'}
+            size={20}
+            color={'#f50057'}
+            loading={this.state.isLoading}
+          />
+        </div>
+        {this.state.isLoading ? null : <CardList plans={this.props.store.filter_plans} />}
       </div>
     );
   }

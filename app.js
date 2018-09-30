@@ -12,6 +12,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const plansRouter = require('./routes/plans');
 
+// const emailRouter = require('./routes/email');
+
 mongoose.Promise = global.Promise;
 // Connect to DB and check the connection
 const connection = process.env.CONNECTION_STRING || 'mongodb://localhost:27017/triplanDB';
@@ -58,6 +60,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/plans', plansRouter);
 app.use('/', indexRouter);
 
+// app.use('/api/email', emailRouter);
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));
 

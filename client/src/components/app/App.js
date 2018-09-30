@@ -19,13 +19,14 @@ function onAuthRequired({ history }) {
 }
 
 @inject(allStores => ({
+  tripIdSaved: allStores.store.tripIdToEdit,
   configUser: allStores.store.configUser,
-  plans: allStores.store.plansArray
+  plans: allStores.store.plansArray,
+  userInStore: allStores.store.user_id,
+  savePlans: allStores.store.savePlans
 }))
 @observer
 class App extends Component {
-
-
 
   componentDidMount = () => {
     const userId = localStorage.getItem('oktaID');
@@ -35,7 +36,10 @@ class App extends Component {
         .then((response) => {
           // set user id on store
           if (response.data.length !== 0) {
-            this.props.configUser(response.data[0]._id);
+            if (this.props.userInStore !== response.data[0]._id) {
+              this.props.configUser(response.data[0]._id);
+              // this.props.savePlans(response.data[0].plans);
+            }
           }
         });
     }
@@ -53,7 +57,7 @@ class App extends Component {
           <div className="App">
             <Navbar />
             {/* <div className="container-fluid"> */}
-            <div>
+            <div className='wrapper-app'>
               <Switch>
                 <SecureRoute exact path="/Home" render={() => <Home />} />
                 <SecureRoute exact path="/MyTrips" render={() => <MyTrips />} />
@@ -62,6 +66,8 @@ class App extends Component {
                   (plan, index) =>
                     <SecureRoute exact path={`/MyTrips/${plan._id}`} key={index} render={() => <OneTrip plan={plan} />} />
                 )}
+
+                <SecureRoute exact path={`/MyTrips/${this.props.tripIdSaved}`} render={() => <OneTrip plan={this.props.plans[this.props.plans.length - 1]} />} />
 
                 <SecureRoute exact path="/About" render={() => <About />} />
                 <SecureRoute exact path="/Planing" render={() => <Planing />} />

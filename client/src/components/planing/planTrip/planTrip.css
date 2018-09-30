@@ -10,6 +10,7 @@
   padding-bottom: 15px;
   width: 100%;
   height: auto;
+  position: relative;
 }
 
 .place-event-containers {
@@ -20,25 +21,76 @@ width: 100%;
 height: auto;
 }
 
+.save-trip-wrapper {
+  position: absolute;
+    right: -8px;
+    top: -8px;
+    height: 100%;
+}
+
 .save-trip-btn {
-  background-color: #f8a100;
-  width: 20%;
-  margin: 10px auto;
-  display: block;
-  color: white;
-  border-radius: 3px;
-  border: 1px solid #f8a100;
+  display: inline-block;
+  position: -webkit-sticky;
+  position: sticky;
+  /* float: right; */
+  /* margin-left: auto; */
+  width: 80px;
+  height: 80px;
+  top: 0px;
+  border-radius: 50%;
+  background-color: #876A49;
+  color: #fff;
+  /* color: black; */
+  /* border: 1px solid #f86300; */
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  font-size: 14px;
+  border: none;
+  align-self: flex-start
+}
+
+/* .save-trip-btn:after {
+  content: 'Save';
+  font-size: 16px;
+} */
+
+.save-trip-btn:hover, .save-trip-btn:active {
+  background-color: #C4C4C4;;
+  color: #000;
+  border: none;
 
 }
 
+
+/* .save-trip-btn:hover:after {
+  content: 'Save Trip';
+  font-size: 20px;
+} */
+/*
+.save-trip-btn.in-active {
+  animation-direction: reverse;
+} */
+
 .name-trip-container {
-  display: flex;
-  width: fit-content;
-  margin: 10px auto;
+  display: inline-flex;
+  /* justify-content: center; */
+  align-items: flex-start;
+  /* width: fit-content; */
+  /* margin: 10px auto; */
+  width: 70%;
+  padding: 10px;
+  margin: 0
 }
 
 .name-trip-container div {
-text-align: center;
+/* text-align: center; */
+align-self: center;
+}
+
+.name-trip-container i {
+height: 80px;
+line-height: 80px;
+padding: 0;
+align-self: flex-start;
 }
 
 .edit-trip-label {
@@ -50,5 +102,14 @@ text-align: center;
 .inlineEdit {
   font-size: 20px;
   padding: 10px;
-  margin-bottom: 0
+  margin-bottom: 0;
+  width: 200px;
+  text-align: left;
+  }
+
+  @media only screen and (max-width: 760px) {
+    .place-event-containers {
+      display: flex;
+      flex-direction: column;
+    }
   }
