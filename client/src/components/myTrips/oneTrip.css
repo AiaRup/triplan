@@ -213,28 +213,21 @@ Tab TimeLine
   display: table;
 }
 
-/* email */
+/* email and print*/
 .print-email-btn {
-  /* background-color: orange;
-  width: 100px;
-  border-radius: 5px;
-  color: rgb(255, 255, 255);
-  height: 35px;
-  margin: 20px;
-  border: 1px lightgray solid;
-  cursor: pointer;
-  font-size: 18px; */
   color: rgb(136, 132, 132);
-  width: 100%;
-  padding: 0 20px;
-  text-align: right;
-  display:block;
-
+  padding: 0 10px;
 }
 
 .print-email-btn:hover {
-  /* background-color: #f50057;; */
+  color: #20313b;;
   cursor: pointer;
+}
+
+.icons-user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */

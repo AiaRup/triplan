@@ -64,10 +64,21 @@
   font-size: auto;
   }
 
-  .btnStylePlan:hover,
-.btnStyle:hover {
-  cursor: pointer;
-}
+  .btnStylePlan:hover {
+    background: rgba(255,255,255,0.4);
+    color: #F6A027;
+    box-shadow: inset 0 0 0 3px #F6A027;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .btnStyle:hover {
+    background: rgba(255,255,255,0.4);
+    color: #f50057;
+    box-shadow: inset 0 0 0 3px #f50057;
+    cursor: pointer;
+    font-weight: bold;
+  }
 
 .btnStylePlan {
   background-color: #F6A027;

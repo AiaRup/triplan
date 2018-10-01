@@ -3,22 +3,14 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import DayMapView from './DayMapView';
 import PrintIcon from '@material-ui/icons/PrintRounded';
+import EmailIcon from '@material-ui/icons/EmailRounded';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Input, InputLabel } from '@material-ui/core';
+import pink from '@material-ui/core/colors/pink';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import Day from './Day';
 import './oneTrip.css';
-
-//for email
-// import Button from '@material-ui/core/Button';
-// import TextField from '@material-ui/core/TextField';
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
-// import nodemailer from 'nodemailer';
-
-
-// import DayMapView from './DayMapView';
 import InputWithIcon from './notes/InputWithIcon';
 import axios from 'axios';
 
@@ -30,8 +22,6 @@ export default class OneTrip extends Component {
     this.state = {
       activeTab: '1',
       notes: this.props.plan.notes,
-
-      //for email
       open: false,
       email: ''
     };
@@ -42,41 +32,35 @@ export default class OneTrip extends Component {
   };
 
   //!! for email
-  //   handleClickOpen = () => {
-  //     this.setState({ open: true });
-  //   };
+    handleClickOpen = () => {
+      this.setState({ open: true });
+    };
 
-  //   handleClose = () => {
-  //     this.setState({ open: false });
-  //   };
+    handleClose = () => {
+      this.setState({ open: false });
+    };
 
-  //   enterEmail = (e) => {
-  //     this.setState({ email: e.target.value })
-  //   }
+    enterEmail = (e) => {
+      this.setState({ email: e.target.value });
+    }
 
-  //   sendAndClose = (e) => {
-  //     e.preventDefualt()
-  //     console.log(this.state.email)
-  //     const tripArr = [];
-  //     const daysArray = this.props.plan.days;
-
-  //     daysArray.map((dayTrip, i) => {
-
-  //       daysArray[i].places.map(place => {
-  //         const day = {};
-  //         day.date = daysArray[i].date;
-  //         day.name = place.name;
-  //         day.address = place.address;
-  //         day.category = place.category;
-
-  //         tripArr.push(day);
-  //     });
-  //   });
-  //   console.log('tripArr', tripArr)
-
-  //     this.setState({ open: false });
-  // };
-
+    sendEmail = (e) => {
+      // ask server to send the trip by mail
+      axios.post(`/api/email/send/${this.state.email}`, {
+        name: this.props.plan.name,
+        city: this.props.plan.city,
+        days: this.props.plan.days,
+        notes: this.props.plan.notes,
+      })
+        .then((response) => {
+          console.log('res send email from server', response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      // close dialog
+      this.handleClose();
+    };
 
   handleNotesChange = (noteType, action, i, text) => {
     const notes = this.props.plan.notes;
@@ -114,7 +98,7 @@ export default class OneTrip extends Component {
 
   render() {
     const { name, days, city } = this.props.plan;
-    const notes = this.state.notes;
+    const { email, notes } = this.state;
     let sortDays = days.slice().sort((a, b) => {
       a = a.date.split('/').reverse().join('');
       b = b.date.split('/').reverse().join('');
@@ -128,46 +112,48 @@ export default class OneTrip extends Component {
 
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
 
-          <span onClick={window.print} className='print-email-btn'><PrintIcon/></span>
-          {/* <button onClick={window.print} className='print-email-btn'>Print Trip</button> */}
-          {/* <button onClick={this.handleClickOpen} className='print-email-btn'>Email Trip</button> */}
+          <div className="icons-user-actions">
+            <span onClick={window.print} className='print-email-btn'><PrintIcon/></span>
+            <span onClick={this.handleClickOpen} className='print-email-btn'><EmailIcon/></span>
+          </div>
 
         </div>
-
-        {/* <div className="email-modal">
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title"
-          > */}
-        {/* <form action="send" method="POST"> */}
-        {/* <DialogTitle id="form-dialog-title">Send Trip plan</DialogTitle>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Send Trip By Email</DialogTitle>
+          <ValidatorForm
+            ref="form"
+            onSubmit={this.sendEmail}
+            onError={errors => console.log(errors)}
+          >
             <DialogContent>
-              <DialogContentText>
-                Enter An Email To Get The Trip Info
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
+              <div style={{ marginBottom: '1rem' }}>
+                <DialogContentText>
+                To send you your trip, please enter your email address below.
+                </DialogContentText>
+              </div>
+              <TextValidator
                 label="Email Address"
-                type="email"
-                fullWidth
                 onChange={this.enterEmail}
+                name="email"
+                value={email}
+                validators={[ 'required', 'isEmail' ]}
+                errorMessages={[ 'This field is required', 'Email is not valid' ]}
+                fullWidth
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
+              <Button onClick={this.handleClose} color="primary">Cancel
               </Button>
-              <Button type="submit" onClick={()=>this.sendAndClose(this.state.email)} color="primary">
-                Send Trip!
+              <Button color="secondary" type="submit">
+              Send Email
               </Button>
-            </DialogActions> */}
-        {/* </form> */}
-        {/* </Dialog>
-        </div> */}
-
+            </DialogActions>
+          </ValidatorForm>
+        </Dialog>
 
         <Nav tabs>
           <NavItem className="tab-in-one-trip">
