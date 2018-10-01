@@ -58,7 +58,7 @@ class InputWithIcon extends Component {
               {this.props.icon === 'Satisfied' ? <Satisfied /> : (this.props.icon === 'NotSatisfied' ? <NotSatisfied/> : <NoteIcon id="icon-input-note"/>)}
             </Grid>
             <Grid item>
-              <form onKeyDown={this.handleSubmit} style={{ width: '100%' }}>>
+              <form onKeyDown={this.handleSubmit} style={{ width: '100%' }}>
                 <FormControl fullWidth>
                   <InputLabel
                     htmlFor="custom-css-input"
