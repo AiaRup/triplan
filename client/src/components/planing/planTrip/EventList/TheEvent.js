@@ -84,7 +84,7 @@ class TheEvent extends Component {
 
     setTimeout(() => {
       this.toggleFade();
-    }, 3000);
+    }, 1500);
   }
 
   regularOrTempEvent = (toggleCollapse) => {
@@ -149,7 +149,7 @@ class TheEvent extends Component {
 
           <div className={this.props.animate ? 'add-event-div animate zoom' : 'add-event-div'}>
             {/* <Tooltip title="Add Event to Plan Trip" TransitionComponent={Fade} TransitionProps={{ timeout: 600 }}> */}
-            <UncontrolledTooltip placement="right" target="Tooltip"> Add Event to Plan Trip
+            <UncontrolledTooltip placement="top" target="Tooltip"> Add Event to Plan Trip
             </UncontrolledTooltip >
             <Button variant="fab" color="secondary" mini aria-label="Add" onClick={this.handleAddEvent} id="Tooltip">
               <AddIcon />

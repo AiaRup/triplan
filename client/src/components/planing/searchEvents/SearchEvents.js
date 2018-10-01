@@ -75,6 +75,7 @@ class SearchEvents extends Component {
 
     // variables to send to the api
     const USER_TOKEN = 'MHF2HMR7buujfhLSC5GbKmtGhslqaO';
+    // const USER_TOKEN = '9bgBCdDfmWp8NxrBqoNZ808YqGIf6m';
     const AuthStr = 'Bearer ' + USER_TOKEN;
     let categories = '';
     const { lat, lng } = this.props.address;

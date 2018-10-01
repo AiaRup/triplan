@@ -24,7 +24,7 @@ class DayList extends Component {
           <Button variant="fab" id="Tooltip" color="secondary" mini aria-label="Add" onClick={this.props.addDay}>
             <AddIcon />
           </Button>
-          <UncontrolledTooltip placement="bottom" target="Tooltip"> Add 1 day to your trip
+          <UncontrolledTooltip placement="left" target="Tooltip"> Add 1 day to your trip
           </UncontrolledTooltip >
           <h5> Days of your Trip </h5>
         </div>

@@ -10,6 +10,7 @@
   padding-bottom: 15px;
   width: 100%;
   height: auto;
+  position: relative;
 }
 
 .place-event-containers {
@@ -20,25 +21,33 @@ width: 100%;
 height: auto;
 }
 
+.save-trip-wrapper {
+  position: absolute;
+    right: -8px;
+    top: -8px;
+    height: 100%;
+}
+
 .save-trip-btn {
-  display: block;
+  display: inline-block;
   position: -webkit-sticky;
   position: sticky;
   /* float: right; */
-  margin-left: auto;
+  /* margin-left: auto; */
   width: 80px;
   height: 80px;
   top: 0px;
   border-radius: 50%;
-  background-color: #f8a100;
-  background-image: linear-gradient(to left top, #20313b, #26416b, #67438c, #b82c86, #f50057);
-  /* background-image: linear-gradient(to left top, #ffffff, #eed4f8, #f3a2da, #fc66a3, #f50057); */
-  /* background-image: linear-gradient(to left top, #f8a100, #ff841a, #ff6430, #ff3f43, #f50057); */
-  color: #fff;
+  background-color: #24ddc4;
+  color: #000;
+  /* color: black; */
   /* border: 1px solid #f86300; */
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(255,255,255,1);
+-moz-box-shadow: 0px 0px 10px 2px rgba(255,255,255,1);
+box-shadow: 0px 0px 10px 2px rgba(255,255,255,1);
   font-size: 14px;
   border: none;
+  align-self: flex-start
 }
 
 /* .save-trip-btn:after {
@@ -46,35 +55,13 @@ height: auto;
   font-size: 16px;
 } */
 
-.save-trip-btn:hover {
-  /* background-color: #dba135; */
-  background-image: linear-gradient(to right bottom, #20313b, #26416b, #67438c, #b82c86, #f50057);
-  /* background-image: linear-gradient(to right bottom, #ffffff, #eed4f8, #f3a2da, #fc66a3, #f50057); */
-  /* background-image: linear-gradient(to right bottom, #f8a100, #ff841a, #ff6430, #ff3f43, #f50057); */
-  /* width: 12%;
-  height: 50px;
-  transition: .3s ease;
-  border-radius: 5px;
-  font-size: 20px; */
-  color: #fff;
+.save-trip-btn:hover, .save-trip-btn:active {
+  background-color: rgb(17, 197, 173);;
+  color: #000;
   border: none;
 
 }
 
-.save-trip-btn:active {
-  /* background-color: #dba135; */
-  background-image: linear-gradient(to right bottom, #20313b, #26416b, #67438c, #b82c86, #f50057);
-  /* background-image: linear-gradient(to right bottom, #ffffff, #eed4f8, #f3a2da, #fc66a3, #f50057); */
-  /* background-image: linear-gradient(to right bottom, #f8a100, #ff841a, #ff6430, #ff3f43, #f50057); */
-  /* width: 12%;
-  height: 50px;
-  transition: .3s ease;
-  border-radius: 5px;
-  font-size: 20px; */
-  color: #fff;
-  border: none;
-
-}
 
 /* .save-trip-btn:hover:after {
   content: 'Save Trip';
@@ -86,23 +73,26 @@ height: auto;
 } */
 
 .name-trip-container {
-  display: flex;
+  display: inline-flex;
   /* justify-content: center; */
   align-items: flex-start;
   /* width: fit-content; */
   /* margin: 10px auto; */
-  width: 100%;
+  width: 70%;
   padding: 10px;
+  margin: 0
 }
 
 .name-trip-container div {
-text-align: center;
+/* text-align: center; */
 align-self: center;
 }
+
 .name-trip-container i {
 height: 80px;
 line-height: 80px;
 padding: 0;
+align-self: flex-start;
 }
 
 .edit-trip-label {

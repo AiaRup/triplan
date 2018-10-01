@@ -45,8 +45,6 @@ class InputWithIcon extends Component {
   handleSubmit = (event) => {
     if (event.keyCode === 13) {
       this.props.handleNotesChange(this.props.noteType, 'add', 0, this.state.value);
-      console.log('in submit note to add', this.state.value);
-      // this.setState({ value: '' });
       event.preventDefault();
     }
   }
@@ -60,8 +58,8 @@ class InputWithIcon extends Component {
               {this.props.icon === 'Satisfied' ? <Satisfied /> : (this.props.icon === 'NotSatisfied' ? <NotSatisfied/> : <NoteIcon id="icon-input-note"/>)}
             </Grid>
             <Grid item>
-              <form onKeyDown={this.handleSubmit} >
-                <FormControl>
+              <form onKeyDown={this.handleSubmit} style={{ width: '100%' }}>
+                <FormControl fullWidth>
                   <InputLabel
                     htmlFor="custom-css-input"
                     FormLabelClasses={{
@@ -74,7 +72,7 @@ class InputWithIcon extends Component {
                     classes={{
                       underline: this.classes.cssUnderline }}
                     onChange={this.handleChange}
-                    // value={this.state.value}
+                    fullWidth
                   />
                 </FormControl>
               </form>

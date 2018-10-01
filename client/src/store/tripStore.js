@@ -132,22 +132,7 @@ class TripStore {
   }
 
   @action addTempEvent = theEvent => {
-    //!! CHANGES BY FUCKING REFERENCE!!
-    // console.log('id before incremate', theEvent.iternalId)
-
-    // this.idForEvent++;
-    // theEvent.iternalId = uuidv1()
-    console.log('id before push', theEvent.iternalId)
-    console.log('event before push', theEvent)
-
     this.eventsArray.push(theEvent);
-
-    console.log('this.eventsArray', this.eventsArray)
- 
-    // console.log('this.eventsArray', JSON.stringify(this.eventsArray))
-
-    // console.log('this.daysArray', JSON.stringify(this.daysArray))
-
   }
 
   // update address when user serch a place on map

@@ -260,6 +260,9 @@ class PlanTrip extends Component {
               <InlineEdit inputClassName="inlineInput" labelClassName="inlineEdit" text={this.props.tripName} onFocusOut={(data) => {
                 this.props.saveTripName(data);
               }} />
+
+            </div>
+            <div className="save-trip-wrapper">
               <button onClick={this.saveTrip} className="btn save-trip-btn">Save Trip</button>
             </div>
             <div className='place-event-containers'>
