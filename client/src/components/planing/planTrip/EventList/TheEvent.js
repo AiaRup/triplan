@@ -10,6 +10,8 @@ import { Button } from '@material-ui/core';
 import DayIcon from '@material-ui/icons/CalendarTodayOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteForeverOutlined';
 import { UncontrolledTooltip, Popover, PopoverHeader } from 'reactstrap';
+import uuidv1 from 'uuid/v1';
+
 // import Fade from '@material-ui/core/Fade';
 
 const Container = styled.div`
@@ -29,7 +31,8 @@ const Container = styled.div`
   tempEventArray: allStores.store.tempEventArray,
   eventsArray: allStores.store.eventsArray,
   // toggleAnimation: allStores.store.toggleAnimation,
-  animate: allStores.store.animate
+  animate: allStores.store.animate,
+  idForEvent: allStores.store.idForEvent
 }))
 
 @observer
@@ -64,8 +67,16 @@ class TheEvent extends Component {
         return;
       }
     }
+    //adding unique id to chosen event
+    console.log('this.props.idForEvent', this.props.idForEvent)
+    // this.props.tempEvent.iternalId = 'event_id' + this.props.idForEvent;
 
+    this.props.tempEvent.iternalId = 'event_id' + uuidv1()
+
+    
     this.props.addTempEvent(this.props.tempEvent);
+    
+
     this.toggleFade();
 
     setTimeout(() => {
@@ -76,7 +87,7 @@ class TheEvent extends Component {
   regularOrTempEvent = (toggleCollapse) => {
 
     if (this.props.verifier === 'eventOfEvents') {
-      console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
+      // console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
       return (
         <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
           {(provided, snapshot) => (

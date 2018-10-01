@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx';
 import moment from 'moment';
+import uuidv1 from 'uuid/v1';
 
 class TripStore {
 
@@ -15,8 +16,8 @@ class TripStore {
   @observable tripName = 'Name Your Trip';
   @observable address = { lat: 51.507351, lng: -0.127758 };
   @observable numOfDays = 0;
-  @observable numOfPlaces = 0;
-  @observable numOfEvents = 0;
+  @observable idForPlace = 0;
+  @observable idForEvent = 0;
   @observable eventCategory = [];
   @observable loading = false;
   @observable isOpenPrefernces = false;
@@ -124,23 +125,24 @@ class TripStore {
   }
 
   // add attraction to places array
-  @action addPlace = (place) => {
-    this.numOfPlaces++;
-    place.iternalId = 'places_id' + this.numOfPlaces;
-
-    // console.log('place for id', place);
+  @action addPlace = place => {
+    this.idForPlace++;
+    place.iternalId = 'places_id' + this.idForPlace;
     this.placesArray.push(place);
   }
 
-  @action addTempEvent = (theEvent) => {
-    //getting the event object and trying to add internal id into it
+  @action addTempEvent = theEvent => {
     //!! CHANGES BY FUCKING REFERENCE!!
-    this.theNewEvent = theEvent;
-    this.numOfEvents++;
-    // console.log('this.theNewEvent', this.theNewEvent);
-    this.theNewEvent.iternalId = 'event_id' + this.numOfEvents;
-    this.eventsArray.push(this.theNewEvent);
-    // console.log('eventsArray', this.eventsArray);
+    console.log('id before incremate', theEvent.iternalId)
+
+    this.idForEvent++;
+    // theEvent.iternalId = uuidv1()
+    console.log('id before push', theEvent.iternalId)
+    this.eventsArray.push(theEvent);
+ 
+    // console.log('this.eventsArray', JSON.stringify(this.eventsArray))
+
+    // console.log('this.daysArray', JSON.stringify(this.daysArray))
 
   }
 
@@ -244,9 +246,8 @@ class TripStore {
   }
 
   // add temp events to api div events
-  @action addTempEvents = (event) => {
-
-    this.tempEventArray.push(event);
+  @action addTempEvents = (events) => {
+    this.tempEventArray.push(events);
   }
 
   @action emailTrip = () => {

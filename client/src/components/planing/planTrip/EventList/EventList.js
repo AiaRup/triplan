@@ -27,9 +27,10 @@ class DroppableEvent extends Component {
         {...this.props.provided.droppableProps}
       >
         {this.props.eventsArray.map((eventItem, eventItemIndex) => {
-          console.log('the passed event', eventItem);
-          // console.log('event in map', eventItem);
-          return <TheEvent key={eventItem.iternalId} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem} verifier="eventOfEvents" dror="eventsInEvents" />;
+          // console.log('eventOfEvents', eventItem.iternalId);
+          return <TheEvent key={eventItem.iternalId} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem}
+          
+          verifier="eventOfEvents" dror="eventsInEvents" />;
         })}
 
         {this.props.provided.placeholder}
