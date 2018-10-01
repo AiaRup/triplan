@@ -31,7 +31,10 @@ function Transition(props) {
   cityName: allStores.store.cityName,
   resetNumDays: allStores.store.resetNumDays,
   tripName: allStores.store.tripName,
-  saveTripName: allStores.store.saveTripName
+  saveTripName: allStores.store.saveTripName,
+  emptyTempEvents: allStores.store.emptyTempEvents,
+  emptyDaysArray: allStores.store.updateDaysWhenEditTrip,
+  emptyEventsPlacesArray: allStores.store.emptyEventsPlacesArray,
 }))
 @observer
 class PlanTrip extends Component {
@@ -109,6 +112,12 @@ class PlanTrip extends Component {
 
         this.props.saveTripId(id);
         this.props.savePlans(response.data.plans);
+
+        // empty days array and temp events array  after trip saved
+        this.props.emptyDaysArray([]);
+        this.props.emptyTempEvents();
+        this.props.saveTripName('Name Your Trip');
+        this.props.emptyEventsPlacesArray();
 
         this.setState({ isSave: true, plan: plan, id: id });
 
