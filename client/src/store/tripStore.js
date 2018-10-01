@@ -144,6 +144,13 @@ class TripStore {
 
   }
 
+  // empty plan's places and events on save trip
+  @action emptyEventsPlacesArray = () => {
+    this.eventsArray = [];
+    this.placesArray = [];
+  }
+
+
   // update address when user serch a place on map
   @action saveAddress = (address) => {
     this.address = address;
