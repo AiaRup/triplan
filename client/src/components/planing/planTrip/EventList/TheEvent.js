@@ -67,14 +67,17 @@ class TheEvent extends Component {
         return;
       }
     }
-    //adding unique id to chosen event
-    console.log('this.props.idForEvent', this.props.idForEvent)
-    // this.props.tempEvent.iternalId = 'event_id' + this.props.idForEvent;
+    const temporaryEvent = {...this.props.tempEvent, 
+      iternalId: uuidv1()
+    }
+    // console.log('event before push', JSON.stringify(temporaryEvent))
 
-    this.props.tempEvent.iternalId = 'event_id' + uuidv1()
-
+    // console.log('event before push', temporaryEvent)
     
-    this.props.addTempEvent(this.props.tempEvent);
+    this.props.addTempEvent(temporaryEvent);
+
+
+    // this.props.addTempEvent(this.props.tempEvent);
     
 
     this.toggleFade();
@@ -87,7 +90,8 @@ class TheEvent extends Component {
   regularOrTempEvent = (toggleCollapse) => {
 
     if (this.props.verifier === 'eventOfEvents') {
-      // console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
+
+      console.log('this.props.eventItem.iternalId', this.props.eventItem.iternalId);
       return (
         <Draggable draggableId={this.props.eventItem.iternalId} index={this.props.eventIndex}>
           {(provided, snapshot) => (

@@ -29,7 +29,7 @@ class DroppableEvent extends Component {
         {this.props.eventsArray.map((eventItem, eventItemIndex) => {
           // console.log('eventOfEvents', eventItem.iternalId);
           return <TheEvent key={eventItem.iternalId} eventIndex={eventItemIndex} eventName={eventItem.name} eventItem={eventItem}
-          
+
           verifier="eventOfEvents" dror="eventsInEvents" />;
         })}
 
@@ -51,14 +51,14 @@ class EventList extends Component {
     return (
       <div className="event-list-container">
         <h5 className='event-container-headline'>Events</h5>
-        <div className="eventList-overflow">
+        {/* <div className="eventList-overflow"> */}
           <Droppable droppableId="eventsContainer"
           >
             {(provided, snapshot) => (
               <DroppableEvent provided={provided} snapshot={snapshot}/>
             )}
           </Droppable>
-        </div>
+        {/* </div> */}
       </div>
 
     );

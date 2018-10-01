@@ -36,7 +36,7 @@ const PlaceListUL = styled.div`
       >
 
         {this.props.daysArray[this.props.index].places.map((item, index)=>{
-          console.log('item', JSON.stringify(item))
+          // console.log('item', JSON.stringify(item))
 
           if (item.type==='event') {
 //!!problem here-> rendering get the latest id

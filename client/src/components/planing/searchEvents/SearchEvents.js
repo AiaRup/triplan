@@ -13,6 +13,9 @@ import Notification, { notify } from 'react-notify-toast';
 import FindIcon from '@material-ui/icons/Search';
 import { Loading } from '../Loading';
 
+import uuidv1 from 'uuid/v1';
+
+
 
 
 const styles = theme => ({
@@ -71,7 +74,7 @@ class SearchEvents extends Component {
     }
 
     // variables to send to the api
-    const USER_TOKEN = '9bgBCdDfmWp8NxrBqoNZ808YqGIf6m';
+    const USER_TOKEN = 'MHF2HMR7buujfhLSC5GbKmtGhslqaO';
     const AuthStr = 'Bearer ' + USER_TOKEN;
     let categories = '';
     const { lat, lng } = this.props.address;
@@ -120,6 +123,9 @@ class SearchEvents extends Component {
             event.name = eventResult.title;
             event.id = eventResult.id;
             event.category = eventResult.category;
+
+            //add id directly
+            // event.iternalId = uuidv1();
 
             event.start = moment.utc(eventResult.start).format('DD/MM/YYYY, HH:mm');
             if (eventResult.start !== eventResult.end) {
