@@ -67,7 +67,7 @@
 
 .gitIcon,.linkedinIcon {
   padding: 0 5px;
-  color: #f50057;
+  color: rgb(245, 0, 87);
 }
 
 .linkedinIcon:hover, .gitIcon:hover  {

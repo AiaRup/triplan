@@ -12,6 +12,7 @@ const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const plansRouter = require('./routes/plans');
+const emailRouter = require('./routes/email');
 
 // const emailRouter = require('./routes/email');
 
@@ -51,6 +52,7 @@ app.use(express.static('node_modules'));
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/plans', plansRouter);
+app.use('/api/email', emailRouter);
 // app.use('/api/email', emailRouter);
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: false }));

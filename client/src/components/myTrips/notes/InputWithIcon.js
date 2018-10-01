@@ -58,8 +58,8 @@ class InputWithIcon extends Component {
               {this.props.icon === 'Satisfied' ? <Satisfied /> : (this.props.icon === 'NotSatisfied' ? <NotSatisfied/> : <NoteIcon id="icon-input-note"/>)}
             </Grid>
             <Grid item>
-              <form onKeyDown={this.handleSubmit} >
-                <FormControl>
+              <form onKeyDown={this.handleSubmit} style={{ width: '100%' }}>
+                <FormControl fullWidth>
                   <InputLabel
                     htmlFor="custom-css-input"
                     FormLabelClasses={{
@@ -72,6 +72,7 @@ class InputWithIcon extends Component {
                     classes={{
                       underline: this.classes.cssUnderline }}
                     onChange={this.handleChange}
+                    fullWidth
                   />
                 </FormControl>
               </form>
