@@ -188,7 +188,7 @@ class PlanTrip extends Component {
         daysArray[daySourceIndex].places.splice(source.index, 1);
         daysArray[daySourceIndex].places.splice(destination.index, 0, placeInDay);
 
-        //Dragging inseide EVENTS CONTAINER
+        //Dragging inside EVENTS CONTAINER
       } else if (source.droppableId === 'eventsContainer' && destination.droppableId === 'eventsContainer') {
 
         const eventInEvents = eventsArray[source.index];

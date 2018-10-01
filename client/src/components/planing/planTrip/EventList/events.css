@@ -21,9 +21,9 @@
 .eventList-overflow {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: white;
   width: auto;
-  height: auto;
+  height: inherit;
 }
 
 .temp-events-list-container {

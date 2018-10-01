@@ -8,7 +8,6 @@ import TheEvent from '../EventList/TheEvent';
 import DeleteIcon from '@material-ui/icons/DeleteRounded';
 import './day.css';
 
-
 const PlaceListUL = styled.div`
   padding: 8px;
   min-height: 120px;
@@ -37,9 +36,12 @@ const PlaceListUL = styled.div`
       >
 
         {this.props.daysArray[this.props.index].places.map((item, index)=>{
-          if (item.type==='event') {
+          // console.log('item', JSON.stringify(item))
 
-            return (<TheEvent key={item.iternalId} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item} verifier="eventOfEvents" dayVerifier="eventsInDay"/>);
+          if (item.type==='event') {
+//!!problem here-> rendering get the latest id
+            return (<TheEvent key={item.iternalId} eventIndex={index} dayIndex={this.props.index} eventName={item.name} eventItem={item}
+             verifier="eventOfEvents" dayVerifier="eventsInDay"/>);
 
           } else if (item.type==='place'){
             return (<Place key={item.iternalId} placeIndex={index} dayIndex={this.props.index} thePlace={item} verifier="placeOfDay"/>);}
