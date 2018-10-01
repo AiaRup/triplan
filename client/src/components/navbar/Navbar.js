@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 import './Navbar.css';
-import logo from '../../images/Logo-design.png';
+import logo from '../../images/logo-design.png';
 
 export default withAuth(
   class Navbar extends Component {
