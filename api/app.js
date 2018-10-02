@@ -49,14 +49,11 @@ app.use(express.static('node_modules'));
 // });
 
 
-app.use('/api', indexRouter);
+
 app.use('/api/users', usersRouter);
 app.use('/api/plans', plansRouter);
 app.use('/api/email', emailRouter);
-// app.use('/api/email', emailRouter);
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use('/api', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
