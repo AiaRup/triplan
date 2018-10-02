@@ -66,20 +66,19 @@ class OneTrip extends Component {
     sendEmail = (e) => {
 
     //get plan from days
-      const thePlan = [];
+      // const thePlan = [];
 
-      this.props.plan.days.map((day, i) => {
-        // thePlan.date.push(day.date)
-        day.places.map(place => {
-          console.log('place', place)
-          thePlan.push(`Date: ${day.date}`,`Name: ${place.name}`, `Address: ${place.address}`, `Category: ${place.category}`, `Description: ${place.description}`, `Duration: ${place.duration}`);
-        });
-      });
+      // this.props.plan.days.map((day, i) => {
+      //   // thePlan.date.push(day.date)
+      //   day.places.map(place => {
+      //     console.log('place', place)
+      //     thePlan.push(`Date: ${day.date}`,`Name: ${place.name}`, `Address: ${place.address}`, `Category: ${place.category}`, `Description: ${place.description}`, `Duration: ${place.duration}`);
+      //   });
+      // });
      
-      console.log('thePlan', thePlan);
+      // console.log('thePlan', thePlan);
 
       // ask server to send the trip by mail
-      //!!how does the code know where to find email.js??
       axios.post(`/api/email/send/${this.state.email}`, {
         name: this.props.plan.name,
         city: this.props.plan.city,
