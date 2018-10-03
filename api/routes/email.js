@@ -10,32 +10,49 @@ router.post('/send/:userEmail', (req, res) => {
 
   let output = `
   <h3>Trip Name: ${planToSend.name}</h3>
-  <ul>
-    <li>City: ${planToSend.city}</li>
+    <p>City: ${planToSend.city}</p>
   `;
 
-  planToSend.days.forEach((day) => {
-    console.log('day', day);
-    day.places.forEach((place) => {
-      const tripData = `
-          <br>
-          <li>Date: ${day.date}</li>
-          <li>Name: ${place.name}</li>
-          <li>Type: ${place.type}</li>
-          <li>Category: ${place.category}</li>
-          <li>Duration: ${place.duration}</li>
-          <li>Phone: ${place.phone}</li>
-          <li>Address: ${place.address}</li>
-          <li>Description: ${place.description}</li>
-        </ul>
-      `;
+  // sort days by date and go through the places
 
-      output += tripData;
-    });
+  let sortDays = planToSend.days.slice().sort((a, b) => {
+    a = a.date.split('/').reverse().join('');
+    b = b.date.split('/').reverse().join('');
+    return a > b ? 1 : a < b ? -1 : 0;
   });
 
-  console.log('output', output);
+  sortDays.forEach((day) => {
+    let tripData = `<br>
+      <h5>Date: ${day.date}</h5>`;
+    day.places.forEach((place) => {
+      let placeInDay = '<ul>';
+      for (let prop in place) {
+        if (place.hasOwnProperty(prop)) {
+          if (prop !== 'type' && prop !== 'id' && prop !== 'position' && prop !== 'iternalId' && prop !== 'photo') {
+            let item = `<li><u>${prop}</u>: ${place[prop]}</li>`;
+            placeInDay += item;
+          }
+        }
+        // tripData += placeInDay;
+      }
+      tripData += `${placeInDay}</ul><br>`;
+      // const tripData = `
+      //     <br>
+      //     <li>Date: ${day.date}</li>
+      //     <li>Name: ${place.name}</li>
+      //     <li>Type: ${place.type}</li>
+      //     <li>Category: ${place.category}</li>
+      //     <li>Duration: ${place.duration}</li>
+      //     <li>Phone: ${place.phone}</li>
+      //     <li>Address: ${place.address}</li>
+      //     <li>Description: ${place.description}</li>
+      //   </ul>
+      // `;
 
+
+    });
+    output += tripData;
+  });
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',

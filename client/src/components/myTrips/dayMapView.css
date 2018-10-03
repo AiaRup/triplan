@@ -46,6 +46,7 @@
   height: 400px;
   flex-basis: 600px;
   margin: 0 20px;
+  box-shadow: 0 0 11px 2px #a7a7a7;
 }
 
 .route-directions {
