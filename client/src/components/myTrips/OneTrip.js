@@ -1,34 +1,20 @@
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
-import PropTypes from 'prop-types';
 import DayMapView from './DayMapView';
 import PrintIcon from '@material-ui/icons/PrintRounded';
 import EmailIcon from '@material-ui/icons/EmailRounded';
 import classnames from 'classnames';
 import Day from './Day';
 import './oneTrip.css';
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Input, InputLabel } from '@material-ui/core';
-import pink from '@material-ui/core/colors/pink';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import Notification, { notify } from 'react-notify-toast';
+
 
 import InputWithIcon from './notes/InputWithIcon';
 import axios from 'axios';
 
-// const styles = theme => ({
-//   cssLabel: {
-//     '&$cssFocused': {
-//       color: pink['A400'],
-//     },
-//   },
-//   cssFocused: {},
-//   cssUnderline: {
-//     '&:after': {
-//       borderBottomColor: pink['A400'],
-//     },
-//   },
-// });
 @inject('store')
 @observer
 class OneTrip extends Component {
@@ -40,7 +26,6 @@ class OneTrip extends Component {
       open: false,
       email: ''
     };
-    // this.classes = props.classes;
   }
 
   printTrip = () => {
@@ -50,7 +35,7 @@ class OneTrip extends Component {
   //!! for email
     handleClickOpen = () => {
 
- 
+
       this.setState({ open: true });
     };
 
@@ -59,7 +44,7 @@ class OneTrip extends Component {
     };
 
     enterEmail = (e) => {
-      
+
       this.setState({ email: e.target.value });
     }
 
@@ -75,7 +60,7 @@ class OneTrip extends Component {
       //     thePlan.push(`Date: ${day.date}`,`Name: ${place.name}`, `Address: ${place.address}`, `Category: ${place.category}`, `Description: ${place.description}`, `Duration: ${place.duration}`);
       //   });
       // });
-     
+
       // console.log('thePlan', thePlan);
 
       // ask server to send the trip by mail
@@ -86,7 +71,10 @@ class OneTrip extends Component {
         notes: this.props.plan.notes,
       })
         .then((response) => {
-          console.log('res send email from server', response);
+          if (response.data === 'email sent') {
+            let myColor = { background: '#f50057', text: '#FFFFFF' };
+            notify.show('Your Trip was sent successfully', 'custom', 3000, myColor);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -144,6 +132,7 @@ class OneTrip extends Component {
 
     return (
       <div className="container-trip">
+        <Notification options={{ zIndex: 400, bottom: '350px' }} />
         <div className="trip-header">
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
 

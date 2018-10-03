@@ -27,7 +27,9 @@ Overall
 
 .trip-header {
   text-align: center;
-  margin: 15px 0;
+  margin: 20px 0;
+  -webkit-animation: focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .trip-header>h2 {
@@ -35,6 +37,7 @@ Overall
   font-weight: bolder;
   padding: 20px;
   box-sizing: border-box;
+
 }
 
 .line-on-sides:before,
@@ -318,99 +321,37 @@ Tab TimeLine
 
 }
 
-/* @media screen and (max-width: 778px) {
-  .trip-header {
-    width: 450px;
-    margin: 15px auto;
+@-webkit-keyframes focus-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-800px);
+            transform: translateZ(-800px);
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
   }
-} */
-
-/*=============
-Tab Map
-==============*/
-
-/*=============
-Notes
-==============*/
-/*
-.notes {
-  flex-basis: 25%;
-  margin: 0;
-  padding: 20px;
-  margin-left: 30px;
-  text-align: center;
-  background-color: #20313b;
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
-}
-
-.input-notes {
-  background: #0077b7;
-}
-
-.note {
-  font-style: italic;
-  display: flex;
-  text-align: center;
-  padding: 5px;
-  border-bottom: 1px #fff solid;
-  color: #fff
-}
-
-.attraction {
-  font-size: large;
-}
-
-.attractions {
-  flex-basis: 37%;
-  margin-right: 25px;
-  box-sizing: border-box;
-  padding: 8px;
-}
-
-.attractions>h3 {
-  text-align: center;
-  border-bottom: #20313b 1px solid;
-  margin-bottom: 15px;
-}
-
-.mapDay {
-  /* width: 50vw; */
-  /* flex-basis: 40%;
-  -webkit-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
-} */
-/*
-.list-attractions {
-  list-style: initial;
-  color: #000;
-}
-
-.fa-circle {
-  font-size: small;
-  margin-left: 4px;
-  color: #20313b;
-}
-
-.pin-note {
-  margin-top: -43px;
-  position: absolute;
-  right: 19px;
-}
-
-.pencil-notes {
-  margin-right: 8px;
-  font-size: 15px;
-  line-height: 32px;
-}
-
-
-.note label {
-  margin-bottom: 0;
-  line-height: 32px;
-}
-
-.note label:hover {
-  cursor: text;
-} */
-
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+ }
+ @keyframes focus-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-800px);
+            transform: translateZ(-800px);
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+ }
