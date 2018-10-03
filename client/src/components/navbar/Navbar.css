@@ -28,19 +28,15 @@
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: white !important;
+  color: white;
 }
 
 .navbar-light .navbar-brand {
-  color: white !important;
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-  color: #e22866 !important;
-}
-
-.userNameColor:hover {
-  color: white !important;
+  color: #e22866;
 }
 
 
@@ -67,6 +63,10 @@
   background: rgba(0,0,0,0);
   box-shadow: inset 0 0 0 2px #f50057;
 
+}
+
+.nav-link.mr-3.userNameColor:hover {
+  color: #fff;
 }
 
 .activeLink {
