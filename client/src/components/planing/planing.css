@@ -5,7 +5,7 @@
   justify-content: space-around;
 }
 
-.plan-trip-container {
+/* .plan-trip-container {
   background-color: #20313b;
   color: #fff;
   margin: 0;
@@ -15,7 +15,7 @@
   width: 100%;
   padding: 10px 20px;
   justify-content: space-between;
-}
+} */
 
 .map-view-container {
   display: flex;

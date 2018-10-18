@@ -12,6 +12,7 @@
   border-radius: 2px;
   height: auto;
   background-color: white;
+  border-radius: 3px;
 }
 
 .day-list-wrapper {
@@ -21,6 +22,7 @@
   background: #fff;
   width: auto;
   height: auto;
+  border-radius: 3px;
 }
 
 .day-container {

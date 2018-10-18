@@ -4,6 +4,7 @@
   color: #fff;
   background-color: #20313B;
   border: 1px solid lightgrey;
+  border-radius: 3px;
 }
 
 .header-days h5 {

@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development cd client && npm install --only=dev --dev",
+    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production; cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "8.11.3"
   },
   "dependencies": {
     "@okta/okta-sdk-nodejs": "^1.2.0",
@@ -11,18 +16,15 @@
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
-    "ejs": "^2.6.1",
     "express": "~4.16.0",
-    "express-handlebars": "^3.0.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "mongoose": "^5.2.4",
     "morgan": "~1.9.0",
-    "nodemailer": "^4.6.8",
-    "path": "^0.12.7",
     "react-router-dom": "^4.3.1",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
+    "nodemailer": "^4.6.8",
     "xoauth2": "^1.2.0"
   }
 }

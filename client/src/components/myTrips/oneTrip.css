@@ -37,7 +37,6 @@ Overall
   font-weight: bolder;
   padding: 20px;
   box-sizing: border-box;
-
 }
 
 .line-on-sides:before,
@@ -216,16 +215,10 @@ Tab TimeLine
   display: table;
 }
 
-/* email  and print*/
+/* email and print*/
 .print-email-btn {
   color: rgb(136, 132, 132);
   padding: 0 10px;
-}
-
-.icons-user-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 .print-email-btn:hover {
@@ -233,8 +226,10 @@ Tab TimeLine
   cursor: pointer;
 }
 
-.container-trip form div p {
-  margin-bottom: 1rem;
+.icons-user-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
@@ -355,3 +350,4 @@ Tab TimeLine
     opacity: 1;
   }
  }
+
