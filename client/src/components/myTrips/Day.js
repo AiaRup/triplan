@@ -11,7 +11,7 @@ const Day = (props) => {
           return (<div className="container-att left-att" key={i}>
             <div className="content-att">
               <div className="img-att-trip">
-                {/* {place.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${place.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+                {place.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${place.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
               </div>
               <h5>{place.name}</h5>
               <p>{place.address}</p>
@@ -24,7 +24,7 @@ const Day = (props) => {
         return (<div className="container-att right-att" key={i}>
           <div className="content-att">
             <div className="img-att-trip">
-              {/* {place.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${place.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />} */}
+              {place.photo && <img src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=130&maxheight=130&photoreference=${place.photo}&key=AIzaSyCl5mAkzOiDZ8dnZjdankkW92-MYxmjNw0`} alt='' />}
             </div>
             <h5>{place.name}</h5>
             <p>{place.address}</p>

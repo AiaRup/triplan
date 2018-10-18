@@ -34,9 +34,13 @@ html {
   flex-direction: column;
 }
 
-#root, .App {
+#root, .App, {
   height: 100vh;
   font-family: 'Montserrat', sans-serif;
+}
+
+.wrapper-app {
+  height: calc(100%-78.8px)
 }
 
 .sweet-loading {

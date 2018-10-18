@@ -4,20 +4,20 @@ import { observer, inject } from 'mobx-react';
 import DayMapView from './DayMapView';
 import PrintIcon from '@material-ui/icons/PrintRounded';
 import EmailIcon from '@material-ui/icons/EmailRounded';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, Input, InputLabel } from '@material-ui/core';
+import pink from '@material-ui/core/colors/pink';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import classnames from 'classnames';
+import Notification, { notify } from 'react-notify-toast';
 import Day from './Day';
 import './oneTrip.css';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import Notification, { notify } from 'react-notify-toast';
-
-
 import InputWithIcon from './notes/InputWithIcon';
 import axios from 'axios';
 
 @inject('store')
 @observer
-class OneTrip extends Component {
+export default class OneTrip extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,8 +34,6 @@ class OneTrip extends Component {
 
   //!! for email
     handleClickOpen = () => {
-
-
       this.setState({ open: true });
     };
 
@@ -44,25 +42,10 @@ class OneTrip extends Component {
     };
 
     enterEmail = (e) => {
-
       this.setState({ email: e.target.value });
     }
 
     sendEmail = (e) => {
-
-    //get plan from days
-      // const thePlan = [];
-
-      // this.props.plan.days.map((day, i) => {
-      //   // thePlan.date.push(day.date)
-      //   day.places.map(place => {
-      //     console.log('place', place)
-      //     thePlan.push(`Date: ${day.date}`,`Name: ${place.name}`, `Address: ${place.address}`, `Category: ${place.category}`, `Description: ${place.description}`, `Duration: ${place.duration}`);
-      //   });
-      // });
-
-      // console.log('thePlan', thePlan);
-
       // ask server to send the trip by mail
       axios.post(`/api/email/send/${this.state.email}`, {
         name: this.props.plan.name,
@@ -79,11 +62,9 @@ class OneTrip extends Component {
         .catch((error) => {
           console.log(error);
         });
-
       // close dialog
       this.handleClose();
     };
-
 
   handleNotesChange = (noteType, action, i, text) => {
     const notes = this.props.plan.notes;
@@ -121,9 +102,7 @@ class OneTrip extends Component {
 
   render() {
     const { name, days, city } = this.props.plan;
-    // const notes = this.state.notes;
     const { email, notes } = this.state;
-
     let sortDays = days.slice().sort((a, b) => {
       a = a.date.split('/').reverse().join('');
       b = b.date.split('/').reverse().join('');
@@ -134,6 +113,8 @@ class OneTrip extends Component {
       <div className="container-trip">
         <Notification options={{ zIndex: 400, bottom: '350px' }} />
         <div className="trip-header">
+          {/* <h1> Name Trip: {name}</h1> */}
+
           <h1 className="line-on-sides">{name[0].toUpperCase() + name.slice(1)}</h1>
 
           <div className="icons-user-actions">
@@ -159,7 +140,6 @@ class OneTrip extends Component {
                 To send you your trip, please enter your email address below.
                 </DialogContentText>
               </div>
-
               <TextValidator
                 label="Email Address"
                 onChange={this.enterEmail}
@@ -169,46 +149,15 @@ class OneTrip extends Component {
                 errorMessages={[ 'This field is required', 'Email is not valid' ]}
                 fullWidth
               />
-              {/* </ValidatorForm> */}
-              {/* <FormControl fullWidth>
-              <InputLabel
-                htmlFor="custom-css-input"
-                FormLabelClasses={{
-                  root: this.classes.cssLabel,
-                  focused: this.classes.cssFocused }} >
-                Email Address
-              </InputLabel>
-              <Input
-                id="user-email"
-                classes={{
-                  underline: this.classes.cssUnderline }}
-                onChange={this.enterEmail}
-                type="email"
-                fullWidth
-              />
-            </FormControl> */}
-              {/* <MuiThemeProvider theme={theme}>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="user-email"
-                label="Email Address"
-                type="email"
-                onChange={this.enterEmail}
-                fullWidth
-              />
-            </MuiThemeProvider> */}
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-              Cancel
+              <Button onClick={this.handleClose} color="primary">Cancel
               </Button>
               <Button color="secondary" type="submit">
               Send Email
               </Button>
             </DialogActions>
           </ValidatorForm>
-
         </Dialog>
 
         <Nav tabs>
@@ -278,9 +227,3 @@ class OneTrip extends Component {
   }
 }
 
-// OneTrip.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-// export default withStyles(styles)(OneTrip);
-export default OneTrip;

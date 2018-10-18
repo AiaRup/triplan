@@ -10,7 +10,7 @@
   height: auto;
   min-width: 32%;
   width: auto;
-  border-radius: 2px;
+  border-radius: 3px;
   background-color: white;
 }
 
@@ -39,6 +39,7 @@ h5.place-container-headline {
   height: 40px;
   line-height: 40px;
   margin-bottom: 0;
+  border-radius: 3px;
 }
 
 .place-headline {
