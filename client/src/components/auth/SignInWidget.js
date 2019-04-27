@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react';
 
 @inject(allStores => ({
   toggleLoginRegister: allStores.store.toggleLoginRegister,
-  showLogin: allStores.store.showLogin
+  showLogin: allStores.store.showLogin,
 }))
 @observer
 class SignInWidget extends Component {
@@ -15,23 +15,24 @@ class SignInWidget extends Component {
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
-      logo: '//logo.clearbit.com/okta.com?greyscale=true',
+      logo: '//logo.clearbit.com/okta.com',
       features: {
-        registration: true
+        registration: true,
       },
       i18n: {
         en: {
-          'errors.E0000004': 'Invalid Credentials- User not registered or Password is incorrect.'
-        }
+          'errors.E0000004':
+            'Invalid Credentials- User not registered or Password is incorrect.',
+        },
       },
       registration: {
         click: () => {
           this.props.toggleLoginRegister();
-        }
-      }
+        },
+      },
     });
     this.widget.renderEl({ el }, this.props.onSuccess, this.props.onError);
-  }
+  };
 
   componentWillUnmount() {
     this.widget.remove();
@@ -43,4 +44,3 @@ class SignInWidget extends Component {
 }
 
 export default SignInWidget;
-
