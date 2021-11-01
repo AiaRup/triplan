@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/AiaRup/doneWithIt">
+  <a href="https://github.com/AiaRup/triplan">
     <img src="https://user-images.githubusercontent.com/35365209/139663814-ccbd6d2c-de8c-4497-9af0-917caf60e5ba.png" alt="Logo" width="150" height="100">
   </a>
 
